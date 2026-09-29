@@ -1,19 +1,27 @@
 /* ========================================================
    Vani Technologies - Global Stylesheet
-   Phase 2: Navbar, Hero, Animations & Statistics
+   Color Palette Synchronized with Official Brand Logo:
+   - Slate Blue Backgrounds: #1c2332, #232a39, #2e384d
+   - Stripe Accent: #60697d (from logo diagonal pattern)
+   - Flame Warm Accents: #e14f2b, #e87239, #ed8a0a (from phoenix icon)
    ======================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
-  --primary-navy: #0b0f19;
-  --secondary-navy: #0f172a;
-  --primary-blue: #2563eb;
-  --accent-cyan: #06b6d4;
-  --accent-purple: #7c3aed;
-  --card-bg: rgba(15, 23, 42, 0.7);
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(37, 99, 235, 0.3);
+  --bg-deep: #161c28;
+  --bg-main: #1c2332;
+  --bg-surface: #252e40;
+  --bg-card: rgba(46, 56, 77, 0.65);
+  
+  --brand-stripe: #60697d;
+  --border-subtle: rgba(96, 105, 125, 0.25);
+  --border-highlight: rgba(96, 105, 125, 0.45);
+  
+  --flame-red: #da251d;
+  --flame-orange: #e85827;
+  --flame-gold: #ed8a0a;
+  --primary-blue: #3b82f6;
 }
 
 * {
@@ -28,8 +36,8 @@ html {
 }
 
 body {
-  background-color: var(--primary-navy);
-  color: #f8fafc;
+  background-color: var(--bg-main);
+  color: #f1f5f9;
   overflow-x: hidden;
   min-height: 100vh;
 }
@@ -41,25 +49,37 @@ h1, h2, h3, h4, .font-heading {
 }
 
 /* ========================================================
-   Navbar Styles & Scroll States
+   Brand Logo Matching Texture & Gradients
    ======================================================== */
+/* Subtle diagonal pinstripe matching the logo angle */
+.brand-pinstripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(96, 105, 125, 0.07),
+    rgba(96, 105, 125, 0.07) 1.5px,
+    transparent 1.5px,
+    transparent 4px
+  );
+}
+
+/* Navbar Initial & Scrolled State */
 .navbar-initial {
-  background: rgba(11, 15, 25, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease-in-out;
+  background: rgba(28, 35, 50, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .navbar-scrolled {
-  background: rgba(11, 15, 25, 0.95) !important;
+  background: rgba(22, 28, 40, 0.95) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border-bottom: 1px solid rgba(37, 99, 235, 0.25) !important;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6) !important;
+  border-bottom: 1px solid var(--border-highlight) !important;
+  box-shadow: 0 10px 30px -10px rgba(10, 14, 22, 0.6) !important;
 }
 
-/* Mobile Nav Menu Transition */
+/* Mobile Nav Menu Drawer */
 #mobile-menu {
   transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease;
 }
@@ -73,33 +93,28 @@ h1, h2, h3, h4, .font-heading {
 }
 
 #mobile-menu.menu-open {
-  max-height: 450px;
+  max-height: 480px;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
 /* ========================================================
-   Hero & Background Effects
+   Hero & Ambient Glow Effects
    ======================================================== */
-/* Subtle animated background grid */
-.tech-grid-pattern {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+.radial-glow-brand {
+  background: radial-gradient(circle at 50% 25%, rgba(66, 75, 95, 0.4) 0%, rgba(28, 35, 50, 0) 70%);
 }
 
-/* Radial ambient lighting */
+.radial-glow-flame {
+  background: radial-gradient(circle at 85% 45%, rgba(232, 88, 39, 0.12) 0%, rgba(28, 35, 50, 0) 65%);
+}
+
 .radial-glow-blue {
-  background: radial-gradient(circle at 50% 30%, rgba(37, 99, 235, 0.18) 0%, rgba(11, 15, 25, 0) 70%);
+  background: radial-gradient(circle at 15% 55%, rgba(59, 130, 246, 0.12) 0%, rgba(28, 35, 50, 0) 65%);
 }
 
-.radial-glow-cyan {
-  background: radial-gradient(circle at 80% 60%, rgba(6, 182, 212, 0.12) 0%, rgba(11, 15, 25, 0) 60%);
-}
-
-/* Floating animation */
+/* Floating Animations */
 @keyframes floatSlow {
   0%, 100% {
     transform: translateY(0px);
@@ -130,15 +145,14 @@ h1, h2, h3, h4, .font-heading {
   animation: floatSlow 7s ease-in-out 1s infinite;
 }
 
-/* Subtle Pulse Glow */
 @keyframes pulseGlow {
   0%, 100% {
-    opacity: 0.4;
+    opacity: 0.35;
     transform: scale(1);
   }
   50% {
-    opacity: 0.7;
-    transform: scale(1.05);
+    opacity: 0.65;
+    transform: scale(1.04);
   }
 }
 
@@ -150,74 +164,81 @@ h1, h2, h3, h4, .font-heading {
    Glassmorphism & Cards
    ======================================================== */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(37, 46, 64, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
 }
 
 .glass-card {
-  background: rgba(15, 23, 42, 0.65);
+  background: rgba(46, 56, 77, 0.55);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(37, 99, 235, 0.4);
+  background: rgba(46, 56, 77, 0.75);
+  border-color: rgba(232, 88, 39, 0.4);
   transform: translateY(-4px);
-  box-shadow: 0 15px 35px -10px rgba(37, 99, 235, 0.22);
+  box-shadow: 0 16px 36px -12px rgba(10, 14, 22, 0.5), 0 0 20px -5px rgba(232, 88, 39, 0.15);
 }
 
-/* Gradient Text */
-.gradient-text-blue {
-  background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 50%, #818cf8 100%);
+/* Gradient Text matching Logo Phoenix Flame */
+.gradient-text-flame {
+  background: linear-gradient(135deg, #f8fafc 20%, #fbd5c6 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-accent {
+  background: linear-gradient(135deg, #e87239 0%, #ed8a0a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Buttons */
 .btn-primary {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #e85827 0%, #d4271e 100%);
   transition: all 0.25s ease;
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 18px rgba(232, 88, 39, 0.35);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.45);
+  background: linear-gradient(135deg, #f0693a 0%, #e1352b 100%);
+  box-shadow: 0 8px 26px rgba(232, 88, 39, 0.5);
   transform: translateY(-2px);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(46, 56, 77, 0.7);
+  border: 1px solid var(--border-highlight);
   transition: all 0.25s ease;
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(66, 75, 95, 0.8);
   border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar matching logo tones */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 9px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: #161c28;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #374257;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #4f5d78;
 }
 
 /* Accessibility: respect reduced motion preferences */
