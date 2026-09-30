@@ -1,85 +1,33 @@
 /**
  * Vani Technologies - Main JavaScript File
- * Modern Interactive Animations, Jitter-Style Kinetic Typewriter & 3D Extrusion
+ * Modern Interactive Animations, Moving Logo Effects & Logo-Themed Particle Background
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize AOS (Animate On Scroll) Library
   initAOS();
 
-  // 2. Initialize Jitter-Style Kinetic Typewriter Effect
-  initTypewriterEffect();
-
-  // 3. Initialize Logo-Related Floating Flame Particle Canvas
+  // 2. Initialize Logo-Related Floating Flame Particle Canvas
   initFlameCanvas();
 
-  // 4. Initialize Sticky Navbar on Scroll
+  // 3. Initialize Sticky Navbar on Scroll
   initStickyNavbar();
 
-  // 5. Initialize Mobile Hamburger Menu
+  // 4. Initialize Mobile Hamburger Menu
   initMobileMenu();
 
-  // 6. Initialize Animated Statistics Counter
+  // 5. Initialize Animated Statistics Counter
   initStatsCounter();
 
-  // 7. Smooth Anchor Link Navigation
+  // 6. Smooth Anchor Link Navigation
   initSmoothScroll();
 
-  // 8. Interactive 3D Perspective Tilt for Hero Cards & Logo
+  // 7. Interactive 3D Tilt for Hero Cards & Logo
   initInteractiveTilt();
 
-  // 9. Backend Connectivity Health Check
+  // 8. Backend Connectivity Health Check
   checkBackendHealth();
 });
-
-/**
- * Jitter-Style Kinetic Typewriter Effect with Blinking Caret
- */
-function initTypewriterEffect() {
-  const targetElement = document.getElementById('typewriter-text');
-  if (!targetElement) return;
-
-  const phrases = [
-    'Building Digital Solutions That Move Businesses Forward',
-    'Architecting Enterprise IT & Scalable Cloud Systems',
-    'Engineering AI Automation & Innovative Software Products',
-    'Delivering Reliable, Modern Full-Stack Platforms',
-  ];
-
-  let phraseIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  let typingSpeed = 65; // ms per character
-
-  function typeStep() {
-    const currentPhrase = phrases[phraseIndex];
-
-    if (isDeleting) {
-      targetElement.textContent = currentPhrase.substring(0, charIndex - 1);
-      charIndex--;
-      typingSpeed = 30; // Faster deleting speed
-    } else {
-      targetElement.textContent = currentPhrase.substring(0, charIndex + 1);
-      charIndex++;
-      typingSpeed = 65; // Natural typing cadence
-    }
-
-    if (!isDeleting && charIndex === currentPhrase.length) {
-      // Pause at full text (like in Jitter video)
-      isDeleting = true;
-      typingSpeed = 3200;
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-      typingSpeed = 500; // Pause before typing next phrase
-    }
-
-    setTimeout(typeStep, typingSpeed);
-  }
-
-  // Start with a small initial delay
-  setTimeout(typeStep, 600);
-}
 
 /**
  * Initialize AOS (Animate on Scroll)
@@ -161,6 +109,7 @@ function initFlameCanvas() {
         }
       }
 
+      // Reset when particle goes above canvas
       if (this.y < -10 || this.x < -10 || this.x > width + 10) {
         this.reset(false);
       }
@@ -196,12 +145,14 @@ function initFlameCanvas() {
     mouseY = null;
   });
 
+  // Handle Resize
   const handleResize = () => {
     width = canvas.width = canvas.offsetWidth;
     height = canvas.height = canvas.offsetHeight;
   };
   window.addEventListener('resize', handleResize);
 
+  // Animation Loop
   function render() {
     ctx.clearRect(0, 0, width, height);
 
@@ -213,6 +164,7 @@ function initFlameCanvas() {
     animationFrameId = requestAnimationFrame(render);
   }
 
+  // Only render if tab is visible
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       cancelAnimationFrame(animationFrameId);
@@ -353,8 +305,8 @@ function initInteractiveTilt() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      const rotateX = ((y - centerY) / centerY) * -6;
-      const rotateY = ((x - centerX) / centerX) * 6;
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
       
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
     });
