@@ -1,0 +1,308 @@
+/* ========================================================
+   Vani Technologies - 3D Background & Hero Stylesheet
+   three-background.css
+   ======================================================== */
+
+/* Container and Canvas Layout */
+#hero-3d-scene-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#hero-three-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ========================================================
+   CREATIVE BACKGROUND - 7 VISUAL LAYERS
+   ======================================================== */
+
+/* LAYER 1: Dark navy / black gradient base */
+.bg-layer-1-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 75% 35%, #1c2436 0%, #151c2a 45%, #0b0f19 100%);
+  z-index: 0;
+}
+
+/* LAYER 2: Large ambient radial glow gradients */
+.bg-layer-2-glow-orange {
+  position: absolute;
+  top: 15%;
+  right: 12%;
+  width: 580px;
+  height: 580px;
+  background: radial-gradient(circle, rgba(232, 88, 39, 0.14) 0%, rgba(237, 138, 10, 0.04) 50%, transparent 72%);
+  border-radius: 50%;
+  filter: blur(85px);
+  pointer-events: none;
+  z-index: 0;
+  animation: ambientOrbDrift 14s ease-in-out infinite alternate;
+}
+
+.bg-layer-2-glow-blue {
+  position: absolute;
+  bottom: 12%;
+  left: 8%;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, rgba(124, 58, 237, 0.05) 50%, transparent 72%);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: ambientOrbDrift 18s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes ambientOrbDrift {
+  0% {
+    transform: translate(0, 0) scale(0.95);
+  }
+  100% {
+    transform: translate(30px, -25px) scale(1.1);
+  }
+}
+
+/* LAYER 3: Perspective Digital Grid (Moving slowly towards viewer) */
+.bg-layer-3-digital-grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  perspective: 550px;
+  overflow: hidden;
+  opacity: 0.15;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse at 50% 65%, rgba(0,0,0,1) 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 65%, rgba(0,0,0,1) 20%, transparent 80%);
+}
+
+.bg-grid-moving-plane {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  left: -50%;
+  top: -20%;
+  transform: rotateX(65deg);
+  background-image: 
+    linear-gradient(to right, rgba(96, 105, 125, 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(96, 105, 125, 0.35) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridPerspectiveMove 22s linear infinite;
+}
+
+@keyframes gridPerspectiveMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 50px;
+  }
+}
+
+/* LAYER 6: Soft Light Waves */
+.bg-layer-6-light-waves {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    130deg,
+    transparent 0%,
+    rgba(232, 88, 39, 0.035) 35%,
+    rgba(59, 130, 246, 0.035) 65%,
+    transparent 100%
+  );
+  filter: blur(45px);
+  pointer-events: none;
+  z-index: 0;
+  animation: waveMotion 16s ease-in-out infinite alternate;
+}
+
+@keyframes waveMotion {
+  0% {
+    opacity: 0.5;
+    transform: rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 0.85;
+    transform: rotate(3deg) scale(1.08);
+  }
+}
+
+/* ========================================================
+   FLOATING 3D TECHNOLOGY LABELS & GLASS PANELS
+   ======================================================== */
+.hero-floating-labels-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.floating-tech-chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  background: rgba(22, 28, 40, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 9999px;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #cbd5e1;
+  box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  user-select: none;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.floating-tech-chip .chip-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* Floating Glass Status Panels */
+.floating-glass-card {
+  position: absolute;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 14px;
+  color: #f1f5f9;
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6), 0 0 20px -5px rgba(232, 88, 39, 0.15);
+  pointer-events: none;
+  user-select: none;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle Floating Animations */
+@keyframes floatTag1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes floatTag2 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(12px) rotate(-1deg); }
+}
+
+.anim-float-tag-1 { animation: floatTag1 6.5s ease-in-out infinite; }
+.anim-float-tag-2 { animation: floatTag2 8s ease-in-out infinite; }
+
+/* ========================================================
+   HERO HEADLINE ENTRANCE ANIMATION (LINE BY LINE)
+   ======================================================== */
+.hero-line-fade-up {
+  display: block;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: heroLineReveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-line-delay-1 { animation-delay: 0.15s; }
+.hero-line-delay-2 { animation-delay: 0.32s; }
+.hero-line-delay-3 { animation-delay: 0.48s; }
+.hero-line-delay-4 { animation-delay: 0.64s; }
+
+@keyframes heroLineReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Orange "Forward" Shimmer Accent */
+.orange-shimmer-accent {
+  background: linear-gradient(
+    115deg,
+    #e85827 0%,
+    #f97316 28%,
+    #fef08a 50%,
+    #f97316 72%,
+    #e85827 100%
+  );
+  background-size: 240% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: orangeShimmerMove 6.5s ease-in-out infinite;
+}
+
+@keyframes orangeShimmerMove {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ========================================================
+   Z-INDEX HIERARCHY (Ensures strict layering & accessibility)
+   ======================================================== */
+.z-layer-bg       { z-index: 0; }
+.z-layer-3d       { z-index: 1; }
+.z-layer-ambient  { z-index: 2; }
+.z-layer-content  { z-index: 10; position: relative; }
+.z-layer-buttons  { z-index: 20; position: relative; }
+.z-layer-navbar   { z-index: 50; }
+
+/* CSS Fallback if WebGL is unavailable */
+.webgl-fallback-core {
+  display: none;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 88, 39, 0.25) 0%, rgba(59, 130, 246, 0.15) 50%, transparent 70%);
+  border: 1px dashed rgba(232, 88, 39, 0.4);
+  animation: spinFallback 20s linear infinite;
+}
+
+.no-webgl .webgl-fallback-core {
+  display: block;
+}
+
+@keyframes spinFallback {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Accessibility: respect user prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .bg-grid-moving-plane,
+  .bg-layer-2-glow-orange,
+  .bg-layer-2-glow-blue,
+  .bg-layer-6-light-waves,
+  .anim-float-tag-1,
+  .anim-float-tag-2,
+  .orange-shimmer-accent {
+    animation: none !important;
+  }
+  
+  .hero-line-fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
