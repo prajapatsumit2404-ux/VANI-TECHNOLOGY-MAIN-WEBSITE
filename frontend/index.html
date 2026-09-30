@@ -51,7 +51,7 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Custom Stylesheet with Logo-matching Palette & Moving Logo Animations -->
+  <!-- Custom Stylesheet with Logo-matching Palette, Jitter Kinetic Typography & 3D Extrusion -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-[#1c2332] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#e85827] selection:text-white relative">
@@ -162,7 +162,7 @@
   </header>
 
   <!-- ========================================================
-       HERO SECTION WITH LOGO-ANIMATED BACKGROUND & EMBER PARTICLES
+       HERO SECTION WITH JITTER KINETIC TYPOGRAPHY & 3D EXTRUSION
        ======================================================== -->
   <main class="flex-grow relative">
     <section id="home" class="relative pt-12 pb-20 md:pt-16 md:pb-28 overflow-hidden brand-pinstripes-animated">
@@ -186,9 +186,9 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <!-- Two-Column Responsive Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           
-          <!-- Left Column: Hero Narrative & Actions -->
+          <!-- Left Column: Kinetic Narrative & Expanding Beam Line -->
           <div class="lg:col-span-7 text-center lg:text-left">
             
             <!-- Live Status Pill -->
@@ -200,9 +200,12 @@
               <span>Next-Gen IT Services &amp; Software Products</span>
             </div>
 
-            <!-- Headline -->
-            <h1 data-aos="fade-up" data-aos-delay="100" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] mb-6 font-heading">
-              Building Digital Solutions That <span class="gradient-text-accent">Move Businesses Forward</span>
+            <!-- Jitter-Style Expanding Horizontal Accent Beam -->
+            <div class="h-[2.5px] max-w-md mx-auto lg:mx-0 bg-gradient-to-r from-[#e85827] via-[#ed8a0a] to-[#3b82f6] rounded-full mb-6 animate-beam-line"></div>
+
+            <!-- Kinetic Headline with Blinking Typewriter Cursor -->
+            <h1 class="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-white tracking-tight leading-[1.14] mb-6 font-heading min-h-[110px] sm:min-h-[130px] lg:min-h-[155px]">
+              <span id="typewriter-text" class="gradient-text-accent"></span><span class="typewriter-cursor"></span>
             </h1>
 
             <!-- Subheading -->
@@ -244,100 +247,83 @@
 
           </div>
 
-          <!-- Right Column: Interactive 3D Showcase Card with Moving Logo Centerpiece -->
-          <div data-aos="zoom-in" data-aos-delay="200" class="lg:col-span-5 relative">
+          <!-- Right Column: Jitter-Style 3D Extruded Showcase Box & Geometric Nodes -->
+          <div data-aos="zoom-in" data-aos-delay="200" class="lg:col-span-5 isometric-3d-scene relative">
             
-            <!-- Outer Gradient Border Card with 3D Tilt -->
-            <div class="gradient-border-card tilt-card shadow-2xl">
-              <div class="gradient-border-inner p-6 sm:p-8 relative overflow-hidden">
-                
-                <!-- Center Glowing Ambient Aura -->
-                <div class="absolute inset-0 bg-gradient-to-tr from-[#e85827]/10 via-[#3b82f6]/5 to-transparent pointer-events-none"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#e85827]/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow"></div>
+            <!-- 3D Extruded Box with Deep Isometric Shadows -->
+            <div class="extruded-3d-box rounded-3xl p-6 sm:p-8 bg-[#1e2638] border border-[#60697d]/35 relative overflow-hidden">
+              
+              <!-- Expanding Accent Line inside 3D Box (Matching Jitter Reference) -->
+              <div class="h-[2px] w-full bg-gradient-to-r from-white via-white/80 to-transparent rounded-full mb-5 shadow-sm"></div>
 
-                <!-- Top Status Badge -->
-                <div class="flex items-center justify-between pb-6 border-b border-[#60697d]/25 relative z-10">
-                  <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-                    <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
-                    <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-                  </div>
-                  <span class="text-xs font-mono font-medium text-slate-400 bg-[#161c28] px-2.5 py-1 rounded-md border border-[#60697d]/20">
-                    vani-technologies.in
-                  </span>
-                </div>
-
-                <!-- Centerpiece: Floating Moving Logo with Flame Glow -->
-                <div class="py-10 text-center relative z-10">
-                  <div class="inline-block relative">
-                    <!-- Spinning Background Glow Halo -->
-                    <div class="absolute -inset-4 rounded-3xl bg-gradient-to-r from-[#e85827]/30 via-[#ed8a0a]/30 to-[#3b82f6]/30 blur-lg opacity-70 animate-pulse-glow"></div>
-                    
-                    <!-- Main Logo Element with Smooth Floating Animation -->
-                    <div class="logo-shimmer-wrapper animate-hero-centerpiece animate-flame-glow p-4 rounded-2xl bg-[#232a39] border border-[#60697d]/40 shadow-2xl relative">
-                      <img src="assets/images/logo.png" alt="Vani Technologies Animated Showcase Logo" class="h-16 sm:h-20 w-auto object-contain mx-auto">
-                    </div>
-                  </div>
-                  
-                  <p class="text-xs uppercase tracking-widest text-[#fbd5c6] font-semibold mt-4">
-                    Enterprise Digital Engineering
+              <!-- Jitter Card Event Header -->
+              <div class="flex items-center justify-between pb-4 border-b border-[#60697d]/20">
+                <div>
+                  <h3 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight font-heading">
+                    Enterprise Suite
+                  </h3>
+                  <p class="text-xs text-[#fbd5c6] font-medium flex items-center gap-1.5 mt-0.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Q3 2026 Production Ready
                   </p>
                 </div>
+                <div class="w-9 h-9 rounded-xl bg-[#252e40] border border-[#60697d]/30 flex items-center justify-center text-[#ed8a0a]">
+                  <i class="fa-solid fa-shield-halved text-sm"></i>
+                </div>
+              </div>
 
-                <!-- Orbiting Feature Chips inside the Showcase -->
-                <div class="grid grid-cols-2 gap-3 relative z-10 pt-2">
-                  
-                  <!-- Chip 1: AI Talksy -->
-                  <div class="p-3 rounded-xl bg-[#252e40]/90 border border-[#60697d]/30 flex items-center gap-2.5 animate-float-1">
-                    <div class="w-8 h-8 rounded-lg bg-[#e85827]/15 text-[#e85827] flex items-center justify-center shrink-0">
-                      <i class="fa-solid fa-robot text-xs"></i>
-                    </div>
-                    <div>
-                      <p class="text-[11px] font-bold text-white leading-none">AI Talksy</p>
-                      <p class="text-[10px] text-slate-400 mt-1">Smart Comms</p>
-                    </div>
-                  </div>
-
-                  <!-- Chip 2: Cloud Solutions -->
-                  <div class="p-3 rounded-xl bg-[#252e40]/90 border border-[#60697d]/30 flex items-center gap-2.5 animate-float-2">
-                    <div class="w-8 h-8 rounded-lg bg-[#3b82f6]/15 text-[#60a5fa] flex items-center justify-center shrink-0">
-                      <i class="fa-solid fa-cloud text-xs"></i>
-                    </div>
-                    <div>
-                      <p class="text-[11px] font-bold text-white leading-none">Cloud 99.9%</p>
-                      <p class="text-[10px] text-slate-400 mt-1">High Scale</p>
-                    </div>
-                  </div>
-
-                  <!-- Chip 3: Samaj Platform -->
-                  <div class="p-3 rounded-xl bg-[#252e40]/90 border border-[#60697d]/30 flex items-center gap-2.5 animate-float-3">
-                    <div class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
-                      <i class="fa-solid fa-users text-xs"></i>
-                    </div>
-                    <div>
-                      <p class="text-[11px] font-bold text-white leading-none">Community</p>
-                      <p class="text-[10px] text-slate-400 mt-1">Verified Samaj</p>
-                    </div>
-                  </div>
-
-                  <!-- Chip 4: RateHonk CRM -->
-                  <div class="p-3 rounded-xl bg-[#252e40]/90 border border-[#60697d]/30 flex items-center gap-2.5 animate-float-1">
-                    <div class="w-8 h-8 rounded-lg bg-[#ed8a0a]/15 text-[#ed8a0a] flex items-center justify-center shrink-0">
-                      <i class="fa-solid fa-chart-line text-xs"></i>
-                    </div>
-                    <div>
-                      <p class="text-[11px] font-bold text-white leading-none">RateHonk</p>
-                      <p class="text-[10px] text-slate-400 mt-1">Travel CRM</p>
-                    </div>
-                  </div>
-
+              <!-- 3D Isometric Centerpiece with Embossed Extruded Geometry & Logo -->
+              <div class="py-8 text-center relative">
+                
+                <!-- 3D Extruded Cylindrical Nodes (Inspired by Jitter Reference) -->
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div class="w-48 h-48 rounded-full border border-dashed border-[#e85827]/25 animate-spin-slow"></div>
                 </div>
 
+                <!-- 4 Extruded Corner Nodes -->
+                <div class="relative z-10 flex items-center justify-center">
+                  <div class="relative p-6 rounded-2xl bg-[#252e40] border border-[#60697d]/40 shadow-2xl">
+                    
+                    <!-- Floating Moving Logo -->
+                    <div class="logo-shimmer-wrapper animate-logo-float animate-flame-glow p-3 rounded-xl bg-[#1c2332] border border-[#60697d]/30">
+                      <img src="assets/images/logo.png" alt="Vani Technologies 3D Extruded Logo" class="h-14 sm:h-16 w-auto object-contain mx-auto">
+                    </div>
+
+                    <!-- 3D Extruded Circular Cylinders Orbiting the Logo -->
+                    <div class="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-gradient-to-b from-[#e85827] to-[#ba2119] extruded-node flex items-center justify-center text-white text-xs">
+                      <i class="fa-solid fa-cloud text-[10px]"></i>
+                    </div>
+                    <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gradient-to-b from-[#3b82f6] to-[#1d4ed8] extruded-node flex items-center justify-center text-white text-xs">
+                      <i class="fa-solid fa-brain text-[10px]"></i>
+                    </div>
+                    <div class="absolute -bottom-3 -left-3 w-8 h-8 rounded-full bg-gradient-to-b from-emerald-500 to-emerald-700 extruded-node flex items-center justify-center text-white text-xs">
+                      <i class="fa-solid fa-code text-[10px]"></i>
+                    </div>
+                    <div class="absolute -bottom-3 -right-3 w-8 h-8 rounded-full bg-gradient-to-b from-[#ed8a0a] to-[#d97706] extruded-node flex items-center justify-center text-white text-xs">
+                      <i class="fa-solid fa-bolt text-[10px]"></i>
+                    </div>
+
+                  </div>
+                </div>
+
+                <p class="text-xs uppercase tracking-widest text-slate-300 font-bold mt-6">
+                  Engineered with Node.js &amp; MongoDB
+                </p>
               </div>
+
+              <!-- Jitter Card Bottom Footer -->
+              <div class="pt-4 border-t border-[#60697d]/20 flex items-center justify-between text-xs text-slate-400">
+                <span class="font-bold text-white tracking-wide flex items-center gap-1.5">
+                  <i class="fa-solid fa-layer-group text-[#e85827]"></i> Vani Technologies
+                </span>
+                <a href="#contact" class="hover:text-[#fbd5c6] transition-colors underline font-medium">
+                  Book Consultation →
+                </a>
+              </div>
+
             </div>
 
             <!-- Floating Tech Badge Decorator -->
-            <div class="absolute -bottom-4 -left-4 hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#161c28]/95 border border-[#60697d]/40 shadow-xl text-xs text-slate-300 animate-float-2 z-20">
+            <div class="absolute -bottom-5 -left-5 hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#161c28]/95 border border-[#60697d]/40 shadow-2xl text-xs text-slate-300 animate-float-2 z-20">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               <span>100% Reliable Deployment</span>
             </div>
