@@ -1,28 +1,31 @@
 /**
  * Vani Technologies - Main JavaScript File
- * Modern Interactive Animations, Logo Motion & Scroll Effects
+ * Modern Interactive Animations, Moving Logo Effects & Logo-Themed Particle Background
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initialize AOS (Animate On Scroll) Library if available
+  // 1. Initialize AOS (Animate On Scroll) Library
   initAOS();
 
-  // 2. Initialize Sticky Navbar on Scroll
+  // 2. Initialize Logo-Related Floating Flame Particle Canvas
+  initFlameCanvas();
+
+  // 3. Initialize Sticky Navbar on Scroll
   initStickyNavbar();
 
-  // 3. Initialize Mobile Hamburger Menu
+  // 4. Initialize Mobile Hamburger Menu
   initMobileMenu();
 
-  // 4. Initialize Animated Statistics Counter
+  // 5. Initialize Animated Statistics Counter
   initStatsCounter();
 
-  // 5. Smooth Anchor Link Navigation
+  // 6. Smooth Anchor Link Navigation
   initSmoothScroll();
 
-  // 6. Interactive 3D Tilt for Hero Cards & Logo
+  // 7. Interactive 3D Tilt for Hero Cards & Logo
   initInteractiveTilt();
 
-  // 7. Backend Connectivity Health Check
+  // 8. Backend Connectivity Health Check
   checkBackendHealth();
 });
 
@@ -39,6 +42,138 @@ function initAOS() {
       disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     });
   }
+}
+
+/**
+ * Logo-Themed Animated Background Canvas (Rising Phoenix Embers & Glowing Nodes)
+ */
+function initFlameCanvas() {
+  const canvas = document.getElementById('flame-particles-canvas');
+  if (!canvas) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    canvas.style.display = 'none';
+    return;
+  }
+
+  const ctx = canvas.getContext('2d');
+  let animationFrameId;
+  let width = (canvas.width = canvas.offsetWidth);
+  let height = (canvas.height = canvas.offsetHeight);
+
+  // Exact Colors Extracted from Vani Technologies Logo
+  const colors = [
+    { r: 232, g: 88, b: 39 },  // Flame Orange
+    { r: 218, g: 37, b: 29 },  // Phoenix Red
+    { r: 237, g: 138, b: 10 }, // Amber Gold
+    { r: 96, g: 105, b: 125 }, // Slate Stripe
+  ];
+
+  const particleCount = Math.min(Math.floor(width / 30), 45);
+  const particles = [];
+
+  class Particle {
+    constructor() {
+      this.reset(true);
+    }
+
+    reset(initial = false) {
+      this.x = Math.random() * width;
+      this.y = initial ? Math.random() * height : height + 10;
+      this.size = Math.random() * 2.8 + 1.2;
+      this.baseSpeedY = Math.random() * 0.6 + 0.3;
+      this.speedY = this.baseSpeedY;
+      this.speedX = (Math.random() - 0.5) * 0.4;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.alpha = Math.random() * 0.55 + 0.2;
+      this.fadeSpeed = Math.random() * 0.003 + 0.001;
+      this.angle = Math.random() * Math.PI * 2;
+      this.angularSpeed = (Math.random() - 0.5) * 0.02;
+    }
+
+    update(mouseX, mouseY) {
+      this.y -= this.speedY;
+      this.angle += this.angularSpeed;
+      this.x += Math.sin(this.angle) * 0.5 + this.speedX;
+
+      // Gentle interactive mouse reaction
+      if (mouseX !== null && mouseY !== null) {
+        const dx = this.x - mouseX;
+        const dy = this.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const maxDist = 120;
+        if (dist < maxDist && dist > 0) {
+          const force = (1 - dist / maxDist) * 1.5;
+          this.x += (dx / dist) * force;
+          this.y += (dy / dist) * force;
+        }
+      }
+
+      // Reset when particle goes above canvas
+      if (this.y < -10 || this.x < -10 || this.x > width + 10) {
+        this.reset(false);
+      }
+    }
+
+    draw() {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.alpha})`;
+      ctx.shadowColor = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0.8)`;
+      ctx.shadowBlur = this.size * 3;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+
+  let mouseX = null;
+  let mouseY = null;
+
+  window.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+  });
+
+  window.addEventListener('mouseleave', () => {
+    mouseX = null;
+    mouseY = null;
+  });
+
+  // Handle Resize
+  const handleResize = () => {
+    width = canvas.width = canvas.offsetWidth;
+    height = canvas.height = canvas.offsetHeight;
+  };
+  window.addEventListener('resize', handleResize);
+
+  // Animation Loop
+  function render() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update(mouseX, mouseY);
+      particles[i].draw();
+    }
+
+    animationFrameId = requestAnimationFrame(render);
+  }
+
+  // Only render if tab is visible
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelAnimationFrame(animationFrameId);
+    } else {
+      render();
+    }
+  });
+
+  render();
 }
 
 /**
@@ -93,7 +228,6 @@ function initMobileMenu() {
 
   toggleBtn.addEventListener('click', toggle);
 
-  // Close mobile menu when clicking any mobile link
   const mobileLinks = mobileMenu.querySelectorAll('a');
   mobileLinks.forEach((link) => {
     link.addEventListener('click', () => {
@@ -134,9 +268,6 @@ function initStatsCounter() {
   }
 }
 
-/**
- * Helper to smoothly animate number from start to end
- */
 function animateValue(element, start, end, duration, decimals, suffix) {
   let startTime = null;
 

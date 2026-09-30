@@ -54,12 +54,12 @@
   <!-- Custom Stylesheet with Logo-matching Palette & Moving Logo Animations -->
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-[#1c2332] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#e85827] selection:text-white">
+<body class="bg-[#1c2332] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#e85827] selection:text-white relative">
 
   <!-- ========================================================
        TOP NOTIFICATION BAR (Logo-Matched Dark Slate)
        ======================================================== -->
-  <div class="bg-[#161c28]/95 border-b border-[#60697d]/20 text-xs text-slate-300 py-1.5 px-4 hidden sm:block">
+  <div class="bg-[#161c28]/95 border-b border-[#60697d]/20 text-xs text-slate-300 py-1.5 px-4 hidden sm:block relative z-50">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-6">
         <a href="tel:+917773895639" class="hover:text-[#fbd5c6] transition-colors flex items-center gap-1.5">
@@ -162,16 +162,26 @@
   </header>
 
   <!-- ========================================================
-       HERO SECTION WITH TAILWIND UI SHOWCASE & MOVING LOGO
+       HERO SECTION WITH LOGO-ANIMATED BACKGROUND & EMBER PARTICLES
        ======================================================== -->
-  <main class="flex-grow">
-    <section id="home" class="relative pt-12 pb-20 md:pt-16 md:pb-28 overflow-hidden brand-pinstripes tech-dot-grid">
+  <main class="flex-grow relative">
+    <section id="home" class="relative pt-12 pb-20 md:pt-16 md:pb-28 overflow-hidden brand-pinstripes-animated">
       
-      <!-- Background Ambient Glow Gradients -->
-      <div class="absolute inset-0 radial-glow-flame pointer-events-none"></div>
-      <div class="absolute inset-0 radial-glow-blue pointer-events-none"></div>
-      <div class="absolute inset-0 radial-glow-amber pointer-events-none"></div>
-      <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#e85827]/12 rounded-full blur-[140px] pointer-events-none animate-pulse-glow"></div>
+      <!-- Interactive Logo Flame Embers Particle Canvas -->
+      <canvas id="flame-particles-canvas"></canvas>
+
+      <!-- Ambient Drifting Flame & Slate Glow Orbs -->
+      <div class="absolute -top-20 -left-20 w-[550px] h-[550px] bg-gradient-to-br from-[#e85827]/18 to-transparent rounded-full blur-[130px] pointer-events-none animate-orb-1"></div>
+      <div class="absolute top-1/3 -right-20 w-[600px] h-[600px] bg-gradient-to-bl from-[#3b82f6]/14 via-[#ed8a0a]/10 to-transparent rounded-full blur-[140px] pointer-events-none animate-orb-2"></div>
+      <div class="absolute -bottom-32 left-1/3 w-[500px] h-[500px] bg-gradient-to-t from-[#da251d]/14 to-transparent rounded-full blur-[120px] pointer-events-none animate-orb-3"></div>
+
+      <!-- Subtle Translucent Phoenix Flame Watermark in Background -->
+      <div class="absolute right-[-8%] top-[15%] w-[680px] h-[680px] pointer-events-none opacity-5 phoenix-watermark select-none hidden lg:block">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-[#e85827]">
+          <path d="M100 15 C85 50, 45 65, 30 110 C20 140, 40 180, 80 185 C95 175, 100 155, 95 140 C110 160, 115 180, 130 185 C170 175, 185 130, 170 95 C155 60, 120 45, 100 15 Z" fill="currentColor"/>
+          <path d="M100 45 C90 70, 65 85, 55 115 C50 135, 65 160, 90 160 C100 145, 100 130, 95 115 C105 130, 110 145, 120 150 C145 140, 155 110, 145 85 C135 65, 115 55, 100 45 Z" fill="#ed8a0a" fill-opacity="0.7"/>
+        </svg>
+      </div>
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
