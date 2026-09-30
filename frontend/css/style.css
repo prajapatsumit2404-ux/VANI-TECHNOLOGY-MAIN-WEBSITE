@@ -1,9 +1,6 @@
 /* ========================================================
    Vani Technologies - Global Stylesheet
-   Color Palette Synchronized with Official Brand Logo:
-   - Slate Blue Backgrounds: #1c2332, #232a39, #2e384d
-   - Stripe Accent: #60697d (from logo diagonal pattern)
-   - Flame Warm Accents: #e14f2b, #e87239, #ed8a0a (from phoenix icon)
+   Modern Tailwind Enhancements & Dynamic Animations
    ======================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
@@ -12,14 +9,15 @@
   --bg-deep: #161c28;
   --bg-main: #1c2332;
   --bg-surface: #252e40;
-  --bg-card: rgba(46, 56, 77, 0.65);
+  --bg-card: rgba(37, 46, 64, 0.65);
   
   --brand-stripe: #60697d;
-  --border-subtle: rgba(96, 105, 125, 0.25);
+  --border-subtle: rgba(96, 105, 125, 0.22);
   --border-highlight: rgba(96, 105, 125, 0.45);
   
   --flame-red: #da251d;
   --flame-orange: #e85827;
+  --flame-amber: #f97316;
   --flame-gold: #ed8a0a;
   --primary-blue: #3b82f6;
 }
@@ -45,76 +43,124 @@ body {
 /* Headings typography */
 h1, h2, h3, h4, .font-heading {
   font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 /* ========================================================
-   Brand Logo Matching Texture & Gradients
+   LOGO MOVING & GLOW ANIMATIONS
    ======================================================== */
-/* Subtle diagonal pinstripe matching the logo angle */
+
+/* 1. Logo Floating Animation */
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(0.6deg);
+  }
+}
+
+.animate-logo-float {
+  animation: logoFloat 4s ease-in-out infinite;
+}
+
+/* 2. Logo Phoenix Flame Pulse Glow */
+@keyframes flamePulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(232, 88, 39, 0.35));
+    opacity: 0.95;
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(232, 88, 39, 0.65)) drop-shadow(0 0 30px rgba(237, 138, 10, 0.25));
+    opacity: 1;
+  }
+}
+
+.animate-flame-glow {
+  animation: flamePulse 3.5s ease-in-out infinite;
+}
+
+/* 3. Logo Shimmer Light Reflection Sweep */
+.logo-shimmer-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  border-radius: 0.75rem;
+}
+
+.logo-shimmer-wrapper::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -150%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(
+    65deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 80%
+  );
+  transform: rotate(25deg);
+  animation: shimmerGlide 5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+@keyframes shimmerGlide {
+  0% {
+    left: -150%;
+  }
+  30%, 100% {
+    left: 150%;
+  }
+}
+
+/* 4. Hero Centerpiece 3D Interactive Floating Effect */
+@keyframes heroBadgeFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1deg) scale(1.01);
+  }
+}
+
+.animate-hero-centerpiece {
+  animation: heroBadgeFloat 5.5s ease-in-out infinite;
+}
+
+/* ========================================================
+   Brand Logo Texture & Background Grid
+   ======================================================== */
 .brand-pinstripes {
   background-image: repeating-linear-gradient(
     -45deg,
-    rgba(96, 105, 125, 0.07),
-    rgba(96, 105, 125, 0.07) 1.5px,
+    rgba(96, 105, 125, 0.065),
+    rgba(96, 105, 125, 0.065) 1.5px,
     transparent 1.5px,
     transparent 4px
   );
 }
 
-/* Navbar Initial & Scrolled State */
-.navbar-initial {
-  background: rgba(28, 35, 50, 0.82);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border-subtle);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.tech-dot-grid {
+  background-image: radial-gradient(rgba(96, 105, 125, 0.2) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-.navbar-scrolled {
-  background: rgba(22, 28, 40, 0.95) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border-bottom: 1px solid var(--border-highlight) !important;
-  box-shadow: 0 10px 30px -10px rgba(10, 14, 22, 0.6) !important;
-}
-
-/* Mobile Nav Menu Drawer */
-#mobile-menu {
-  transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease;
-}
-
-#mobile-menu.menu-closed {
-  max-height: 0;
-  opacity: 0;
-  transform: translateY(-8px);
-  pointer-events: none;
-  overflow: hidden;
-}
-
-#mobile-menu.menu-open {
-  max-height: 480px;
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-/* ========================================================
-   Hero & Ambient Glow Effects
-   ======================================================== */
-.radial-glow-brand {
-  background: radial-gradient(circle at 50% 25%, rgba(66, 75, 95, 0.4) 0%, rgba(28, 35, 50, 0) 70%);
-}
-
+/* Ambient Radial Lights */
 .radial-glow-flame {
-  background: radial-gradient(circle at 85% 45%, rgba(232, 88, 39, 0.12) 0%, rgba(28, 35, 50, 0) 65%);
+  background: radial-gradient(circle at 75% 40%, rgba(232, 88, 39, 0.16) 0%, rgba(28, 35, 50, 0) 65%);
 }
 
 .radial-glow-blue {
-  background: radial-gradient(circle at 15% 55%, rgba(59, 130, 246, 0.12) 0%, rgba(28, 35, 50, 0) 65%);
+  background: radial-gradient(circle at 25% 60%, rgba(59, 130, 246, 0.14) 0%, rgba(28, 35, 50, 0) 65%);
 }
 
-/* Floating Animations */
+.radial-glow-amber {
+  background: radial-gradient(circle at 50% 20%, rgba(237, 138, 10, 0.12) 0%, rgba(28, 35, 50, 0) 70%);
+}
+
+/* Floating Elements */
 @keyframes floatSlow {
   0%, 100% {
     transform: translateY(0px);
@@ -138,13 +184,14 @@ h1, h2, h3, h4, .font-heading {
 }
 
 .animate-float-2 {
-  animation: floatReverse 6s ease-in-out infinite;
+  animation: floatReverse 6.5s ease-in-out infinite;
 }
 
 .animate-float-3 {
   animation: floatSlow 7s ease-in-out 1s infinite;
 }
 
+/* Pulse Glow */
 @keyframes pulseGlow {
   0%, 100% {
     opacity: 0.35;
@@ -152,7 +199,7 @@ h1, h2, h3, h4, .font-heading {
   }
   50% {
     opacity: 0.65;
-    transform: scale(1.04);
+    transform: scale(1.05);
   }
 }
 
@@ -161,17 +208,56 @@ h1, h2, h3, h4, .font-heading {
 }
 
 /* ========================================================
-   Glassmorphism & Cards
+   Navbar Styles & Sticky Scroll States
+   ======================================================== */
+.navbar-initial {
+  background: rgba(28, 35, 50, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar-scrolled {
+  background: rgba(20, 26, 38, 0.96) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(232, 88, 39, 0.3) !important;
+  box-shadow: 0 12px 35px -10px rgba(10, 14, 22, 0.7) !important;
+}
+
+/* Mobile Nav Drawer */
+#mobile-menu {
+  transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+#mobile-menu.menu-closed {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#mobile-menu.menu-open {
+  max-height: 480px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ========================================================
+   Modern Tailwind Glass Cards & Gradients
    ======================================================== */
 .glass-panel {
-  background: rgba(37, 46, 64, 0.7);
+  background: rgba(37, 46, 64, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
 }
 
 .glass-card {
-  background: rgba(46, 56, 77, 0.55);
+  background: rgba(37, 46, 64, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-subtle);
@@ -179,20 +265,39 @@ h1, h2, h3, h4, .font-heading {
 }
 
 .glass-card:hover {
-  background: rgba(46, 56, 77, 0.75);
-  border-color: rgba(232, 88, 39, 0.4);
+  background: rgba(46, 56, 77, 0.8);
+  border-color: rgba(232, 88, 39, 0.45);
   transform: translateY(-4px);
-  box-shadow: 0 16px 36px -12px rgba(10, 14, 22, 0.5), 0 0 20px -5px rgba(232, 88, 39, 0.15);
+  box-shadow: 0 18px 40px -12px rgba(10, 14, 22, 0.6), 0 0 25px -6px rgba(232, 88, 39, 0.2);
+}
+
+/* Modern Gradient Borders */
+.gradient-border-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(232, 88, 39, 0.35), rgba(96, 105, 125, 0.2), rgba(59, 130, 246, 0.35));
+  padding: 1px;
+  border-radius: 1.25rem;
+  transition: all 0.4s ease;
+}
+
+.gradient-border-card:hover {
+  background: linear-gradient(135deg, rgba(232, 88, 39, 0.8), rgba(237, 138, 10, 0.6), rgba(59, 130, 246, 0.8));
+  box-shadow: 0 20px 45px -15px rgba(232, 88, 39, 0.3);
+}
+
+.gradient-border-inner {
+  background: rgba(28, 35, 50, 0.95);
+  border-radius: calc(1.25rem - 1px);
 }
 
 /* Gradient Text matching Logo Phoenix Flame */
-.gradient-text-flame {
-  background: linear-gradient(135deg, #f8fafc 20%, #fbd5c6 50%, #f97316 100%);
+.gradient-text-accent {
+  background: linear-gradient(135deg, #f8fafc 25%, #fbd5c6 50%, #f97316 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.gradient-text-accent {
+.gradient-text-flame {
   background: linear-gradient(135deg, #e87239 0%, #ed8a0a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -202,28 +307,28 @@ h1, h2, h3, h4, .font-heading {
 .btn-primary {
   background: linear-gradient(135deg, #e85827 0%, #d4271e 100%);
   transition: all 0.25s ease;
-  box-shadow: 0 4px 18px rgba(232, 88, 39, 0.35);
+  box-shadow: 0 4px 18px rgba(232, 88, 39, 0.38);
 }
 
 .btn-primary:hover {
   background: linear-gradient(135deg, #f0693a 0%, #e1352b 100%);
-  box-shadow: 0 8px 26px rgba(232, 88, 39, 0.5);
+  box-shadow: 0 8px 26px rgba(232, 88, 39, 0.55);
   transform: translateY(-2px);
 }
 
 .btn-secondary {
-  background: rgba(46, 56, 77, 0.7);
+  background: rgba(37, 46, 64, 0.7);
   border: 1px solid var(--border-highlight);
   transition: all 0.25s ease;
 }
 
 .btn-secondary:hover {
-  background: rgba(66, 75, 95, 0.8);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(46, 56, 77, 0.9);
+  border-color: rgba(255, 255, 255, 0.35);
   transform: translateY(-2px);
 }
 
-/* Custom Scrollbar matching logo tones */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 9px;
 }

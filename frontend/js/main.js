@@ -1,24 +1,45 @@
 /**
  * Vani Technologies - Main JavaScript File
- * Phase 2: Sticky Navbar, Mobile Menu, Scroll Interactions & Stat Counters
+ * Modern Interactive Animations, Logo Motion & Scroll Effects
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initialize Sticky Navbar on Scroll
+  // 1. Initialize AOS (Animate On Scroll) Library if available
+  initAOS();
+
+  // 2. Initialize Sticky Navbar on Scroll
   initStickyNavbar();
 
-  // 2. Initialize Mobile Hamburger Menu
+  // 3. Initialize Mobile Hamburger Menu
   initMobileMenu();
 
-  // 3. Initialize Animated Statistics Counter
+  // 4. Initialize Animated Statistics Counter
   initStatsCounter();
 
-  // 4. Smooth Anchor Link Navigation
+  // 5. Smooth Anchor Link Navigation
   initSmoothScroll();
 
-  // 5. Backend Connectivity Health Check
+  // 6. Interactive 3D Tilt for Hero Cards & Logo
+  initInteractiveTilt();
+
+  // 7. Backend Connectivity Health Check
   checkBackendHealth();
 });
+
+/**
+ * Initialize AOS (Animate on Scroll)
+ */
+function initAOS() {
+  if (typeof AOS !== 'undefined') {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50,
+      disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    });
+  }
+}
 
 /**
  * Changes navbar styling on scroll
@@ -38,7 +59,6 @@ function initStickyNavbar() {
   };
 
   window.addEventListener('scroll', handleScroll, { passive: true });
-  // Initial check on page load
   handleScroll();
 }
 
@@ -123,7 +143,6 @@ function animateValue(element, start, end, duration, decimals, suffix) {
   function step(currentTime) {
     if (!startTime) startTime = currentTime;
     const progress = Math.min((currentTime - startTime) / duration, 1);
-    // Easing out cubic
     const easeProgress = 1 - Math.pow(1 - progress, 3);
     const currentValue = start + (end - start) * easeProgress;
 
@@ -137,6 +156,34 @@ function animateValue(element, start, end, duration, decimals, suffix) {
   }
 
   window.requestAnimationFrame(step);
+}
+
+/**
+ * Interactive 3D Subtle Tilt for elements on mouse move
+ */
+function initInteractiveTilt() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  
+  const tiltElements = document.querySelectorAll('.tilt-card');
+  tiltElements.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+    });
+  });
 }
 
 /**
@@ -172,15 +219,15 @@ function checkBackendHealth() {
     .then((data) => {
       const statusBadge = document.getElementById('api-status-badge');
       if (statusBadge) {
-        statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 inline-block mr-1.5 animate-pulse"></span>API Active';
-        statusBadge.className = 'px-3 py-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center';
+        statusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block mr-1.5 animate-pulse"></span>API Active';
+        statusBadge.className = 'px-2.5 py-0.5 text-[11px] font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center';
       }
     })
     .catch(() => {
       const statusBadge = document.getElementById('api-status-badge');
       if (statusBadge) {
-        statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-400 inline-block mr-1.5"></span>Offline';
-        statusBadge.className = 'px-3 py-1 text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/30 rounded-full flex items-center';
+        statusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block mr-1.5"></span>Offline';
+        statusBadge.className = 'px-2.5 py-0.5 text-[11px] font-medium text-amber-400 bg-amber-500/10 border border-amber-500/30 rounded-full flex items-center';
       }
     });
 }
