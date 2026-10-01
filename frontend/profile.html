@@ -174,10 +174,14 @@
           </span>
         </div>
         
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 pt-2">
           <div class="p-4 rounded-xl bg-[#252e40]/60 border border-[#60697d]/25">
             <span class="text-xs text-slate-400 block mb-1">Total Users Registered</span>
             <span id="admin-total-users" class="text-2xl font-bold text-white">--</span>
+          </div>
+          <div class="p-4 rounded-xl bg-[#252e40]/60 border border-[#60697d]/25">
+            <span class="text-xs text-slate-400 block mb-1">Inbound Enquiries</span>
+            <span id="admin-total-contacts" class="text-2xl font-bold text-[#e85827]">--</span>
           </div>
           <div class="p-4 rounded-xl bg-[#252e40]/60 border border-[#60697d]/25">
             <span class="text-xs text-slate-400 block mb-1">System Security Status</span>
@@ -186,10 +190,27 @@
             </span>
           </div>
           <div class="p-4 rounded-xl bg-[#252e40]/60 border border-[#60697d]/25">
-            <span class="text-xs text-slate-400 block mb-1">JWT Auth Engine</span>
+            <span class="text-xs text-slate-400 block mb-1">Rate Limit Guard</span>
             <span class="text-base font-semibold text-[#60a5fa] flex items-center gap-1.5 mt-1">
-              <i class="fa-solid fa-bolt text-xs"></i> 7-Day Secret Tokens
+              <i class="fa-solid fa-shield-halved text-xs"></i> Anti-Spam Active
             </span>
+          </div>
+        </div>
+
+        <!-- Inbound Enquiries Table / List (Phase 7) -->
+        <div class="mt-6 pt-5 border-t border-[#60697d]/25 space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <i class="fa-solid fa-inbox text-[#e85827]"></i>
+              <span>Recent Inbound Client Inquiries (GET /api/contact)</span>
+            </h3>
+            <span id="admin-enquiries-badge" class="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#e85827]/20 text-[#e85827]">
+              Admin Protected
+            </span>
+          </div>
+
+          <div id="admin-contacts-container" class="space-y-2 max-h-96 overflow-y-auto pr-1">
+            <p class="text-xs text-slate-400 py-3">Loading inquiries...</p>
           </div>
         </div>
       </div>
@@ -377,13 +398,24 @@
             phoneBtn.href = `verify-phone.html?phone=${encodeURIComponent(user.phone)}&sendNow=true`;
           }
 
-          // If role is admin, fetch admin dashboard
+          // If role is admin, fetch admin dashboard & inbound contact inquiries
           if (user.role === 'admin') {
             const adminRes = await Auth.getAdminDashboard();
             if (adminRes.ok && adminRes.success) {
               const adminPanel = document.getElementById('admin-panel');
               adminPanel.classList.remove('hidden');
               document.getElementById('admin-total-users').textContent = adminRes.analytics.totalRegisteredUsers;
+            }
+
+            // Phase 7: Fetch Inbound Enquiries via GET /api/contact
+            try {
+              const contactRes = await Auth.getContacts({ limit: 15 });
+              if (contactRes.ok && contactRes.success) {
+                document.getElementById('admin-total-contacts').textContent = contactRes.total || contactRes.count || 0;
+                renderAdminContacts(contactRes.contacts || []);
+              }
+            } catch (cErr) {
+              console.error('Failed to load contact inquiries:', cErr);
             }
           }
 
@@ -405,6 +437,72 @@
       document.getElementById('profile-logout-btn').addEventListener('click', () => {
         Auth.logout();
       });
+
+      // Render Admin Contacts List
+      function renderAdminContacts(contacts) {
+        const container = document.getElementById('admin-contacts-container');
+        if (!container) return;
+
+        if (!contacts || contacts.length === 0) {
+          container.innerHTML = `
+            <div class="p-6 text-center text-xs text-slate-400 bg-[#161c28]/60 rounded-xl border border-[#60697d]/20">
+              <i class="fa-solid fa-inbox text-2xl text-slate-500 mb-2 block"></i>
+              No contact enquiries received yet.
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = contacts.map(c => {
+          const dateStr = new Date(c.createdAt).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+
+          const statusColor = 
+            c.status === 'resolved' ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400' :
+            c.status === 'in-discussion' ? 'bg-blue-500/15 border-blue-500/30 text-[#60a5fa]' :
+            c.status === 'contacted' ? 'bg-amber-500/15 border-amber-500/30 text-amber-400' :
+            'bg-[#e85827]/15 border-[#e85827]/30 text-[#e85827]';
+
+          return `
+            <div class="p-3.5 rounded-xl bg-[#161c28]/80 border border-[#60697d]/25 hover:border-[#60697d]/50 transition-all text-xs space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-white text-sm">${c.name}</span>
+                  ${c.company ? `<span class="text-slate-400 text-[11px]">(${c.company})</span>` : ''}
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${statusColor}">
+                    ${c.status}
+                  </span>
+                  <span class="text-[11px] text-slate-500">${dateStr}</span>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-3 text-slate-300 text-[11px]">
+                <a href="mailto:${c.email}" class="hover:text-white flex items-center gap-1 text-[#60a5fa]">
+                  <i class="fa-solid fa-envelope text-[10px]"></i> ${c.email}
+                </a>
+                <span class="text-slate-600">•</span>
+                <a href="tel:${c.phone}" class="hover:text-white flex items-center gap-1 text-[#e85827]">
+                  <i class="fa-solid fa-phone text-[10px]"></i> ${c.phone}
+                </a>
+                <span class="text-slate-600">•</span>
+                <span class="text-slate-300 bg-white/5 px-2 py-0.5 rounded">
+                  <i class="fa-solid fa-layer-group text-[10px] text-amber-400 mr-1"></i>${c.service}
+                </span>
+              </div>
+
+              <div class="p-2.5 rounded-lg bg-[#252e40]/70 text-slate-300 text-xs leading-relaxed border border-[#60697d]/20">
+                ${c.message}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
     });
   </script>
 </body>

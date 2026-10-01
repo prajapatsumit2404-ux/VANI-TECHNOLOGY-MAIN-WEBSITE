@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 10. Backend Connectivity Health Check
   checkBackendHealth();
+
+  // 11. Phase 7: Initialize Contact Form Handler
+  initContactForm();
 });
 
 /**
@@ -1030,4 +1033,157 @@ function initProductDetailModal() {
     }
   });
 }
+
+/**
+ * Phase 7: Initialize Contact Form Handler & Validations
+ */
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  const submitBtn = document.getElementById('contact-submit-btn');
+  const btnText = document.getElementById('contact-btn-text');
+  const btnIcon = document.getElementById('contact-btn-icon');
+  const alertContainerId = 'contact-alert';
+  const messageInput = document.getElementById('contact-message');
+  const charCount = document.getElementById('char-count');
+
+  // Auto-fill form if logged in
+  if (window.Auth && window.Auth.isAuthenticated()) {
+    const user = window.Auth.getUser();
+    if (user) {
+      const nameInput = document.getElementById('contact-name');
+      const emailInput = document.getElementById('contact-email');
+      const phoneInput = document.getElementById('contact-phone');
+
+      if (nameInput && !nameInput.value) nameInput.value = user.fullName || '';
+      if (emailInput && !emailInput.value) emailInput.value = user.email || '';
+      if (phoneInput && !phoneInput.value) phoneInput.value = user.phone || '';
+    }
+  }
+
+  // Live character counter for message
+  if (messageInput && charCount) {
+    messageInput.addEventListener('input', () => {
+      const len = messageInput.value.length;
+      if (len < 10) {
+        charCount.textContent = `${len}/10 min characters`;
+        charCount.className = 'text-[11px] text-amber-400 font-medium';
+      } else {
+        charCount.textContent = `${len} characters`;
+        charCount.className = 'text-[11px] text-emerald-400 font-medium';
+      }
+    });
+  }
+
+  // Pre-select service from URL query param if present
+  const params = new URLSearchParams(window.location.search);
+  const requestedService = params.get('service');
+  if (requestedService) {
+    const serviceSelect = document.getElementById('contact-service');
+    if (serviceSelect) {
+      for (let opt of serviceSelect.options) {
+        if (opt.value.toLowerCase() === requestedService.toLowerCase()) {
+          serviceSelect.value = opt.value;
+          break;
+        }
+      }
+    }
+  }
+
+  // Form submission handler
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (window.Auth) window.Auth.hideAlert(alertContainerId);
+
+    const name = document.getElementById('contact-name')?.value.trim();
+    const email = document.getElementById('contact-email')?.value.trim();
+    const phone = document.getElementById('contact-phone')?.value.trim();
+    const company = document.getElementById('contact-company')?.value.trim();
+    const service = document.getElementById('contact-service')?.value.trim();
+    const message = messageInput ? messageInput.value.trim() : '';
+
+    // Validations
+    if (!name || name.length < 2) {
+      if (window.Auth) window.Auth.showAlert(alertContainerId, 'Please enter your full name (at least 2 characters).', 'warning');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      if (window.Auth) window.Auth.showAlert(alertContainerId, 'Please enter a valid email address.', 'warning');
+      return;
+    }
+
+    if (!phone || phone.length < 7) {
+      if (window.Auth) window.Auth.showAlert(alertContainerId, 'Please enter a valid phone number (at least 7 digits).', 'warning');
+      return;
+    }
+
+    if (!service) {
+      if (window.Auth) window.Auth.showAlert(alertContainerId, 'Please select a service or technology discipline.', 'warning');
+      return;
+    }
+
+    if (!message || message.length < 10) {
+      if (window.Auth) window.Auth.showAlert(alertContainerId, 'Please enter a detailed message (minimum 10 characters).', 'warning');
+      return;
+    }
+
+    // Set Loading State
+    submitBtn.disabled = true;
+    btnText.textContent = 'Sending Inquiry...';
+    btnIcon.className = 'fa-solid fa-spinner animate-spin text-xs';
+    if (window.Auth) {
+      window.Auth.showAlert(alertContainerId, 'Loading... Transmitting your project inquiry to our team.', 'warning');
+    }
+
+    try {
+      const res = await (window.Auth ? window.Auth.submitContact({
+        name,
+        email,
+        phone,
+        company,
+        service,
+        message,
+      }) : fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, company, service, message })
+      }).then(r => r.json()));
+
+      if (res.ok !== false && (res.success || res.status === 201)) {
+        // Success message
+        if (window.Auth) {
+          window.Auth.showAlert(
+            alertContainerId,
+            `<strong>Success!</strong> ${res.message || 'Your inquiry has been received. Our team will contact you within 24 hours.'}`,
+            'success'
+          );
+        }
+        form.reset();
+        if (charCount) {
+          charCount.textContent = 'min 10 characters';
+          charCount.className = 'text-[11px] text-slate-400';
+        }
+      } else {
+        // Error message (including 429 rate limit or validation)
+        const errMsg = res.message || 'Failed to submit inquiry. Please try again.';
+        if (window.Auth) {
+          window.Auth.showAlert(alertContainerId, errMsg, res.status === 429 ? 'warning' : 'error');
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      if (window.Auth) {
+        window.Auth.showAlert(alertContainerId, 'Network error. Please ensure the backend server is reachable.', 'error');
+      }
+    } finally {
+      submitBtn.disabled = false;
+      btnText.textContent = 'Send Inquiry';
+      btnIcon.className = 'fa-solid fa-paper-plane text-xs';
+    }
+  });
+}
+
 

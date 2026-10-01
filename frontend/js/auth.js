@@ -166,6 +166,73 @@ const Auth = {
     });
   },
 
+  // Phase 7: Contact System Methods
+  async submitContact(formData) {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      return { status: response.status, ok: response.ok, ...data };
+    } catch (error) {
+      console.error('[Contact API Error]:', error);
+      return {
+        ok: false,
+        status: 500,
+        success: false,
+        message: 'Network error or server unreachable. Please try again.',
+      };
+    }
+  },
+
+  async getContacts(queryParams = {}) {
+    const qs = new URLSearchParams(queryParams).toString();
+    const url = `/api/contact${qs ? '?' + qs : ''}`;
+    const token = this.getToken();
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token ? `Bearer ${token}` : '',
+        },
+      });
+      const data = await response.json();
+      return { status: response.status, ok: response.ok, ...data };
+    } catch (error) {
+      console.error('[Get Contacts Error]:', error);
+      return {
+        ok: false,
+        status: 500,
+        success: false,
+        message: 'Network error. Could not retrieve contacts.',
+      };
+    }
+  },
+
+  async updateContactStatus(id, status) {
+    const token = this.getToken();
+    try {
+      const response = await fetch(`/api/contact/${id}/status`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token ? `Bearer ${token}` : '',
+        },
+        body: JSON.stringify({ status }),
+      });
+      const data = await response.json();
+      return { status: response.status, ok: response.ok, ...data };
+    } catch (error) {
+      console.error('[Update Contact Status Error]:', error);
+      return { ok: false, status: 500, success: false, message: 'Network error.' };
+    }
+  },
+
   // Alert UI helper
   showAlert(containerId, message, type = 'error') {
     const container = document.getElementById(containerId);
