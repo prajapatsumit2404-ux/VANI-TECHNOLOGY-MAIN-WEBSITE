@@ -505,6 +505,92 @@ h1, h2, h3, h4, .font-heading {
   opacity: 1;
 }
 
+/* ========================================================
+   PHASE 4: FEATURED PRODUCTS & FILTER STYLING
+   ======================================================== */
+
+.product-card {
+  position: relative;
+  background: rgba(37, 46, 64, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(96, 105, 125, 0.3);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(232, 88, 39, 0.6);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6), 0 0 30px -5px rgba(232, 88, 39, 0.25);
+}
+
+.product-card .img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #161c28;
+}
+
+.product-card .img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover .img-wrapper img {
+  transform: scale(1.06);
+}
+
+/* Fallback image container when image fails or loads */
+.product-image-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1c2332 0%, #161c28 100%);
+  border-bottom: 1px solid rgba(96, 105, 125, 0.25);
+  color: #94a3b8;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+/* Filter Buttons */
+.filter-btn {
+  padding: 0.5rem 1.15rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: rgba(37, 46, 64, 0.7);
+  color: #cbd5e1;
+  border: 1px solid rgba(96, 105, 125, 0.3);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  background: rgba(46, 56, 77, 0.9);
+  color: #ffffff;
+  border-color: rgba(232, 88, 39, 0.45);
+  transform: translateY(-1px);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #e85827 0%, #da251d 100%);
+  color: #ffffff;
+  border-color: #e85827;
+  box-shadow: 0 4px 15px rgba(232, 88, 39, 0.35);
+}
+
 /* Accessibility: respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {

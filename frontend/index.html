@@ -981,8 +981,684 @@
       </div>
     </section>
 
+    <!-- ========================================================
+         PHASE 4: FEATURED PRODUCTS SECTION
+         ======================================================== -->
+    <section id="products" class="relative py-24 sm:py-32 border-t border-[#60697d]/20 bg-[#1c2332]/95 z-layer-content overflow-hidden">
+      <!-- Ambient light effect -->
+      <div class="absolute -top-32 left-1/3 w-[500px] h-[500px] bg-[#e85827]/10 rounded-full blur-[130px] pointer-events-none"></div>
+      <div class="absolute -bottom-32 right-10 w-[500px] h-[500px] bg-[#3b82f6]/10 rounded-full blur-[130px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-14" data-aos="fade-up">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#e85827]/10 border border-[#e85827]/30 text-xs font-semibold text-[#f97316] uppercase tracking-wider mb-4">
+            <i class="fa-solid fa-shapes text-[11px]"></i>
+            <span>Our Product Portfolio</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Featured Products &amp; Platforms
+          </h2>
+          <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
+            Discover cutting-edge digital platforms, SaaS applications, and enterprise products engineered by Vani Technologies across diverse industry sectors.
+          </p>
+        </div>
+
+        <!-- Search & Category Filters Bar -->
+        <div class="max-w-5xl mx-auto mb-12 space-y-6" data-aos="fade-up" data-aos-delay="100">
+          
+          <!-- Search Bar -->
+          <div class="relative max-w-2xl mx-auto">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-magnifying-glass text-sm"></i>
+            </div>
+            <input 
+              type="text" 
+              id="product-search-input" 
+              placeholder="Search products by name, category, or features..." 
+              class="w-full pl-11 pr-10 py-3.5 rounded-xl bg-[#252e40]/80 border border-[#60697d]/35 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-[#e85827] focus:ring-2 focus:ring-[#e85827]/30 transition-all backdrop-blur-md shadow-inner"
+              aria-label="Search products"
+            >
+            <button 
+              id="clear-search-btn" 
+              type="button" 
+              class="hidden absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-white transition-colors"
+              aria-label="Clear search"
+            >
+              <i class="fa-solid fa-circle-xmark text-sm"></i>
+            </button>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            <button type="button" class="filter-btn active" data-filter="all">All</button>
+            <button type="button" class="filter-btn" data-filter="ai">AI</button>
+            <button type="button" class="filter-btn" data-filter="crm">CRM</button>
+            <button type="button" class="filter-btn" data-filter="community">Community</button>
+            <button type="button" class="filter-btn" data-filter="healthcare">Healthcare</button>
+            <button type="button" class="filter-btn" data-filter="education">Education</button>
+            <button type="button" class="filter-btn" data-filter="ecommerce">E-commerce</button>
+            <button type="button" class="filter-btn" data-filter="meditation">Meditation</button>
+            <button type="button" class="filter-btn" data-filter="services">Services</button>
+          </div>
+
+          <!-- Products Results Count Status -->
+          <div class="flex items-center justify-between text-xs text-slate-400 px-2 pt-1 border-t border-[#60697d]/15">
+            <span id="product-count-display">Showing 8 of 8 products</span>
+            <span class="text-slate-400 hidden sm:inline"><i class="fa-solid fa-filter text-[10px] text-[#e85827] mr-1"></i>Filter by category or search above</span>
+          </div>
+
+        </div>
+
+        <!-- 8 Products Grid -->
+        <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+          <!-- Product 1: AI Talksy -->
+          <div class="product-card group" data-category="ai" data-product-id="ai-talksy" data-name="AI Talksy" data-aos="fade-up" data-aos-delay="50">
+            <div>
+              <!-- Image Banner with Fallback -->
+              <div class="img-wrapper">
+                <img 
+                  loading="lazy" 
+                  src="assets/images/portfolio/Tablet-Screens-presentation-Mock-up.png" 
+                  alt="AI Talksy Mockup"
+                  onerror="this.onerror=null; this.src='https://www.vanitechnologies.in/assets/dist/portfolio/Tablet-Screens-presentation-Mock-up.png'; if(!this.dataset.tried) { this.dataset.tried='1'; } else { window.showProductImageFallback && window.showProductImageFallback(this, 'AI Talksy', 'fa-solid fa-robot'); }"
+                >
+                <!-- Floating Badges -->
+                <div class="absolute top-3 left-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider rounded-md bg-[#e85827] text-white shadow-md">
+                    AI
+                  </span>
+                </div>
+                <div class="absolute top-3 right-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold rounded-md bg-[#161c28]/85 text-emerald-400 border border-emerald-500/30 backdrop-blur-sm">
+                    From $29/mo
+                  </span>
+                </div>
+              </div>
+
+              <!-- Product Info -->
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#fbd5c6] transition-colors flex items-center justify-between">
+                  <span>AI Talksy</span>
+                  <i class="fa-solid fa-robot text-sm text-[#e85827]"></i>
+                </h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                  Intelligent conversational AI &amp; customer automation platform for deploying 24/7 autonomous support bots and lead agents.
+                </p>
+
+                <!-- Features Checklist -->
+                <div class="space-y-1.5 mb-5 text-xs text-slate-400">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-[#e85827] text-[10px]"></i>
+                    <span>24/7 Autonomous AI Chatbot</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-[#e85827] text-[10px]"></i>
+                    <span>Custom Document &amp; URL Training</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-[#e85827] text-[10px]"></i>
+                    <span>CRM Lead Auto-Sync</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="p-6 pt-0 space-y-2">
+              <a 
+                href="https://aitalksy.com/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn-primary w-full py-2.5 px-4 rounded-lg text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-md"
+              >
+                <span>Visit Product</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              </a>
+              <button 
+                type="button" 
+                class="product-modal-trigger w-full py-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-medium border border-white/10 transition-colors flex items-center justify-center gap-1.5"
+                data-product-id="ai-talksy"
+              >
+                <span>View Details</span>
+                <i class="fa-solid fa-circle-info text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 2: Community Forum -->
+          <div class="product-card group" data-category="community" data-product-id="community-forum" data-name="Community Forum" data-aos="fade-up" data-aos-delay="100">
+            <div>
+              <!-- Image Banner with Fallback -->
+              <div class="img-wrapper">
+                <img 
+                  loading="lazy" 
+                  src="assets/images/portfolio/Mockup_11.png" 
+                  alt="Community Forum Mockup"
+                  onerror="this.onerror=null; this.src='https://www.vanitechnologies.in/assets/dist/portfolio/Mockup_11.png'; if(!this.dataset.tried) { this.dataset.tried='1'; } else { window.showProductImageFallback && window.showProductImageFallback(this, 'Community Forum', 'fa-solid fa-comments'); }"
+                >
+                <div class="absolute top-3 left-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider rounded-md bg-purple-600 text-white shadow-md">
+                    Community
+                  </span>
+                </div>
+                <div class="absolute top-3 right-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold rounded-md bg-[#161c28]/85 text-emerald-400 border border-emerald-500/30 backdrop-blur-sm">
+                    Free / Open
+                  </span>
+                </div>
+              </div>
+
+              <!-- Product Info -->
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#fbd5c6] transition-colors flex items-center justify-between">
+                  <span>Community Forum</span>
+                  <i class="fa-solid fa-comments text-sm text-purple-400"></i>
+                </h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                  Modern discussion portal engineered for developer knowledge bases, peer collaboration, and technical community growth.
+                </p>
+
+                <!-- Features Checklist -->
+                <div class="space-y-1.5 mb-5 text-xs text-slate-400">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-purple-400 text-[10px]"></i>
+                    <span>Threaded Discussions &amp; Polls</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-purple-400 text-[10px]"></i>
+                    <span>Markdown &amp; Code Highlighting</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-purple-400 text-[10px]"></i>
+                    <span>Reputation &amp; Member Badges</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="p-6 pt-0 space-y-2">
+              <a 
+                href="https://communityforum.tech/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn-primary w-full py-2.5 px-4 rounded-lg text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-md"
+              >
+                <span>Visit Product</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              </a>
+              <button 
+                type="button" 
+                class="product-modal-trigger w-full py-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-medium border border-white/10 transition-colors flex items-center justify-center gap-1.5"
+                data-product-id="community-forum"
+              >
+                <span>View Details</span>
+                <i class="fa-solid fa-circle-info text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 3: RateHonk Travel CRM -->
+          <div class="product-card group" data-category="crm" data-product-id="ratehonk-travel-crm" data-name="RateHonk Travel CRM" data-aos="fade-up" data-aos-delay="150">
+            <div>
+              <!-- Image Banner with Fallback -->
+              <div class="img-wrapper">
+                <img 
+                  loading="lazy" 
+                  src="assets/images/portfolio/responsive_web.png" 
+                  alt="RateHonk Travel CRM Mockup"
+                  onerror="this.onerror=null; this.src='https://www.vanitechnologies.in/assets/dist/portfolio/responsive_web.png'; if(!this.dataset.tried) { this.dataset.tried='1'; } else { window.showProductImageFallback && window.showProductImageFallback(this, 'RateHonk CRM', 'fa-solid fa-plane-departure'); }"
+                >
+                <div class="absolute top-3 left-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider rounded-md bg-[#3b82f6] text-white shadow-md">
+                    CRM
+                  </span>
+                </div>
+                <div class="absolute top-3 right-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold rounded-md bg-[#161c28]/85 text-amber-400 border border-amber-500/30 backdrop-blur-sm">
+                    Enterprise SaaS
+                  </span>
+                </div>
+              </div>
+
+              <!-- Product Info -->
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#fbd5c6] transition-colors flex items-center justify-between">
+                  <span>RateHonk Travel CRM</span>
+                  <i class="fa-solid fa-plane-departure text-sm text-[#3b82f6]"></i>
+                </h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                  End-to-end B2B travel agency CRM solution for managing itineraries, bookings, supplier invoices, and tour agent commissions.
+                </p>
+
+                <!-- Features Checklist -->
+                <div class="space-y-1.5 mb-5 text-xs text-slate-400">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-[#3b82f6] text-[10px]"></i>
+                    <span>Multi-City Itinerary Builder</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-[#3b82f6] text-[10px]"></i>
+                    <span>Automated Invoicing &amp; Billing</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-[#3b82f6] text-[10px]"></i>
+                    <span>Real-Time Lead Pipelines</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="p-6 pt-0 space-y-2">
+              <a 
+                href="https://crm.ratehonk.com/portfolio" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn-primary w-full py-2.5 px-4 rounded-lg text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-md"
+              >
+                <span>Visit Product</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              </a>
+              <button 
+                type="button" 
+                class="product-modal-trigger w-full py-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-medium border border-white/10 transition-colors flex items-center justify-center gap-1.5"
+                data-product-id="ratehonk-travel-crm"
+              >
+                <span>View Details</span>
+                <i class="fa-solid fa-circle-info text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 4: TeleMedicine -->
+          <div class="product-card group" data-category="healthcare" data-product-id="telemedicine" data-name="TeleMedicine" data-aos="fade-up" data-aos-delay="200">
+            <div>
+              <!-- Image Banner with Fallback -->
+              <div class="img-wrapper">
+                <img 
+                  loading="lazy" 
+                  src="assets/images/portfolio/3.png" 
+                  alt="TeleMedicine Mockup"
+                  onerror="this.onerror=null; this.src='https://www.vanitechnologies.in/assets/dist/portfolio/3.png'; if(!this.dataset.tried) { this.dataset.tried='1'; } else { window.showProductImageFallback && window.showProductImageFallback(this, 'TeleMedicine', 'fa-solid fa-heart-pulse'); }"
+                >
+                <div class="absolute top-3 left-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider rounded-md bg-emerald-600 text-white shadow-md">
+                    Healthcare
+                  </span>
+                </div>
+                <div class="absolute top-3 right-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold rounded-md bg-[#161c28]/85 text-emerald-400 border border-emerald-500/30 backdrop-blur-sm">
+                    Hospital License
+                  </span>
+                </div>
+              </div>
+
+              <!-- Product Info -->
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#fbd5c6] transition-colors flex items-center justify-between">
+                  <span>TeleMedicine</span>
+                  <i class="fa-solid fa-heart-pulse text-sm text-emerald-400"></i>
+                </h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                  HIPAA-compliant virtual medical consultation platform with end-to-end encrypted video calls, e-prescriptions, and EHR records.
+                </p>
+
+                <!-- Features Checklist -->
+                <div class="space-y-1.5 mb-5 text-xs text-slate-400">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 text-[10px]"></i>
+                    <span>Encrypted HD Video Consults</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 text-[10px]"></i>
+                    <span>Digital E-Prescription Portal</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 text-[10px]"></i>
+                    <span>Patient Health History &amp; EHR</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="p-6 pt-0 space-y-2">
+              <button 
+                type="button" 
+                class="product-modal-trigger btn-primary w-full py-2.5 px-4 rounded-lg text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-md"
+                data-product-id="telemedicine"
+              >
+                <span>Visit Product</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+              <button 
+                type="button" 
+                class="product-modal-trigger w-full py-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-medium border border-white/10 transition-colors flex items-center justify-center gap-1.5"
+                data-product-id="telemedicine"
+              >
+                <span>View Details</span>
+                <i class="fa-solid fa-circle-info text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 5: Homem Do Pao -->
+          <div class="product-card group" data-category="ecommerce" data-product-id="homem-do-pao" data-name="Homem Do Pao" data-aos="fade-up" data-aos-delay="50">
+            <div>
+              <!-- Image Banner with Fallback -->
+              <div class="img-wrapper">
+                <img 
+                  loading="lazy" 
+                  src="assets/images/portfolio/Tablet-Screens-presentation-Mock-up.png" 
+                  alt="Homem Do Pao Mockup"
+                  onerror="this.onerror=null; this.src='https://www.vanitechnologies.in/assets/dist/portfolio/Tablet-Screens-presentation-Mock-up.png'; if(!this.dataset.tried) { this.dataset.tried='1'; } else { window.showProductImageFallback && window.showProductImageFallback(this, 'Homem Do Pao', 'fa-solid fa-bread-slice'); }"
+                >
+                <div class="absolute top-3 left-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider rounded-md bg-amber-600 text-white shadow-md">
+                    E-commerce
+                  </span>
+                </div>
+                <div class="absolute top-3 right-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold rounded-md bg-[#161c28]/85 text-emerald-400 border border-emerald-500/30 backdrop-blur-sm">
+                    Custom Store
+                  </span>
+                </div>
+              </div>
+
+              <!-- Product Info -->
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#fbd5c6] transition-colors flex items-center justify-between">
+                  <span>Homem Do Pao</span>
+                  <i class="fa-solid fa-bread-slice text-sm text-amber-400"></i>
+                </h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                  Artisan bakery digital commerce platform featuring recurring bread subscriptions, live order status, and local dispatch.
+                </p>
+
+                <!-- Features Checklist -->
+                <div class="space-y-1.5 mb-5 text-xs text-slate-400">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-amber-400 text-[10px]"></i>
+                    <span>Bakery Subscription Engine</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-amber-400 text-[10px]"></i>
+                    <span>Online Checkout &amp; Card Pay</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-amber-400 text-[10px]"></i>
+                    <span>Live Order Dispatch Tracking</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="p-6 pt-0 space-y-2">
+              <button 
+                type="button" 
+                class="product-modal-trigger btn-primary w-full py-2.5 px-4 rounded-lg text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-md"
+                data-product-id="homem-do-pao"
+              >
+                <span>Visit Product</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+              <button 
+                type="button" 
+                class="product-modal-trigger w-full py-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-medium border border-white/10 transition-colors flex items-center justify-center gap-1.5"
+                data-product-id="homem-do-pao"
+              >
+                <span>View Details</span>
+                <i class="fa-solid fa-circle-info text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 6: Meditation with Willy Cherish -->
+          <div class="product-card group" data-category="meditation" data-product-id="meditation-willy-cherish" data-name="Meditation with Willy Cherish" data-aos="fade-up" data-aos-delay="100">
+            <div>
+              <!-- Image Banner with Fallback -->
+              <div class="img-wrapper">
+                <img 
+                  loading="lazy" 
+                  src="assets/images/portfolio/Mockup_11.png" 
+                  alt="Meditation with Willy Cherish Mockup"
+                  onerror="this.onerror=null; this.src='https://www.vanitechnologies.in/assets/dist/portfolio/Mockup_11.png'; if(!this.dataset.tried) { this.dataset.tried='1'; } else { window.showProductImageFallback && window.showProductImageFallback(this, 'Meditation App', 'fa-solid fa-spa'); }"
+                >
+                <div class="absolute top-3 left-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider rounded-md bg-teal-600 text-white shadow-md">
+                    Meditation
+                  </span>
+                </div>
+                <div class="absolute top-3 right-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold rounded-md bg-[#161c28]/85 text-emerald-400 border border-emerald-500/30 backdrop-blur-sm">
+                    Freemium App
+                  </span>
+                </div>
+              </div>
+
+              <!-- Product Info -->
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#fbd5c6] transition-colors flex items-center justify-between">
+                  <span>Meditation Willy Cherish</span>
+                  <i class="fa-solid fa-spa text-sm text-teal-400"></i>
+                </h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                  Mindfulness and audio meditation app providing stress relief journeys, ambient nature soundscapes, and habit tracking.
+                </p>
+
+                <!-- Features Checklist -->
+                <div class="space-y-1.5 mb-5 text-xs text-slate-400">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-teal-400 text-[10px]"></i>
+                    <span>Guided Audio Sessions &amp; Sleep</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-teal-400 text-[10px]"></i>
+                    <span>Binaural Beats &amp; Ambience</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-teal-400 text-[10px]"></i>
+                    <span>Daily Streak &amp; Habit Tracker</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="p-6 pt-0 space-y-2">
+              <button 
+                type="button" 
+                class="product-modal-trigger btn-primary w-full py-2.5 px-4 rounded-lg text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-md"
+                data-product-id="meditation-willy-cherish"
+              >
+                <span>Visit Product</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+              <button 
+                type="button" 
+                class="product-modal-trigger w-full py-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-medium border border-white/10 transition-colors flex items-center justify-center gap-1.5"
+                data-product-id="meditation-willy-cherish"
+              >
+                <span>View Details</span>
+                <i class="fa-solid fa-circle-info text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 7: MSB School -->
+          <div class="product-card group" data-category="education" data-product-id="msb-school" data-name="MSB School" data-aos="fade-up" data-aos-delay="150">
+            <div>
+              <!-- Image Banner with Fallback -->
+              <div class="img-wrapper">
+                <img 
+                  loading="lazy" 
+                  src="assets/images/portfolio/responsive_web.png" 
+                  alt="MSB School Mockup"
+                  onerror="this.onerror=null; this.src='https://www.vanitechnologies.in/assets/dist/portfolio/responsive_web.png'; if(!this.dataset.tried) { this.dataset.tried='1'; } else { window.showProductImageFallback && window.showProductImageFallback(this, 'MSB School', 'fa-solid fa-graduation-cap'); }"
+                >
+                <div class="absolute top-3 left-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider rounded-md bg-indigo-600 text-white shadow-md">
+                    Education
+                  </span>
+                </div>
+                <div class="absolute top-3 right-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold rounded-md bg-[#161c28]/85 text-emerald-400 border border-emerald-500/30 backdrop-blur-sm">
+                    School SaaS
+                  </span>
+                </div>
+              </div>
+
+              <!-- Product Info -->
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#fbd5c6] transition-colors flex items-center justify-between">
+                  <span>MSB School</span>
+                  <i class="fa-solid fa-graduation-cap text-sm text-indigo-400"></i>
+                </h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                  Full-scale school management system connecting administration, students, and parents for exams, attendance, and fees.
+                </p>
+
+                <!-- Features Checklist -->
+                <div class="space-y-1.5 mb-5 text-xs text-slate-400">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-indigo-400 text-[10px]"></i>
+                    <span>Student Information System</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-indigo-400 text-[10px]"></i>
+                    <span>Online Fee Collection Portal</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-indigo-400 text-[10px]"></i>
+                    <span>Parent Real-Time Notice App</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="p-6 pt-0 space-y-2">
+              <button 
+                type="button" 
+                class="product-modal-trigger btn-primary w-full py-2.5 px-4 rounded-lg text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-md"
+                data-product-id="msb-school"
+              >
+                <span>Visit Product</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+              <button 
+                type="button" 
+                class="product-modal-trigger w-full py-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-medium border border-white/10 transition-colors flex items-center justify-center gap-1.5"
+                data-product-id="msb-school"
+              >
+                <span>View Details</span>
+                <i class="fa-solid fa-circle-info text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 8: Software Testing -->
+          <div class="product-card group" data-category="services" data-product-id="software-testing-suite" data-name="Software Testing" data-aos="fade-up" data-aos-delay="200">
+            <div>
+              <!-- Image Banner with Fallback -->
+              <div class="img-wrapper">
+                <img 
+                  loading="lazy" 
+                  src="assets/images/portfolio/3.png" 
+                  alt="Software Testing Mockup"
+                  onerror="this.onerror=null; this.src='https://www.vanitechnologies.in/assets/dist/portfolio/3.png'; if(!this.dataset.tried) { this.dataset.tried='1'; } else { window.showProductImageFallback && window.showProductImageFallback(this, 'Software Testing', 'fa-solid fa-vial-circle-check'); }"
+                >
+                <div class="absolute top-3 left-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider rounded-md bg-blue-600 text-white shadow-md">
+                    Services
+                  </span>
+                </div>
+                <div class="absolute top-3 right-3 z-10">
+                  <span class="px-2.5 py-1 text-[11px] font-bold rounded-md bg-[#161c28]/85 text-emerald-400 border border-emerald-500/30 backdrop-blur-sm">
+                    On-Demand QA
+                  </span>
+                </div>
+              </div>
+
+              <!-- Product Info -->
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[#fbd5c6] transition-colors flex items-center justify-between">
+                  <span>Software Testing</span>
+                  <i class="fa-solid fa-vial-circle-check text-sm text-blue-400"></i>
+                </h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                  Enterprise QA &amp; Automated Testing Suite by Vani Technologies for continuous integration, load testing, and security scans.
+                </p>
+
+                <!-- Features Checklist -->
+                <div class="space-y-1.5 mb-5 text-xs text-slate-400">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-blue-400 text-[10px]"></i>
+                    <span>Automated Continuous CI Tests</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-blue-400 text-[10px]"></i>
+                    <span>High-Concurrency Load Testing</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-blue-400 text-[10px]"></i>
+                    <span>Vulnerability &amp; Security Audits</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="p-6 pt-0 space-y-2">
+              <button 
+                type="button" 
+                class="product-modal-trigger btn-primary w-full py-2.5 px-4 rounded-lg text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-md"
+                data-product-id="software-testing-suite"
+              >
+                <span>Visit Product</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+              <button 
+                type="button" 
+                class="product-modal-trigger w-full py-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-medium border border-white/10 transition-colors flex items-center justify-center gap-1.5"
+                data-product-id="software-testing-suite"
+              >
+                <span>View Details</span>
+                <i class="fa-solid fa-circle-info text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Empty State (Shown when search/filter returns 0 results) -->
+        <div id="no-products-found" class="hidden text-center py-16 px-4 bg-[#252e40]/40 border border-[#60697d]/20 rounded-2xl max-w-lg mx-auto my-8">
+          <div class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-4 text-slate-400 text-2xl">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <h4 class="text-lg font-bold text-white mb-2">No Matching Products Found</h4>
+          <p class="text-xs sm:text-sm text-slate-400 mb-6">
+            We couldn't find any products matching your current search or category filter.
+          </p>
+          <button 
+            type="button" 
+            id="reset-search-filters-btn" 
+            class="btn-secondary px-5 py-2.5 rounded-lg text-xs font-semibold text-white inline-flex items-center gap-2"
+          >
+            <i class="fa-solid fa-rotate-left text-xs"></i>
+            <span>Reset Search &amp; Filters</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
     <!-- Placeholder anchors for upcoming phases -->
-    <div id="products" class="pt-8"></div>
     <div id="contact" class="pt-8"></div>
 
   </main>
@@ -1098,6 +1774,80 @@
           <i class="fa-solid fa-arrow-right text-xs"></i>
         </a>
         <button id="modal-close-footer" type="button" class="btn-secondary px-4 py-2.5 rounded-lg text-slate-300 hover:text-white text-xs sm:text-sm font-semibold transition-colors">
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PHASE 4: PRODUCT DETAIL MODAL (Interactive Popup)
+       ======================================================== -->
+  <div id="product-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-container w-full max-w-2xl bg-[#1c2332] border border-[#60697d]/40 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      
+      <!-- Modal Header -->
+      <div class="p-5 sm:p-6 bg-[#161c28] border-b border-[#60697d]/20 flex items-center justify-between">
+        <div class="flex items-center gap-3.5">
+          <div id="pmodal-icon-box" class="w-12 h-12 rounded-xl bg-[#252e40] border border-[#60697d]/40 flex items-center justify-center text-xl text-[#e85827]">
+            <i class="fa-solid fa-shapes"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span id="pmodal-category" class="text-[11px] font-semibold uppercase tracking-wider text-[#e85827]">Category</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+              <span id="pmodal-pricing" class="text-[11px] font-bold text-emerald-400">Pricing</span>
+            </div>
+            <h3 id="pmodal-title" class="text-xl sm:text-2xl font-bold text-white">Product Title</h3>
+          </div>
+        </div>
+        <button id="pmodal-close-btn" type="button" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors border border-white/10" aria-label="Close product modal">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-6 text-sm text-slate-300">
+        
+        <!-- Image Preview Frame -->
+        <div class="w-full aspect-[16/9] rounded-xl overflow-hidden bg-[#161c28] border border-[#60697d]/30 relative">
+          <img id="pmodal-image" src="" alt="Product Preview" class="w-full h-full object-cover">
+        </div>
+
+        <!-- Overview -->
+        <div>
+          <h4 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-2">Overview</h4>
+          <p id="pmodal-desc" class="text-base text-slate-200 leading-relaxed font-normal">
+            Detailed overview of this product.
+          </p>
+        </div>
+
+        <!-- Features Checklist -->
+        <div>
+          <h4 class="text-xs uppercase font-semibold text-[#e85827] tracking-wider mb-3">Core Features &amp; Capabilities</h4>
+          <ul id="pmodal-features" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <!-- Populated dynamically -->
+          </ul>
+        </div>
+
+        <!-- Tech Stack -->
+        <div>
+          <h4 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-2.5">Architecture &amp; Stacks</h4>
+          <div id="pmodal-tech" class="flex flex-wrap gap-2">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 sm:p-5 bg-[#161c28] border-t border-[#60697d]/20 flex items-center justify-between gap-4">
+        <a id="pmodal-visit-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary px-5 py-2.5 rounded-lg text-white text-xs sm:text-sm font-semibold flex items-center gap-2">
+          <span>Visit Live Product</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+        </a>
+        <button id="pmodal-close-footer" type="button" class="btn-secondary px-4 py-2.5 rounded-lg text-slate-300 hover:text-white text-xs sm:text-sm font-semibold transition-colors">
           Close
         </button>
       </div>
