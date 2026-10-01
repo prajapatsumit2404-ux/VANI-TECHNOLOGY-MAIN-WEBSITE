@@ -2146,56 +2146,95 @@
   <!-- ========================================================
        PHASE 4: PRODUCT DETAIL MODAL (Interactive Popup)
        ======================================================== -->
-  <div id="product-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-container w-full max-w-2xl bg-[#1c2332] border border-[#60697d]/40 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+  <div id="product-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-container w-full max-w-3xl bg-[#1c2332] border border-[#60697d]/40 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
       
-      <!-- Modal Header -->
-      <div class="p-5 sm:p-6 bg-[#161c28] border-b border-[#60697d]/20 flex items-center justify-between">
+      <!-- Top Navigation & Action Bar: Back to Products & Status -->
+      <div class="px-5 py-3.5 bg-[#161c28] border-b border-[#60697d]/20 flex items-center justify-between gap-3">
+        <button id="pmodal-back-btn" type="button" class="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white transition-colors bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-lg border border-white/10">
+          <i class="fa-solid fa-arrow-left text-xs text-[#e85827]"></i>
+          <span>Back to Products</span>
+        </button>
+        <div class="flex items-center gap-2.5">
+          <!-- Availability / Stock Badge -->
+          <span id="pmodal-stock-badge" class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="pmodal-stock">In Stock / Available</span>
+          </span>
+          <button id="pmodal-close-btn" type="button" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors border border-white/10" aria-label="Close product modal">
+            <i class="fa-solid fa-xmark text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Sub-Header (Product Brand Identity & Price) -->
+      <div class="p-5 sm:p-6 bg-[#161c28]/70 border-b border-[#60697d]/20 flex items-center justify-between flex-wrap gap-4">
         <div class="flex items-center gap-3.5">
-          <div id="pmodal-icon-box" class="w-12 h-12 rounded-xl bg-[#252e40] border border-[#60697d]/40 flex items-center justify-center text-xl text-[#e85827]">
+          <div id="pmodal-icon-box" class="w-12 h-12 rounded-xl bg-[#252e40] border border-[#60697d]/40 flex items-center justify-center text-xl text-[#e85827] shrink-0">
             <i class="fa-solid fa-shapes"></i>
           </div>
           <div>
             <div class="flex items-center gap-2">
               <span id="pmodal-category" class="text-[11px] font-semibold uppercase tracking-wider text-[#e85827]">Category</span>
               <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
-              <span id="pmodal-pricing" class="text-[11px] font-bold text-emerald-400">Pricing</span>
+              <span id="pmodal-sku" class="text-[11px] font-mono text-slate-400">ID: product-id</span>
             </div>
             <h3 id="pmodal-title" class="text-xl sm:text-2xl font-bold text-white">Product Title</h3>
           </div>
         </div>
-        <button id="pmodal-close-btn" type="button" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors border border-white/10" aria-label="Close product modal">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
+        <div class="text-left sm:text-right w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-white/5">
+          <span class="text-[10px] text-slate-400 block uppercase tracking-wider font-mono">Pricing / License</span>
+          <span id="pmodal-pricing" class="text-base sm:text-xl font-bold text-emerald-400">Custom Enterprise</span>
+        </div>
       </div>
 
       <!-- Modal Body (Scrollable) -->
-      <div class="p-6 sm:p-8 overflow-y-auto space-y-6 text-sm text-slate-300">
+      <div class="p-5 sm:p-7 overflow-y-auto space-y-6 text-sm text-slate-300">
         
         <!-- Image Preview Frame -->
-        <div class="w-full aspect-[16/9] rounded-xl overflow-hidden bg-[#161c28] border border-[#60697d]/30 relative">
+        <div class="w-full aspect-[16/9] sm:aspect-[21/9] rounded-xl overflow-hidden bg-[#161c28] border border-[#60697d]/30 relative flex items-center justify-center">
           <img id="pmodal-image" src="" alt="Product Preview" class="w-full h-full object-cover">
         </div>
 
-        <!-- Overview -->
+        <!-- Description / Overview -->
         <div>
-          <h4 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-2">Overview</h4>
-          <p id="pmodal-desc" class="text-base text-slate-200 leading-relaxed font-normal">
+          <h4 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-2 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-info text-[#e85827]"></i>
+            <span>Overview &amp; Purpose</span>
+          </h4>
+          <p id="pmodal-desc" class="text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
             Detailed overview of this product.
           </p>
         </div>
 
         <!-- Features Checklist -->
         <div>
-          <h4 class="text-xs uppercase font-semibold text-[#e85827] tracking-wider mb-3">Core Features &amp; Capabilities</h4>
+          <h4 class="text-xs uppercase font-semibold text-[#e85827] tracking-wider mb-3 flex items-center gap-1.5">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Core Features &amp; Capabilities</span>
+          </h4>
           <ul id="pmodal-features" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             <!-- Populated dynamically -->
           </ul>
         </div>
 
+        <!-- Specifications Grid -->
+        <div id="pmodal-specs-container">
+          <h4 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-2.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-sliders text-[#ed8a0a]"></i>
+            <span>Technical Specifications</span>
+          </h4>
+          <div id="pmodal-specs-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
         <!-- Tech Stack -->
         <div>
-          <h4 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-2.5">Architecture &amp; Stacks</h4>
+          <h4 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-2.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-layer-group text-slate-400"></i>
+            <span>Architecture &amp; Stacks</span>
+          </h4>
           <div id="pmodal-tech" class="flex flex-wrap gap-2">
             <!-- Populated dynamically -->
           </div>
@@ -2203,18 +2242,41 @@
 
       </div>
 
-      <!-- Modal Footer -->
-      <div class="p-4 sm:p-5 bg-[#161c28] border-t border-[#60697d]/20 flex items-center justify-between gap-4">
-        <a id="pmodal-visit-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary px-5 py-2.5 rounded-lg text-white text-xs sm:text-sm font-semibold flex items-center gap-2">
-          <span>Visit Live Product</span>
-          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-        </a>
-        <button id="pmodal-close-footer" type="button" class="btn-secondary px-4 py-2.5 rounded-lg text-slate-300 hover:text-white text-xs sm:text-sm font-semibold transition-colors">
-          Close
+      <!-- Modal Footer with Add to Cart, Buy Now / Visit, and Back to Products -->
+      <div class="p-4 sm:p-5 bg-[#161c28] border-t border-[#60697d]/20 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5 w-full sm:w-auto">
+          <!-- Add to Cart Button -->
+          <button id="pmodal-add-cart-btn" type="button" class="btn-secondary flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 hover:border-[#ed8a0a]/60">
+            <i class="fa-solid fa-cart-plus text-xs text-[#ed8a0a]"></i>
+            <span id="pmodal-cart-text">Add to Cart</span>
+          </button>
+          <!-- Buy Now / Inquire Button -->
+          <a id="pmodal-visit-btn" href="#" class="btn-primary flex-1 sm:flex-initial px-5 py-2.5 rounded-lg text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2">
+            <span id="pmodal-visit-text">Buy Now / Visit Product</span>
+            <i id="pmodal-visit-icon" class="fa-solid fa-bolt text-xs"></i>
+          </a>
+        </div>
+        <button id="pmodal-close-footer" type="button" class="btn-secondary w-full sm:w-auto px-4 py-2.5 rounded-lg text-slate-300 hover:text-white text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-arrow-left text-[11px]"></i>
+          <span>Back to Products</span>
         </button>
       </div>
 
     </div>
+  </div>
+
+  <!-- Cart / Action Toast Notification -->
+  <div id="cart-toast" class="fixed bottom-6 right-6 z-[200] max-w-sm px-4 py-3 rounded-xl bg-[#1c2332] border border-emerald-500/40 text-white shadow-2xl hidden items-center gap-3 backdrop-blur-md transition-all">
+    <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+      <i class="fa-solid fa-check text-sm"></i>
+    </div>
+    <div class="flex-1 min-w-0">
+      <p id="cart-toast-title" class="text-xs font-bold text-white truncate">Product added</p>
+      <p id="cart-toast-msg" class="text-[11px] text-slate-300 truncate">Saved to your inquiry / cart list</p>
+    </div>
+    <button type="button" onclick="document.getElementById('cart-toast').classList.add('hidden')" class="text-slate-400 hover:text-white text-xs p-1">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
   </div>
 
   <!-- Three.js Library -->

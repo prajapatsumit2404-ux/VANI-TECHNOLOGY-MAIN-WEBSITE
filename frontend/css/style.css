@@ -713,6 +713,8 @@ h1, h2, h3, h4, .font-heading {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -720,6 +722,15 @@ h1, h2, h3, h4, .font-heading {
   transform: translateY(-8px);
   border-color: rgba(232, 88, 39, 0.6);
   box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6), 0 0 30px -5px rgba(232, 88, 39, 0.25);
+}
+
+.product-card:active {
+  transform: translateY(-4px) scale(0.99);
+}
+
+.product-card:focus-visible {
+  outline: 2px solid #e85827;
+  outline-offset: 3px;
 }
 
 .product-card .img-wrapper {

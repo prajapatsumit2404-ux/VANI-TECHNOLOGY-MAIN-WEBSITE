@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Product = require('../models/Product');
 
 /**
@@ -92,7 +93,25 @@ exports.getAllProductsAdmin = async (req, res, next) => {
  */
 exports.getProductById = async (req, res, next) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const { id } = req.params;
+    let product = null;
+
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      product = await Product.findById(id);
+    }
+
+    if (!product) {
+      const cleanName = id.replace(/-/g, ' ');
+      const keywords = id.split('-').filter(w => w.length > 1);
+      product = await Product.findOne({
+        $or: [
+          { name: new RegExp(`^${cleanName}$`, 'i') },
+          { name: new RegExp(cleanName, 'i') },
+          { name: new RegExp(keywords.join('.*'), 'i') },
+        ],
+      });
+    }
+
     if (!product) {
       return res.status(404).json({
         success: false,

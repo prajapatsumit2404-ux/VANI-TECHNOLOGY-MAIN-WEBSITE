@@ -614,20 +614,26 @@ window.showProductImageFallback = function(imgEl, title, iconClass) {
 
 /**
  * Phase 4: Featured Products Dataset
+ * Every product is equipped with complete, unique metadata, specifications, and availability.
  */
 const PRODUCTS_DATA = {
   'ai-talksy': {
     id: 'ai-talksy',
     title: 'AI Talksy',
+    name: 'AI Talksy',
     category: 'AI',
     categorySlug: 'ai',
     pricing: 'From $29/mo (Free Trial)',
+    price: '$29 / Month',
+    stock: 'In Stock / Instant Cloud Access',
+    availability: 'Available Now',
     icon: 'fa-solid fa-robot',
     image: 'assets/images/portfolio/aitalksy-logo.png',
     fallbackImage: 'assets/images/portfolio/Tablet-Screens-presentation-Mock-up.png',
     link: 'https://aitalksy.com/',
     isExternal: true,
     desc: 'Intelligent conversational AI & customer automation platform enabling enterprises to deploy 24/7 AI chat agents, lead qualification assistants, and voice agents with zero code.',
+    description: 'Intelligent conversational AI & customer automation platform enabling enterprises to deploy 24/7 AI chat agents, lead qualification assistants, and voice agents with zero code.',
     features: [
       '24/7 Multi-Language Conversational AI Chatbot',
       'Custom Knowledge Base Training (PDF, URLs, Docs)',
@@ -636,20 +642,31 @@ const PRODUCTS_DATA = {
       'Sentiment Analysis & Live Agent Handoff',
       'Real-Time Analytics & Conversation Insights'
     ],
+    specifications: [
+      { label: 'Platform Type', value: 'Conversational AI / SaaS' },
+      { label: 'Integration', value: 'REST API, Webhooks, WhatsApp, Slack' },
+      { label: 'Supported Models', value: 'GPT-4o, Claude 3.5, Gemini 1.5' },
+      { label: 'SLA Guarantee', value: '99.9% High Availability Uptime' }
+    ],
     tech: ['OpenAI / LLMs', 'Python / FastAPI', 'Vector DB / Pinecone', 'React', 'Node.js', 'WebSockets']
   },
   'community-forum': {
     id: 'community-forum',
     title: 'Community Forum',
+    name: 'Community Forum',
     category: 'Community',
     categorySlug: 'community',
     pricing: 'Free / Open Platform',
+    price: 'Free / Open Source',
+    stock: 'In Stock / Instant Deployment',
+    availability: 'Available Now',
     icon: 'fa-solid fa-comments',
     image: 'assets/images/portfolio/community-forum-logo.png',
     fallbackImage: 'assets/images/portfolio/Mockup_11.png',
     link: 'https://communityforum.tech/',
     isExternal: true,
     desc: 'Scalable, modern discussion platform engineered for high-engagement developer communities, tech enthusiasts, knowledge bases, and peer-to-peer technical support.',
+    description: 'Scalable, modern discussion platform engineered for high-engagement developer communities, tech enthusiasts, knowledge bases, and peer-to-peer technical support.',
     features: [
       'Real-Time Threaded Discussions & Polls',
       'Reputation Badges & Member Gamification',
@@ -658,20 +675,31 @@ const PRODUCTS_DATA = {
       'Instant Push & Email Notification Engine',
       'SEO-Optimized Forum Threads & Indexing'
     ],
+    specifications: [
+      { label: 'Platform Type', value: 'Developer Community Platform' },
+      { label: 'Database', value: 'MongoDB / Redis Cache' },
+      { label: 'Real-time Protocol', value: 'WebSockets & Push API' },
+      { label: 'SEO Optimization', value: 'Full Server-Side Indexing' }
+    ],
     tech: ['Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'Redis', 'Elasticsearch']
   },
   'ratehonk-travel-crm': {
     id: 'ratehonk-travel-crm',
     title: 'RateHonk Travel CRM',
+    name: 'RateHonk Travel CRM',
     category: 'CRM',
     categorySlug: 'crm',
     pricing: 'Enterprise SaaS',
+    price: 'Custom Enterprise / $99/mo',
+    stock: 'In Stock / Ready for Onboarding',
+    availability: 'Available Now',
     icon: 'fa-solid fa-plane-departure',
     image: 'assets/images/portfolio/ratehonk-logo.png',
     fallbackImage: 'assets/images/portfolio/responsive_web.png',
     link: 'https://crm.ratehonk.com/portfolio',
     isExternal: true,
     desc: 'Enterprise travel management and B2B CRM solution designed for travel agencies and tour operators to manage leads, generate customized flight/hotel itineraries, and automate customer billing.',
+    description: 'Enterprise travel management and B2B CRM solution designed for travel agencies and tour operators to manage leads, generate customized flight/hotel itineraries, and automate customer billing.',
     features: [
       'Dynamic Multi-City Flight & Hotel Itinerary Builder',
       'Automated Supplier Invoicing & Receipt Generator',
@@ -680,20 +708,31 @@ const PRODUCTS_DATA = {
       'Multi-Currency Payment Processing',
       'Customer Travel Voucher & PDF Exports'
     ],
+    specifications: [
+      { label: 'Platform Type', value: 'B2B Travel Operations CRM' },
+      { label: 'Accounting', value: 'Multi-Currency & Supplier Ledger' },
+      { label: 'Export Formats', value: 'PDF Itineraries, CSV & Invoices' },
+      { label: 'Security', value: 'Role-Based Access Control (RBAC)' }
+    ],
     tech: ['PHP / Laravel', 'MySQL', 'Vue.js', 'Bootstrap', 'REST APIs', 'PDFKit']
   },
   'telemedicine': {
     id: 'telemedicine',
     title: 'TeleMedicine',
+    name: 'TeleMedicine Platform',
     category: 'Healthcare',
     categorySlug: 'healthcare',
     pricing: 'Hospital License',
+    price: 'Enterprise License / $199/mo',
+    stock: 'In Stock / Licensed Deployment',
+    availability: 'Available for Onboarding',
     icon: 'fa-solid fa-heart-pulse',
     image: 'assets/images/portfolio/3.png',
     fallbackImage: 'https://www.vanitechnologies.in/assets/dist/portfolio/3.png',
     link: '#contact',
     isExternal: false,
     desc: 'Secure, HIPAA-compliant digital healthcare and virtual consultation platform connecting patients with certified medical practitioners via encrypted HD video calls, digital prescriptions, and EHR sync.',
+    description: 'Secure, HIPAA-compliant digital healthcare and virtual consultation platform connecting patients with certified medical practitioners via encrypted HD video calls, digital prescriptions, and EHR sync.',
     features: [
       'End-to-End Encrypted HD Video Consultations',
       'Digital E-Prescription & Lab Report Management',
@@ -702,20 +741,31 @@ const PRODUCTS_DATA = {
       'Doctor Availability & Calendar Management',
       'Secure HIPAA-Compliant Data Storage'
     ],
+    specifications: [
+      { label: 'Compliance', value: 'HIPAA & GDPR Compliant' },
+      { label: 'Video Protocol', value: 'WebRTC End-to-End Encrypted' },
+      { label: 'EHR Standard', value: 'FHIR / HL7 Compatible' },
+      { label: 'Device Support', value: 'Web, iOS, Android' }
+    ],
     tech: ['WebRTC', 'React', 'Node.js', 'PostgreSQL', 'HIPAA Cloud', 'Socket.io']
   },
   'homem-do-pao': {
     id: 'homem-do-pao',
     title: 'Homem Do Pao',
+    name: 'Homem Do Pao Bakery Store',
     category: 'E-commerce',
     categorySlug: 'ecommerce',
     pricing: 'Custom Storefront',
+    price: 'Commercial Storefront',
+    stock: 'In Stock / Turnkey Storefront',
+    availability: 'Available Now',
     icon: 'fa-solid fa-bread-slice',
     image: 'assets/images/portfolio/Tablet-Screens-presentation-Mock-up.png',
     fallbackImage: 'https://www.vanitechnologies.in/assets/dist/portfolio/Tablet-Screens-presentation-Mock-up.png',
     link: '#contact',
     isExternal: false,
     desc: 'Digital e-commerce and artisan bakery ordering ecosystem featuring recurring fresh bread subscriptions, live order status tracking, and seamless contactless local deliveries.',
+    description: 'Digital e-commerce and artisan bakery ordering ecosystem featuring recurring fresh bread subscriptions, live order status tracking, and seamless contactless local deliveries.',
     features: [
       'Artisan Food Catalog & Custom Bundles',
       'Weekly / Monthly Bread Subscription Engine',
@@ -724,20 +774,31 @@ const PRODUCTS_DATA = {
       'Automated Customer WhatsApp Order Alerts',
       'Bakery Kitchen Inventory Synchronization'
     ],
+    specifications: [
+      { label: 'Platform Type', value: 'Headless Digital Commerce' },
+      { label: 'Payment Gateways', value: 'Stripe, PayPal, Apple Pay' },
+      { label: 'Subscription Mode', value: 'Weekly & Monthly Re-Orders' },
+      { label: 'Order Dispatch', value: 'Live Driver GPS Tracking' }
+    ],
     tech: ['Shopify Plus / Headless', 'Next.js', 'Stripe', 'Node.js', 'Webhooks']
   },
   'meditation-willy-cherish': {
     id: 'meditation-willy-cherish',
     title: 'Meditation with Willy Cherish',
+    name: 'Meditation with Willy Cherish',
     category: 'Meditation',
     categorySlug: 'meditation',
     pricing: 'Freemium ($9.99/mo Premium)',
+    price: 'Freemium / $9.99/mo',
+    stock: 'In Stock / Instant Access',
+    availability: 'Available Now',
     icon: 'fa-solid fa-spa',
     image: 'assets/images/portfolio/Mockup_11.png',
     fallbackImage: 'https://www.vanitechnologies.in/assets/dist/portfolio/Mockup_11.png',
     link: '#contact',
     isExternal: false,
     desc: 'Mindful wellness and guided meditation audio portal offering stress-relief soundscapes, breathwork exercises, guided sleep journeys, and ambient mindfulness sessions.',
+    description: 'Mindful wellness and guided meditation audio portal offering stress-relief soundscapes, breathwork exercises, guided sleep journeys, and ambient mindfulness sessions.',
     features: [
       'Curated HD Guided Audio & Soundscapes',
       'Binaural Beats & Ambient Relaxing Loops',
@@ -746,20 +807,31 @@ const PRODUCTS_DATA = {
       'Timer-Based Breathing Exercises',
       'Sleep Meditation Journeys & White Noise'
     ],
+    specifications: [
+      { label: 'Audio Engine', value: 'Spatial Audio & Binaural Beats' },
+      { label: 'Offline Support', value: 'Local Cache Audio Storage' },
+      { label: 'Platforms', value: 'PWA, iOS & Android' },
+      { label: 'Habit Analytics', value: 'Daily Streaks & Milestones' }
+    ],
     tech: ['React Native', 'Web Audio API', 'Node.js', 'AWS CloudFront', 'Firebase']
   },
   'msb-school': {
     id: 'msb-school',
     title: 'MSB School',
+    name: 'MSB School Management System',
     category: 'Education',
     categorySlug: 'education',
     pricing: 'Institutional SaaS',
+    price: 'Annual Institutional SaaS',
+    stock: 'In Stock / Institution Ready',
+    availability: 'Available for Deployment',
     icon: 'fa-solid fa-graduation-cap',
     image: 'assets/images/portfolio/responsive_web.png',
     fallbackImage: 'https://www.vanitechnologies.in/assets/dist/portfolio/responsive_web.png',
     link: '#contact',
     isExternal: false,
     desc: 'Comprehensive educational institution management system and virtual learning portal for students, teachers, and parents, covering attendance, report cards, fees, and virtual classrooms.',
+    description: 'Comprehensive educational institution management system and virtual learning portal for students, teachers, and parents, covering attendance, report cards, fees, and virtual classrooms.',
     features: [
       'Student Information System (SIS) & Grades',
       'Online Fee Collection & Receipt Generator',
@@ -768,20 +840,31 @@ const PRODUCTS_DATA = {
       'Teacher Lesson Planning & Attendance Tracker',
       'Automated Report Card & Certificate Generator'
     ],
+    specifications: [
+      { label: 'User Roles', value: 'Admins, Teachers, Parents, Students' },
+      { label: 'Billing Engine', value: 'Automated Fee Invoicing & Receipts' },
+      { label: 'Classroom', value: 'Assignments & Gradebooks' },
+      { label: 'Notification', value: 'SMS, WhatsApp & Push Alerts' }
+    ],
     tech: ['Angular', 'Node.js', 'PostgreSQL', 'AWS S3', 'Razorpay / Stripe']
   },
   'software-testing-suite': {
     id: 'software-testing-suite',
     title: 'Software Testing',
+    name: 'Software Testing & QA Suite',
     category: 'Services',
     categorySlug: 'services',
     pricing: 'On-Demand QA / Retainer',
+    price: 'On-Demand QA / Retainer',
+    stock: 'In Stock / Dedicated Engineers',
+    availability: 'Available for Engagement',
     icon: 'fa-solid fa-vial-circle-check',
     image: 'assets/images/portfolio/3.png',
     fallbackImage: 'https://www.vanitechnologies.in/assets/dist/portfolio/3.png',
     link: '#services',
     isExternal: false,
     desc: 'Enterprise QA & Automated Testing Suite engineered by Vani Technologies for continuous integration, load simulation, cross-browser regression, and vulnerability detection.',
+    description: 'Enterprise QA & Automated Testing Suite engineered by Vani Technologies for continuous integration, load simulation, cross-browser regression, and vulnerability detection.',
     features: [
       'Automated Continuous Testing & CI Pipelines',
       'High-Concurrency Load & Stress Simulation',
@@ -789,6 +872,12 @@ const PRODUCTS_DATA = {
       'Cross-Device & Browser Matrix Verification',
       'Automated Smoke & Regression Test Suites',
       'Detailed Bug & Performance Auditing Reports'
+    ],
+    specifications: [
+      { label: 'Testing Types', value: 'E2E, Unit, Load, Stress, Penetration' },
+      { label: 'CI/CD Support', value: 'GitHub Actions, Jenkins, GitLab' },
+      { label: 'Browser Matrix', value: 'Chrome, Safari, Firefox, Edge' },
+      { label: 'Reporting', value: 'Automated Slack/Email Telemetry' }
     ],
     tech: ['Jest', 'Cypress', 'Playwright', 'Selenium', 'Postman', 'k6', 'SonarQube']
   }
@@ -909,6 +998,8 @@ function initProductsAndFilters() {
 
 /**
  * Product Details Modal Controller
+ * Handles click on every product card, accurate data binding, fallbacks,
+ * Add to Cart, Buy Now, Back to Products navigation, and slug URL routing.
  */
 function initProductDetailModal() {
   const modal = document.getElementById('product-modal');
@@ -916,56 +1007,194 @@ function initProductDetailModal() {
 
   const modalIconBox = document.getElementById('pmodal-icon-box');
   const modalCategory = document.getElementById('pmodal-category');
+  const modalSku = document.getElementById('pmodal-sku');
   const modalPricing = document.getElementById('pmodal-pricing');
+  const modalStock = document.getElementById('pmodal-stock');
   const modalTitle = document.getElementById('pmodal-title');
   const modalImage = document.getElementById('pmodal-image');
   const modalDesc = document.getElementById('pmodal-desc');
   const modalFeatures = document.getElementById('pmodal-features');
+  const modalSpecsGrid = document.getElementById('pmodal-specs-grid');
   const modalTech = document.getElementById('pmodal-tech');
+  const modalAddCartBtn = document.getElementById('pmodal-add-cart-btn');
+  const modalCartText = document.getElementById('pmodal-cart-text');
   const modalVisitBtn = document.getElementById('pmodal-visit-btn');
+  const modalVisitText = document.getElementById('pmodal-visit-text');
+  const modalVisitIcon = document.getElementById('pmodal-visit-icon');
+  const modalBackBtn = document.getElementById('pmodal-back-btn');
   const modalCloseBtn = document.getElementById('pmodal-close-btn');
   const modalCloseFooter = document.getElementById('pmodal-close-footer');
 
-  const openProductModal = (productId) => {
-    const product = PRODUCTS_DATA[productId];
-    if (!product) return;
+  let currentActiveProduct = null;
 
-    if (modalIconBox) modalIconBox.innerHTML = `<i class="${product.icon}"></i>`;
-    if (modalCategory) modalCategory.textContent = product.category;
-    if (modalPricing) modalPricing.textContent = product.pricing;
-    if (modalTitle) modalTitle.textContent = product.title;
+  // Toast feedback helper
+  const showToast = (title, message) => {
+    const toast = document.getElementById('cart-toast');
+    const toastTitle = document.getElementById('cart-toast-title');
+    const toastMsg = document.getElementById('cart-toast-msg');
+    if (!toast) return;
+
+    if (toastTitle) toastTitle.textContent = title;
+    if (toastMsg) toastMsg.textContent = message;
+
+    toast.classList.remove('hidden');
+    toast.classList.add('flex');
+
+    if (toast._timer) clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => {
+      toast.classList.add('hidden');
+      toast.classList.remove('flex');
+    }, 3500);
+  };
+
+  /**
+   * Resolves exact product data from PRODUCTS_DATA, DOM card attributes, or API
+   */
+  const getProductData = (productId) => {
+    if (!productId) return null;
+    const cleanId = productId.toLowerCase().trim();
+
+    // 1. Direct key match
+    if (PRODUCTS_DATA[cleanId]) return PRODUCTS_DATA[cleanId];
+
+    // 2. Normalized match (hyphens / spacing / title matching)
+    const foundKey = Object.keys(PRODUCTS_DATA).find(
+      (k) =>
+        k === cleanId ||
+        k.replace(/-/g, '') === cleanId.replace(/-/g, '') ||
+        PRODUCTS_DATA[k].title?.toLowerCase() === cleanId ||
+        PRODUCTS_DATA[k].name?.toLowerCase() === cleanId
+    );
+    if (foundKey) return PRODUCTS_DATA[foundKey];
+
+    // 3. Fallback: Extract from the DOM card if rendered dynamically or customized
+    const cardEl = document.querySelector(`.product-card[data-product-id="${productId}"]`);
+    if (cardEl) {
+      const cardTitle = cardEl.getAttribute('data-name') || cardEl.querySelector('h3 span')?.textContent?.trim() || 'Vani Technology Solution';
+      const cardCategory = cardEl.getAttribute('data-category') || 'Services';
+      const cardImg = cardEl.querySelector('img')?.getAttribute('src') || 'assets/images/portfolio/Tablet-Screens-presentation-Mock-up.png';
+      const cardDesc = cardEl.querySelector('p')?.textContent?.trim() || 'Enterprise-grade digital solution engineered by Vani Technologies.';
+      const features = Array.from(cardEl.querySelectorAll('.space-y-1\\.5 span')).map((s) => s.textContent.trim()).filter(Boolean);
+
+      return {
+        id: productId,
+        title: cardTitle,
+        name: cardTitle,
+        category: cardCategory.toUpperCase(),
+        categorySlug: cardCategory.toLowerCase(),
+        pricing: 'Enterprise Custom / Inquire',
+        price: 'Custom Pricing',
+        stock: 'In Stock / Ready to Deploy',
+        availability: 'Available Now',
+        icon: 'fa-solid fa-shapes',
+        image: cardImg,
+        fallbackImage: 'assets/images/portfolio/Tablet-Screens-presentation-Mock-up.png',
+        link: '#contact',
+        isExternal: false,
+        desc: cardDesc,
+        description: cardDesc,
+        features: features.length ? features : ['High Availability Architecture', 'Custom Integration Support', 'Dedicated Engineering SLA'],
+        specifications: [
+          { label: 'Platform Type', value: 'Enterprise Digital Solution' },
+          { label: 'Security', value: 'Role-Based Access & Data Encryption' },
+          { label: 'Deployment', value: 'Cloud / SaaS & Dedicated On-Prem' },
+          { label: 'Support', value: '24/7 SLA Engineering Support' }
+        ],
+        tech: ['Modern Web', 'Node.js', 'Cloud Architecture']
+      };
+    }
+
+    return null;
+  };
+
+  /**
+   * Opens the Product Details Modal with the exact product data
+   */
+  const openProductModal = (productId) => {
+    const product = getProductData(productId);
+    if (!product) {
+      console.warn(`[Vani Technologies] Product not found for ID: ${productId}`);
+      return;
+    }
+
+    currentActiveProduct = product;
+
+    // Header & Badges
+    if (modalIconBox) modalIconBox.innerHTML = `<i class="${product.icon || 'fa-solid fa-shapes'}"></i>`;
+    if (modalCategory) modalCategory.textContent = product.category || 'Technology';
+    if (modalSku) modalSku.textContent = `ID: ${product.id}`;
+    if (modalPricing) modalPricing.textContent = product.pricing || product.price || 'Custom Pricing';
+    if (modalStock) modalStock.textContent = product.stock || product.availability || 'In Stock / Available';
+    if (modalTitle) modalTitle.textContent = product.title || product.name || 'Product Details';
+
+    // Image preview with graceful fallback
     if (modalImage) {
-      modalImage.src = product.image;
-      modalImage.alt = product.title;
+      modalImage.src = product.image || product.fallbackImage || 'assets/images/portfolio/Tablet-Screens-presentation-Mock-up.png';
+      modalImage.alt = product.title || 'Product Preview';
       if (['ai-talksy', 'community-forum', 'ratehonk-travel-crm'].includes(product.id)) {
         modalImage.className = 'w-full h-full object-contain p-6 bg-white';
       } else {
         modalImage.className = 'w-full h-full object-cover';
       }
-      modalImage.onerror = function() {
+      modalImage.onerror = function () {
         this.onerror = null;
-        this.src = product.fallbackImage;
+        this.src = product.fallbackImage || 'assets/images/portfolio/Tablet-Screens-presentation-Mock-up.png';
       };
     }
-    if (modalDesc) modalDesc.textContent = product.desc;
 
-    // Populate Features
+    // Overview description
+    if (modalDesc) {
+      modalDesc.textContent = product.desc || product.description || 'Enterprise-grade digital solution engineered by Vani Technologies.';
+    }
+
+    // Features checklist
     if (modalFeatures) {
-      modalFeatures.innerHTML = product.features
+      const featuresList = (product.features && product.features.length)
+        ? product.features
+        : ['High-Performance Scalability', 'Enterprise Data Protection', '24/7 Dedicated SLA Support'];
+
+      modalFeatures.innerHTML = featuresList
         .map(
           (f) => `
-            <li class="flex items-start gap-2.5 p-2 rounded-lg bg-white/[0.02] border border-white/5">
+            <li class="flex items-start gap-2.5 p-2.5 rounded-lg bg-white/[0.03] border border-white/5 hover:border-[#e85827]/30 transition-colors">
               <i class="fa-solid fa-circle-check text-[#e85827] text-xs mt-1 shrink-0"></i>
-              <span class="text-xs text-slate-300 font-medium leading-relaxed">${f}</span>
+              <span class="text-xs text-slate-200 font-medium leading-relaxed">${f}</span>
             </li>
           `
         )
         .join('');
     }
 
-    // Populate Tech
+    // Specifications Grid
+    if (modalSpecsGrid) {
+      const specs = (product.specifications && product.specifications.length)
+        ? product.specifications
+        : [
+            { label: 'Platform Type', value: `${product.category || 'Digital'} Platform` },
+            { label: 'Deployment', value: 'Cloud SaaS / Dedicated Hosting' },
+            { label: 'Security', value: 'End-to-End Encryption & RBAC' },
+            { label: 'SLA Support', value: '24/7 Monitored Uptime' }
+          ];
+
+      modalSpecsGrid.innerHTML = specs
+        .map(
+          (s) => `
+            <div class="p-2.5 rounded-lg bg-[#252e40]/70 border border-[#60697d]/25 flex items-center justify-between gap-3 text-xs">
+              <span class="text-slate-400 font-mono uppercase text-[10px] tracking-wider">${s.label}</span>
+              <span class="text-white font-semibold text-right">${s.value}</span>
+            </div>
+          `
+        )
+        .join('');
+    }
+
+    // Tech Stack Badges
     if (modalTech) {
-      modalTech.innerHTML = product.tech
+      const techList = (product.tech && product.tech.length)
+        ? product.tech
+        : ['Node.js', 'Cloud Architecture', 'Secure REST APIs'];
+
+      modalTech.innerHTML = techList
         .map(
           (t) => `
             <span class="px-2.5 py-1 text-xs rounded-md bg-[#252e40] text-slate-200 border border-[#60697d]/35 font-mono shadow-sm">
@@ -976,55 +1205,153 @@ function initProductDetailModal() {
         .join('');
     }
 
-    // Visit button setup
+    // Configure "Add to Cart" button
+    if (modalAddCartBtn && modalCartText) {
+      modalCartText.textContent = 'Add to Cart';
+      modalAddCartBtn.onclick = (e) => {
+        e.preventDefault();
+        try {
+          const cart = JSON.parse(localStorage.getItem('vani_cart') || '[]');
+          if (!cart.some((item) => item.id === product.id)) {
+            cart.push({
+              id: product.id,
+              name: product.title || product.name,
+              category: product.category,
+              pricing: product.pricing || product.price,
+              addedAt: new Date().toISOString()
+            });
+            localStorage.setItem('vani_cart', JSON.stringify(cart));
+          }
+        } catch (err) {}
+
+        modalAddCartBtn.classList.add('bg-emerald-600', 'text-white');
+        modalCartText.innerHTML = '<i class="fa-solid fa-check mr-1 text-white"></i> Added!';
+        showToast(`${product.title} added to cart!`, 'Saved to your inquiry list. You can finalize your inquiry below.');
+
+        setTimeout(() => {
+          modalAddCartBtn.classList.remove('bg-emerald-600', 'text-white');
+          modalCartText.textContent = 'Add to Cart';
+        }, 2200);
+      };
+    }
+
+    // Configure "Buy Now / Visit Product / Inquire" button
     if (modalVisitBtn) {
-      modalVisitBtn.href = product.link;
+      modalVisitBtn.href = product.link || '#contact';
       if (product.isExternal) {
         modalVisitBtn.target = '_blank';
         modalVisitBtn.rel = 'noopener noreferrer';
-        modalVisitBtn.innerHTML = `<span>Visit Live Product</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>`;
+        if (modalVisitText) modalVisitText.textContent = 'Visit Live Product';
+        if (modalVisitIcon) modalVisitIcon.className = 'fa-solid fa-arrow-up-right-from-square text-xs';
+        modalVisitBtn.onclick = null;
       } else {
         modalVisitBtn.removeAttribute('target');
         modalVisitBtn.removeAttribute('rel');
-        modalVisitBtn.innerHTML = `<span>Inquire / Request Demo</span> <i class="fa-solid fa-arrow-right text-xs"></i>`;
+        if (modalVisitText) modalVisitText.textContent = 'Inquire / Buy Now';
+        if (modalVisitIcon) modalVisitIcon.className = 'fa-solid fa-bolt text-xs';
         modalVisitBtn.onclick = (e) => {
+          e.preventDefault();
           closeProductModal();
-          const targetEl = document.querySelector(product.link);
-          if (targetEl) {
-            e.preventDefault();
+
+          const contactSection = document.querySelector('#contact');
+          if (contactSection) {
             const navbarHeight = 72;
-            const targetPosition = targetEl.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-            window.scrollTo({
-              top: targetPosition,
-              behavior: 'smooth'
-            });
+            const targetPos = contactSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+            window.scrollTo({ top: targetPos, behavior: 'smooth' });
+
+            const msgBox = document.getElementById('contact-message');
+            if (msgBox) {
+              msgBox.value = `Hello Vani Technologies Team,\n\nI am interested in acquiring / licensing "${product.title}" (${product.pricing || 'Custom'}). Please provide availability details, deployment timelines, and pricing options.`;
+              msgBox.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+            const serviceSelect = document.getElementById('contact-service');
+            if (serviceSelect) {
+              serviceSelect.value = 'General Inquiry';
+            }
           }
         };
       }
     }
 
+    // Update URL hash for clean slug routing / bookmarking
+    try {
+      if (window.location.hash !== `#/products/${product.id}`) {
+        window.history.replaceState(null, '', `#/products/${encodeURIComponent(product.id)}`);
+      }
+    } catch (e) {}
+
+    // Open Modal with Animation
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   };
 
+  /**
+   * Closes the Product Details Modal and resets URL hash cleanly
+   */
   const closeProductModal = () => {
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    currentActiveProduct = null;
+
+    // Reset URL hash cleanly back to #products
+    try {
+      if (window.location.hash.startsWith('#/products/')) {
+        window.history.replaceState(null, '', '#products');
+      }
+    } catch (e) {}
   };
 
-  // Attach triggers
-  const triggers = document.querySelectorAll('.product-modal-trigger');
-  triggers.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const pId = btn.getAttribute('data-product-id');
-      if (pId) openProductModal(pId);
-    });
-  });
+  /**
+   * 1. Make EVERY product card clickable
+   */
+  const attachCardListeners = () => {
+    const cards = document.querySelectorAll('.product-card');
+    cards.forEach((card) => {
+      card.style.cursor = 'pointer';
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
 
-  // Close triggers
+      card.addEventListener('click', (e) => {
+        // If clicking directly on an external anchor with target="_blank", allow standard link navigation
+        const clickedExternalLink = e.target.closest('a[target="_blank"]');
+        if (clickedExternalLink) {
+          return;
+        }
+
+        e.preventDefault();
+        const pId = card.getAttribute('data-product-id') || card.querySelector('[data-product-id]')?.getAttribute('data-product-id');
+        if (pId) {
+          openProductModal(pId);
+        }
+      });
+
+      // Keyboard accessibility (Enter or Space)
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const pId = card.getAttribute('data-product-id');
+          if (pId) openProductModal(pId);
+        }
+      });
+    });
+
+    // Also attach to any explicit .product-modal-trigger buttons
+    document.querySelectorAll('.product-modal-trigger').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const pId = btn.getAttribute('data-product-id') || btn.closest('.product-card')?.getAttribute('data-product-id');
+        if (pId) openProductModal(pId);
+      });
+    });
+  };
+
+  attachCardListeners();
+
+  // Close handlers
+  if (modalBackBtn) modalBackBtn.addEventListener('click', closeProductModal);
   if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeProductModal);
   if (modalCloseFooter) modalCloseFooter.addEventListener('click', closeProductModal);
 
@@ -1037,6 +1364,36 @@ function initProductDetailModal() {
       closeProductModal();
     }
   });
+
+  // Deep-linking / URL hash router: check URL on load & on hashchange
+  const handleUrlProductRoute = () => {
+    const hash = window.location.hash || '';
+    const searchParams = new URLSearchParams(window.location.search);
+    const paramProduct = searchParams.get('product');
+
+    let targetId = null;
+
+    if (paramProduct) {
+      targetId = paramProduct;
+    } else if (hash.startsWith('#/products/')) {
+      targetId = hash.replace('#/products/', '').split('?')[0];
+    } else if (hash.startsWith('#product-')) {
+      targetId = hash.replace('#product-', '').split('?')[0];
+    }
+
+    if (targetId) {
+      setTimeout(() => {
+        openProductModal(targetId);
+      }, 150);
+    }
+  };
+
+  window.addEventListener('hashchange', handleUrlProductRoute);
+  handleUrlProductRoute();
+
+  // Expose openProductModal globally for direct programmatic calls
+  window.openProductModal = openProductModal;
+  window.closeProductModal = closeProductModal;
 }
 
 /**
