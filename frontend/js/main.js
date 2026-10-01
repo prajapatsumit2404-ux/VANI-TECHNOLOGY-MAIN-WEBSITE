@@ -195,6 +195,11 @@ function initStatsCounter() {
 }
 
 function animateValue(element, start, end, duration, decimals, suffix) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    element.textContent = end.toFixed(decimals) + suffix;
+    return;
+  }
+
   let startTime = null;
 
   function step(currentTime) {

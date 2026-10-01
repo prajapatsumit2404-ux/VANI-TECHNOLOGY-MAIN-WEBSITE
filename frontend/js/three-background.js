@@ -497,6 +497,16 @@
       }, { threshold: 0.05 });
       observer.observe(heroSection);
     }
+
+    // Dynamic reduced-motion preference updates
+    try {
+      const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      motionQuery.addEventListener('change', (e) => {
+        state.reducedMotion = e.matches;
+      });
+    } catch (e) {
+      // Fallback for older browsers
+    }
   }
 
   /**
