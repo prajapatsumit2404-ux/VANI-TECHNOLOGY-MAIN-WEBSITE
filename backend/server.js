@@ -68,10 +68,29 @@ app.use((err, req, res, next) => {
 });
 
 // Start Server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log('====================================================');
   console.log(`🚀 Vani Technologies Server is running on port ${PORT}`);
   console.log(`🌐 Website URL:  http://localhost:${PORT}`);
   console.log(`🩺 Health API:   http://localhost:${PORT}/api/health`);
   console.log('====================================================');
+});
+
+// Handle Server Port Conflict & Errors
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`\n❌ [PORT CONFLICT] Port ${PORT} is already in use by another running Node.js process.`);
+    console.error(`💡 Tip: Stop the process currently occupying port ${PORT} by running:`);
+    console.error(`   npx kill-port ${PORT}  OR  Stop-Process -Id (Get-NetTCPConnection -LocalPort ${PORT}).OwningProcess -Force\n`);
+  } else {
+    console.error('[Server Error]:', err.message);
+  }
+});
+
+// Graceful Shutdown
+process.on('SIGINT', () => {
+  console.log('\n🛑 Gracefully shutting down Vani Technologies server...');
+  server.close(() => {
+    process.exit(0);
+  });
 });
