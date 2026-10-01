@@ -20,21 +20,81 @@ const PORT = process.env.PORT || 5000;
 connectDB().then(() => seedProductsIfNeeded());
 
 // Security and Logging Middleware
-// helmet configured to allow CDN resources in development
+const rateLimit = require('express-rate-limit');
+
+// Production Helmet configuration
 app.use(
   helmet({
-    contentSecurityPolicy: false,
+    contentSecurityPolicy: false, // Allows CDN resources (Tailwind, FontAwesome, AOS, ThreeJS)
     crossOriginEmbedderPolicy: false,
+    referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
   })
 );
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(morgan('dev'));
 
-// Serve Frontend Static Files
+// Dynamic CORS configuration
+const allowedOrigins = [
+  'https://www.vanitechnologies.in',
+  'https://vanitechnologies.in',
+  'http://localhost:5000',
+  'http://127.0.0.1:5000',
+  ...(process.env.CLIENT_URL ? [process.env.CLIENT_URL] : []),
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl, or server-to-server)
+      if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+        return callback(null, true);
+      }
+      return callback(new Error('Blocked by CORS security policy.'));
+    },
+    credentials: true,
+  })
+);
+
+// Body parsers with payload size limits
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Logging: combined in production, dev in development
+app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+
+// General API Rate Limiter
+const apiLimiter = rateLimit({
+  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS, 10) || 15 * 60 * 1000,
+  max: parseInt(process.env.RATE_LIMIT_MAX, 10) || (process.env.NODE_ENV === 'production' ? 100 : 1000),
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: 'Too many requests from this IP address. Please try again after 15 minutes.',
+  },
+});
+app.use('/api/', apiLimiter);
+
+// Specific stricter rate limiter for authentication routes
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: process.env.NODE_ENV === 'production' ? 30 : 300,
+  message: {
+    success: false,
+    message: 'Too many authentication attempts. Please try again after 15 minutes.',
+  },
+});
+app.use('/api/auth/', authLimiter);
+
+// Serve Frontend Static Files & Assets
 const frontendPath = path.join(__dirname, '../frontend');
 app.use(express.static(frontendPath));
+
+// Explicit route for robots.txt & sitemap.xml
+app.get('/robots.txt', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'robots.txt'));
+});
+app.get('/sitemap.xml', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'sitemap.xml'));
+});
 
 // Health Check API Route
 app.get('/api/health', (req, res) => {
@@ -63,10 +123,16 @@ app.use('/api/*', (req, res) => {
 
 // Global Error Handling Middleware
 app.use((err, req, res, next) => {
-  console.error('[Server Error]:', err.stack);
+  if (process.env.NODE_ENV !== 'production') {
+    console.error('[Server Error]:', err.stack);
+  } else {
+    console.error('[Server Error]:', err.message);
+  }
+
   res.status(err.status || 500).json({
     success: false,
     message: err.message || 'Internal Server Error',
+    ...(process.env.NODE_ENV !== 'production' ? { stack: err.stack } : {}),
   });
 });
 

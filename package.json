@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node backend/tests/test_phase10.js",
+    "test:all": "node backend/tests/test_phase6.js && node backend/tests/test_phase7.js && node backend/tests/test_phase8.js && node backend/tests/test_phase10.js"
   },
   "keywords": [
     "vani-technologies",

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /api/admin/
+Disallow: /profile.html
+
+Sitemap: https://www.vanitechnologies.in/sitemap.xml
