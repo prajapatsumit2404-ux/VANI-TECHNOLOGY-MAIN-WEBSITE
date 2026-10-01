@@ -455,8 +455,8 @@ exports.verifyOTP = async (req, res) => {
  */
 exports.login = async (req, res) => {
   try {
-    const { identifier, email, phone, password } = req.body;
-    const loginIdentifier = identifier || email || phone;
+    const { identifier, email, phone, emailOrPhone, password } = req.body;
+    const loginIdentifier = identifier || email || phone || emailOrPhone;
 
     if (!loginIdentifier || !password) {
       return res.status(400).json({

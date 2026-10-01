@@ -130,7 +130,7 @@ const Auth = {
   },
 
   async getAdminDashboard() {
-    return await this.request('/admin-dashboard', {
+    return await this.adminRequest('/dashboard', {
       method: 'GET',
     });
   },
