@@ -135,6 +135,106 @@ const Auth = {
     });
   },
 
+  // Phase 8: Admin Dashboard & Management Methods
+  async adminRequest(endpoint, options = {}) {
+    const headers = {
+      'Content-Type': 'application/json',
+      ...(options.headers || {}),
+    };
+    const token = this.getToken();
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
+    try {
+      const response = await fetch(`/api/admin${endpoint}`, {
+        ...options,
+        headers,
+      });
+      const data = await response.json();
+      return { status: response.status, ok: response.ok, ...data };
+    } catch (error) {
+      console.error('[Admin Request Error]:', error);
+      return {
+        ok: false,
+        status: 500,
+        success: false,
+        message: 'Network error communicating with admin services.',
+      };
+    }
+  },
+
+  async getAdminDashboardSummary() {
+    return await this.adminRequest('/dashboard');
+  },
+
+  async getAdminUsers(params = {}) {
+    const qs = new URLSearchParams(params).toString();
+    return await this.adminRequest(`/users${qs ? '?' + qs : ''}`);
+  },
+
+  async updateAdminUserRole(id, role) {
+    return await this.adminRequest(`/users/${id}/role`, {
+      method: 'PATCH',
+      body: JSON.stringify({ role }),
+    });
+  },
+
+  async deleteAdminUser(id) {
+    return await this.adminRequest(`/users/${id}`, {
+      method: 'DELETE',
+    });
+  },
+
+  async getAdminProducts(params = {}) {
+    const qs = new URLSearchParams(params).toString();
+    return await this.adminRequest(`/products${qs ? '?' + qs : ''}`);
+  },
+
+  async createAdminProduct(productData) {
+    return await this.adminRequest('/products', {
+      method: 'POST',
+      body: JSON.stringify(productData),
+    });
+  },
+
+  async getAdminProductById(id) {
+    return await this.adminRequest(`/products/${id}`);
+  },
+
+  async updateAdminProduct(id, productData) {
+    return await this.adminRequest(`/products/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(productData),
+    });
+  },
+
+  async deleteAdminProduct(id) {
+    return await this.adminRequest(`/products/${id}`, {
+      method: 'DELETE',
+    });
+  },
+
+  async markAdminProductFeatured(id, featured) {
+    return await this.adminRequest(`/products/${id}/featured`, {
+      method: 'PATCH',
+      body: JSON.stringify({ featured }),
+    });
+  },
+
+  async updateAdminProductStatus(id, status) {
+    return await this.adminRequest(`/products/${id}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    });
+  },
+
+  async getAdminAnalytics() {
+    return await this.adminRequest('/analytics');
+  },
+
+  async getAdminSettings() {
+    return await this.adminRequest('/settings');
+  },
+
   // Phase 6: Account Verification Methods
   async sendOTP(phone) {
     return await this.request('/send-otp', {

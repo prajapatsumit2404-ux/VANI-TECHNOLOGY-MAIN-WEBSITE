@@ -10,13 +10,14 @@ const morgan = require('morgan');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const connectDB = require('./config/db');
+const { seedProductsIfNeeded } = require('./utils/seedProducts');
 
 // Initialize Express App
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Connect to Database
-connectDB();
+// Connect to Database & Seed default portfolio products
+connectDB().then(() => seedProductsIfNeeded());
 
 // Security and Logging Middleware
 // helmet configured to allow CDN resources in development
@@ -49,6 +50,8 @@ app.get('/api/health', (req, res) => {
 // API Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/contact', require('./routes/contactRoutes'));
+app.use('/api/products', require('./routes/productRoutes'));
+app.use('/api/admin', require('./routes/adminRoutes'));
 
 // Fallback for API routes not found
 app.use('/api/*', (req, res) => {
