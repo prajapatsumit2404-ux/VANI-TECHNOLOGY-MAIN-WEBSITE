@@ -135,6 +135,37 @@ const Auth = {
     });
   },
 
+  // Phase 6: Account Verification Methods
+  async sendOTP(phone) {
+    return await this.request('/send-otp', {
+      method: 'POST',
+      body: JSON.stringify({ phone }),
+    });
+  },
+
+  async verifyOTP(phone, otp) {
+    return await this.request('/verify-otp', {
+      method: 'POST',
+      body: JSON.stringify({ phone, otp }),
+    });
+  },
+
+  async verifyEmailToken(token) {
+    return await this.request(`/verify-email?token=${encodeURIComponent(token)}`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+  },
+
+  async resendVerificationEmail(email) {
+    return await this.request('/resend-verification-email', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    });
+  },
+
   // Alert UI helper
   showAlert(containerId, message, type = 'error') {
     const container = document.getElementById(containerId);

@@ -8,6 +8,10 @@ const {
   logout,
   forgotPassword,
   resetPassword,
+  verifyEmail,
+  resendVerificationEmail,
+  sendOTP,
+  verifyOTP,
   adminDashboard,
 } = require('../controllers/authController');
 
@@ -19,6 +23,14 @@ router.post('/login', login);
 router.post('/logout', logout);
 router.post('/forgot-password', forgotPassword);
 router.post('/reset-password', resetPassword);
+
+// Email Verification routes
+router.get('/verify-email', verifyEmail);
+router.post('/resend-verification-email', resendVerificationEmail);
+
+// Phone OTP Verification routes (Can be called with { phone, otp } or by authenticated user)
+router.post('/send-otp', sendOTP);
+router.post('/verify-otp', verifyOTP);
 
 // Protected user profile route
 router.get('/me', protect, getMe);

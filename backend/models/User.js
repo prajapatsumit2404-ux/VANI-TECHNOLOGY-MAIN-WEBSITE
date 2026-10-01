@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -43,6 +44,42 @@ const UserSchema = new mongoose.Schema(
       enum: ['user', 'admin'],
       default: 'user',
     },
+    // Email Verification fields
+    emailVerified: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      select: false,
+    },
+    verificationTokenExpiry: {
+      type: Date,
+      select: false,
+    },
+    // Phone OTP Verification fields
+    phoneVerified: {
+      type: Boolean,
+      default: false,
+    },
+    otp: {
+      type: String,
+      select: false,
+    },
+    otpExpiry: {
+      type: Date,
+      select: false,
+    },
+    otpAttempts: {
+      type: Number,
+      default: 0,
+      select: false,
+    },
+    otpLastSent: {
+      type: Date,
+      select: false,
+    },
+    // Password reset fields
     resetPasswordToken: {
       type: String,
       select: false,
@@ -61,7 +98,6 @@ const UserSchema = new mongoose.Schema(
  * Pre-save middleware to securely hash password before storing
  */
 UserSchema.pre('save', async function (next) {
-  // Only hash password if it was modified (or is new)
   if (!this.isModified('password')) {
     return next();
   }
@@ -90,13 +126,60 @@ UserSchema.methods.generateAuthToken = function () {
 };
 
 /**
- * Ensure passwords and internal reset tokens are never leaked in toJSON() serialization
+ * Generate Email Verification Token
+ * Returns raw unhashed token for verification link, stores SHA-256 hash in DB
+ */
+UserSchema.methods.generateEmailVerificationToken = function () {
+  const rawToken = crypto.randomBytes(32).toString('hex');
+
+  // Hash token and store in user model
+  this.verificationToken = crypto
+    .createHash('sha256')
+    .update(rawToken)
+    .digest('hex');
+
+  // Token expires in 24 hours
+  this.verificationTokenExpiry = Date.now() + 24 * 60 * 60 * 1000;
+
+  return rawToken;
+};
+
+/**
+ * Generate Secure 6-digit Phone OTP
+ * Returns raw 6-digit OTP for SMS provider, stores SHA-256 hash in DB
+ */
+UserSchema.methods.generatePhoneOTP = function () {
+  // Generate random 6-digit number between 100000 and 999999
+  const rawOtp = crypto.randomInt(100000, 999999).toString();
+
+  // Hash OTP before storing so real OTP is never stored in plain-text
+  this.otp = crypto
+    .createHash('sha256')
+    .update(rawOtp)
+    .digest('hex');
+
+  // OTP expires in 10 minutes
+  this.otpExpiry = Date.now() + 10 * 60 * 1000;
+  this.otpAttempts = 0;
+  this.otpLastSent = Date.now();
+
+  return rawOtp;
+};
+
+/**
+ * Ensure passwords, verification tokens, and OTP secrets are never leaked in toJSON()
  */
 UserSchema.methods.toJSON = function () {
   const userObject = this.toObject();
   delete userObject.password;
   delete userObject.resetPasswordToken;
   delete userObject.resetPasswordExpire;
+  delete userObject.verificationToken;
+  delete userObject.verificationTokenExpiry;
+  delete userObject.otp;
+  delete userObject.otpExpiry;
+  delete userObject.otpAttempts;
+  delete userObject.otpLastSent;
   return userObject;
 };
 

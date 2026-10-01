@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification | Vani Technologies</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#1c2332] text-slate-100 min-h-screen flex flex-col justify-between antialiased brand-pinstripes selection:bg-[#e85827] selection:text-white">
+  
+  <!-- Navigation Header -->
+  <header class="navbar-initial sticky top-0 z-50 w-full border-b border-[#60697d]/20 bg-[#161c28]/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="logo-shimmer-wrapper p-1 rounded-xl bg-[#232a39]/80 border border-[#60697d]/20 transition-all duration-300 group-hover:border-[#e85827]/40">
+          <img src="assets/images/logo.png" alt="Vani Technologies" class="h-10 sm:h-12 w-auto object-contain rounded-lg">
+        </div>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-2 px-3.5 py-2 rounded-lg hover:bg-white/5 border border-transparent hover:border-[#60697d]/30">
+          <i class="fa-solid fa-house text-[#e85827] text-xs"></i>
+          <span>Home</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <!-- Ambient Glows -->
+    <div class="absolute -top-32 -left-32 w-80 h-80 bg-[#e85827]/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-[#3b82f6]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-lg w-full p-8 sm:p-10 rounded-2xl bg-[#252e40]/75 border border-[#60697d]/35 backdrop-blur-xl shadow-2xl relative z-10 text-center">
+      
+      <!-- STATE 1: LOADING SPINNER -->
+      <div id="state-loading" class="py-8 space-y-4">
+        <div class="w-16 h-16 mx-auto rounded-full border-4 border-[#e85827]/20 border-t-[#e85827] animate-spin"></div>
+        <h2 class="text-xl font-bold text-white">Verifying Your Email Address...</h2>
+        <p class="text-xs sm:text-sm text-slate-400">Please wait while we validate your secure cryptographic token.</p>
+      </div>
+
+      <!-- STATE 2: SUCCESS -->
+      <div id="state-success" class="hidden py-4 space-y-6">
+        <div class="w-20 h-20 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto text-4xl shadow-xl shadow-emerald-500/10 animate-bounce">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div class="space-y-2">
+          <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Email Verified!</h1>
+          <p id="success-message" class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm mx-auto">
+            Your email address has been successfully verified. You now have full access to your Vani Technologies client account.
+          </p>
+        </div>
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a id="btn-success-profile" href="profile.html" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-[#e85827] to-[#da251d] text-white text-xs sm:text-sm font-semibold hover:opacity-95 transition-all shadow-lg flex items-center justify-center gap-2">
+            <i class="fa-solid fa-user-circle"></i>
+            <span>Go to My Profile</span>
+          </a>
+          <a href="login.html" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#161c28] border border-[#60697d]/30 text-slate-300 hover:text-white text-xs sm:text-sm font-semibold hover:bg-white/5 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>Sign In</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- STATE 3: ERROR / EXPIRED -->
+      <div id="state-error" class="hidden py-4 space-y-6">
+        <div class="w-20 h-20 rounded-2xl bg-red-500/20 border border-red-500/40 text-red-400 flex items-center justify-center mx-auto text-4xl shadow-xl">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <div class="space-y-2">
+          <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Verification Failed</h1>
+          <p id="error-message" class="text-xs sm:text-sm text-red-300 leading-relaxed max-w-sm mx-auto">
+            The verification link is invalid, expired, or has already been used.
+          </p>
+        </div>
+
+        <!-- Resend Form Card -->
+        <div class="mt-6 p-6 rounded-xl bg-[#161c28]/90 border border-[#60697d]/30 text-left space-y-4">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane text-[#e85827]"></i>
+            <span>Request a New Verification Link</span>
+          </h3>
+          <div id="resend-alert" class="hidden"></div>
+          <form id="resend-form" class="space-y-3">
+            <div>
+              <label for="resend-email" class="block text-[11px] font-semibold text-slate-400 mb-1">Account Email</label>
+              <input 
+                type="email" 
+                id="resend-email" 
+                placeholder="Enter your registered email"
+                class="w-full px-3.5 py-2.5 rounded-lg bg-[#252e40] border border-[#60697d]/30 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-[#e85827]"
+                required
+              >
+            </div>
+            <button 
+              type="submit" 
+              id="resend-submit-btn"
+              class="w-full py-2.5 rounded-lg bg-[#e85827] hover:bg-[#d4481b] text-white text-xs font-semibold transition-all flex items-center justify-center gap-2"
+            >
+              <span>Resend Verification Email</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="pt-2">
+          <a href="login.html" class="text-xs text-slate-400 hover:text-white transition-colors flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to Login</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- STATE 4: INFO / CHECK INBOX (When visiting without token) -->
+      <div id="state-info" class="hidden py-4 space-y-6">
+        <div class="w-20 h-20 rounded-2xl bg-blue-500/20 border border-blue-500/40 text-[#60a5fa] flex items-center justify-center mx-auto text-4xl shadow-xl">
+          <i class="fa-solid fa-envelope-open-text"></i>
+        </div>
+        <div class="space-y-2">
+          <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Verify Your Email</h1>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm mx-auto">
+            We have sent a verification link to your registered email address. Click the link in that email to activate your account.
+          </p>
+        </div>
+
+        <!-- Dev Mode Mock Info Banner -->
+        <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs text-left leading-relaxed flex items-start gap-2.5">
+          <i class="fa-solid fa-circle-info text-sm mt-0.5 shrink-0"></i>
+          <div>
+            <strong>Local Development Mode:</strong> Verification emails are simulated in mock mode. You can check the backend console output for the generated direct link.
+          </div>
+        </div>
+
+        <!-- Resend Form Card -->
+        <div class="p-6 rounded-xl bg-[#161c28]/90 border border-[#60697d]/30 text-left space-y-4">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane text-[#e85827]"></i>
+            <span>Didn't receive the email?</span>
+          </h3>
+          <div id="info-resend-alert" class="hidden"></div>
+          <form id="info-resend-form" class="space-y-3">
+            <div>
+              <label for="info-resend-email" class="block text-[11px] font-semibold text-slate-400 mb-1">Your Registered Email</label>
+              <input 
+                type="email" 
+                id="info-resend-email" 
+                placeholder="name@company.com"
+                class="w-full px-3.5 py-2.5 rounded-lg bg-[#252e40] border border-[#60697d]/30 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-[#e85827]"
+                required
+              >
+            </div>
+            <button 
+              type="submit" 
+              id="info-resend-btn"
+              class="w-full py-2.5 rounded-lg bg-[#e85827] hover:bg-[#d4481b] text-white text-xs font-semibold transition-all flex items-center justify-center gap-2"
+            >
+              <span>Resend Verification Link</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="pt-2 flex items-center justify-center gap-4 text-xs text-slate-400">
+          <a href="profile.html" class="hover:text-white transition-colors">Go to Profile</a>
+          <span>•</span>
+          <a href="login.html" class="hover:text-white transition-colors">Sign In</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-6 border-t border-[#60697d]/20 bg-[#161c28] text-center text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>© 2026 Vani Technologies. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        <a href="mailto:support@vanitechnologies.in" class="hover:text-white transition-colors">support@vanitechnologies.in</a>
+        <span>•</span>
+        <a href="tel:+917773895639" class="hover:text-white transition-colors">+91-7773895639</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const stateLoading = document.getElementById('state-loading');
+      const stateSuccess = document.getElementById('state-success');
+      const stateError = document.getElementById('state-error');
+      const stateInfo = document.getElementById('state-info');
+
+      function showState(stateEl) {
+        [stateLoading, stateSuccess, stateError, stateInfo].forEach(el => el.classList.add('hidden'));
+        stateEl.classList.remove('hidden');
+      }
+
+      // Check URL query parameters
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+      const statusParam = params.get('status');
+      const messageParam = params.get('message');
+
+      // Case 1: Backend redirected here directly with ?status=success or ?status=error
+      if (statusParam) {
+        if (statusParam === 'success') {
+          if (messageParam) {
+            document.getElementById('success-message').textContent = decodeURIComponent(messageParam);
+          }
+          // If logged in, update cached user state
+          const user = Auth.getUser();
+          if (user) {
+            user.emailVerified = true;
+            Auth.setUser(user);
+          }
+          showState(stateSuccess);
+          return;
+        } else {
+          if (messageParam) {
+            document.getElementById('error-message').textContent = decodeURIComponent(messageParam);
+          }
+          showState(stateError);
+          return;
+        }
+      }
+
+      // Case 2: URL has token parameter -> verify token via API call
+      if (token) {
+        try {
+          const res = await Auth.verifyEmailToken(token);
+          if (res.ok && res.success) {
+            if (res.message) {
+              document.getElementById('success-message').textContent = res.message;
+            }
+            // Update local user if logged in
+            const user = Auth.getUser();
+            if (user) {
+              user.emailVerified = true;
+              Auth.setUser(user);
+            }
+            showState(stateSuccess);
+          } else {
+            document.getElementById('error-message').textContent = res.message || 'Invalid or expired verification token.';
+            showState(stateError);
+          }
+        } catch (err) {
+          console.error(err);
+          document.getElementById('error-message').textContent = 'Unable to connect to verification server. Please try again.';
+          showState(stateError);
+        }
+        return;
+      }
+
+      // Case 3: No token or status -> general "Check your inbox" screen
+      showState(stateInfo);
+
+      // Setup Resend Form Handlers
+      setupResendForm('resend-form', 'resend-email', 'resend-alert', 'resend-submit-btn');
+      setupResendForm('info-resend-form', 'info-resend-email', 'info-resend-alert', 'info-resend-btn');
+
+      function setupResendForm(formId, inputId, alertId, btnId) {
+        const form = document.getElementById(formId);
+        if (!form) return;
+
+        // Auto-fill email if user is logged in
+        const user = Auth.getUser();
+        if (user && user.email) {
+          const input = document.getElementById(inputId);
+          if (input) input.value = user.email;
+        }
+
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const email = document.getElementById(inputId).value.trim();
+          const btn = document.getElementById(btnId);
+          if (!email) return;
+
+          btn.disabled = true;
+          btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i><span>Sending Link...</span>';
+
+          try {
+            const res = await Auth.resendVerificationEmail(email);
+            if (res.ok && res.success) {
+              Auth.showAlert(alertId, res.message || 'Verification link sent! Check your inbox.', 'success');
+              if (res.mockVerificationLink) {
+                console.log('%c[Vani Technologies MOCK EMAIL LINK]:', 'color: #10b981; font-weight: bold;', res.mockVerificationLink);
+              }
+            } else {
+              Auth.showAlert(alertId, res.message || 'Failed to send verification link.', 'error');
+            }
+          } catch (err) {
+            Auth.showAlert(alertId, 'Network error. Please try again.', 'error');
+          } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<span>Resend Verification Link</span>';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phone OTP Verification | Vani Technologies</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* 6-digit OTP input boxes styling */
+    .otp-input {
+      width: 3rem;
+      height: 3.5rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      border-radius: 0.75rem;
+      background: #161c28;
+      border: 1px solid rgba(96, 105, 125, 0.4);
+      color: #ffffff;
+      transition: all 0.2s ease;
+    }
+    .otp-input:focus {
+      outline: none;
+      border-color: #e85827;
+      box-shadow: 0 0 0 2px rgba(232, 88, 39, 0.25);
+    }
+    @media (max-width: 420px) {
+      .otp-input {
+        width: 2.4rem;
+        height: 3rem;
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#1c2332] text-slate-100 min-h-screen flex flex-col justify-between antialiased brand-pinstripes selection:bg-[#e85827] selection:text-white">
+  
+  <!-- Navigation Header -->
+  <header class="navbar-initial sticky top-0 z-50 w-full border-b border-[#60697d]/20 bg-[#161c28]/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="logo-shimmer-wrapper p-1 rounded-xl bg-[#232a39]/80 border border-[#60697d]/20 transition-all duration-300 group-hover:border-[#e85827]/40">
+          <img src="assets/images/logo.png" alt="Vani Technologies" class="h-10 sm:h-12 w-auto object-contain rounded-lg">
+        </div>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="profile.html" class="text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-2 px-3.5 py-2 rounded-lg hover:bg-white/5 border border-transparent hover:border-[#60697d]/30">
+          <i class="fa-solid fa-user text-[#e85827] text-xs"></i>
+          <span>Profile</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <!-- Ambient Glows -->
+    <div class="absolute -top-32 -left-32 w-80 h-80 bg-[#e85827]/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-[#3b82f6]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-md w-full p-8 sm:p-10 rounded-2xl bg-[#252e40]/75 border border-[#60697d]/35 backdrop-blur-xl shadow-2xl relative z-10">
+      
+      <!-- STEP 1: PHONE NUMBER CONFIRM / SEND OTP -->
+      <div id="step-send-otp" class="space-y-6">
+        <div class="text-center">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#e85827]/20 to-[#da251d]/10 border border-[#e85827]/40 text-[#e85827] flex items-center justify-center mx-auto mb-4 text-2xl shadow-lg">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </div>
+          <h1 class="text-2xl font-bold text-white tracking-tight">Verify Phone Number</h1>
+          <p class="text-xs sm:text-sm text-slate-300 mt-2">
+            We will send a 6-digit OTP code to verify your phone number.
+          </p>
+        </div>
+
+        <!-- Alert Container -->
+        <div id="send-otp-alert" class="hidden"></div>
+
+        <form id="send-otp-form" class="space-y-4">
+          <div>
+            <label for="phone-input" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+              Phone Number
+            </label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-phone text-sm"></i>
+              </div>
+              <input 
+                type="tel" 
+                id="phone-input" 
+                placeholder="+91 9876543210"
+                class="w-full pl-10 pr-4 py-3 rounded-xl bg-[#161c28]/90 border border-[#60697d]/35 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#e85827]"
+                required
+              >
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1.5">Enter standard phone digits (e.g. 10 digits or with + country code).</p>
+          </div>
+
+          <button 
+            type="submit" 
+            id="send-otp-btn"
+            class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#e85827] to-[#da251d] text-white font-semibold text-sm hover:opacity-95 transition-all shadow-lg flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-paper-plane text-xs"></i>
+            <span>Send 6-Digit OTP</span>
+          </button>
+        </form>
+
+        <div class="pt-2 text-center">
+          <a href="profile.html" class="text-xs text-slate-400 hover:text-white transition-colors flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to Profile</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- STEP 2: ENTER OTP -->
+      <div id="step-verify-otp" class="hidden space-y-6">
+        <div class="text-center">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#3b82f6]/20 to-[#1d4ed8]/10 border border-[#3b82f6]/40 text-[#60a5fa] flex items-center justify-center mx-auto mb-4 text-2xl shadow-lg">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h1 class="text-2xl font-bold text-white tracking-tight">Enter Verification Code</h1>
+          <p class="text-xs sm:text-sm text-slate-300 mt-2">
+            Enter the 6-digit code sent to <strong id="display-phone" class="text-white">--</strong>
+            <button id="btn-change-phone" type="button" class="text-[#e85827] hover:underline ml-1 text-xs font-semibold">Change</button>
+          </p>
+        </div>
+
+        <!-- Dev Mode Mock OTP Banner (Only shown if server returns mockOtp) -->
+        <div id="mock-otp-banner" class="hidden p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-flask text-amber-400 text-sm"></i>
+            <div>
+              <span class="font-bold">Dev/Mock Mode OTP:</span>
+              <span id="mock-otp-code" class="font-mono font-bold text-amber-200 tracking-wider text-sm ml-1 select-all">123456</span>
+            </div>
+          </div>
+          <button id="btn-autofill-otp" type="button" class="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-[11px] font-bold text-amber-200 uppercase tracking-wider">
+            Auto-fill
+          </button>
+        </div>
+
+        <!-- Alert Container -->
+        <div id="verify-otp-alert" class="hidden"></div>
+
+        <form id="verify-otp-form" class="space-y-6">
+          
+          <!-- 6-digit inputs -->
+          <div class="flex items-center justify-center gap-2 sm:gap-3" id="otp-inputs-container">
+            <input type="text" maxlength="1" pattern="[0-9]" class="otp-input" data-index="0" autofocus autocomplete="one-time-code" inputmode="numeric">
+            <input type="text" maxlength="1" pattern="[0-9]" class="otp-input" data-index="1" inputmode="numeric">
+            <input type="text" maxlength="1" pattern="[0-9]" class="otp-input" data-index="2" inputmode="numeric">
+            <input type="text" maxlength="1" pattern="[0-9]" class="otp-input" data-index="3" inputmode="numeric">
+            <input type="text" maxlength="1" pattern="[0-9]" class="otp-input" data-index="4" inputmode="numeric">
+            <input type="text" maxlength="1" pattern="[0-9]" class="otp-input" data-index="5" inputmode="numeric">
+          </div>
+
+          <!-- Attempts and Timer -->
+          <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+            <span id="attempts-display" class="flex items-center gap-1.5 text-slate-400">
+              <i class="fa-solid fa-clock-rotate-left text-[11px]"></i>
+              <span>Attempts remaining: <strong id="attempts-count" class="text-slate-200">5</strong></span>
+            </span>
+            <div id="resend-container">
+              <span id="timer-text" class="text-slate-400 font-mono">Resend in <strong id="countdown-seconds" class="text-[#e85827]">60</strong>s</span>
+              <button 
+                type="button" 
+                id="btn-resend-otp" 
+                class="hidden text-[#e85827] hover:underline font-semibold"
+              >
+                Resend OTP
+              </button>
+            </div>
+          </div>
+
+          <button 
+            type="submit" 
+            id="verify-otp-btn"
+            class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#e85827] to-[#da251d] text-white font-semibold text-sm hover:opacity-95 transition-all shadow-lg flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-circle-check text-xs"></i>
+            <span>Verify &amp; Confirm Phone</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- STEP 3: VERIFIED SUCCESS -->
+      <div id="step-success" class="hidden text-center py-4 space-y-6">
+        <div class="w-20 h-20 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto text-4xl shadow-xl shadow-emerald-500/10">
+          <i class="fa-solid fa-shield-check"></i>
+        </div>
+        <div class="space-y-2">
+          <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Phone Verified!</h1>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm mx-auto">
+            Your phone number has been securely verified and linked to your Vani Technologies profile.
+          </p>
+        </div>
+        <div class="pt-4">
+          <a href="profile.html" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#e85827] to-[#da251d] text-white text-sm font-semibold hover:opacity-95 transition-all shadow-lg flex items-center justify-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Return to Profile</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-6 border-t border-[#60697d]/20 bg-[#161c28] text-center text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>© 2026 Vani Technologies. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        <a href="mailto:support@vanitechnologies.in" class="hover:text-white transition-colors">support@vanitechnologies.in</a>
+        <span>•</span>
+        <a href="tel:+917773895639" class="hover:text-white transition-colors">+91-7773895639</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let currentPhone = '';
+      let timerInterval = null;
+      let countdown = 60;
+
+      const stepSendOtp = document.getElementById('step-send-otp');
+      const stepVerifyOtp = document.getElementById('step-verify-otp');
+      const stepSuccess = document.getElementById('step-success');
+
+      const phoneInput = document.getElementById('phone-input');
+      const sendOtpForm = document.getElementById('send-otp-form');
+      const sendOtpBtn = document.getElementById('send-otp-btn');
+      const displayPhone = document.getElementById('display-phone');
+
+      const otpInputs = Array.from(document.querySelectorAll('.otp-input'));
+      const verifyOtpForm = document.getElementById('verify-otp-form');
+      const verifyOtpBtn = document.getElementById('verify-otp-btn');
+      const btnChangePhone = document.getElementById('btn-change-phone');
+      const btnResendOtp = document.getElementById('btn-resend-otp');
+      const timerText = document.getElementById('timer-text');
+      const countdownSeconds = document.getElementById('countdown-seconds');
+      const attemptsCount = document.getElementById('attempts-count');
+      const mockOtpBanner = document.getElementById('mock-otp-banner');
+      const mockOtpCode = document.getElementById('mock-otp-code');
+      const btnAutofillOtp = document.getElementById('btn-autofill-otp');
+
+      // Pre-fill phone if logged in or passed via URL
+      const user = Auth.getUser();
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlPhone = urlParams.get('phone');
+
+      if (urlPhone) {
+        phoneInput.value = urlPhone;
+      } else if (user && user.phone) {
+        phoneInput.value = user.phone;
+      }
+
+      // Auto-trigger OTP send if ?sendNow=true
+      if (urlParams.get('sendNow') === 'true' && phoneInput.value) {
+        setTimeout(() => {
+          sendOtpForm.dispatchEvent(new Event('submit'));
+        }, 150);
+      }
+
+      // Step 1: Send OTP
+      sendOtpForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        Auth.hideAlert('send-otp-alert');
+
+        const phone = phoneInput.value.trim();
+        if (!phone) {
+          Auth.showAlert('send-otp-alert', 'Please enter a valid phone number.', 'error');
+          return;
+        }
+
+        currentPhone = phone;
+        sendOtpBtn.disabled = true;
+        sendOtpBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i><span>Sending OTP...</span>';
+
+        try {
+          const res = await Auth.sendOTP(currentPhone);
+          if (res.ok && res.success) {
+            displayPhone.textContent = currentPhone;
+            stepSendOtp.classList.add('hidden');
+            stepVerifyOtp.classList.remove('hidden');
+
+            // Handle Dev Mock Mode OTP
+            if (res.mockOtp) {
+              mockOtpCode.textContent = res.mockOtp;
+              mockOtpBanner.classList.remove('hidden');
+            } else {
+              mockOtpBanner.classList.add('hidden');
+            }
+
+            // Clear any old OTP inputs and focus first box
+            otpInputs.forEach(i => i.value = '');
+            otpInputs[0].focus();
+
+            startResendTimer(60);
+          } else {
+            Auth.showAlert('send-otp-alert', res.message || 'Failed to send OTP.', 'error');
+          }
+        } catch (err) {
+          Auth.showAlert('send-otp-alert', 'Network error. Please try again.', 'error');
+        } finally {
+          sendOtpBtn.disabled = false;
+          sendOtpBtn.innerHTML = '<i class="fa-solid fa-paper-plane text-xs"></i><span>Send 6-Digit OTP</span>';
+        }
+      });
+
+      // Change phone button
+      btnChangePhone.addEventListener('click', () => {
+        stepVerifyOtp.classList.add('hidden');
+        stepSendOtp.classList.remove('hidden');
+        clearInterval(timerInterval);
+      });
+
+      // OTP Input field handling (auto tab, paste, backspace)
+      otpInputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+          const val = e.target.value.replace(/[^0-9]/g, '');
+          e.target.value = val;
+
+          if (val && index < otpInputs.length - 1) {
+            otpInputs[index + 1].focus();
+          }
+
+          // Check if all 6 filled
+          checkAutoSubmit();
+        });
+
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !input.value && index > 0) {
+            otpInputs[index - 1].focus();
+          }
+        });
+
+        // Paste support: paste entire 6 digit string
+        input.addEventListener('paste', (e) => {
+          e.preventDefault();
+          const pasteData = (e.clipboardData || window.clipboardData).getData('text').trim();
+          const digits = pasteData.replace(/[^0-9]/g, '').slice(0, 6).split('');
+          digits.forEach((digit, i) => {
+            if (otpInputs[i]) otpInputs[i].value = digit;
+          });
+          const nextIndex = Math.min(digits.length, otpInputs.length - 1);
+          otpInputs[nextIndex].focus();
+          checkAutoSubmit();
+        });
+      });
+
+      function getOtpValue() {
+        return otpInputs.map(i => i.value).join('');
+      }
+
+      function checkAutoSubmit() {
+        const val = getOtpValue();
+        if (val.length === 6) {
+          // All 6 filled
+        }
+      }
+
+      // Auto-fill button for dev mode
+      btnAutofillOtp.addEventListener('click', () => {
+        const mockCode = mockOtpCode.textContent.trim();
+        if (mockCode && mockCode.length === 6) {
+          mockCode.split('').forEach((d, idx) => {
+            if (otpInputs[idx]) otpInputs[idx].value = d;
+          });
+          otpInputs[5].focus();
+        }
+      });
+
+      // Step 2: Verify OTP
+      verifyOtpForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        Auth.hideAlert('verify-otp-alert');
+
+        const otp = getOtpValue();
+        if (otp.length !== 6) {
+          Auth.showAlert('verify-otp-alert', 'Please enter all 6 digits of the OTP.', 'warning');
+          return;
+        }
+
+        verifyOtpBtn.disabled = true;
+        verifyOtpBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i><span>Verifying Code...</span>';
+
+        try {
+          const res = await Auth.verifyOTP(currentPhone, otp);
+
+          if (res.ok && res.success) {
+            // Update local user state
+            const localUser = Auth.getUser();
+            if (localUser) {
+              localUser.phoneVerified = true;
+              Auth.setUser(localUser);
+            }
+
+            stepVerifyOtp.classList.add('hidden');
+            stepSuccess.classList.remove('hidden');
+            clearInterval(timerInterval);
+          } else {
+            // Show error with remaining attempts if provided
+            let msg = res.message || 'Verification failed.';
+            if (res.remainingAttempts !== undefined) {
+              attemptsCount.textContent = res.remainingAttempts;
+              msg += ` (${res.remainingAttempts} attempt(s) remaining)`;
+            }
+            Auth.showAlert('verify-otp-alert', msg, 'error');
+
+            // Clear inputs for re-try
+            otpInputs.forEach(i => i.value = '');
+            otpInputs[0].focus();
+          }
+        } catch (err) {
+          Auth.showAlert('verify-otp-alert', 'Network error. Please try again.', 'error');
+        } finally {
+          verifyOtpBtn.disabled = false;
+          verifyOtpBtn.innerHTML = '<i class="fa-solid fa-circle-check text-xs"></i><span>Verify &amp; Confirm Phone</span>';
+        }
+      });
+
+      // Resend OTP handler
+      btnResendOtp.addEventListener('click', async () => {
+        Auth.hideAlert('verify-otp-alert');
+        btnResendOtp.disabled = true;
+        btnResendOtp.textContent = 'Sending...';
+
+        try {
+          const res = await Auth.sendOTP(currentPhone);
+          if (res.ok && res.success) {
+            Auth.showAlert('verify-otp-alert', 'A fresh OTP has been sent!', 'success');
+            if (res.mockOtp) {
+              mockOtpCode.textContent = res.mockOtp;
+              mockOtpBanner.classList.remove('hidden');
+            }
+            attemptsCount.textContent = 5;
+            startResendTimer(60);
+          } else {
+            Auth.showAlert('verify-otp-alert', res.message || 'Cannot resend OTP at this time.', 'error');
+            btnResendOtp.disabled = false;
+            btnResendOtp.textContent = 'Resend OTP';
+          }
+        } catch (err) {
+          Auth.showAlert('verify-otp-alert', 'Failed to resend OTP.', 'error');
+          btnResendOtp.disabled = false;
+          btnResendOtp.textContent = 'Resend OTP';
+        }
+      });
+
+      function startResendTimer(seconds = 60) {
+        clearInterval(timerInterval);
+        countdown = seconds;
+        countdownSeconds.textContent = countdown;
+        timerText.classList.remove('hidden');
+        btnResendOtp.classList.add('hidden');
+        btnResendOtp.disabled = true;
+
+        timerInterval = setInterval(() => {
+          countdown--;
+          countdownSeconds.textContent = countdown;
+          if (countdown <= 0) {
+            clearInterval(timerInterval);
+            timerText.classList.add('hidden');
+            btnResendOtp.classList.remove('hidden');
+            btnResendOtp.disabled = false;
+            btnResendOtp.textContent = 'Resend OTP';
+          }
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>
