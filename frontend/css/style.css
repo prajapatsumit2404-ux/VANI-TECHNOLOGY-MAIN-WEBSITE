@@ -398,6 +398,113 @@ h1, h2, h3, h4, .font-heading {
   background: #4f5d78;
 }
 
+/* ========================================================
+   PHASE 3: ABOUT & SERVICES STYLING
+   ======================================================== */
+
+/* Service Cards */
+.service-card {
+  position: relative;
+  background: rgba(37, 46, 64, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(96, 105, 125, 0.28);
+  border-radius: 1rem;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(232, 88, 39, 0.6), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(232, 88, 39, 0.5);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5), 0 0 25px -5px rgba(232, 88, 39, 0.2);
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+/* Service Card Icon Box */
+.service-icon-box {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, rgba(37, 46, 64, 0.9) 0%, rgba(22, 28, 40, 0.95) 100%);
+  border: 1px solid rgba(96, 105, 125, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #e85827;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.service-card:hover .service-icon-box {
+  background: linear-gradient(135deg, #e85827 0%, #da251d 100%);
+  color: #ffffff;
+  border-color: rgba(232, 88, 39, 0.8);
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 6px 20px rgba(232, 88, 39, 0.4);
+}
+
+/* Value Cards */
+.value-card {
+  position: relative;
+  background: rgba(37, 46, 64, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(96, 105, 125, 0.22);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  transition: all 0.3s ease;
+}
+
+.value-card:hover {
+  background: rgba(37, 46, 64, 0.85);
+  border-color: rgba(232, 88, 39, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.4);
+}
+
+/* Service Detail Modal */
+.modal-overlay {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-container {
+  transform: scale(0.95) translateY(12px);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.modal-overlay.active .modal-container {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
 /* Accessibility: respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
@@ -407,3 +514,4 @@ h1, h2, h3, h4, .font-heading {
     scroll-behavior: auto !important;
   }
 }
+
