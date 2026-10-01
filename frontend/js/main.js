@@ -612,8 +612,8 @@ const PRODUCTS_DATA = {
     categorySlug: 'ai',
     pricing: 'From $29/mo (Free Trial)',
     icon: 'fa-solid fa-robot',
-    image: 'assets/images/portfolio/Tablet-Screens-presentation-Mock-up.png',
-    fallbackImage: 'https://www.vanitechnologies.in/assets/dist/portfolio/Tablet-Screens-presentation-Mock-up.png',
+    image: 'assets/images/portfolio/aitalksy-logo.png',
+    fallbackImage: 'assets/images/portfolio/Tablet-Screens-presentation-Mock-up.png',
     link: 'https://aitalksy.com/',
     isExternal: true,
     desc: 'Intelligent conversational AI & customer automation platform enabling enterprises to deploy 24/7 AI chat agents, lead qualification assistants, and voice agents with zero code.',
@@ -634,8 +634,8 @@ const PRODUCTS_DATA = {
     categorySlug: 'community',
     pricing: 'Free / Open Platform',
     icon: 'fa-solid fa-comments',
-    image: 'assets/images/portfolio/Mockup_11.png',
-    fallbackImage: 'https://www.vanitechnologies.in/assets/dist/portfolio/Mockup_11.png',
+    image: 'assets/images/portfolio/community-forum-logo.png',
+    fallbackImage: 'assets/images/portfolio/Mockup_11.png',
     link: 'https://communityforum.tech/',
     isExternal: true,
     desc: 'Scalable, modern discussion platform engineered for high-engagement developer communities, tech enthusiasts, knowledge bases, and peer-to-peer technical support.',
@@ -656,8 +656,8 @@ const PRODUCTS_DATA = {
     categorySlug: 'crm',
     pricing: 'Enterprise SaaS',
     icon: 'fa-solid fa-plane-departure',
-    image: 'assets/images/portfolio/responsive_web.png',
-    fallbackImage: 'https://www.vanitechnologies.in/assets/dist/portfolio/responsive_web.png',
+    image: 'assets/images/portfolio/ratehonk-logo.png',
+    fallbackImage: 'assets/images/portfolio/responsive_web.png',
     link: 'https://crm.ratehonk.com/portfolio',
     isExternal: true,
     desc: 'Enterprise travel management and B2B CRM solution designed for travel agencies and tour operators to manage leads, generate customized flight/hotel itineraries, and automate customer billing.',
@@ -926,6 +926,11 @@ function initProductDetailModal() {
     if (modalImage) {
       modalImage.src = product.image;
       modalImage.alt = product.title;
+      if (['ai-talksy', 'community-forum', 'ratehonk-travel-crm'].includes(product.id)) {
+        modalImage.className = 'w-full h-full object-contain p-6 bg-white';
+      } else {
+        modalImage.className = 'w-full h-full object-cover';
+      }
       modalImage.onerror = function() {
         this.onerror = null;
         this.src = product.fallbackImage;
