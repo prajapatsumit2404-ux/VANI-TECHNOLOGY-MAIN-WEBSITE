@@ -46,6 +46,9 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// API Routes
+app.use('/api/auth', require('./routes/authRoutes'));
+
 // Fallback for API routes not found
 app.use('/api/*', (req, res) => {
   res.status(404).json({

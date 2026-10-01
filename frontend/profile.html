@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Profile | Vani Technologies</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#1c2332] text-slate-100 min-h-screen flex flex-col justify-between antialiased brand-pinstripes selection:bg-[#e85827] selection:text-white">
+  
+  <!-- Protected Navbar -->
+  <header class="navbar-initial sticky top-0 z-50 w-full border-b border-[#60697d]/20 bg-[#161c28]/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="logo-shimmer-wrapper p-1 rounded-xl bg-[#232a39]/80 border border-[#60697d]/20 transition-all duration-300 group-hover:border-[#e85827]/40">
+          <img src="assets/images/logo.png" alt="Vani Technologies" class="h-10 sm:h-12 w-auto object-contain rounded-lg">
+        </div>
+      </a>
+      <div class="flex items-center gap-3 sm:gap-4">
+        <a href="index.html" class="text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-white/5">
+          <i class="fa-solid fa-house text-[#e85827] text-xs"></i>
+          <span class="hidden sm:inline">Home</span>
+        </a>
+        <button 
+          id="profile-logout-btn" 
+          type="button" 
+          class="btn-secondary px-3.5 py-1.5 rounded-lg text-xs font-semibold text-red-400 hover:text-white hover:bg-red-500/20 border-red-500/30 flex items-center gap-1.5 transition-all"
+        >
+          <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Profile Main Content -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 relative">
+    
+    <!-- Profile Page Loading Skeleton -->
+    <div id="profile-skeleton" class="max-w-4xl mx-auto space-y-6 animate-pulse">
+      <div class="h-44 rounded-2xl bg-[#252e40]/60 border border-[#60697d]/30"></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="h-32 rounded-xl bg-[#252e40]/60 border border-[#60697d]/30"></div>
+        <div class="h-32 rounded-xl bg-[#252e40]/60 border border-[#60697d]/30"></div>
+        <div class="h-32 rounded-xl bg-[#252e40]/60 border border-[#60697d]/30"></div>
+      </div>
+    </div>
+
+    <!-- Real Profile Content (Shown after auth verification) -->
+    <div id="profile-content" class="hidden max-w-4xl mx-auto space-y-8">
+      
+      <!-- Top Profile Overview Card -->
+      <div class="p-8 sm:p-10 rounded-2xl bg-[#252e40]/75 border border-[#60697d]/35 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+        <div class="absolute -right-20 -bottom-20 w-72 h-72 bg-gradient-to-br from-[#e85827]/15 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 relative z-10 text-center sm:text-left">
+          
+          <!-- Avatar Initial Circle -->
+          <div id="user-avatar" class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-[#e85827] to-[#da251d] text-white font-extrabold text-3xl flex items-center justify-center shadow-xl border border-white/20 shrink-0">
+            VT
+          </div>
+
+          <!-- User Details -->
+          <div class="flex-grow space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <h1 id="user-fullname" class="text-2xl sm:text-3xl font-bold text-white tracking-tight">User Name</h1>
+              <div class="flex items-center justify-center sm:justify-end gap-2">
+                <span id="user-role-badge" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#e85827]/20 border border-[#e85827]/40 text-[#f97316]">
+                  Client
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Active
+                </span>
+              </div>
+            </div>
+
+            <!-- Email & Phone info -->
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs sm:text-sm text-slate-300 pt-1">
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-envelope text-[#e85827]"></i>
+                <span id="user-email">email@domain.com</span>
+              </span>
+              <span class="hidden sm:inline text-slate-500">•</span>
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-phone text-[#e85827]"></i>
+                <span id="user-phone">+91 0000000000</span>
+              </span>
+            </div>
+
+            <!-- Member since date -->
+            <div class="text-xs text-slate-400 pt-2 flex items-center justify-center sm:justify-start gap-2">
+              <i class="fa-regular fa-calendar-check text-[#3b82f6]"></i>
+              <span>Member Since: <strong id="user-created-date" class="text-slate-300">--</strong></span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Admin Panel Section (Only visible for admin users) -->
+      <div id="admin-panel" class="hidden p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#161c28] to-[#1c2332] border border-[#e85827]/40 shadow-xl space-y-4">
+        <div class="flex items-center justify-between pb-4 border-b border-[#60697d]/20">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-lg bg-[#e85827]/20 border border-[#e85827]/40 text-[#e85827] flex items-center justify-center text-sm">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-white">Administrator Control Panel</h2>
+              <p class="text-xs text-slate-400">Authorized administrative role detected</p>
+            </div>
+          </div>
+          <span class="px-2.5 py-1 text-xs rounded-md bg-[#e85827] text-white font-bold tracking-wide">
+            ADMIN LEVEL
+          </span>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+          <div class="p-4 rounded-xl bg-[#252e40]/60 border border-[#60697d]/25">
+            <span class="text-xs text-slate-400 block mb-1">Total Users Registered</span>
+            <span id="admin-total-users" class="text-2xl font-bold text-white">--</span>
+          </div>
+          <div class="p-4 rounded-xl bg-[#252e40]/60 border border-[#60697d]/25">
+            <span class="text-xs text-slate-400 block mb-1">System Security Status</span>
+            <span class="text-base font-semibold text-emerald-400 flex items-center gap-1.5 mt-1">
+              <i class="fa-solid fa-circle-check text-xs"></i> All Guards Active
+            </span>
+          </div>
+          <div class="p-4 rounded-xl bg-[#252e40]/60 border border-[#60697d]/25">
+            <span class="text-xs text-slate-400 block mb-1">JWT Auth Engine</span>
+            <span class="text-base font-semibold text-[#60a5fa] flex items-center gap-1.5 mt-1">
+              <i class="fa-solid fa-bolt text-xs"></i> 7-Day Secret Tokens
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Action 1: Explore Products -->
+        <a href="index.html#products" class="p-6 rounded-2xl bg-[#252e40]/60 border border-[#60697d]/25 hover:border-[#e85827]/50 transition-all duration-300 group block">
+          <div class="w-12 h-12 rounded-xl bg-[#e85827]/15 border border-[#e85827]/30 text-[#e85827] flex items-center justify-center text-xl mb-4 group-hover:scale-110 group-hover:bg-[#e85827] group-hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-shapes"></i>
+          </div>
+          <h3 class="text-base font-bold text-white mb-1 group-hover:text-[#fbd5c6] transition-colors">Our Products</h3>
+          <p class="text-xs text-slate-400 leading-relaxed mb-3">
+            Browse our 8 enterprise applications and active SaaS platforms.
+          </p>
+          <span class="text-xs text-[#e85827] font-semibold flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+            <span>Explore Catalog</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </a>
+
+        <!-- Action 2: Professional Services -->
+        <a href="index.html#services" class="p-6 rounded-2xl bg-[#252e40]/60 border border-[#60697d]/25 hover:border-[#3b82f6]/50 transition-all duration-300 group block">
+          <div class="w-12 h-12 rounded-xl bg-[#3b82f6]/15 border border-[#3b82f6]/30 text-[#60a5fa] flex items-center justify-center text-xl mb-4 group-hover:scale-110 group-hover:bg-[#3b82f6] group-hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-cubes-stacked"></i>
+          </div>
+          <h3 class="text-base font-bold text-white mb-1 group-hover:text-[#bfdbfe] transition-colors">IT Services</h3>
+          <p class="text-xs text-slate-400 leading-relaxed mb-3">
+            Review our 12 specialized technology disciplines and request consultations.
+          </p>
+          <span class="text-xs text-[#60a5fa] font-semibold flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+            <span>View 12 Services</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </a>
+
+        <!-- Action 3: Technical Support -->
+        <a href="mailto:support@vanitechnologies.in" class="p-6 rounded-2xl bg-[#252e40]/60 border border-[#60697d]/25 hover:border-emerald-500/50 transition-all duration-300 group block">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <h3 class="text-base font-bold text-white mb-1 group-hover:text-emerald-300 transition-colors">Direct Support</h3>
+          <p class="text-xs text-slate-400 leading-relaxed mb-3">
+            Contact Vani Technologies engineers for assistance and quotes.
+          </p>
+          <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+            <span>Contact Support</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </a>
+
+      </div>
+
+      <!-- Security & Password Box -->
+      <div class="p-6 rounded-2xl bg-[#161c28]/90 border border-[#60697d]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3 text-center sm:text-left">
+          <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 text-lg shrink-0">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-white">Account Password &amp; Credentials</h4>
+            <p class="text-xs text-slate-400">Passwords are encrypted via bcrypt (10 salt rounds) and never stored in plain-text.</p>
+          </div>
+        </div>
+        <a href="forgot-password.html" class="btn-secondary px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white shrink-0">
+          Reset Password
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-6 border-t border-[#60697d]/20 bg-[#161c28] text-center text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>© 2026 Vani Technologies. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        <a href="mailto:support@vanitechnologies.in" class="hover:text-white transition-colors">support@vanitechnologies.in</a>
+        <span>•</span>
+        <a href="tel:+917773895639" class="hover:text-white transition-colors">+91-7773895639</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth Script -->
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Verify token exists locally
+      if (!Auth.isAuthenticated()) {
+        window.location.href = 'login.html?redirect=profile.html';
+        return;
+      }
+
+      // 2. Fetch authenticated profile from backend
+      try {
+        const res = await Auth.getMe();
+
+        if (res.ok && res.success && res.user) {
+          const user = res.user;
+
+          // Update avatar initials
+          const avatar = document.getElementById('user-avatar');
+          const initials = user.fullName
+            .split(' ')
+            .map((n) => n[0])
+            .join('')
+            .toUpperCase()
+            .substring(0, 2);
+          avatar.textContent = initials || 'VT';
+
+          // Update details
+          document.getElementById('user-fullname').textContent = user.fullName;
+          document.getElementById('user-email').textContent = user.email;
+          document.getElementById('user-phone').textContent = user.phone;
+
+          const roleBadge = document.getElementById('user-role-badge');
+          roleBadge.textContent = user.role.toUpperCase();
+          if (user.role === 'admin') {
+            roleBadge.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/20 border border-purple-500/40 text-purple-300';
+          }
+
+          if (user.createdAt) {
+            const date = new Date(user.createdAt);
+            document.getElementById('user-created-date').textContent = date.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            });
+          }
+
+          // If role is admin, fetch admin dashboard
+          if (user.role === 'admin') {
+            const adminRes = await Auth.getAdminDashboard();
+            if (adminRes.ok && adminRes.success) {
+              const adminPanel = document.getElementById('admin-panel');
+              adminPanel.classList.remove('hidden');
+              document.getElementById('admin-total-users').textContent = adminRes.analytics.totalRegisteredUsers;
+            }
+          }
+
+          // Hide skeleton, show real content
+          document.getElementById('profile-skeleton').classList.add('hidden');
+          document.getElementById('profile-content').classList.remove('hidden');
+        } else {
+          // Token is invalid / expired -> clear session & redirect
+          Auth.clearSession();
+          window.location.href = 'login.html?redirect=profile.html';
+        }
+      } catch (err) {
+        console.error('Failed to load profile:', err);
+        Auth.clearSession();
+        window.location.href = 'login.html?redirect=profile.html';
+      }
+
+      // Logout handler
+      document.getElementById('profile-logout-btn').addEventListener('click', () => {
+        Auth.logout();
+      });
+    });
+  </script>
+</body>
+</html>

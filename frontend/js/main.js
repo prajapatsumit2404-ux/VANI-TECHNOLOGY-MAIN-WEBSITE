@@ -28,7 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 8. Phase 4: Featured Products, Search, Filters & Product Modal
   initProductsAndFilters();
 
-  // 9. Backend Connectivity Health Check
+  // 9. Update Navbar Auth Button if Logged In
+  if (window.Auth) window.Auth.updateNavbarAuth();
+
+  // 10. Backend Connectivity Health Check
   checkBackendHealth();
 });
 

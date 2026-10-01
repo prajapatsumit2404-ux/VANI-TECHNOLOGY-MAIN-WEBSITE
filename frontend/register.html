@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Vani Technologies</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#1c2332] text-slate-100 min-h-screen flex flex-col justify-between antialiased brand-pinstripes selection:bg-[#e85827] selection:text-white">
+  
+  <!-- Top Navigation -->
+  <header class="navbar-initial sticky top-0 z-50 w-full border-b border-[#60697d]/20 bg-[#161c28]/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="logo-shimmer-wrapper p-1 rounded-xl bg-[#232a39]/80 border border-[#60697d]/20 transition-all duration-300 group-hover:border-[#e85827]/40">
+          <img src="assets/images/logo.png" alt="Vani Technologies" class="h-10 sm:h-12 w-auto object-contain rounded-lg">
+        </div>
+      </a>
+      <a href="login.html" class="text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-2 px-3.5 py-2 rounded-lg hover:bg-white/5 border border-transparent hover:border-[#60697d]/30">
+        <i class="fa-solid fa-arrow-right-to-bracket text-[#e85827]"></i>
+        <span>Already have an account? Sign In</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Register Main Content -->
+  <main class="flex-grow flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <!-- Ambient Glows -->
+    <div class="absolute -top-32 right-1/4 w-80 h-80 bg-[#e85827]/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 left-1/4 w-80 h-80 bg-[#3b82f6]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-lg w-full p-8 sm:p-10 rounded-2xl bg-[#252e40]/75 border border-[#60697d]/35 backdrop-blur-xl shadow-2xl relative z-10">
+      
+      <!-- Card Header -->
+      <div class="text-center mb-8">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#e85827]/20 to-[#da251d]/10 border border-[#e85827]/40 text-[#e85827] flex items-center justify-center mx-auto mb-4 text-2xl shadow-lg">
+          <i class="fa-solid fa-user-plus"></i>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-white font-heading tracking-tight">Create an Account</h1>
+        <p class="text-xs sm:text-sm text-slate-300 mt-2">
+          Join Vani Technologies to access digital services, applications, and support
+        </p>
+      </div>
+
+      <!-- Alert Notification Container -->
+      <div id="register-alert" class="hidden mb-6"></div>
+
+      <!-- Register Form -->
+      <form id="register-form" class="space-y-4" novalidate>
+        
+        <!-- Full Name -->
+        <div>
+          <label for="reg-fullname" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+            Full Name <span class="text-[#e85827]">*</span>
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-user text-sm"></i>
+            </div>
+            <input 
+              type="text" 
+              id="reg-fullname" 
+              name="fullName" 
+              placeholder="e.g. John Doe" 
+              class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#161c28]/90 border border-[#60697d]/35 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#e85827] focus:ring-1 focus:ring-[#e85827] transition-all"
+              required
+            >
+          </div>
+        </div>
+
+        <!-- Email & Phone Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          
+          <!-- Email -->
+          <div>
+            <label for="reg-email" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              Email Address <span class="text-[#e85827]">*</span>
+            </label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-envelope text-sm"></i>
+              </div>
+              <input 
+                type="email" 
+                id="reg-email" 
+                name="email" 
+                placeholder="name@company.com" 
+                class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#161c28]/90 border border-[#60697d]/35 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#e85827] focus:ring-1 focus:ring-[#e85827] transition-all"
+                required
+              >
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div>
+            <label for="reg-phone" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              Phone Number <span class="text-[#e85827]">*</span>
+            </label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-phone text-sm"></i>
+              </div>
+              <input 
+                type="tel" 
+                id="reg-phone" 
+                name="phone" 
+                placeholder="e.g. 9876543210" 
+                class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#161c28]/90 border border-[#60697d]/35 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#e85827] focus:ring-1 focus:ring-[#e85827] transition-all"
+                required
+              >
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <label for="reg-password" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+            Password <span class="text-[#e85827]">*</span>
+            <span class="text-slate-400 font-normal lowercase ml-1">(min 8 characters)</span>
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-lock text-sm"></i>
+            </div>
+            <input 
+              type="password" 
+              id="reg-password" 
+              name="password" 
+              placeholder="Create strong password" 
+              class="w-full pl-10 pr-10 py-2.5 rounded-xl bg-[#161c28]/90 border border-[#60697d]/35 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#e85827] focus:ring-1 focus:ring-[#e85827] transition-all"
+              required
+            >
+            <button 
+              type="button" 
+              id="toggle-reg-password" 
+              class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-white transition-colors"
+              aria-label="Toggle password visibility"
+            >
+              <i class="fa-solid fa-eye text-sm"></i>
+            </button>
+          </div>
+          <div class="flex items-center gap-1.5 mt-1 text-[11px] text-slate-400">
+            <span id="pass-length-indicator" class="inline-block w-2 h-2 rounded-full bg-slate-600"></span>
+            <span id="pass-strength-text">Minimum 8 characters required</span>
+          </div>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div>
+          <label for="reg-confirm-password" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+            Confirm Password <span class="text-[#e85827]">*</span>
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-shield-halved text-sm"></i>
+            </div>
+            <input 
+              type="password" 
+              id="reg-confirm-password" 
+              name="confirmPassword" 
+              placeholder="Re-enter password to confirm" 
+              class="w-full pl-10 pr-10 py-2.5 rounded-xl bg-[#161c28]/90 border border-[#60697d]/35 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#e85827] focus:ring-1 focus:ring-[#e85827] transition-all"
+              required
+            >
+            <button 
+              type="button" 
+              id="toggle-reg-confirm-password" 
+              class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-white transition-colors"
+              aria-label="Toggle confirm password visibility"
+            >
+              <i class="fa-solid fa-eye text-sm"></i>
+            </button>
+          </div>
+          <span id="confirm-match-text" class="hidden text-[11px] mt-1 block"></span>
+        </div>
+
+        <!-- Terms Agreement -->
+        <div class="pt-1">
+          <label class="flex items-start gap-2.5 text-xs text-slate-300 cursor-pointer">
+            <input type="checkbox" id="reg-terms" class="mt-0.5 rounded border-[#60697d]/40 text-[#e85827] focus:ring-[#e85827] bg-[#161c28]" required checked>
+            <span>I agree to Vani Technologies Terms of Service and Privacy Policy.</span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button 
+          type="submit" 
+          id="reg-submit-btn" 
+          class="btn-primary w-full py-3.5 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-lg transition-all mt-4"
+        >
+          <span id="reg-btn-text">Create Account</span>
+          <i id="reg-btn-icon" class="fa-solid fa-arrow-right text-xs"></i>
+        </button>
+
+      </form>
+
+      <!-- Footer Navigation -->
+      <div class="mt-8 pt-6 border-t border-[#60697d]/20 text-center text-xs text-slate-400">
+        <span>Already have an account?</span>
+        <a href="login.html" class="text-[#e85827] font-semibold hover:underline ml-1">
+          Sign In Here
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-6 border-t border-[#60697d]/20 bg-[#161c28] text-center text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>© 2026 Vani Technologies. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        <a href="mailto:support@vanitechnologies.in" class="hover:text-white transition-colors">support@vanitechnologies.in</a>
+        <span>•</span>
+        <a href="tel:+917773895639" class="hover:text-white transition-colors">+91-7773895639</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth Script -->
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check if user is already authenticated
+      if (Auth.isAuthenticated()) {
+        window.location.href = 'profile.html';
+        return;
+      }
+
+      // Password toggles
+      Auth.setupPasswordToggle('toggle-reg-password', 'reg-password');
+      Auth.setupPasswordToggle('toggle-reg-confirm-password', 'reg-confirm-password');
+
+      const passInput = document.getElementById('reg-password');
+      const confirmInput = document.getElementById('reg-confirm-password');
+      const lengthIndicator = document.getElementById('pass-length-indicator');
+      const strengthText = document.getElementById('pass-strength-text');
+      const matchText = document.getElementById('confirm-match-text');
+
+      // Live password length feedback
+      passInput.addEventListener('input', () => {
+        const val = passInput.value;
+        if (val.length >= 8) {
+          lengthIndicator.className = 'inline-block w-2 h-2 rounded-full bg-emerald-400';
+          strengthText.textContent = 'Password meets length requirement (8+ chars)';
+          strengthText.className = 'text-emerald-400';
+        } else {
+          lengthIndicator.className = 'inline-block w-2 h-2 rounded-full bg-amber-400';
+          strengthText.textContent = `Needs ${8 - val.length} more character${8 - val.length > 1 ? 's' : ''}`;
+          strengthText.className = 'text-slate-400';
+        }
+        checkMatch();
+      });
+
+      // Live confirm password match check
+      const checkMatch = () => {
+        if (!confirmInput.value) {
+          matchText.className = 'hidden text-[11px] mt-1 block';
+          return;
+        }
+        if (confirmInput.value === passInput.value) {
+          matchText.textContent = '✓ Passwords match';
+          matchText.className = 'text-[11px] text-emerald-400 mt-1 block';
+        } else {
+          matchText.textContent = '✕ Passwords do not match';
+          matchText.className = 'text-[11px] text-red-400 mt-1 block';
+        }
+      };
+
+      confirmInput.addEventListener('input', checkMatch);
+
+      // Registration form submit
+      const form = document.getElementById('register-form');
+      const submitBtn = document.getElementById('reg-submit-btn');
+      const btnText = document.getElementById('reg-btn-text');
+      const btnIcon = document.getElementById('reg-btn-icon');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        Auth.hideAlert('register-alert');
+
+        const fullName = document.getElementById('reg-fullname').value.trim();
+        const email = document.getElementById('reg-email').value.trim();
+        const phone = document.getElementById('reg-phone').value.trim();
+        const password = passInput.value;
+        const confirmPassword = confirmInput.value;
+        const terms = document.getElementById('reg-terms').checked;
+
+        // Frontend validations
+        if (!fullName || !email || !phone || !password || !confirmPassword) {
+          Auth.showAlert('register-alert', 'Please complete all required fields.');
+          return;
+        }
+
+        if (fullName.length < 2) {
+          Auth.showAlert('register-alert', 'Full name must be at least 2 characters long.');
+          return;
+        }
+
+        if (!email.includes('@') || !email.includes('.')) {
+          Auth.showAlert('register-alert', 'Please provide a valid email address.');
+          return;
+        }
+
+        if (password.length < 8) {
+          Auth.showAlert('register-alert', 'Password must be at least 8 characters long.');
+          passInput.focus();
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          Auth.showAlert('register-alert', 'Passwords do not match. Please verify.');
+          confirmInput.focus();
+          return;
+        }
+
+        if (!terms) {
+          Auth.showAlert('register-alert', 'Please accept the Terms of Service to proceed.');
+          return;
+        }
+
+        // Loading state
+        submitBtn.disabled = true;
+        btnText.textContent = 'Creating account...';
+        btnIcon.className = 'fa-solid fa-spinner fa-spin text-xs';
+
+        try {
+          const res = await Auth.register({
+            fullName,
+            email,
+            phone,
+            password,
+            confirmPassword,
+          });
+
+          if (res.ok && res.success) {
+            Auth.showAlert(
+              'register-alert',
+              'Account created successfully! Redirecting to your profile...',
+              'success'
+            );
+            setTimeout(() => {
+              window.location.href = 'profile.html';
+            }, 1000);
+          } else {
+            Auth.showAlert('register-alert', res.message || 'Registration failed. Please check your inputs.');
+            submitBtn.disabled = false;
+            btnText.textContent = 'Create Account';
+            btnIcon.className = 'fa-solid fa-arrow-right text-xs';
+          }
+        } catch (err) {
+          Auth.showAlert('register-alert', 'Network error. Please ensure the backend server is running.');
+          submitBtn.disabled = false;
+          btnText.textContent = 'Create Account';
+          btnIcon.className = 'fa-solid fa-arrow-right text-xs';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

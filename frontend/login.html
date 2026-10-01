@@ -11,36 +11,268 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-[#1c2332] text-slate-100 min-h-screen flex flex-col justify-between antialiased brand-pinstripes">
+<body class="bg-[#1c2332] text-slate-100 min-h-screen flex flex-col justify-between antialiased brand-pinstripes selection:bg-[#e85827] selection:text-white">
   
-  <header class="navbar-initial sticky top-0 z-50 w-full border-b border-[#60697d]/20 bg-[#161c28]/90 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2.5">
-        <img src="assets/images/logo.png" alt="Vani Technologies" class="h-9 w-auto object-contain rounded-lg">
+  <!-- Top Navigation -->
+  <header class="navbar-initial sticky top-0 z-50 w-full border-b border-[#60697d]/20 bg-[#161c28]/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="logo-shimmer-wrapper p-1 rounded-xl bg-[#232a39]/80 border border-[#60697d]/20 transition-all duration-300 group-hover:border-[#e85827]/40">
+          <img src="assets/images/logo.png" alt="Vani Technologies" class="h-10 sm:h-12 w-auto object-contain rounded-lg">
+        </div>
       </a>
-      <a href="index.html" class="text-sm text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
-        <i class="fa-solid fa-arrow-left text-xs text-[#e85827]"></i> Back to Home
+      <a href="index.html" class="text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-2 px-3.5 py-2 rounded-lg hover:bg-white/5 border border-transparent hover:border-[#60697d]/30">
+        <i class="fa-solid fa-arrow-left text-[#e85827]"></i>
+        <span>Back to Home</span>
       </a>
     </div>
   </header>
 
-  <main class="flex-grow flex items-center justify-center px-4 py-12">
-    <div class="glass-card max-w-md w-full p-8 rounded-2xl border border-[#60697d]/30 text-center shadow-2xl">
-      <div class="w-14 h-14 rounded-2xl bg-[#e85827]/15 text-[#e85827] flex items-center justify-center mx-auto mb-4 text-2xl">
-        <i class="fa-solid fa-lock"></i>
+  <!-- Login Main Content -->
+  <main class="flex-grow flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <!-- Ambient Glows -->
+    <div class="absolute -top-32 -left-32 w-80 h-80 bg-[#e85827]/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-[#3b82f6]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-md w-full p-8 sm:p-10 rounded-2xl bg-[#252e40]/75 border border-[#60697d]/35 backdrop-blur-xl shadow-2xl relative z-10">
+      
+      <!-- Card Header -->
+      <div class="text-center mb-8">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#e85827]/20 to-[#da251d]/10 border border-[#e85827]/40 text-[#e85827] flex items-center justify-center mx-auto mb-4 text-2xl shadow-lg">
+          <i class="fa-solid fa-user-lock"></i>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-white font-heading tracking-tight">Welcome Back</h1>
+        <p class="text-xs sm:text-sm text-slate-300 mt-2">
+          Sign in to your Vani Technologies client account
+        </p>
       </div>
-      <h1 class="text-2xl font-bold text-white font-heading mb-2">Member Portal</h1>
-      <p class="text-sm text-slate-300 mb-6">
-        Authentication system (JWT, Email &amp; OTP verification) will be activated in the upcoming Authentication Phase.
-      </p>
-      <a href="index.html" class="btn-primary inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white">
-        <i class="fa-solid fa-house text-xs"></i> Return to Homepage
-      </a>
+
+      <!-- Alert Notification Container -->
+      <div id="login-alert" class="hidden mb-6"></div>
+
+      <!-- Mode Selector Tabs: Email OR Phone -->
+      <div class="grid grid-cols-2 gap-1 p-1 bg-[#161c28]/80 border border-[#60697d]/25 rounded-xl mb-6">
+        <button 
+          type="button" 
+          id="tab-email" 
+          class="py-2 text-xs font-semibold rounded-lg transition-all duration-200 bg-[#e85827] text-white shadow-sm flex items-center justify-center gap-1.5"
+        >
+          <i class="fa-solid fa-envelope text-[11px]"></i>
+          <span>Email Login</span>
+        </button>
+        <button 
+          type="button" 
+          id="tab-phone" 
+          class="py-2 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white flex items-center justify-center gap-1.5"
+        >
+          <i class="fa-solid fa-phone text-[11px]"></i>
+          <span>Phone Login</span>
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="space-y-5" novalidate>
+        
+        <!-- Identifier Field: Email or Phone -->
+        <div>
+          <label id="identifier-label" for="login-identifier" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+            Email Address
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i id="identifier-icon" class="fa-solid fa-envelope text-sm"></i>
+            </div>
+            <input 
+              type="text" 
+              id="login-identifier" 
+              name="identifier" 
+              placeholder="e.g. name@company.com" 
+              class="w-full pl-10 pr-4 py-3 rounded-xl bg-[#161c28]/90 border border-[#60697d]/35 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#e85827] focus:ring-1 focus:ring-[#e85827] transition-all"
+              required
+            >
+          </div>
+          <span id="identifier-error" class="hidden text-[11px] text-red-400 mt-1 block"></span>
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <label for="login-password" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+              Password
+            </label>
+            <a href="forgot-password.html" class="text-xs text-[#e85827] hover:underline font-medium">
+              Forgot Password?
+            </a>
+          </div>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-lock text-sm"></i>
+            </div>
+            <input 
+              type="password" 
+              id="login-password" 
+              name="password" 
+              placeholder="Enter your password" 
+              class="w-full pl-10 pr-10 py-3 rounded-xl bg-[#161c28]/90 border border-[#60697d]/35 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#e85827] focus:ring-1 focus:ring-[#e85827] transition-all"
+              required
+            >
+            <button 
+              type="button" 
+              id="toggle-login-password" 
+              class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-white transition-colors"
+              aria-label="Toggle password visibility"
+            >
+              <i class="fa-solid fa-eye text-sm"></i>
+            </button>
+          </div>
+          <span id="password-error" class="hidden text-[11px] text-red-400 mt-1 block"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <button 
+          type="submit" 
+          id="login-submit-btn" 
+          class="btn-primary w-full py-3.5 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-lg transition-all"
+        >
+          <span id="login-btn-text">Sign In to Account</span>
+          <i id="login-btn-icon" class="fa-solid fa-arrow-right text-xs"></i>
+        </button>
+
+      </form>
+
+      <!-- Footer Navigation -->
+      <div class="mt-8 pt-6 border-t border-[#60697d]/20 text-center text-xs text-slate-400">
+        <span>Don't have an account yet?</span>
+        <a href="register.html" class="text-[#e85827] font-semibold hover:underline ml-1">
+          Create New Account
+        </a>
+      </div>
+
     </div>
   </main>
 
+  <!-- Footer -->
   <footer class="py-6 border-t border-[#60697d]/20 bg-[#161c28] text-center text-xs text-slate-400">
-    <p>© 2026 Vani Technologies. All rights reserved.</p>
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>© 2026 Vani Technologies. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        <a href="mailto:support@vanitechnologies.in" class="hover:text-white transition-colors">support@vanitechnologies.in</a>
+        <span>•</span>
+        <a href="tel:+917773895639" class="hover:text-white transition-colors">+91-7773895639</a>
+      </div>
+    </div>
   </footer>
+
+  <!-- Auth Script -->
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check for loggedOut query param
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('loggedOut') === 'true') {
+        Auth.showAlert('login-alert', 'You have been successfully logged out.', 'success');
+      }
+
+      // Check if user is already authenticated
+      if (Auth.isAuthenticated()) {
+        window.location.href = 'profile.html';
+        return;
+      }
+
+      // Password toggle
+      Auth.setupPasswordToggle('toggle-login-password', 'login-password');
+
+      // Mode Tabs: Email OR Phone
+      const tabEmail = document.getElementById('tab-email');
+      const tabPhone = document.getElementById('tab-phone');
+      const identifierLabel = document.getElementById('identifier-label');
+      const identifierIcon = document.getElementById('identifier-icon');
+      const identifierInput = document.getElementById('login-identifier');
+
+      let currentMode = 'email'; // 'email' or 'phone'
+
+      tabEmail.addEventListener('click', () => {
+        currentMode = 'email';
+        tabEmail.className = 'py-2 text-xs font-semibold rounded-lg transition-all duration-200 bg-[#e85827] text-white shadow-sm flex items-center justify-center gap-1.5';
+        tabPhone.className = 'py-2 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white flex items-center justify-center gap-1.5';
+        identifierLabel.textContent = 'Email Address';
+        identifierIcon.className = 'fa-solid fa-envelope text-sm';
+        identifierInput.placeholder = 'e.g. name@company.com';
+        identifierInput.type = 'email';
+        identifierInput.focus();
+      });
+
+      tabPhone.addEventListener('click', () => {
+        currentMode = 'phone';
+        tabPhone.className = 'py-2 text-xs font-semibold rounded-lg transition-all duration-200 bg-[#e85827] text-white shadow-sm flex items-center justify-center gap-1.5';
+        tabEmail.className = 'py-2 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white flex items-center justify-center gap-1.5';
+        identifierLabel.textContent = 'Phone Number';
+        identifierIcon.className = 'fa-solid fa-phone text-sm';
+        identifierInput.placeholder = 'e.g. 9876543210';
+        identifierInput.type = 'tel';
+        identifierInput.focus();
+      });
+
+      // Form submission
+      const form = document.getElementById('login-form');
+      const submitBtn = document.getElementById('login-submit-btn');
+      const btnText = document.getElementById('login-btn-text');
+      const btnIcon = document.getElementById('login-btn-icon');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        Auth.hideAlert('login-alert');
+
+        const identifier = identifierInput.value.trim();
+        const password = document.getElementById('login-password').value;
+
+        // Client-side validation
+        if (!identifier) {
+          Auth.showAlert('login-alert', `Please enter your ${currentMode === 'email' ? 'email address' : 'phone number'}.`);
+          identifierInput.focus();
+          return;
+        }
+
+        if (currentMode === 'email' && !identifier.includes('@')) {
+          Auth.showAlert('login-alert', 'Please enter a valid email address with an @ symbol.');
+          identifierInput.focus();
+          return;
+        }
+
+        if (!password) {
+          Auth.showAlert('login-alert', 'Please enter your account password.');
+          document.getElementById('login-password').focus();
+          return;
+        }
+
+        // Set Loading State
+        submitBtn.disabled = true;
+        btnText.textContent = 'Verifying credentials...';
+        btnIcon.className = 'fa-solid fa-spinner fa-spin text-xs';
+
+        try {
+          const res = await Auth.login({ identifier, password });
+
+          if (res.ok && res.success) {
+            Auth.showAlert('login-alert', 'Login successful! Redirecting to profile...', 'success');
+            setTimeout(() => {
+              const redirect = urlParams.get('redirect') || 'profile.html';
+              window.location.href = redirect;
+            }, 800);
+          } else {
+            Auth.showAlert('login-alert', res.message || 'Invalid credentials. Please try again.');
+            submitBtn.disabled = false;
+            btnText.textContent = 'Sign In to Account';
+            btnIcon.className = 'fa-solid fa-arrow-right text-xs';
+          }
+        } catch (err) {
+          Auth.showAlert('login-alert', 'Network error. Please ensure the backend server is running.');
+          submitBtn.disabled = false;
+          btnText.textContent = 'Sign In to Account';
+          btnIcon.className = 'fa-solid fa-arrow-right text-xs';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
