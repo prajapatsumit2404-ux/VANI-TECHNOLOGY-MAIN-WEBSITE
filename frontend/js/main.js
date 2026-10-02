@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 8. Phase 4: Featured Products, Search, Filters & Product Modal
   initProductsAndFilters();
 
+  // 8b. Cinematic Product Story Controller (Main Products)
+  initCinematicProductStories();
+
   // 9. Update Navbar Auth Button if Logged In
   if (window.Auth) window.Auth.updateNavbarAuth();
 
@@ -884,25 +887,51 @@ const PRODUCTS_DATA = {
 };
 
 /**
- * Phase 4: Products Filters, Search & Modal Controller
+ * Reorganized Product Data Structure (Main Products vs Delivery Projects)
+ */
+const MAIN_PRODUCTS_KEYS = [
+  'ai-talksy',
+  'community-forum',
+  'ratehonk-travel-crm'
+];
+
+const DELIVERY_PROJECTS_KEYS = [
+  'homem-do-pao',
+  'meditation-willy-cherish',
+  'msb-school',
+  'software-testing-suite',
+  'telemedicine'
+];
+
+const mainProducts = MAIN_PRODUCTS_KEYS.map((k) => PRODUCTS_DATA[k]).filter(Boolean);
+const deliveryProjects = DELIVERY_PROJECTS_KEYS.map((k) => PRODUCTS_DATA[k]).filter(Boolean);
+
+// Expose arrays globally for external consumption
+window.mainProducts = mainProducts;
+window.deliveryProjects = deliveryProjects;
+
+/**
+ * Phase 4 & Phase 10: Products Filters, Search & Modal Controller
+ * Specifically drives the 5 Delivery Projects grid and search experience without requiring login.
  */
 function initProductsAndFilters() {
-  const searchInput = document.getElementById('product-search-input');
-  const clearSearchBtn = document.getElementById('clear-search-btn');
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const productCards = document.querySelectorAll('.product-card');
-  const countDisplay = document.getElementById('product-count-display');
-  const emptyState = document.getElementById('no-products-found');
-  const resetFiltersBtn = document.getElementById('reset-search-filters-btn');
+  const searchInput = document.getElementById('delivery-search-input') || document.getElementById('product-search-input');
+  const clearSearchBtn = document.getElementById('clear-delivery-search-btn') || document.getElementById('clear-search-btn');
+  const filterBtns = document.querySelectorAll('#delivery-projects .filter-btn, .filter-btn');
+  const productCards = document.querySelectorAll('#delivery-grid .product-card');
+  const countDisplay = document.getElementById('delivery-count-display') || document.getElementById('product-count-display');
+  const emptyState = document.getElementById('no-delivery-found') || document.getElementById('no-products-found');
+  const resetFiltersBtn = document.getElementById('reset-delivery-filters-btn') || document.getElementById('reset-search-filters-btn');
 
   let currentCategory = 'all';
   let currentSearchQuery = '';
 
   const applyFilters = () => {
     let visibleCount = 0;
-    const totalCount = productCards.length;
+    const cards = productCards.length ? productCards : document.querySelectorAll('.product-card');
+    const totalCount = cards.length;
 
-    productCards.forEach((card) => {
+    cards.forEach((card) => {
       const category = (card.getAttribute('data-category') || '').toLowerCase();
       const name = (card.getAttribute('data-name') || '').toLowerCase();
       const content = card.textContent.toLowerCase();
@@ -927,7 +956,7 @@ function initProductsAndFilters() {
 
     // Update count display
     if (countDisplay) {
-      countDisplay.textContent = `Showing ${visibleCount} of ${totalCount} products`;
+      countDisplay.textContent = `Showing ${visibleCount} of ${totalCount} delivered projects`;
     }
 
     // Toggle empty state
@@ -984,7 +1013,7 @@ function initProductsAndFilters() {
       if (clearSearchBtn) clearSearchBtn.classList.add('hidden');
 
       filterBtns.forEach((b) => b.classList.remove('active'));
-      const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+      const allBtn = document.querySelector('#delivery-projects .filter-btn[data-filter="all"], .filter-btn[data-filter="all"]');
       if (allBtn) allBtn.classList.add('active');
       currentCategory = 'all';
 
@@ -992,8 +1021,199 @@ function initProductsAndFilters() {
     });
   }
 
+  // Initial count display
+  applyFilters();
+
   // Product Details Modal setup
   initProductDetailModal();
+}
+
+/**
+ * Cinematic Product Story Controller for MAIN PRODUCTS
+ * Provides scroll-triggered storytelling, step progression, interactive controls, and hover effects.
+ */
+function initCinematicProductStories() {
+  const stories = {
+    aitalksy: {
+      id: 'aitalksy',
+      container: document.getElementById('story-aitalksy'),
+      totalSteps: 5,
+      currentStep: 1,
+      timer: null,
+      intervalMs: 3200,
+      captions: [
+        'Step 1: User transmits natural language query',
+        'Step 2: Vector search & intent analysis in progress',
+        'Step 3: AI Talksy synthesizes intelligent response',
+        'Step 4: Real-time action dispatched across channels',
+        'Step 5: Automated business resolution completed'
+      ]
+    },
+    community: {
+      id: 'community',
+      container: document.getElementById('story-communityforum'),
+      totalSteps: 5,
+      currentStep: 1,
+      timer: null,
+      intervalMs: 3200,
+      captions: [
+        'Step 1: Onboarding diverse community members',
+        'Step 2: Cryptographic identity verification',
+        'Step 3: Mobile digital platform gateway initialized',
+        'Step 4: Synchronizing community services & utilities',
+        'Step 5: One unified ecosystem for your community'
+      ]
+    },
+    ratehonk: {
+      id: 'ratehonk',
+      container: document.getElementById('story-ratehonk'),
+      totalSteps: 5,
+      currentStep: 1,
+      timer: null,
+      intervalMs: 3200,
+      captions: [
+        'Step 1: Inbound travel lead arrives from web/WhatsApp',
+        'Step 2: Lead progresses through automated sales pipeline',
+        'Step 3: Follow-up alert triggered upon quote interaction',
+        'Step 4: Travel itinerary confirmed & booking voucher generated',
+        'Step 5: Dashboard analytics tracking revenue growth'
+      ]
+    }
+  };
+
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Render a specific step for a given story
+  const showStep = (storyKey, stepNum) => {
+    const story = stories[storyKey];
+    if (!story || !story.container) return;
+    story.currentStep = stepNum;
+
+    // 1. Update pills
+    const pills = story.container.querySelectorAll('.story-step-pill');
+    pills.forEach((p) => {
+      const pStep = parseInt(p.getAttribute('data-step'), 10);
+      if (pStep === stepNum) {
+        p.classList.add('active');
+      } else {
+        p.classList.remove('active');
+      }
+    });
+
+    // 2. Update panes
+    for (let s = 1; s <= story.totalSteps; s++) {
+      const pane = document.getElementById(`${storyKey}-stage-step${s}`);
+      if (pane) {
+        if (s === stepNum) {
+          pane.classList.remove('hidden');
+          pane.style.opacity = '1';
+          pane.style.transform = 'translateY(0)';
+        } else {
+          pane.classList.add('hidden');
+          pane.style.opacity = '0';
+          pane.style.transform = 'translateY(8px)';
+        }
+      }
+    }
+
+    // 3. Update caption
+    const captionEl = document.getElementById(`${storyKey}-step-caption`);
+    if (captionEl && story.captions[stepNum - 1]) {
+      captionEl.textContent = story.captions[stepNum - 1];
+    }
+  };
+
+  // Start automatic sequencer
+  const startStory = (storyKey) => {
+    if (isReducedMotion) return;
+    const story = stories[storyKey];
+    if (!story || story.timer) return;
+
+    story.timer = setInterval(() => {
+      let nextStep = story.currentStep + 1;
+      if (nextStep > story.totalSteps) nextStep = 1;
+      showStep(storyKey, nextStep);
+    }, story.intervalMs);
+  };
+
+  // Pause automatic sequencer
+  const stopStory = (storyKey) => {
+    const story = stories[storyKey];
+    if (!story || !story.timer) return;
+    clearInterval(story.timer);
+    story.timer = null;
+  };
+
+  // Set up listeners for pills, replay buttons, and hover events
+  Object.keys(stories).forEach((key) => {
+    const story = stories[key];
+    if (!story.container) return;
+
+    // Step Pills click
+    const pills = story.container.querySelectorAll('.story-step-pill');
+    pills.forEach((pill) => {
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        const step = parseInt(pill.getAttribute('data-step'), 10);
+        showStep(key, step);
+      });
+    });
+
+    // Replay button click
+    const replayBtn = story.container.querySelector(`.story-replay-btn[data-story="${key}"]`);
+    if (replayBtn) {
+      replayBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        stopStory(key);
+        showStep(key, 1);
+        startStory(key);
+      });
+    }
+
+    // Hover pause & subtle depth reaction
+    story.container.addEventListener('mouseenter', () => {
+      stopStory(key);
+    });
+
+    story.container.addEventListener('mouseleave', () => {
+      if (story.isInView) {
+        startStory(key);
+      }
+    });
+
+    // Initial render
+    showStep(key, 1);
+  });
+
+  // IntersectionObserver to start/pause animations only when scrolled into viewport
+  if ('IntersectionObserver' in window) {
+    const storyObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const storyId = entry.target.getAttribute('data-story-id');
+          if (!storyId || !stories[storyId]) return;
+
+          if (entry.isIntersecting) {
+            stories[storyId].isInView = true;
+            startStory(storyId);
+          } else {
+            stories[storyId].isInView = false;
+            stopStory(storyId);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    Object.keys(stories).forEach((k) => {
+      if (stories[k].container) {
+        storyObserver.observe(stories[k].container);
+      }
+    });
+  } else {
+    // Fallback if IntersectionObserver not available
+    Object.keys(stories).forEach((k) => startStory(k));
+  }
 }
 
 /**
