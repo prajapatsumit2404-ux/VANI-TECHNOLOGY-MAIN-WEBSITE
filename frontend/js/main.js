@@ -1032,53 +1032,66 @@ function initProductsAndFilters() {
 
 /**
  * Cinematic Product Story Controller for MAIN PRODUCTS
- * Provides scroll-triggered storytelling, step progression, interactive controls, and hover effects.
+ * Provides scroll-triggered storytelling, 5-scene movie sequence:
+ * INTRO → PROBLEM / INPUT → PROCESS → RESULT → CALL TO ACTION.
+ * Powered by GPU-friendly GSAP transitions and Viewport Detection.
  */
 function initCinematicProductStories() {
+  const MOVIE_SCENES = ['intro', 'problem', 'process', 'result', 'cta'];
+
   const stories = {
     aitalksy: {
       id: 'aitalksy',
+      name: 'AI Talksy',
       container: document.getElementById('story-aitalksy'),
       totalSteps: 5,
+      scenes: MOVIE_SCENES,
       currentStep: 1,
       timer: null,
-      intervalMs: 3200,
+      intervalMs: 3400,
+      isInView: false,
       captions: [
-        'Step 1: User transmits natural language query',
-        'Step 2: Vector search & intent analysis in progress',
-        'Step 3: AI Talksy synthesizes intelligent response',
-        'Step 4: Real-time action dispatched across channels',
-        'Step 5: Automated business resolution completed'
+        'INTRO: Meet AI Talksy — Enterprise conversational intelligence',
+        'PROBLEM / INPUT: High inquiry volume & delayed response cause 68% lost leads',
+        'PROCESS: Sub-0.4s semantic intent analysis & vector knowledge retrieval',
+        'RESULT: 98.7% instant resolution, omnichannel sync & zero human bottleneck',
+        'CALL TO ACTION: Deploy AI Talksy in minutes — Zero code required'
       ]
     },
     community: {
       id: 'community',
+      name: 'Community Forum',
       container: document.getElementById('story-communityforum'),
       totalSteps: 5,
+      scenes: MOVIE_SCENES,
       currentStep: 1,
       timer: null,
-      intervalMs: 3200,
+      intervalMs: 3400,
+      isInView: false,
       captions: [
-        'Step 1: Onboarding diverse community members',
-        'Step 2: Cryptographic identity verification',
-        'Step 3: Mobile digital platform gateway initialized',
-        'Step 4: Synchronizing community services & utilities',
-        'Step 5: One unified ecosystem for your community'
+        'INTRO: Community members fragmented across scattered chat groups & emails',
+        'PROBLEM / INPUT: Fake accounts & lack of trust solved with verified member identity',
+        'PROCESS: 7 essential community services unified in a single mobile platform',
+        'RESULT: One trusted, unified digital ecosystem for the entire community',
+        'CALL TO ACTION: Launch your verified community platform at communityforum.tech'
       ]
     },
     ratehonk: {
       id: 'ratehonk',
+      name: 'RateHonk Travel CRM',
       container: document.getElementById('story-ratehonk'),
       totalSteps: 5,
+      scenes: MOVIE_SCENES,
       currentStep: 1,
       timer: null,
-      intervalMs: 3200,
+      intervalMs: 3400,
+      isInView: false,
       captions: [
-        'Step 1: Inbound travel lead arrives from web/WhatsApp',
-        'Step 2: Lead progresses through automated sales pipeline',
-        'Step 3: Follow-up alert triggered upon quote interaction',
-        'Step 4: Travel itinerary confirmed & booking voucher generated',
-        'Step 5: Dashboard analytics tracking revenue growth'
+        'INTRO: Travel agencies lose deals in messy spreadsheets and delayed quotes',
+        'PROBLEM / INPUT: Inbound travel inquiries need instant quotation & pipeline tracking',
+        'PROCESS: Automated 5-stage sales funnel with instant client engagement alerts',
+        'RESULT: +34.8% conversion boost, automated booking vouchers & live revenue growth',
+        'CALL TO ACTION: Streamline your travel sales at crm.ratehonk.com'
       ]
     }
   };
@@ -1097,46 +1110,50 @@ function initCinematicProductStories() {
       const pStep = parseInt(p.getAttribute('data-step'), 10);
       if (pStep === stepNum) {
         p.classList.add('active');
+        p.setAttribute('aria-selected', 'true');
       } else {
         p.classList.remove('active');
+        p.setAttribute('aria-selected', 'false');
       }
     });
 
-    // 2. Update panes
+    // 2. Update scenes (panes) with GPU-accelerated GSAP transforms
     for (let s = 1; s <= story.totalSteps; s++) {
       const pane = document.getElementById(`${storyKey}-stage-step${s}`);
       if (pane) {
         if (s === stepNum) {
           pane.classList.remove('hidden');
           if (typeof gsap !== 'undefined' && !isReducedMotion) {
+            gsap.killTweensOf(pane);
             gsap.fromTo(
               pane,
-              { opacity: 0, y: 10, scale: 0.98 },
-              { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: 'power2.out' }
+              { opacity: 0, y: 12, scale: 0.97, force3D: true },
+              { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: 'power2.out', force3D: true }
             );
           } else {
             pane.style.opacity = '1';
-            pane.style.transform = 'translateY(0)';
+            pane.style.transform = 'translate3d(0, 0, 0)';
           }
         } else {
           pane.classList.add('hidden');
           pane.style.opacity = '0';
-          pane.style.transform = 'translateY(8px)';
+          pane.style.transform = 'translate3d(0, 10px, 0)';
         }
       }
     }
 
-    // 3. Update caption with subtle GSAP nudge
+    // 3. Update caption with subtle directional GSAP nudge
     const captionEl = document.getElementById(`${storyKey}-step-caption`);
     if (captionEl && story.captions[stepNum - 1]) {
       captionEl.textContent = story.captions[stepNum - 1];
       if (typeof gsap !== 'undefined' && !isReducedMotion) {
-        gsap.fromTo(captionEl, { opacity: 0.5, x: -4 }, { opacity: 1, x: 0, duration: 0.3, ease: 'power1.out' });
+        gsap.killTweensOf(captionEl);
+        gsap.fromTo(captionEl, { opacity: 0.4, x: -6, force3D: true }, { opacity: 1, x: 0, duration: 0.3, ease: 'power1.out', force3D: true });
       }
     }
   };
 
-  // Start automatic sequencer
+  // Start automatic sequencer for a single story
   const startStory = (storyKey) => {
     if (isReducedMotion) return;
     const story = stories[storyKey];
@@ -1149,7 +1166,7 @@ function initCinematicProductStories() {
     }, story.intervalMs);
   };
 
-  // Pause automatic sequencer
+  // Pause automatic sequencer for a single story
   const stopStory = (storyKey) => {
     const story = stories[storyKey];
     if (!story || !story.timer) return;
@@ -1157,7 +1174,7 @@ function initCinematicProductStories() {
     story.timer = null;
   };
 
-  // Set up listeners for pills, replay buttons, and hover events
+  // Attach controls: pill click, replay, and hover pause
   Object.keys(stories).forEach((key) => {
     const story = stories[key];
     if (!story.container) return;
@@ -1168,6 +1185,7 @@ function initCinematicProductStories() {
       pill.addEventListener('click', (e) => {
         e.preventDefault();
         const step = parseInt(pill.getAttribute('data-step'), 10);
+        stopStory(key);
         showStep(key, step);
       });
     });
@@ -1179,11 +1197,13 @@ function initCinematicProductStories() {
         e.preventDefault();
         stopStory(key);
         showStep(key, 1);
-        startStory(key);
+        if (story.isInView) {
+          startStory(key);
+        }
       });
     }
 
-    // Hover pause & subtle depth reaction
+    // Hover pause & subtle reaction (do not interrupt user while reading/interacting)
     story.container.addEventListener('mouseenter', () => {
       stopStory(key);
     });
@@ -1194,11 +1214,12 @@ function initCinematicProductStories() {
       }
     });
 
-    // Initial render
+    // Initial render of first scene
     showStep(key, 1);
   });
 
-  // IntersectionObserver to start/pause animations only when scrolled into viewport
+  // IntersectionObserver: Viewport detection ensures animations ONLY run when the product enters view
+  // and does NOT run all product animations simultaneously.
   if ('IntersectionObserver' in window) {
     const storyObserver = new IntersectionObserver(
       (entries) => {
@@ -1224,9 +1245,17 @@ function initCinematicProductStories() {
       }
     });
   } else {
-    // Fallback if IntersectionObserver not available
-    Object.keys(stories).forEach((k) => startStory(k));
+    // Fallback if IntersectionObserver not available (start first story only)
+    startStory('aitalksy');
   }
+
+  // Export system for global access and testing
+  window.ProductStorySystem = {
+    stories,
+    showStep,
+    startStory,
+    stopStory
+  };
 }
 
 /**

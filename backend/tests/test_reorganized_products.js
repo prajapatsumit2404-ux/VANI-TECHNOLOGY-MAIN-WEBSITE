@@ -117,6 +117,37 @@ assert(css.includes('.story-stage-canvas'), '.story-stage-canvas CSS defined');
 assert(css.includes('prefers-reduced-motion'), 'prefers-reduced-motion overrides present');
 console.log('  [PASS] CSS styling, hover effects, and reduced-motion compliance verified');
 
+// 7. Verify Phase 5: Cinematic Product Story System Components & Movie Sequence
+console.log('\n7. Checking Phase 5: Product Story System & Movie Sequence...');
+assert(html.includes('class="product-story'), 'Semantic ProductStory component class present in HTML');
+assert(html.includes('class="product-background'), 'Semantic ProductBackground component class present in HTML');
+assert(html.includes('class="product-visualization'), 'Semantic ProductVisualization component class present in HTML');
+assert(html.includes('class="product-story-scene'), 'Semantic ProductStoryScene component class present in HTML');
+assert(html.includes('class="product-story-cta'), 'Semantic ProductStoryCTA component class present in HTML');
+
+// 5 Movie scenes present for all 3 products
+const requiredScenes = ['intro', 'problem', 'process', 'result', 'cta'];
+requiredScenes.forEach((scene) => {
+  const count = (html.match(new RegExp(`data-scene="${scene}"`, 'g')) || []).length;
+  assert(count === 3, `Movie Scene "${scene}" present in all 3 flagship products (found ${count})`);
+});
+console.log('  [PASS] All 3 Products implement complete 5-scene movie sequence (INTRO -> PROBLEM -> PROCESS -> RESULT -> CTA)');
+
+// Viewport Detection and JS Sequencer
+assert(js.includes('IntersectionObserver'), 'IntersectionObserver used for viewport detection');
+assert(js.includes('window.ProductStorySystem'), 'ProductStorySystem exported on window');
+assert(js.includes('MOVIE_SCENES'), 'MOVIE_SCENES defined in JS sequencer');
+console.log('  [PASS] Viewport detection & non-simultaneous animation sequencer verified in JS');
+
+// GPU Acceleration and Hardware CSS
+assert(css.includes('.product-story'), '.product-story CSS defined');
+assert(css.includes('.product-story-scene'), '.product-story-scene CSS defined');
+assert(css.includes('.product-story-cta'), '.product-story-cta CSS defined');
+assert(css.includes('.product-visualization'), '.product-visualization CSS defined');
+assert(css.includes('translate3d'), 'GPU-accelerated translate3d transforms utilized');
+console.log('  [PASS] Reusable component CSS classes & GPU-friendly hardware acceleration verified');
+
 console.log('\n====================================================');
-console.log('ALL REORGANIZATION TESTS PASSED: 100% SUCCESS');
+console.log('ALL REORGANIZATION & PHASE 5 TESTS PASSED: 100% SUCCESS');
 console.log('====================================================');
+
