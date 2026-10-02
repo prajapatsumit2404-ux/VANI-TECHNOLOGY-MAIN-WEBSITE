@@ -1108,8 +1108,16 @@ function initCinematicProductStories() {
       if (pane) {
         if (s === stepNum) {
           pane.classList.remove('hidden');
-          pane.style.opacity = '1';
-          pane.style.transform = 'translateY(0)';
+          if (typeof gsap !== 'undefined' && !isReducedMotion) {
+            gsap.fromTo(
+              pane,
+              { opacity: 0, y: 10, scale: 0.98 },
+              { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: 'power2.out' }
+            );
+          } else {
+            pane.style.opacity = '1';
+            pane.style.transform = 'translateY(0)';
+          }
         } else {
           pane.classList.add('hidden');
           pane.style.opacity = '0';
@@ -1118,10 +1126,13 @@ function initCinematicProductStories() {
       }
     }
 
-    // 3. Update caption
+    // 3. Update caption with subtle GSAP nudge
     const captionEl = document.getElementById(`${storyKey}-step-caption`);
     if (captionEl && story.captions[stepNum - 1]) {
       captionEl.textContent = story.captions[stepNum - 1];
+      if (typeof gsap !== 'undefined' && !isReducedMotion) {
+        gsap.fromTo(captionEl, { opacity: 0.5, x: -4 }, { opacity: 1, x: 0, duration: 0.3, ease: 'power1.out' });
+      }
     }
   };
 
