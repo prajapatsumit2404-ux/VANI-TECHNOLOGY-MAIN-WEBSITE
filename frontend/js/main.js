@@ -1310,7 +1310,12 @@ function initCinematicProductStories() {
   const startStory = (storyKey) => {
     if (isReducedMotion) return;
     const story = stories[storyKey];
-    if (!story || story.timer) return;
+    if (!story) return;
+
+    // Resume canvas animation loop when story starts/enters view
+    if (story.startCanvas) story.startCanvas();
+
+    if (story.timer) return;
 
     story.timer = setInterval(() => {
       let nextStep = story.currentStep + 1;
@@ -1322,9 +1327,15 @@ function initCinematicProductStories() {
   // Pause automatic sequencer for a single story
   const stopStory = (storyKey) => {
     const story = stories[storyKey];
-    if (!story || !story.timer) return;
-    clearInterval(story.timer);
-    story.timer = null;
+    if (!story) return;
+
+    if (story.timer) {
+      clearInterval(story.timer);
+      story.timer = null;
+    }
+
+    // Halt canvas animation loop completely when story pauses/leaves view
+    if (story.stopCanvas) story.stopCanvas();
   };
 
   // Attach controls: pill click, replay, and hover pause
@@ -1381,14 +1392,18 @@ function initCinematicProductStories() {
     let width = (canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : 600);
     let height = (canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : 450);
 
+    const isMobile = window.innerWidth < 768;
+    const nodeCount = isMobile ? 12 : 22;
+    const microParticleCount = isMobile ? 8 : 14;
+
     const handleResize = () => {
       if (!canvas.parentElement) return;
       width = canvas.width = canvas.parentElement.offsetWidth;
       height = canvas.height = canvas.parentElement.offsetHeight;
+      if (isReducedMotion) renderFrame();
     };
     window.addEventListener('resize', handleResize);
 
-    const nodeCount = 26;
     const nodes = [];
     for (let i = 0; i < nodeCount; i++) {
       nodes.push({
@@ -1402,7 +1417,6 @@ function initCinematicProductStories() {
       });
     }
 
-    const microParticleCount = 18;
     const particles = [];
     for (let i = 0; i < microParticleCount; i++) {
       particles.push({
@@ -1416,12 +1430,7 @@ function initCinematicProductStories() {
 
     let animFrameId = null;
 
-    const render = () => {
-      if (!stories.aitalksy.isInView && !isReducedMotion) {
-        animFrameId = requestAnimationFrame(render);
-        return;
-      }
-
+    const renderFrame = () => {
       ctx.clearRect(0, 0, width, height);
 
       // Subtle neural connections
@@ -1446,12 +1455,13 @@ function initCinematicProductStories() {
       // Draw neural nodes
       for (let i = 0; i < nodeCount; i++) {
         const n = nodes[i];
-        n.x += n.vx;
-        n.y += n.vy;
-        if (n.x < 0 || n.x > width) n.vx *= -1;
-        if (n.y < 0 || n.y > height) n.vy *= -1;
-
-        n.pulsePhase += 0.03;
+        if (!isReducedMotion) {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > width) n.vx *= -1;
+          if (n.y < 0 || n.y > height) n.vy *= -1;
+          n.pulsePhase += 0.03;
+        }
         const currentRadius = n.radius + (n.isGlow ? Math.sin(n.pulsePhase) * 0.8 : 0);
 
         ctx.beginPath();
@@ -1470,23 +1480,51 @@ function initCinematicProductStories() {
       // Draw soft drifting micro-particles
       for (let i = 0; i < microParticleCount; i++) {
         const p = particles[i];
-        p.y += p.vy;
-        if (p.y < 0) {
-          p.y = height;
-          p.x = Math.random() * width;
+        if (!isReducedMotion) {
+          p.y += p.vy;
+          if (p.y < 0) {
+            p.y = height;
+            p.x = Math.random() * width;
+          }
         }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(147, 197, 253, ${p.alpha})`;
         ctx.fill();
       }
+    };
 
-      if (!isReducedMotion) {
-        animFrameId = requestAnimationFrame(render);
+    const loop = () => {
+      // Avoid expensive continuous animations when not visible or reduced motion
+      if (!stories.aitalksy.isInView || isReducedMotion) {
+        animFrameId = null;
+        return;
+      }
+      renderFrame();
+      animFrameId = requestAnimationFrame(loop);
+    };
+
+    stories.aitalksy.startCanvas = () => {
+      if (isReducedMotion) {
+        renderFrame();
+        return;
+      }
+      if (!animFrameId && stories.aitalksy.isInView) {
+        animFrameId = requestAnimationFrame(loop);
       }
     };
 
-    render();
+    stories.aitalksy.stopCanvas = () => {
+      if (animFrameId) {
+        cancelAnimationFrame(animFrameId);
+        animFrameId = null;
+      }
+    };
+
+    renderFrame();
+    if (stories.aitalksy.isInView && !isReducedMotion) {
+      animFrameId = requestAnimationFrame(loop);
+    }
   };
 
   initAITalksyBackground();
@@ -1501,15 +1539,17 @@ function initCinematicProductStories() {
     let width = (canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : 600);
     let height = (canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : 450);
 
+    const isMobile = window.innerWidth < 768;
+    const nodeCount = isMobile ? 10 : 16;
+
     const handleResize = () => {
       if (!canvas.parentElement) return;
       width = canvas.width = canvas.parentElement.offsetWidth;
       height = canvas.height = canvas.parentElement.offsetHeight;
+      if (isReducedMotion) renderFrame();
     };
     window.addEventListener('resize', handleResize);
 
-    // Warm organic community nodes (representing member clusters, family trees, local circles)
-    const nodeCount = 18;
     const nodes = [];
     for (let i = 0; i < nodeCount; i++) {
       nodes.push({
@@ -1524,7 +1564,6 @@ function initCinematicProductStories() {
       });
     }
 
-    // 2 soft warm floating ambient light circles
     const warmLights = [
       { x: width * 0.25, y: height * 0.35, vx: 0.15, vy: 0.12, radius: 140, color: 'rgba(245, 158, 11, 0.045)' },
       { x: width * 0.75, y: height * 0.65, vx: -0.12, vy: -0.15, radius: 160, color: 'rgba(16, 185, 129, 0.04)' }
@@ -1532,20 +1571,17 @@ function initCinematicProductStories() {
 
     let animFrameId = null;
 
-    const render = () => {
-      if (!stories.community.isInView && !isReducedMotion) {
-        animFrameId = requestAnimationFrame(render);
-        return;
-      }
-
+    const renderFrame = () => {
       ctx.clearRect(0, 0, width, height);
 
       // 1. Draw soft warm ambient drifting lights
       warmLights.forEach((light) => {
-        light.x += light.vx;
-        light.y += light.vy;
-        if (light.x < 50 || light.x > width - 50) light.vx *= -1;
-        if (light.y < 50 || light.y > height - 50) light.vy *= -1;
+        if (!isReducedMotion) {
+          light.x += light.vx;
+          light.y += light.vy;
+          if (light.x < 50 || light.x > width - 50) light.vx *= -1;
+          if (light.y < 50 || light.y > height - 50) light.vy *= -1;
+        }
 
         const grad = ctx.createRadialGradient(light.x, light.y, 0, light.x, light.y, light.radius);
         grad.addColorStop(0, light.color);
@@ -1556,7 +1592,7 @@ function initCinematicProductStories() {
         ctx.fill();
       });
 
-      // 2. Connected lines between community nodes (warm trust threads)
+      // 2. Connected lines between community nodes
       const maxDistance = 110;
       for (let i = 0; i < nodeCount; i++) {
         for (let j = i + 1; j < nodeCount; j++) {
@@ -1578,12 +1614,13 @@ function initCinematicProductStories() {
       // 3. Draw community nodes & subtle warm pulses
       for (let i = 0; i < nodeCount; i++) {
         const n = nodes[i];
-        n.x += n.vx;
-        n.y += n.vy;
-        if (n.x < 0 || n.x > width) n.vx *= -1;
-        if (n.y < 0 || n.y > height) n.vy *= -1;
-
-        n.phase += 0.02;
+        if (!isReducedMotion) {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > width) n.vx *= -1;
+          if (n.y < 0 || n.y > height) n.vy *= -1;
+          n.phase += 0.02;
+        }
         const curRadius = n.radius + (n.isHub ? Math.sin(n.phase) * 0.7 : 0);
 
         ctx.beginPath();
@@ -1591,7 +1628,6 @@ function initCinematicProductStories() {
         ctx.fillStyle = `${n.color}0.75)`;
         ctx.fill();
 
-        // Soft warm outer aura for hubs
         if (n.isHub) {
           ctx.beginPath();
           ctx.arc(n.x, n.y, curRadius * 2.8, 0, Math.PI * 2);
@@ -1599,13 +1635,38 @@ function initCinematicProductStories() {
           ctx.fill();
         }
       }
+    };
 
-      if (!isReducedMotion) {
-        animFrameId = requestAnimationFrame(render);
+    const loop = () => {
+      if (!stories.community.isInView || isReducedMotion) {
+        animFrameId = null;
+        return;
+      }
+      renderFrame();
+      animFrameId = requestAnimationFrame(loop);
+    };
+
+    stories.community.startCanvas = () => {
+      if (isReducedMotion) {
+        renderFrame();
+        return;
+      }
+      if (!animFrameId && stories.community.isInView) {
+        animFrameId = requestAnimationFrame(loop);
       }
     };
 
-    render();
+    stories.community.stopCanvas = () => {
+      if (animFrameId) {
+        cancelAnimationFrame(animFrameId);
+        animFrameId = null;
+      }
+    };
+
+    renderFrame();
+    if (stories.community.isInView && !isReducedMotion) {
+      animFrameId = requestAnimationFrame(loop);
+    }
   };
 
   initCommunityBackground();
@@ -1620,15 +1681,17 @@ function initCinematicProductStories() {
     let width = (canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : 600);
     let height = (canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : 450);
 
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 8 : 16;
+
     const handleResize = () => {
       if (!canvas.parentElement) return;
       width = canvas.width = canvas.parentElement.offsetWidth;
       height = canvas.height = canvas.parentElement.offsetHeight;
+      if (isReducedMotion) renderFrame();
     };
     window.addEventListener('resize', handleResize);
 
-    // Data stream particles flowing horizontally along grid lines
-    const particleCount = 20;
     const particles = [];
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -1640,17 +1703,10 @@ function initCinematicProductStories() {
       });
     }
 
-    // Moving chart trend line data
     let chartPhase = 0;
-
     let animFrameId = null;
 
-    const render = () => {
-      if (!stories.ratehonk.isInView && !isReducedMotion) {
-        animFrameId = requestAnimationFrame(render);
-        return;
-      }
-
+    const renderFrame = () => {
       ctx.clearRect(0, 0, width, height);
 
       // 1. Subtle SaaS Coordinate Grid
@@ -1671,7 +1727,7 @@ function initCinematicProductStories() {
       }
 
       // 2. Moving SaaS Chart Trend Line
-      chartPhase += 0.02;
+      if (!isReducedMotion) chartPhase += 0.02;
       ctx.beginPath();
       const points = 8;
       for (let i = 0; i <= points; i++) {
@@ -1699,10 +1755,12 @@ function initCinematicProductStories() {
       // 4. Data Line Particles
       for (let i = 0; i < particleCount; i++) {
         const p = particles[i];
-        p.x += p.speed;
-        if (p.x > width + p.length) {
-          p.x = -p.length;
-          p.y = Math.floor(Math.random() * 8) * (height / 8) + 20;
+        if (!isReducedMotion) {
+          p.x += p.speed;
+          if (p.x > width + p.length) {
+            p.x = -p.length;
+            p.y = Math.floor(Math.random() * 8) * (height / 8) + 20;
+          }
         }
 
         const grad = ctx.createLinearGradient(p.x - p.length, p.y, p.x, p.y);
@@ -1716,13 +1774,38 @@ function initCinematicProductStories() {
         ctx.lineWidth = 1.5;
         ctx.stroke();
       }
+    };
 
-      if (!isReducedMotion) {
-        animFrameId = requestAnimationFrame(render);
+    const loop = () => {
+      if (!stories.ratehonk.isInView || isReducedMotion) {
+        animFrameId = null;
+        return;
+      }
+      renderFrame();
+      animFrameId = requestAnimationFrame(loop);
+    };
+
+    stories.ratehonk.startCanvas = () => {
+      if (isReducedMotion) {
+        renderFrame();
+        return;
+      }
+      if (!animFrameId && stories.ratehonk.isInView) {
+        animFrameId = requestAnimationFrame(loop);
       }
     };
 
-    render();
+    stories.ratehonk.stopCanvas = () => {
+      if (animFrameId) {
+        cancelAnimationFrame(animFrameId);
+        animFrameId = null;
+      }
+    };
+
+    renderFrame();
+    if (stories.ratehonk.isInView && !isReducedMotion) {
+      animFrameId = requestAnimationFrame(loop);
+    }
   };
 
   initRateHonkBackground();
@@ -1834,6 +1917,17 @@ function initCinematicProductStories() {
         targetFgX = 0;
         targetFgY = 0;
       });
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 1024 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        cards.forEach((card) => {
+          const bgCanvas = card.querySelector('canvas');
+          const stage = card.querySelector('.story-stage-canvas');
+          if (bgCanvas) bgCanvas.style.transform = '';
+          if (stage) stage.style.transform = '';
+        });
+      }
     });
   };
 
