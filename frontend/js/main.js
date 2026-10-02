@@ -905,10 +905,12 @@ const DELIVERY_PROJECTS_KEYS = [
 
 const mainProducts = MAIN_PRODUCTS_KEYS.map((k) => PRODUCTS_DATA[k]).filter(Boolean);
 const deliveryProjects = DELIVERY_PROJECTS_KEYS.map((k) => PRODUCTS_DATA[k]).filter(Boolean);
+const deliveredProjects = deliveryProjects;
 
 // Expose arrays globally for external consumption
 window.mainProducts = mainProducts;
 window.deliveryProjects = deliveryProjects;
+window.deliveredProjects = deliveredProjects;
 
 /**
  * Phase 4 & Phase 10: Products Filters, Search & Modal Controller
