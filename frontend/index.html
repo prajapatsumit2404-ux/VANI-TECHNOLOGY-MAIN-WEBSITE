@@ -1022,12 +1022,14 @@
 
           <!-- ========================================================
                PRODUCT 01: AI TALKSY
-          <!-- ========================================================
-               PRODUCT 01: AI TALKSY
-               Movie Sequence: INTRO → PROBLEM / INPUT → PROCESS → RESULT → CALL TO ACTION
+               Movie Sequence: USER → MESSAGE → AI → PROCESSING → RESPONSE → BUSINESS CONNECTION → RESULT
                ======================================================== -->
-          <article id="story-aitalksy" class="product-story cinematic-story-card theme-aitalksy p-6 sm:p-10" data-story-id="aitalksy" data-aos="fade-up">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <article id="story-aitalksy" class="product-story cinematic-story-card theme-aitalksy p-6 sm:p-10 relative overflow-hidden" data-story-id="aitalksy" data-aos="fade-up">
+            
+            <!-- Dedicated Futuristic Neural Animated Background Canvas -->
+            <canvas id="aitalksy-neural-canvas" class="aitalksy-neural-bg-canvas" aria-hidden="true"></canvas>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
               
               <!-- Left Column: Product Identity & Direct CTA -->
               <div class="lg:col-span-5 space-y-6">
@@ -1098,167 +1100,251 @@
 
               <!-- Right Column: Reusable Cinematic Visualization Stage -->
               <div class="lg:col-span-7">
-                <div class="product-background story-stage-canvas story-stage-grid p-5 sm:p-7 flex flex-col justify-between">
+                <div class="product-background story-stage-canvas story-stage-grid p-5 sm:p-7 flex flex-col justify-between relative overflow-hidden">
                   
-                  <!-- Top Status & Movie Timeline Scene Navigation -->
-                  <div class="flex items-center justify-between flex-wrap gap-2 pb-4 border-b border-slate-700/40">
+                  <!-- Top Status & Movie Timeline Scene Navigation (7 Scenes) -->
+                  <div class="flex items-center justify-between flex-wrap gap-2 pb-4 border-b border-slate-700/40 relative z-10">
                     <div class="flex items-center gap-2 text-[11px] font-mono text-cyan-400">
                       <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
                       <span>AI Neural Pipeline • Product Story</span>
                     </div>
                     <div class="flex items-center gap-1.5 flex-wrap">
-                      <button type="button" class="story-step-pill pill-cyan active" data-story="aitalksy" data-step="1">1. Intro</button>
-                      <button type="button" class="story-step-pill pill-cyan" data-story="aitalksy" data-step="2">2. Problem / Input</button>
-                      <button type="button" class="story-step-pill pill-cyan" data-story="aitalksy" data-step="3">3. Process</button>
-                      <button type="button" class="story-step-pill pill-cyan" data-story="aitalksy" data-step="4">4. Result</button>
-                      <button type="button" class="story-step-pill pill-cyan" data-story="aitalksy" data-step="5">5. Call to Action</button>
+                      <button type="button" class="story-step-pill pill-cyan active" data-story="aitalksy" data-step="1">1. User</button>
+                      <button type="button" class="story-step-pill pill-cyan" data-story="aitalksy" data-step="2">2. Message</button>
+                      <button type="button" class="story-step-pill pill-cyan" data-story="aitalksy" data-step="3">3. AI</button>
+                      <button type="button" class="story-step-pill pill-cyan" data-story="aitalksy" data-step="4">4. Processing</button>
+                      <button type="button" class="story-step-pill pill-cyan" data-story="aitalksy" data-step="5">5. Response</button>
+                      <button type="button" class="story-step-pill pill-cyan" data-story="aitalksy" data-step="6">6. Business Connection</button>
+                      <button type="button" class="story-step-pill pill-cyan" data-story="aitalksy" data-step="7">7. Result</button>
                     </div>
                   </div>
 
-                  <!-- Visual Animation Stage Content -->
-                  <div class="product-visualization relative py-6 sm:py-8 flex flex-col items-center justify-center min-h-[260px]">
+                  <!-- Visual Animation Stage Content (7 Movie Scenes) -->
+                  <div class="product-visualization relative py-6 sm:py-8 flex flex-col items-center justify-center min-h-[280px] z-10">
                     
-                    <!-- Scene 1: INTRO (AI Talksy Autonomous Intelligence) -->
+                    <!-- SCENE 1 — USER (Avatar & Typing Animation) -->
                     <div id="aitalksy-stage-step1" class="product-story-scene story-step-pane w-full max-w-md mx-auto space-y-4 text-center transition-all duration-500" data-scene="intro">
-                      <div class="relative w-24 h-24 mx-auto flex items-center justify-center">
-                        <div class="absolute inset-0 rounded-full border border-cyan-400/40 animate-orbit border-dashed"></div>
-                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white text-2xl shadow-xl animate-ai-core">
-                          <i class="fa-solid fa-robot"></i>
+                      <div class="flex items-center justify-center gap-3">
+                        <div class="w-14 h-14 rounded-full bg-slate-800 border-2 border-cyan-400/50 flex items-center justify-center text-cyan-300 text-xl shadow-lg relative">
+                          <i class="fa-solid fa-user-tie"></i>
+                          <span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-slate-900" title="Online User"></span>
+                        </div>
+                        <div class="text-left">
+                          <span class="text-xs font-bold text-white block">Enterprise Customer</span>
+                          <span class="text-[11px] text-slate-400">Initiating live digital inquiry</span>
                         </div>
                       </div>
-                      <div>
-                        <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-bold uppercase tracking-wider">Movie Intro • AI Talksy</span>
-                        <h4 class="text-sm sm:text-base font-bold text-white mt-1.5">24/7 Autonomous Enterprise AI Agents</h4>
-                        <p class="text-xs text-slate-300 mt-1 max-w-xs mx-auto">Conversational AI built to handle multi-channel customer inquiries with zero wait times.</p>
+
+                      <!-- Message Box with Typing Animation -->
+                      <div class="p-4 rounded-2xl rounded-tl-none bg-slate-800/90 border border-cyan-500/30 text-slate-100 text-sm shadow-xl max-w-xs mx-auto text-left relative">
+                        <div class="text-[10px] text-cyan-400 font-mono uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                          <i class="fa-solid fa-keyboard text-[10px]"></i> User Typing:
+                        </div>
+                        <span id="aitalksy-typing-text" class="font-mono text-cyan-100 font-semibold text-base">Hello, I need help.</span>
+                        <span class="aitalksy-cursor">|</span>
                       </div>
-                      <div class="flex items-center justify-center gap-1.5 h-6">
-                        <span class="soundwave-bar"></span>
-                        <span class="soundwave-bar"></span>
-                        <span class="soundwave-bar"></span>
-                        <span class="soundwave-bar"></span>
-                        <span class="soundwave-bar"></span>
-                      </div>
+                      <p class="text-xs text-slate-400 max-w-xs mx-auto">
+                        A customer initiates a message across an enterprise communication channel.
+                      </p>
                     </div>
 
-                    <!-- Scene 2: PROBLEM / INPUT (Customer Inquiry & Support Friction) -->
-                    <div id="aitalksy-stage-step2" class="product-story-scene story-step-pane hidden w-full max-w-md mx-auto space-y-3 transition-all duration-500" data-scene="problem">
-                      <div class="flex items-start gap-3">
-                        <div class="w-10 h-10 rounded-full bg-slate-700/80 border border-slate-600 flex items-center justify-center text-slate-300 text-sm shrink-0">
-                          <i class="fa-solid fa-user"></i>
-                        </div>
-                        <div class="p-3.5 rounded-2xl rounded-tl-none bg-slate-800/90 border border-slate-700 text-slate-200 text-xs sm:text-sm shadow-lg leading-relaxed">
-                          "Hello, we are overwhelmed with incoming customer leads on WhatsApp and website chat after office hours!"
-                          <div class="mt-2 flex items-center gap-1.5 text-[10px] text-cyan-400 font-mono">
-                            <span class="typing-dot w-1 h-1 rounded-full bg-cyan-400"></span>
-                            <span class="typing-dot w-1 h-1 rounded-full bg-cyan-400"></span>
-                            <span class="typing-dot w-1 h-1 rounded-full bg-cyan-400"></span>
-                            <span>Input received: Routing inquiry to AI Neural Core...</span>
+                    <!-- SCENE 2 — MESSAGE (Moving toward AI with translate, opacity, scale, blur) -->
+                    <div id="aitalksy-stage-step2" class="product-story-scene story-step-pane hidden w-full max-w-md mx-auto space-y-4 text-center transition-all duration-500" data-scene="problem">
+                      <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-bold uppercase tracking-wider font-mono">
+                        Message Streaming Toward AI
+                      </span>
+                      <div class="relative py-4 flex flex-col items-center">
+                        <div class="animate-message-transfer p-4 rounded-2xl bg-cyan-950/60 border border-cyan-400/50 text-cyan-100 shadow-2xl max-w-xs mx-auto text-center">
+                          <i class="fa-solid fa-paper-plane text-cyan-400 text-xs mr-1.5"></i>
+                          <span class="font-mono font-bold text-sm">"Hello, I need help."</span>
+                          <div class="text-[10px] text-cyan-300 font-mono mt-1.5 flex items-center justify-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+                            <span>Streaming payload to AI...</span>
                           </div>
                         </div>
-                      </div>
-                      <div class="grid grid-cols-2 gap-2 text-[10px] text-slate-400">
-                        <div class="p-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-300 flex items-center gap-1.5">
-                          <i class="fa-solid fa-clock text-xs"></i> 45m Avg Human Wait Time
-                        </div>
-                        <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 flex items-center gap-1.5">
-                          <i class="fa-solid fa-triangle-exclamation text-xs"></i> 68% Leads Lost After Hours
+                        <div class="mt-4 text-cyan-400/80 text-xl flex items-center justify-center animate-bounce">
+                          <i class="fa-solid fa-arrow-down-long"></i>
                         </div>
                       </div>
+                      <p class="text-xs text-slate-300 max-w-xs mx-auto">
+                        The user message moves smoothly toward AI Talksy with GPU-accelerated motion blur.
+                      </p>
                     </div>
 
-                    <!-- Scene 3: PROCESS (Sub-400ms Neural Semantic Reasoning) -->
-                    <div id="aitalksy-stage-step3" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500" data-scene="process">
-                      <div class="relative w-28 h-28 mx-auto flex items-center justify-center">
+                    <!-- SCENE 3 — AI (Futuristic AI Orb, Neural Network, Connected Nodes) -->
+                    <div id="aitalksy-stage-step3" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500">
+                      <div class="relative w-32 h-32 mx-auto flex items-center justify-center">
                         <div class="absolute inset-0 rounded-full border border-cyan-500/40 animate-orbit border-dashed"></div>
                         <div class="absolute inset-2 rounded-full border border-cyan-400/30 animate-orbit-reverse"></div>
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-2xl animate-ai-core shadow-xl">
+                        
+                        <!-- Connected nodes floating around the central core -->
+                        <div class="absolute -top-1 left-3 w-3 h-3 rounded-full bg-cyan-400 shadow-md ai-floating-node"></div>
+                        <div class="absolute top-10 -right-2 w-3.5 h-3.5 rounded-full bg-blue-400 shadow-md ai-floating-node" style="animation-delay: 0.5s;"></div>
+                        <div class="absolute -bottom-1 right-4 w-2.5 h-2.5 rounded-full bg-teal-400 shadow-md ai-floating-node" style="animation-delay: 1s;"></div>
+                        <div class="absolute bottom-8 -left-2 w-3 h-3 rounded-full bg-cyan-300 shadow-md ai-floating-node" style="animation-delay: 1.5s;"></div>
+
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center text-white text-2xl animate-ai-core shadow-2xl relative z-10">
                           <i class="fa-solid fa-brain"></i>
                         </div>
                       </div>
-                      <div>
-                        <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-bold uppercase tracking-wider font-mono">Process Stage • Neural Reasoning</span>
-                        <h4 class="text-sm font-bold text-white mt-1">Vector Embeddings &amp; Knowledge Base Retrieval</h4>
-                        <p class="text-xs text-cyan-300 font-mono mt-1">Analyzing Intent • Sentiment Detection • CRM Lead Parsing (&lt;0.4s)</p>
+                      <div class="space-y-1">
+                        <h4 class="text-sm sm:text-base font-bold text-white">AI Talksy Neural Core</h4>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs font-medium">
+                          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                          <span>AI is processing the user's request.</span>
+                        </div>
                       </div>
                     </div>
 
-                    <!-- Scene 4: RESULT (Omnichannel Dispatch & Verified Resolution) -->
-                    <div id="aitalksy-stage-step4" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500" data-scene="result">
-                      <span class="text-xs text-slate-300 block font-medium">Result: Instant Omnichannel Execution Across All Platforms</span>
-                      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-lg mx-auto">
-                        <div class="p-2.5 rounded-xl bg-slate-900/80 border border-emerald-500/40 text-emerald-400 flex flex-col items-center gap-1 shadow-md">
-                          <i class="fa-brands fa-whatsapp text-lg"></i>
-                          <span class="text-[11px] font-bold">WhatsApp</span>
-                          <span class="text-[9px] text-slate-400 font-mono">Dispatched</span>
+                    <!-- SCENE 4 — PROCESSING (Subtle Animated Indicators: Processing -> Understanding -> Generating response) -->
+                    <div id="aitalksy-stage-step4" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500" data-scene="process">
+                      <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-bold uppercase tracking-wider font-mono">
+                        Neural State Transition
+                      </span>
+                      
+                      <!-- 3-stage animated indicators: Processing -> Understanding -> Generating response -->
+                      <div class="max-w-xs mx-auto space-y-2.5">
+                        <div id="aitalksy-proc-1" class="processing-step-badge active-proc p-2.5 rounded-xl bg-slate-900/90 border border-cyan-500/40 text-left flex items-center justify-between text-xs text-cyan-300 shadow-md">
+                          <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-gear fa-spin text-xs text-cyan-400"></i>
+                            <strong class="font-mono">Processing...</strong>
+                          </span>
+                          <span class="text-[10px] font-mono text-cyan-400">Tokenized</span>
                         </div>
-                        <div class="p-2.5 rounded-xl bg-slate-900/80 border border-blue-500/40 text-blue-400 flex flex-col items-center gap-1 shadow-md">
-                          <i class="fa-solid fa-message text-lg"></i>
-                          <span class="text-[11px] font-bold">Web Chat</span>
-                          <span class="text-[9px] text-slate-400 font-mono">Resolved</span>
+                        <div id="aitalksy-proc-2" class="processing-step-badge p-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-left flex items-center justify-between text-xs text-slate-300 shadow-md">
+                          <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-microchip text-xs text-purple-400"></i>
+                            <strong class="font-mono">Understanding...</strong>
+                          </span>
+                          <span class="text-[10px] font-mono text-purple-400">Intent Matched</span>
                         </div>
-                        <div class="p-2.5 rounded-xl bg-slate-900/80 border border-pink-500/40 text-pink-400 flex flex-col items-center gap-1 shadow-md">
-                          <i class="fa-brands fa-slack text-lg"></i>
-                          <span class="text-[11px] font-bold">Slack Bot</span>
-                          <span class="text-[9px] text-slate-400 font-mono">Notified</span>
-                        </div>
-                        <div class="p-2.5 rounded-xl bg-slate-900/80 border border-purple-500/40 text-purple-400 flex flex-col items-center gap-1 shadow-md">
-                          <i class="fa-solid fa-microphone text-lg"></i>
-                          <span class="text-[11px] font-bold">Voice Agent</span>
-                          <span class="text-[9px] text-slate-400 font-mono">Active</span>
+                        <div id="aitalksy-proc-3" class="processing-step-badge p-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-left flex items-center justify-between text-xs text-slate-300 shadow-md">
+                          <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-sparkles text-xs text-emerald-400"></i>
+                            <strong class="font-mono">Generating response...</strong>
+                          </span>
+                          <span class="text-[10px] font-mono text-emerald-400">&lt; 0.4s</span>
                         </div>
                       </div>
-                      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span>Business Action Completed: Ticket #4920 Resolved &amp; CRM Updated</span>
+
+                      <div class="flex items-center justify-center gap-1.5 h-5 pt-1">
+                        <span class="soundwave-bar"></span>
+                        <span class="soundwave-bar"></span>
+                        <span class="soundwave-bar"></span>
+                        <span class="soundwave-bar"></span>
+                        <span class="soundwave-bar"></span>
                       </div>
                     </div>
 
-                    <!-- Scene 5: CALL TO ACTION (Interactive Launch & Specs) -->
-                    <div id="aitalksy-stage-step5" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500" data-scene="cta">
-                      <div class="p-4 rounded-2xl bg-cyan-950/40 border border-cyan-500/40 max-w-md mx-auto space-y-3 shadow-xl">
-                        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-[11px] font-bold uppercase tracking-wider">
-                          <i class="fa-solid fa-rocket"></i>
-                          <span>Call to Action • Deploy AI Talksy</span>
+                    <!-- SCENE 5 — RESPONSE ("Sure! I can help you with that.") -->
+                    <div id="aitalksy-stage-step5" class="product-story-scene story-step-pane hidden w-full max-w-md mx-auto space-y-4 transition-all duration-500">
+                      <div class="flex items-start gap-3">
+                        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-500 flex items-center justify-center text-white text-base shrink-0 shadow-lg">
+                          <i class="fa-solid fa-robot"></i>
                         </div>
-                        <h4 class="text-base font-extrabold text-white">Ready to Automate Your Business?</h4>
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                          Deploy 24/7 AI Talksy agents across WhatsApp, Web &amp; Slack in minutes with zero coding required.
-                        </p>
-                        <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
+                        <div class="p-4 rounded-2xl rounded-tl-none bg-cyan-950/50 border border-cyan-400/50 text-cyan-100 text-xs sm:text-sm shadow-xl leading-relaxed text-left">
+                          <div class="flex items-center gap-1.5 text-[10px] font-bold text-cyan-400 uppercase tracking-wider mb-1.5">
+                            <i class="fa-solid fa-sparkles"></i> AI Talksy Assistant
+                          </div>
+                          <div class="text-base font-bold text-white mb-1">
+                            "Sure! I can help you with that."
+                          </div>
+                          <p class="text-xs text-slate-300">
+                            I can automate your customer inquiries, qualify new leads 24/7, and resolve support tickets in real time.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-center justify-center gap-2 text-[10px] text-cyan-400 font-mono">
+                        <i class="fa-solid fa-bolt text-xs"></i>
+                        <span>Response latency: 0.38s • 100% Automated</span>
+                      </div>
+                    </div>
+
+                    <!-- SCENE 6 — BUSINESS CONNECTION (User • Website • Chat • Support • Business • AI) -->
+                    <div id="aitalksy-stage-step6" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500">
+                      <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-bold uppercase tracking-wider font-mono">
+                        Business Connection • Channels to AI
+                      </span>
+                      
+                      <div class="grid grid-cols-3 gap-2.5 max-w-sm mx-auto text-xs">
+                        <div class="business-connection-node p-2.5 rounded-xl bg-slate-900/90 border border-cyan-500/30 flex flex-col items-center gap-1 text-slate-200 shadow-md">
+                          <i class="fa-solid fa-user text-cyan-400 text-sm"></i>
+                          <span class="font-bold text-[11px]">User</span>
+                        </div>
+                        <div class="business-connection-node p-2.5 rounded-xl bg-slate-900/90 border border-blue-500/30 flex flex-col items-center gap-1 text-slate-200 shadow-md">
+                          <i class="fa-solid fa-globe text-blue-400 text-sm"></i>
+                          <span class="font-bold text-[11px]">Website</span>
+                        </div>
+                        <div class="business-connection-node p-2.5 rounded-xl bg-slate-900/90 border border-emerald-500/30 flex flex-col items-center gap-1 text-slate-200 shadow-md">
+                          <i class="fa-solid fa-comments text-emerald-400 text-sm"></i>
+                          <span class="font-bold text-[11px]">Chat</span>
+                        </div>
+                        <div class="business-connection-node p-2.5 rounded-xl bg-slate-900/90 border border-pink-500/30 flex flex-col items-center gap-1 text-slate-200 shadow-md">
+                          <i class="fa-solid fa-headset text-pink-400 text-sm"></i>
+                          <span class="font-bold text-[11px]">Support</span>
+                        </div>
+                        <div class="business-connection-node p-2.5 rounded-xl bg-slate-900/90 border border-amber-500/30 flex flex-col items-center gap-1 text-slate-200 shadow-md">
+                          <i class="fa-solid fa-briefcase text-amber-400 text-sm"></i>
+                          <span class="font-bold text-[11px]">Business</span>
+                        </div>
+                        <div class="business-connection-node p-2.5 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/30 border border-cyan-400 flex flex-col items-center gap-1 text-cyan-300 shadow-lg">
+                          <i class="fa-solid fa-brain text-cyan-400 text-sm animate-pulse"></i>
+                          <span class="font-extrabold text-[11px]">AI</span>
+                        </div>
+                      </div>
+                      <p class="text-xs text-slate-300 max-w-xs mx-auto">
+                        User, Website, Chat, Support, and Business pipelines connected seamlessly to AI.
+                      </p>
+                    </div>
+
+                    <!-- SCENE 7 — RESULT & FINAL (Small Business Dashboard with Animated Numbers) -->
+                    <div id="aitalksy-stage-step7" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500" data-scene="result">
+                      
+                      <!-- Small Business Dashboard -->
+                      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-md mx-auto">
+                        <div class="p-3 rounded-xl bg-slate-900/90 border border-cyan-500/30 text-center shadow-md">
+                          <span class="text-[9px] text-slate-400 uppercase font-mono block">Messages Handled</span>
+                          <strong class="aitalksy-counter text-xl font-extrabold text-white" data-target="24" data-suffix="">24</strong>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/90 border border-cyan-500/30 text-center shadow-md">
+                          <span class="text-[9px] text-slate-400 uppercase font-mono block">Responses</span>
+                          <strong class="aitalksy-counter text-xl font-extrabold text-cyan-400" data-target="21" data-suffix="">21</strong>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/90 border border-cyan-500/30 text-center shadow-md">
+                          <span class="text-[9px] text-slate-400 uppercase font-mono block">Resolved</span>
+                          <strong class="aitalksy-counter text-xl font-extrabold text-emerald-400" data-target="18" data-suffix="">18</strong>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/90 border border-cyan-500/30 text-center shadow-md">
+                          <span class="text-[9px] text-slate-400 uppercase font-mono block">Automation</span>
+                          <strong class="aitalksy-counter text-xl font-extrabold text-purple-400" data-target="87" data-suffix="%">87%</strong>
+                        </div>
+                      </div>
+
+                      <!-- FINAL Section -->
+                      <div class="pt-2 space-y-3" data-scene="cta">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 font-bold text-xs uppercase tracking-wider shadow-lg">
+                          <i class="fa-solid fa-sparkles"></i>
+                          <span>AI-powered communication</span>
+                        </div>
+                        <div>
                           <a 
                             href="https://aitalksy.com/" 
                             target="_blank" 
                             rel="noopener noreferrer" 
-                            class="btn-primary px-5 py-2.5 rounded-xl text-white text-xs font-bold inline-flex items-center gap-2 shadow-lg"
+                            class="btn-primary px-6 py-3 rounded-xl text-white text-xs sm:text-sm font-bold inline-flex items-center justify-center gap-2 shadow-xl hover:shadow-cyan-500/25 transition-all group"
                           >
-                            <span>DEPLOY AI TALKSY NOW</span>
-                            <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                            <span>EXPLORE AITALKSY</span>
+                            <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
                           </a>
-                          <button 
-                            type="button" 
-                            class="product-modal-trigger px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-cyan-300 text-xs font-semibold border border-cyan-500/30 transition-colors"
-                            data-product-id="ai-talksy"
-                          >
-                            <span>View Specs</span>
-                          </button>
                         </div>
-                      </div>
-                      <div class="pt-2">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 font-bold text-xs uppercase tracking-wider shadow-lg">
-                          <i class="fa-solid fa-sparkles"></i>
-                          <span>AI-powered communication</span>
-                        </div>
-                      </div>
-                      <div class="text-[10px] text-slate-400 font-mono">
-                        Instant Cloud Setup • 99.9% Uptime Guarantee
                       </div>
                     </div>
 
                   </div>
 
                   <!-- Bottom Progress & Replay Controls -->
-                  <div class="pt-3 border-t border-slate-700/40 flex items-center justify-between text-xs text-slate-400">
-                    <span id="aitalksy-step-caption" class="font-medium text-slate-300">INTRO: Meet AI Talksy — Enterprise conversational intelligence</span>
+                  <div class="pt-3 border-t border-slate-700/40 flex items-center justify-between text-xs text-slate-400 relative z-10">
+                    <span id="aitalksy-step-caption" class="font-medium text-slate-300">SCENE 1 — USER: "Hello, I need help."</span>
                     <button type="button" class="story-replay-btn text-cyan-400 hover:text-cyan-300 flex items-center gap-1" data-story="aitalksy">
                       <i class="fa-solid fa-rotate text-[11px]"></i>
                       <span>Replay Story</span>

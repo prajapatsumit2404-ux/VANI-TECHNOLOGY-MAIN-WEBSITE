@@ -1032,30 +1032,33 @@ function initProductsAndFilters() {
 
 /**
  * Cinematic Product Story Controller for MAIN PRODUCTS
- * Provides scroll-triggered storytelling, 5-scene movie sequence:
- * INTRO → PROBLEM / INPUT → PROCESS → RESULT → CALL TO ACTION.
- * Powered by GPU-friendly GSAP transitions and Viewport Detection.
+ * Phase 6: AI Talksy 7-Scene Product Story
+ * USER → MESSAGE → AI → PROCESSING → RESPONSE → BUSINESS CONNECTION → RESULT
+ * Powered by GPU-friendly GSAP transitions, Canvas Neural Background, and Viewport Detection.
  */
 function initCinematicProductStories() {
-  const MOVIE_SCENES = ['intro', 'problem', 'process', 'result', 'cta'];
+  const MOVIE_SCENES_AITALKSY = ['user', 'message', 'ai', 'processing', 'response', 'business', 'result'];
+  const MOVIE_SCENES_STANDARD = ['intro', 'problem', 'process', 'result', 'cta'];
 
   const stories = {
     aitalksy: {
       id: 'aitalksy',
       name: 'AI Talksy',
       container: document.getElementById('story-aitalksy'),
-      totalSteps: 5,
-      scenes: MOVIE_SCENES,
+      totalSteps: 7,
+      scenes: MOVIE_SCENES_AITALKSY,
       currentStep: 1,
       timer: null,
-      intervalMs: 3400,
+      intervalMs: 3600,
       isInView: false,
       captions: [
-        'INTRO: Meet AI Talksy — Enterprise conversational intelligence',
-        'PROBLEM / INPUT: High inquiry volume & delayed response cause 68% lost leads',
-        'PROCESS: Sub-0.4s semantic intent analysis & vector knowledge retrieval',
-        'RESULT: 98.7% instant resolution, omnichannel sync & zero human bottleneck',
-        'CALL TO ACTION: Deploy AI Talksy in minutes — Zero code required'
+        'SCENE 1 — USER: "Hello, I need help." (User typing request)',
+        'SCENE 2 — MESSAGE: Streaming message payload toward AI Core',
+        'SCENE 3 — AI: AI Talksy neural network processing user request',
+        'SCENE 4 — PROCESSING: Processing... Understanding... Generating response...',
+        'SCENE 5 — RESPONSE: "Sure! I can help you with that." — Instant resolution',
+        'SCENE 6 — BUSINESS CONNECTION: User • Website • Chat • Support • Business • AI',
+        'SCENE 7 — RESULT: Messages: 24 • Responses: 21 • Resolved: 18 • Automation: 87%'
       ]
     },
     community: {
@@ -1063,7 +1066,7 @@ function initCinematicProductStories() {
       name: 'Community Forum',
       container: document.getElementById('story-communityforum'),
       totalSteps: 5,
-      scenes: MOVIE_SCENES,
+      scenes: MOVIE_SCENES_STANDARD,
       currentStep: 1,
       timer: null,
       intervalMs: 3400,
@@ -1081,7 +1084,7 @@ function initCinematicProductStories() {
       name: 'RateHonk Travel CRM',
       container: document.getElementById('story-ratehonk'),
       totalSteps: 5,
-      scenes: MOVIE_SCENES,
+      scenes: MOVIE_SCENES_STANDARD,
       currentStep: 1,
       timer: null,
       intervalMs: 3400,
@@ -1097,6 +1100,53 @@ function initCinematicProductStories() {
   };
 
   const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Typing animation for AI Talksy Scene 1
+  const runAITalksyTyping = () => {
+    const textEl = document.getElementById('aitalksy-typing-text');
+    if (!textEl) return;
+    const fullText = "Hello, I need help.";
+    textEl.textContent = '';
+    let idx = 0;
+    if (textEl._typeTimer) clearInterval(textEl._typeTimer);
+    textEl._typeTimer = setInterval(() => {
+      idx++;
+      textEl.textContent = fullText.slice(0, idx);
+      if (idx >= fullText.length) {
+        clearInterval(textEl._typeTimer);
+      }
+    }, 45);
+  };
+
+  // Processing step progression for AI Talksy Scene 4
+  const runAITalksyProcessing = () => {
+    const p1 = document.getElementById('aitalksy-proc-1');
+    const p2 = document.getElementById('aitalksy-proc-2');
+    const p3 = document.getElementById('aitalksy-proc-3');
+    if (!p1 || !p2 || !p3) return;
+
+    p1.className = 'processing-step-badge active-proc p-2.5 rounded-xl bg-cyan-950/40 border border-cyan-500/50 text-left flex items-center justify-between text-xs text-cyan-300 shadow-md';
+    p2.className = 'processing-step-badge p-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-left flex items-center justify-between text-xs text-slate-400 shadow-md';
+    p3.className = 'processing-step-badge p-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-left flex items-center justify-between text-xs text-slate-400 shadow-md';
+
+    setTimeout(() => {
+      p2.className = 'processing-step-badge active-proc p-2.5 rounded-xl bg-purple-950/40 border border-purple-500/50 text-left flex items-center justify-between text-xs text-purple-300 shadow-md';
+    }, 650);
+
+    setTimeout(() => {
+      p3.className = 'processing-step-badge active-proc p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/50 text-left flex items-center justify-between text-xs text-emerald-300 shadow-md';
+    }, 1300);
+  };
+
+  // Animated counters for AI Talksy Scene 7
+  const runAITalksyCounters = () => {
+    const counters = document.querySelectorAll('.aitalksy-counter');
+    counters.forEach((el) => {
+      const target = parseFloat(el.getAttribute('data-target') || '0');
+      const suffix = el.getAttribute('data-suffix') || '';
+      animateValue(el, 0, target, 1100, 0, suffix);
+    });
+  };
 
   // Render a specific step for a given story
   const showStep = (storyKey, stepNum) => {
@@ -1142,7 +1192,14 @@ function initCinematicProductStories() {
       }
     }
 
-    // 3. Update caption with subtle directional GSAP nudge
+    // 3. AI Talksy dynamic scene actions
+    if (storyKey === 'aitalksy') {
+      if (stepNum === 1) runAITalksyTyping();
+      if (stepNum === 4) runAITalksyProcessing();
+      if (stepNum === 7) runAITalksyCounters();
+    }
+
+    // 4. Update caption with subtle directional GSAP nudge
     const captionEl = document.getElementById(`${storyKey}-step-caption`);
     if (captionEl && story.captions[stepNum - 1]) {
       captionEl.textContent = story.captions[stepNum - 1];
@@ -1217,6 +1274,126 @@ function initCinematicProductStories() {
     // Initial render of first scene
     showStep(key, 1);
   });
+
+  // Dedicated Futuristic Neural Animated Background Canvas for AI Talksy
+  const initAITalksyBackground = () => {
+    const canvas = document.getElementById('aitalksy-neural-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = (canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : 600);
+    let height = (canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : 450);
+
+    const handleResize = () => {
+      if (!canvas.parentElement) return;
+      width = canvas.width = canvas.parentElement.offsetWidth;
+      height = canvas.height = canvas.parentElement.offsetHeight;
+    };
+    window.addEventListener('resize', handleResize);
+
+    const nodeCount = 26;
+    const nodes = [];
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        radius: Math.random() * 2 + 1.2,
+        isGlow: i % 4 === 0,
+        pulsePhase: Math.random() * Math.PI * 2
+      });
+    }
+
+    const microParticleCount = 18;
+    const particles = [];
+    for (let i = 0; i < microParticleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vy: -(Math.random() * 0.35 + 0.15),
+        alpha: Math.random() * 0.35 + 0.1,
+        radius: Math.random() * 1.5 + 0.8
+      });
+    }
+
+    let animFrameId = null;
+
+    const render = () => {
+      if (!stories.aitalksy.isInView && !isReducedMotion) {
+        animFrameId = requestAnimationFrame(render);
+        return;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+
+      // Subtle neural connections
+      const maxDistance = 90;
+      for (let i = 0; i < nodeCount; i++) {
+        for (let j = i + 1; j < nodeCount; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < maxDistance) {
+            const alpha = (1 - dist / maxDistance) * 0.22;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw neural nodes
+      for (let i = 0; i < nodeCount; i++) {
+        const n = nodes[i];
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > width) n.vx *= -1;
+        if (n.y < 0 || n.y > height) n.vy *= -1;
+
+        n.pulsePhase += 0.03;
+        const currentRadius = n.radius + (n.isGlow ? Math.sin(n.pulsePhase) * 0.8 : 0);
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, Math.max(0.5, currentRadius), 0, Math.PI * 2);
+        ctx.fillStyle = n.isGlow ? 'rgba(34, 211, 238, 0.85)' : 'rgba(6, 182, 212, 0.45)';
+        ctx.fill();
+
+        if (n.isGlow) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, currentRadius * 3, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(6, 182, 212, 0.08)';
+          ctx.fill();
+        }
+      }
+
+      // Draw soft drifting micro-particles
+      for (let i = 0; i < microParticleCount; i++) {
+        const p = particles[i];
+        p.y += p.vy;
+        if (p.y < 0) {
+          p.y = height;
+          p.x = Math.random() * width;
+        }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(147, 197, 253, ${p.alpha})`;
+        ctx.fill();
+      }
+
+      if (!isReducedMotion) {
+        animFrameId = requestAnimationFrame(render);
+      }
+    };
+
+    render();
+  };
+
+  initAITalksyBackground();
 
   // IntersectionObserver: Viewport detection ensures animations ONLY run when the product enters view
   // and does NOT run all product animations simultaneously.

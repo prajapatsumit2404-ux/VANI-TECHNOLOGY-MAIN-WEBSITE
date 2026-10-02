@@ -978,6 +978,108 @@ h1, h2, h3, h4, .font-heading {
   will-change: transform;
 }
 
+/* AI Talksy Dedicated Futuristic Background Canvas */
+.aitalksy-neural-bg-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Scene 1: Typing cursor */
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.aitalksy-cursor {
+  display: inline-block;
+  font-weight: 700;
+  color: #22d3ee;
+  animation: blinkCursor 0.8s infinite;
+}
+
+/* Scene 2: Message moving toward AI (translate, opacity, scale, blur) */
+@keyframes messageMoveTowardAI {
+  0% {
+    transform: translate3d(0, 18px, 0) scale(1);
+    opacity: 0.95;
+    filter: blur(0px);
+  }
+  35% {
+    transform: translate3d(0, 0px, 0) scale(1.02);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  70% {
+    transform: translate3d(0, -18px, 0) scale(0.92);
+    opacity: 0.75;
+    filter: blur(1px);
+  }
+  100% {
+    transform: translate3d(0, -32px, 0) scale(0.82);
+    opacity: 0.3;
+    filter: blur(2.5px);
+  }
+}
+
+.animate-message-transfer {
+  animation: messageMoveTowardAI 2.8s ease-in-out infinite;
+  will-change: transform, opacity, filter;
+}
+
+/* Scene 3: Connected nodes around AI Orb */
+@keyframes nodePulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.8);
+    transform: scale(1.1);
+  }
+}
+
+.ai-floating-node {
+  animation: nodePulseGlow 3s ease-in-out infinite;
+  will-change: transform, box-shadow;
+}
+
+/* Scene 4: Processing progression pills */
+.processing-step-badge {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.processing-step-badge.active-proc {
+  background: rgba(6, 182, 212, 0.2);
+  border-color: #06b6d4;
+  color: #22d3ee;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.3);
+}
+
+/* Scene 6: Business Connection Network */
+@keyframes signalFlow {
+  0% {
+    stroke-dashoffset: 24;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.business-connection-node {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.business-connection-node:hover {
+  transform: translateY(-2px) scale(1.04);
+  border-color: #22d3ee;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.35);
+}
+
 /* Dynamic Soundwave Bars */
 @keyframes soundwaveAnim {
   0%, 100% { height: 6px; }
