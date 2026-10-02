@@ -20,10 +20,10 @@ const html = fs.readFileSync(htmlPath, 'utf8');
 const js = fs.readFileSync(jsPath, 'utf8');
 const css = fs.readFileSync(cssPath, 'utf8');
 
-// 1. Verify Main Products Section
-console.log('1. Checking MAIN PRODUCTS section...');
-assert(html.includes('MAIN PRODUCTS'), 'MAIN PRODUCTS heading present');
-assert(html.includes('Products that define our digital expertise'), 'Main Products subtitle present');
+// 1. Verify Product Section
+console.log('1. Checking PRODUCT section...');
+assert(html.includes('PRODUCT'), 'PRODUCT heading present');
+assert(html.includes('Products that define our digital expertise'), 'Product subtitle present');
 
 assert(html.includes('id="story-aitalksy"'), 'AI Talksy story card present');
 assert(html.includes('id="story-communityforum"'), 'Community Forum story card present');
@@ -36,12 +36,12 @@ assert(html.includes('href="https://communityforum.tech/"'), 'Community Forum ex
 assert(html.includes('EXPLORE COMMUNITY FORUM'), 'Community Forum CTA button text present');
 assert(html.includes('href="https://crm.ratehonk.com/portfolio"'), 'RateHonk external link present');
 assert(html.includes('EXPLORE RATEHONK CRM'), 'RateHonk CTA button text present');
-console.log('  [PASS] All 3 Main Products present with verified external URLs & CTAs');
+console.log('  [PASS] All 3 Products present with verified external URLs & CTAs');
 
-// 2. Verify Delivery Projects Section
-console.log('\n2. Checking DELIVERY PROJECTS section...');
-assert(html.includes('DELIVERY PROJECTS'), 'DELIVERY PROJECTS heading present');
-assert(html.includes("Projects we've successfully delivered"), 'Delivery Projects subtitle present');
+// 2. Verify Project Delivered Section
+console.log('\n2. Checking PROJECT DELIVERED section...');
+assert(html.includes('PROJECT DELIVERED'), 'PROJECT DELIVERED heading present');
+assert(html.includes("Projects we've successfully delivered"), 'Project Delivered subtitle present');
 assert(html.includes('id="delivery-grid"'), 'delivery-grid container present');
 
 const deliveryProductIds = [
