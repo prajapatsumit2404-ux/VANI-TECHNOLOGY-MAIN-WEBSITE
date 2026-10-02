@@ -1072,11 +1072,11 @@ function initCinematicProductStories() {
       intervalMs: 3400,
       isInView: false,
       captions: [
-        'INTRO: Community members fragmented across scattered chat groups & emails',
-        'PROBLEM / INPUT: Fake accounts & lack of trust solved with verified member identity',
-        'PROCESS: 7 essential community services unified in a single mobile platform',
-        'RESULT: One trusted, unified digital ecosystem for the entire community',
-        'CALL TO ACTION: Launch your verified community platform at communityforum.tech'
+        'SCENE 1 - PEOPLE: Diverse members seeking meaningful connection',
+        'SCENE 2 - COMMUNITY: Connected lines uniting members into a trusted community',
+        'SCENE 3 - VERIFICATION: Professional identity verification with zero fake accounts',
+        'SCENE 4 - DIGITAL PLATFORM: Smartphone hub powering 7 unified community services',
+        'SCENE 5 - CONNECTED ECOSYSTEM: Many community services unified in one digital platform'
       ]
     },
     ratehonk: {
@@ -1148,6 +1148,49 @@ function initCinematicProductStories() {
     });
   };
 
+  // Slowly connects the member avatars in Community Forum Scene 1
+  const runCommunityPeopleConnect = () => {
+    const path = document.getElementById('comm-connecting-path');
+    if (path) {
+      path.style.transition = 'none';
+      path.style.strokeDashoffset = '240';
+      setTimeout(() => {
+        path.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        path.style.strokeDashoffset = '0';
+      }, 50);
+    }
+  };
+
+  // Triggers the verified stamp in Community Forum Scene 3
+  const runCommunityVerification = () => {
+    const stamp = document.querySelector('.animate-verification-stamp');
+    if (stamp) {
+      stamp.style.animation = 'none';
+      void stamp.offsetHeight;
+      stamp.style.animation = 'verificationStamp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+    }
+  };
+
+  // Sequentially reveals the 7 community services inside the smartphone in Community Forum Scene 4
+  const runCommunityPhoneServices = () => {
+    const services = document.querySelectorAll('.comm-phone-service');
+    if (!services || services.length === 0) return;
+
+    services.forEach((s) => {
+      s.classList.remove('is-visible');
+      s.style.opacity = '0';
+      s.style.transform = 'translate3d(0, 10px, 0)';
+    });
+
+    services.forEach((s, idx) => {
+      setTimeout(() => {
+        s.classList.add('is-visible');
+        s.style.opacity = '1';
+        s.style.transform = 'translate3d(0, 0, 0)';
+      }, 170 * (idx + 1));
+    });
+  };
+
   // Render a specific step for a given story
   const showStep = (storyKey, stepNum) => {
     const story = stories[storyKey];
@@ -1192,11 +1235,15 @@ function initCinematicProductStories() {
       }
     }
 
-    // 3. AI Talksy dynamic scene actions
+    // 3. Dynamic scene actions for AI Talksy & Community Forum
     if (storyKey === 'aitalksy') {
       if (stepNum === 1) runAITalksyTyping();
       if (stepNum === 4) runAITalksyProcessing();
       if (stepNum === 7) runAITalksyCounters();
+    } else if (storyKey === 'community') {
+      if (stepNum === 1) runCommunityPeopleConnect();
+      if (stepNum === 3) runCommunityVerification();
+      if (stepNum === 4) runCommunityPhoneServices();
     }
 
     // 4. Update caption with subtle directional GSAP nudge
@@ -1395,13 +1442,133 @@ function initCinematicProductStories() {
 
   initAITalksyBackground();
 
+  // Dedicated Warm Ecosystem Background Canvas for Community Forum (Phase 7)
+  const initCommunityBackground = () => {
+    const canvas = document.getElementById('community-ecosystem-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = (canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : 600);
+    let height = (canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : 450);
+
+    const handleResize = () => {
+      if (!canvas.parentElement) return;
+      width = canvas.width = canvas.parentElement.offsetWidth;
+      height = canvas.height = canvas.parentElement.offsetHeight;
+    };
+    window.addEventListener('resize', handleResize);
+
+    // Warm organic community nodes (representing member clusters, family trees, local circles)
+    const nodeCount = 18;
+    const nodes = [];
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.28,
+        vy: (Math.random() - 0.5) * 0.28,
+        radius: Math.random() * 2.2 + 1.8,
+        isHub: i % 3 === 0,
+        color: i % 3 === 0 ? 'rgba(245, 158, 11, ' : (i % 3 === 1 ? 'rgba(16, 185, 129, ' : 'rgba(232, 88, 39, '),
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+
+    // 2 soft warm floating ambient light circles
+    const warmLights = [
+      { x: width * 0.25, y: height * 0.35, vx: 0.15, vy: 0.12, radius: 140, color: 'rgba(245, 158, 11, 0.045)' },
+      { x: width * 0.75, y: height * 0.65, vx: -0.12, vy: -0.15, radius: 160, color: 'rgba(16, 185, 129, 0.04)' }
+    ];
+
+    let animFrameId = null;
+
+    const render = () => {
+      if (!stories.community.isInView && !isReducedMotion) {
+        animFrameId = requestAnimationFrame(render);
+        return;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+
+      // 1. Draw soft warm ambient drifting lights
+      warmLights.forEach((light) => {
+        light.x += light.vx;
+        light.y += light.vy;
+        if (light.x < 50 || light.x > width - 50) light.vx *= -1;
+        if (light.y < 50 || light.y > height - 50) light.vy *= -1;
+
+        const grad = ctx.createRadialGradient(light.x, light.y, 0, light.x, light.y, light.radius);
+        grad.addColorStop(0, light.color);
+        grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(light.x, light.y, light.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 2. Connected lines between community nodes (warm trust threads)
+      const maxDistance = 110;
+      for (let i = 0; i < nodeCount; i++) {
+        for (let j = i + 1; j < nodeCount; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < maxDistance) {
+            const alpha = (1 - dist / maxDistance) * 0.18;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(245, 158, 11, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // 3. Draw community nodes & subtle warm pulses
+      for (let i = 0; i < nodeCount; i++) {
+        const n = nodes[i];
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > width) n.vx *= -1;
+        if (n.y < 0 || n.y > height) n.vy *= -1;
+
+        n.phase += 0.02;
+        const curRadius = n.radius + (n.isHub ? Math.sin(n.phase) * 0.7 : 0);
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, Math.max(1, curRadius), 0, Math.PI * 2);
+        ctx.fillStyle = `${n.color}0.75)`;
+        ctx.fill();
+
+        // Soft warm outer aura for hubs
+        if (n.isHub) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, curRadius * 2.8, 0, Math.PI * 2);
+          ctx.fillStyle = `${n.color}0.08)`;
+          ctx.fill();
+        }
+      }
+
+      if (!isReducedMotion) {
+        animFrameId = requestAnimationFrame(render);
+      }
+    };
+
+    render();
+  };
+
+  initCommunityBackground();
+
   // IntersectionObserver: Viewport detection ensures animations ONLY run when the product enters view
   // and does NOT run all product animations simultaneously.
   if ('IntersectionObserver' in window) {
     const storyObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const storyId = entry.target.getAttribute('data-story-id');
+          const rawId = entry.target.getAttribute('data-story-id');
+          const storyId = (rawId === 'communityforum' || rawId === 'community') ? 'community' : rawId;
           if (!storyId || !stories[storyId]) return;
 
           if (entry.isIntersecting) {

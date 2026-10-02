@@ -1114,7 +1114,72 @@ h1, h2, h3, h4, .font-heading {
 .typing-dot:nth-child(2) { animation: typingBounce 1.2s infinite ease-in-out 0.2s; }
 .typing-dot:nth-child(3) { animation: typingBounce 1.2s infinite ease-in-out 0.4s; }
 
-/* Community Shield & Features Animations */
+/* Community Forum Ecosystem Animations & Background (Phase 7) */
+.community-ecosystem-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.theme-community-stage {
+  background: radial-gradient(circle at 15% 25%, rgba(245, 158, 11, 0.08) 0%, transparent 45%),
+              radial-gradient(circle at 85% 75%, rgba(16, 185, 129, 0.08) 0%, transparent 45%),
+              radial-gradient(circle at 50% 50%, rgba(232, 88, 39, 0.04) 0%, transparent 60%),
+              #131a26;
+}
+
+.community-person-node {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.community-person-node:hover {
+  transform: translateY(-3px) scale(1.03);
+  border-color: rgba(16, 185, 129, 0.6);
+  box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.25);
+}
+
+/* Scene 2: Community pulse glow */
+@keyframes communityPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.3), 0 0 30px rgba(245, 158, 11, 0.15);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(16, 185, 129, 0.6), 0 0 45px rgba(245, 158, 11, 0.35);
+    transform: scale(1.03);
+  }
+}
+
+.animate-community-pulse {
+  animation: communityPulseGlow 2.8s ease-in-out infinite;
+}
+
+/* Scene 3: Professional verification animation */
+@keyframes verificationStamp {
+  0% {
+    transform: scale(0.65) rotate(-6deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08) rotate(2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.animate-verification-stamp {
+  animation: verificationStamp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 @keyframes shieldGlow {
   0%, 100% {
     box-shadow: 0 0 15px rgba(16, 185, 129, 0.3), inset 0 0 10px rgba(16, 185, 129, 0.2);
@@ -1128,6 +1193,31 @@ h1, h2, h3, h4, .font-heading {
 
 .animate-shield-glow {
   animation: shieldGlow 2.5s ease-in-out infinite;
+}
+
+/* Scene 4: Smartphone enter & 7 services progression */
+@keyframes phoneSlideIn {
+  0% {
+    transform: translateY(24px) scale(0.94);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-phone-enter {
+  animation: phoneSlideIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.comm-phone-service {
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease;
+}
+
+.comm-phone-service:hover {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: rgba(16, 185, 129, 0.6);
 }
 
 @keyframes featureDockIn {
@@ -1254,7 +1344,11 @@ h1, h2, h3, h4, .font-heading {
   .animate-shield-glow,
   .animate-feature-dock,
   .animate-voucher-stamp,
-  .animate-pipeline-glow {
+  .animate-pipeline-glow,
+  .animate-community-pulse,
+  .animate-verification-stamp,
+  .animate-phone-enter,
+  .comm-phone-service {
     animation: none !important;
   }
 

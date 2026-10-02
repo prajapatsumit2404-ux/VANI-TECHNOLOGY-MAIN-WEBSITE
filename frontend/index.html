@@ -1433,156 +1433,283 @@
 
               <!-- Right Column: Reusable Cinematic Visualization Stage -->
               <div class="lg:col-span-7">
-                <div class="product-background story-stage-canvas story-stage-grid p-5 sm:p-7 flex flex-col justify-between">
+                <div class="product-background story-stage-canvas story-stage-grid p-5 sm:p-7 flex flex-col justify-between relative overflow-hidden theme-community-stage">
                   
+                  <!-- Dedicated Warm Community Ecosystem Background Canvas -->
+                  <canvas id="community-ecosystem-canvas" class="community-ecosystem-bg-canvas" aria-hidden="true"></canvas>
+
                   <!-- Top Status & Movie Timeline Scene Navigation -->
-                  <div class="flex items-center justify-between flex-wrap gap-2 pb-4 border-b border-slate-700/40">
+                  <div class="flex items-center justify-between flex-wrap gap-2 pb-4 border-b border-slate-700/40 relative z-10">
                     <div class="flex items-center gap-2 text-[11px] font-mono text-emerald-400">
                       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                       <span>Community Ecosystem • Product Story</span>
                     </div>
                     <div class="flex items-center gap-1.5 flex-wrap">
-                      <button type="button" class="story-step-pill pill-emerald active" data-story="community" data-step="1">1. Intro</button>
-                      <button type="button" class="story-step-pill pill-emerald" data-story="community" data-step="2">2. Problem / Input</button>
-                      <button type="button" class="story-step-pill pill-emerald" data-story="community" data-step="3">3. Process</button>
-                      <button type="button" class="story-step-pill pill-emerald" data-story="community" data-step="4">4. Result</button>
-                      <button type="button" class="story-step-pill pill-emerald" data-story="community" data-step="5">5. Call to Action</button>
+                      <button type="button" class="story-step-pill pill-emerald active" data-story="community" data-step="1">1. People</button>
+                      <button type="button" class="story-step-pill pill-emerald" data-story="community" data-step="2">2. Community</button>
+                      <button type="button" class="story-step-pill pill-emerald" data-story="community" data-step="3">3. Verification</button>
+                      <button type="button" class="story-step-pill pill-emerald" data-story="community" data-step="4">4. Digital Platform</button>
+                      <button type="button" class="story-step-pill pill-emerald" data-story="community" data-step="5">5. Connected Ecosystem</button>
                     </div>
                   </div>
 
                   <!-- Visual Animation Stage Content -->
-                  <div class="product-visualization relative py-6 sm:py-8 flex flex-col items-center justify-center min-h-[260px]">
+                  <div class="product-visualization relative py-6 sm:py-8 flex flex-col items-center justify-center min-h-[300px] z-10">
                     
-                    <!-- Scene 1: INTRO (Fragmented Community Disconnect) -->
+                    <!-- Scene 1: PEOPLE (Individual Avatars Slowly Connecting) -->
                     <div id="community-stage-step1" class="product-story-scene story-step-pane w-full max-w-md mx-auto space-y-4 text-center transition-all duration-500" data-scene="intro">
-                      <div class="grid grid-cols-4 gap-2.5">
-                        <div class="p-3 rounded-2xl bg-slate-800/80 border border-slate-700 flex flex-col items-center gap-1 shadow-md">
-                          <span class="text-2xl">👩</span>
-                          <span class="text-[11px] font-bold text-white">Sarah</span>
-                          <span class="text-[9px] text-slate-400">Member</span>
-                        </div>
-                        <div class="p-3 rounded-2xl bg-slate-800/80 border border-slate-700 flex flex-col items-center gap-1 shadow-md">
-                          <span class="text-2xl">👨</span>
-                          <span class="text-[11px] font-bold text-white">Rajesh</span>
-                          <span class="text-[9px] text-slate-400">Merchant</span>
-                        </div>
-                        <div class="p-3 rounded-2xl bg-slate-800/80 border border-slate-700 flex flex-col items-center gap-1 shadow-md">
-                          <span class="text-2xl">👩</span>
-                          <span class="text-[11px] font-bold text-white">Priya</span>
-                          <span class="text-[9px] text-slate-400">Youth</span>
-                        </div>
-                        <div class="p-3 rounded-2xl bg-slate-800/80 border border-slate-700 flex flex-col items-center gap-1 shadow-md">
-                          <span class="text-2xl">👨</span>
-                          <span class="text-[11px] font-bold text-white">Omar</span>
-                          <span class="text-[9px] text-slate-400">Elder</span>
-                        </div>
-                      </div>
                       <div>
-                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase tracking-wider">Movie Intro • Fragmented Community</span>
-                        <p class="text-xs text-slate-300 mt-1 max-w-xs mx-auto">Diverse members scattered across isolated chat groups, spreadsheets, and unverified forums.</p>
+                        <span class="px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px] font-bold uppercase tracking-wider font-mono">Scene 1 • Individual Members</span>
+                        <h4 class="text-sm sm:text-base font-bold text-white mt-1">Diverse Members in the Community</h4>
                       </div>
-                    </div>
+                      
+                      <!-- Multiple People/Member Avatars (Person, Person, Person, Person) -->
+                      <div class="grid grid-cols-4 gap-2 sm:gap-3 relative pt-2">
+                        <!-- Person 1 -->
+                        <div class="community-person-node flex flex-col items-center p-2.5 rounded-xl bg-slate-900/80 border border-amber-500/30 shadow-md">
+                          <div class="w-11 h-11 rounded-full bg-amber-500/20 border-2 border-amber-400 flex items-center justify-center text-lg text-amber-300 shadow-sm relative">
+                            <i class="fa-solid fa-user"></i>
+                            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-slate-900"></span>
+                          </div>
+                          <span class="text-xs font-bold text-white mt-1.5 block">Person 1</span>
+                          <span class="text-[9px] text-amber-300/80">Sarah</span>
+                        </div>
 
-                    <!-- Scene 2: PROBLEM / INPUT (Identity Fraud vs Cryptographic Verification) -->
-                    <div id="community-stage-step2" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500" data-scene="problem">
-                      <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 flex items-center justify-center text-3xl shadow-xl animate-shield-glow">
-                        <i class="fa-solid fa-shield-check"></i>
-                      </div>
-                      <div class="space-y-1.5">
-                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase tracking-wider font-mono">Problem Solved • Identity Verification</span>
-                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-950/50 border border-emerald-500/50 text-emerald-300 font-bold text-xs sm:text-sm shadow-md">
-                          <span>Unverified Account</span>
-                          <i class="fa-solid fa-arrow-right text-xs text-emerald-400"></i>
-                          <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                          <span>100% Cryptographically Verified</span>
+                        <!-- Person 2 -->
+                        <div class="community-person-node flex flex-col items-center p-2.5 rounded-xl bg-slate-900/80 border border-emerald-500/30 shadow-md">
+                          <div class="w-11 h-11 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-lg text-emerald-300 shadow-sm relative">
+                            <i class="fa-solid fa-user-gear"></i>
+                            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-slate-900"></span>
+                          </div>
+                          <span class="text-xs font-bold text-white mt-1.5 block">Person 2</span>
+                          <span class="text-[9px] text-emerald-300/80">David</span>
                         </div>
-                        <p class="text-[11px] text-slate-400 max-w-xs mx-auto">Eliminates fake profiles, spam bots, and unauthorized access.</p>
-                      </div>
-                    </div>
 
-                    <!-- Scene 3: PROCESS (Smartphone Centerpiece & 7 Services Docking) -->
-                    <div id="community-stage-step3" class="product-story-scene story-step-pane hidden w-full space-y-3 transition-all duration-500" data-scene="process">
-                      <div class="text-center">
-                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase tracking-wider font-mono">Process Stage • 7 Services Unified</span>
-                        <h4 class="text-xs sm:text-sm font-bold text-white mt-1">Mobile Centerpiece Initializing Services:</h4>
-                      </div>
-                      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 max-w-lg mx-auto text-xs">
-                        <div class="p-2.5 rounded-lg bg-slate-900/90 border border-emerald-500/30 flex items-center gap-2 text-slate-200 shadow-sm animate-feature-dock">
-                          <i class="fa-solid fa-users text-emerald-400 text-xs"></i>
-                          <span class="font-medium truncate">1. Members Directory</span>
+                        <!-- Person 3 -->
+                        <div class="community-person-node flex flex-col items-center p-2.5 rounded-xl bg-slate-900/80 border border-orange-500/30 shadow-md">
+                          <div class="w-11 h-11 rounded-full bg-orange-500/20 border-2 border-orange-400 flex items-center justify-center text-lg text-orange-300 shadow-sm relative">
+                            <i class="fa-solid fa-user-tag"></i>
+                            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-slate-900"></span>
+                          </div>
+                          <span class="text-xs font-bold text-white mt-1.5 block">Person 3</span>
+                          <span class="text-[9px] text-orange-300/80">Priya</span>
                         </div>
-                        <div class="p-2.5 rounded-lg bg-slate-900/90 border border-pink-500/30 flex items-center gap-2 text-slate-200 shadow-sm animate-feature-dock">
-                          <i class="fa-solid fa-heart text-pink-400 text-xs"></i>
-                          <span class="font-medium truncate">2. Matrimony Hub</span>
-                        </div>
-                        <div class="p-2.5 rounded-lg bg-slate-900/90 border border-amber-500/30 flex items-center gap-2 text-slate-200 shadow-sm animate-feature-dock">
-                          <i class="fa-solid fa-store text-amber-400 text-xs"></i>
-                          <span class="font-medium truncate">3. Marketplace</span>
-                        </div>
-                        <div class="p-2.5 rounded-lg bg-slate-900/90 border border-blue-500/30 flex items-center gap-2 text-slate-200 shadow-sm animate-feature-dock">
-                          <i class="fa-solid fa-receipt text-blue-400 text-xs"></i>
-                          <span class="font-medium truncate">4. Bill Payment</span>
-                        </div>
-                        <div class="p-2.5 rounded-lg bg-slate-900/90 border border-purple-500/30 flex items-center gap-2 text-slate-200 shadow-sm animate-feature-dock">
-                          <i class="fa-solid fa-check-to-slot text-purple-400 text-xs"></i>
-                          <span class="font-medium truncate">5. E-Voting</span>
-                        </div>
-                        <div class="p-2.5 rounded-lg bg-slate-900/90 border border-teal-500/30 flex items-center gap-2 text-slate-200 shadow-sm animate-feature-dock">
-                          <i class="fa-solid fa-sitemap text-teal-400 text-xs"></i>
-                          <span class="font-medium truncate">6. Family Tree</span>
-                        </div>
-                        <div class="col-span-2 sm:col-span-3 p-2.5 rounded-lg bg-slate-900/90 border border-indigo-500/30 flex items-center justify-center gap-2 text-slate-200 shadow-sm animate-feature-dock">
-                          <i class="fa-solid fa-calendar-check text-indigo-400 text-xs"></i>
-                          <span class="font-medium">7. Community Events &amp; Festivals</span>
-                        </div>
-                      </div>
-                    </div>
 
-                    <!-- Scene 4: RESULT (One Connected Digital Ecosystem) -->
-                    <div id="community-stage-step4" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500" data-scene="result">
-                      <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 font-bold text-xs sm:text-sm uppercase tracking-wider shadow-xl">
-                        <i class="fa-solid fa-network-wired text-emerald-400"></i>
-                        <span>Result: One Digital Platform for Your Community</span>
-                      </div>
-                      <div class="grid grid-cols-3 gap-2.5 max-w-sm mx-auto">
-                        <div class="p-2.5 rounded-xl bg-slate-900/80 border border-emerald-500/30 text-center">
-                          <span class="text-[10px] text-slate-400 font-mono uppercase block">Trust</span>
-                          <strong class="text-sm font-bold text-emerald-400">100% Verified</strong>
-                        </div>
-                        <div class="p-2.5 rounded-xl bg-slate-900/80 border border-emerald-500/30 text-center">
-                          <span class="text-[10px] text-slate-400 font-mono uppercase block">Services</span>
-                          <strong class="text-sm font-bold text-white">7 Modules</strong>
-                        </div>
-                        <div class="p-2.5 rounded-xl bg-slate-900/80 border border-emerald-500/30 text-center">
-                          <span class="text-[10px] text-slate-400 font-mono uppercase block">Culture</span>
-                          <strong class="text-sm font-bold text-emerald-400">Connected</strong>
+                        <!-- Person 4 -->
+                        <div class="community-person-node flex flex-col items-center p-2.5 rounded-xl bg-slate-900/80 border border-teal-500/30 shadow-md">
+                          <div class="w-11 h-11 rounded-full bg-teal-500/20 border-2 border-teal-400 flex items-center justify-center text-lg text-teal-300 shadow-sm relative">
+                            <i class="fa-solid fa-user-check"></i>
+                            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-slate-900"></span>
+                          </div>
+                          <span class="text-xs font-bold text-white mt-1.5 block">Person 4</span>
+                          <span class="text-[9px] text-teal-300/80">Marcus</span>
                         </div>
                       </div>
-                      <p class="text-xs text-slate-300 max-w-sm mx-auto">
-                        All services securely unified under a single verified login, delivering dignity, efficiency, and cultural continuity.
+
+                      <!-- Connecting line slowly connecting them -->
+                      <div class="py-1">
+                        <svg class="w-full h-6 max-w-xs mx-auto" viewBox="0 0 300 20" fill="none">
+                          <path id="comm-connecting-path" d="M 35 10 L 105 10 L 195 10 L 265 10" stroke="url(#comm-line-grad)" stroke-width="2.5" stroke-dasharray="240" stroke-dashoffset="0" stroke-linecap="round"/>
+                          <defs>
+                            <linearGradient id="comm-line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" stop-color="#f59e0b"/>
+                              <stop offset="50%" stop-color="#10b981"/>
+                              <stop offset="100%" stop-color="#e85827"/>
+                            </linearGradient>
+                          </defs>
+                        </svg>
+                      </div>
+
+                      <p class="text-xs text-slate-300 leading-relaxed max-w-xs mx-auto">
+                        Individual members slowly connecting into a shared circle of mutual trust and collective growth.
                       </p>
                     </div>
 
-                    <!-- Scene 5: CALL TO ACTION (Interactive Launch & Specs) -->
-                    <div id="community-stage-step5" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500" data-scene="cta">
-                      <div class="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 max-w-md mx-auto space-y-3 shadow-xl">
-                        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold uppercase tracking-wider">
-                          <i class="fa-solid fa-people-roof"></i>
-                          <span>Call to Action • Launch Community Hub</span>
+                    <!-- Scene 2: COMMUNITY (Lines Connect the Members -> COMMUNITY) -->
+                    <div id="community-stage-step2" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500" data-scene="problem">
+                      <div>
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[10px] font-bold uppercase tracking-wider font-mono">Scene 2 • Unified Bond</span>
+                      </div>
+
+                      <!-- Connected Lines Grid between members -->
+                      <div class="relative max-w-xs mx-auto py-2">
+                        <div class="grid grid-cols-4 gap-2 opacity-85 mb-3">
+                          <span class="px-2 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30 text-[10px] text-amber-300 font-semibold">Sarah</span>
+                          <span class="px-2 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-[10px] text-emerald-300 font-semibold">David</span>
+                          <span class="px-2 py-1 rounded-lg bg-orange-500/10 border border-orange-500/30 text-[10px] text-orange-300 font-semibold">Priya</span>
+                          <span class="px-2 py-1 rounded-lg bg-teal-500/10 border border-teal-500/30 text-[10px] text-teal-300 font-semibold">Marcus</span>
                         </div>
-                        <h4 class="text-base font-extrabold text-white">Unite Your Community Today</h4>
+
+                        <!-- COMMUNITY Badge -->
+                        <div class="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-gradient-to-r from-amber-500/20 via-emerald-500/25 to-orange-500/20 border-2 border-emerald-400 text-white font-extrabold tracking-widest text-lg sm:text-xl shadow-2xl animate-community-pulse">
+                          <i class="fa-solid fa-people-group text-emerald-400 text-xl"></i>
+                          <span>COMMUNITY</span>
+                        </div>
+                      </div>
+
+                      <div class="space-y-1 max-w-sm mx-auto">
+                        <h4 class="text-sm font-bold text-white">Lines Connect the Members</h4>
                         <p class="text-xs text-slate-300 leading-relaxed">
-                          Empower members with a trusted digital platform featuring family trees, matrimony, local marketplace, and verified voting.
+                          Strong trust lines unite individual members into an interconnected, vibrant community network.
                         </p>
-                        <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
+                      </div>
+                    </div>
+
+                    <!-- Scene 3: VERIFICATION (✓ Verified Member) -->
+                    <div id="community-stage-step3" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500" data-scene="process">
+                      <div>
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[10px] font-bold uppercase tracking-wider font-mono">Scene 3 • Trust &amp; Safety</span>
+                      </div>
+
+                      <!-- Shield / Verified Seal with Professional Animation -->
+                      <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-3xl text-emerald-400 shadow-2xl animate-verification-stamp">
+                        <i class="fa-solid fa-shield-check"></i>
+                      </div>
+
+                      <!-- Verified Member Label -->
+                      <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-950/80 border border-emerald-500/60 text-emerald-300 font-bold text-sm sm:text-base shadow-lg animate-verified-badge">
+                        <span class="text-emerald-400 text-lg">✓</span>
+                        <span>Verified Member</span>
+                      </div>
+
+                      <div class="grid grid-cols-2 gap-2 max-w-xs mx-auto text-[11px] text-slate-300 pt-1">
+                        <div class="p-2 rounded-lg bg-slate-900/80 border border-slate-700/60 flex items-center gap-1.5">
+                          <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i>
+                          <span>ID Authenticated</span>
+                        </div>
+                        <div class="p-2 rounded-lg bg-slate-900/80 border border-slate-700/60 flex items-center gap-1.5">
+                          <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i>
+                          <span>Zero Fake Profiles</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Scene 4: DIGITAL PLATFORM (Smartphone Moves to Center & 7 Services Show One by One) -->
+                    <div id="community-stage-step4" class="product-story-scene story-step-pane hidden w-full text-center space-y-3 transition-all duration-500" data-scene="result">
+                      <div>
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[10px] font-bold uppercase tracking-wider font-mono">Scene 4 • Digital Platform</span>
+                        <h4 class="text-xs sm:text-sm font-bold text-white mt-1">A smartphone moves into the center</h4>
+                      </div>
+
+                      <!-- Smartphone Mockup -->
+                      <div class="community-phone-frame mx-auto relative rounded-[26px] border-4 border-slate-700 bg-slate-950 shadow-2xl p-3 w-full max-w-[280px] sm:max-w-[300px] animate-phone-enter">
+                        <!-- Phone Island & Status -->
+                        <div class="flex items-center justify-between pb-2 border-b border-slate-800 text-[10px] text-slate-400">
+                          <span class="font-mono text-emerald-400">9:41</span>
+                          <span class="w-12 h-2.5 rounded-full bg-slate-800"></span>
+                          <div class="flex items-center gap-1">
+                            <i class="fa-solid fa-signal text-[9px]"></i>
+                            <i class="fa-solid fa-wifi text-[9px]"></i>
+                            <i class="fa-solid fa-battery-full text-[9px] text-emerald-400"></i>
+                          </div>
+                        </div>
+
+                        <!-- 7 Services Inside Smartphone (Shown One by One) -->
+                        <div class="space-y-1.5 py-2 text-left text-xs">
+                          <!-- 1. Members -->
+                          <div class="comm-phone-service p-2 rounded-lg bg-slate-900/90 border border-emerald-500/30 flex items-center justify-between shadow-sm transition-all duration-300" data-index="1">
+                            <span class="flex items-center gap-2 text-slate-200 font-medium">
+                              <i class="fa-solid fa-users text-emerald-400 text-xs w-4 text-center"></i>
+                              <span>Members</span>
+                            </span>
+                            <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                          </div>
+
+                          <!-- 2. Matrimony -->
+                          <div class="comm-phone-service p-2 rounded-lg bg-slate-900/90 border border-pink-500/30 flex items-center justify-between shadow-sm transition-all duration-300" data-index="2">
+                            <span class="flex items-center gap-2 text-slate-200 font-medium">
+                              <i class="fa-solid fa-heart text-pink-400 text-xs w-4 text-center"></i>
+                              <span>Matrimony</span>
+                            </span>
+                            <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                          </div>
+
+                          <!-- 3. Marketplace -->
+                          <div class="comm-phone-service p-2 rounded-lg bg-slate-900/90 border border-amber-500/30 flex items-center justify-between shadow-sm transition-all duration-300" data-index="3">
+                            <span class="flex items-center gap-2 text-slate-200 font-medium">
+                              <i class="fa-solid fa-store text-amber-400 text-xs w-4 text-center"></i>
+                              <span>Marketplace</span>
+                            </span>
+                            <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                          </div>
+
+                          <!-- 4. Bill Payment -->
+                          <div class="comm-phone-service p-2 rounded-lg bg-slate-900/90 border border-blue-500/30 flex items-center justify-between shadow-sm transition-all duration-300" data-index="4">
+                            <span class="flex items-center gap-2 text-slate-200 font-medium">
+                              <i class="fa-solid fa-receipt text-blue-400 text-xs w-4 text-center"></i>
+                              <span>Bill Payment</span>
+                            </span>
+                            <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                          </div>
+
+                          <!-- 5. E-Voting -->
+                          <div class="comm-phone-service p-2 rounded-lg bg-slate-900/90 border border-purple-500/30 flex items-center justify-between shadow-sm transition-all duration-300" data-index="5">
+                            <span class="flex items-center gap-2 text-slate-200 font-medium">
+                              <i class="fa-solid fa-check-to-slot text-purple-400 text-xs w-4 text-center"></i>
+                              <span>E-Voting</span>
+                            </span>
+                            <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                          </div>
+
+                          <!-- 6. Family Tree -->
+                          <div class="comm-phone-service p-2 rounded-lg bg-slate-900/90 border border-teal-500/30 flex items-center justify-between shadow-sm transition-all duration-300" data-index="6">
+                            <span class="flex items-center gap-2 text-slate-200 font-medium">
+                              <i class="fa-solid fa-sitemap text-teal-400 text-xs w-4 text-center"></i>
+                              <span>Family Tree</span>
+                            </span>
+                            <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                          </div>
+
+                          <!-- 7. Events -->
+                          <div class="comm-phone-service p-2 rounded-lg bg-slate-900/90 border border-orange-500/30 flex items-center justify-between shadow-sm transition-all duration-300" data-index="7">
+                            <span class="flex items-center gap-2 text-slate-200 font-medium">
+                              <i class="fa-solid fa-calendar-check text-orange-400 text-xs w-4 text-center"></i>
+                              <span>Events</span>
+                            </span>
+                            <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Scene 5: CONNECTED ECOSYSTEM & FINAL CTA -->
+                    <div id="community-stage-step5" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500" data-scene="cta">
+                      <!-- Top block: Many community services -->
+                      <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-700/60 max-w-md mx-auto shadow-md">
+                        <span class="text-xs font-bold text-amber-300 uppercase tracking-wider block mb-2 font-mono">Many community services</span>
+                        <div class="flex flex-wrap items-center justify-center gap-1.5 text-[10px]">
+                          <span class="px-2 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">Members</span>
+                          <span class="px-2 py-0.5 rounded-md bg-pink-500/15 border border-pink-500/30 text-pink-300">Matrimony</span>
+                          <span class="px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-300">Marketplace</span>
+                          <span class="px-2 py-0.5 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-300">Bill Payment</span>
+                          <span class="px-2 py-0.5 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-300">E-Voting</span>
+                          <span class="px-2 py-0.5 rounded-md bg-teal-500/15 border border-teal-500/30 text-teal-300">Family Tree</span>
+                          <span class="px-2 py-0.5 rounded-md bg-orange-500/15 border border-orange-500/30 text-orange-300">Events</span>
+                        </div>
+                      </div>
+
+                      <!-- Arrow down connector -->
+                      <div class="flex flex-col items-center justify-center py-0.5">
+                        <i class="fa-solid fa-arrow-down-long text-emerald-400 text-lg animate-bounce"></i>
+                      </div>
+
+                      <!-- Bottom block: One digital platform -->
+                      <div class="p-4 rounded-2xl bg-gradient-to-r from-emerald-950/70 via-slate-900/90 to-amber-950/70 border border-emerald-500/50 max-w-md mx-auto shadow-xl">
+                        <span class="text-xs font-bold text-emerald-300 uppercase tracking-wider block font-mono">One digital platform</span>
+                        <h4 class="text-base sm:text-lg font-extrabold text-white mt-1">One Digital Platform for Your Community</h4>
+                        <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                          Empower every member with a trusted, unified digital ecosystem.
+                        </p>
+                        
+                        <div class="pt-3 flex flex-wrap items-center justify-center gap-3">
                           <a 
                             href="https://communityforum.tech/" 
                             target="_blank" 
                             rel="noopener noreferrer" 
-                            class="btn-primary px-5 py-2.5 rounded-xl text-white text-xs font-bold inline-flex items-center gap-2 shadow-lg"
+                            class="btn-primary px-6 py-2.5 rounded-xl text-white text-xs font-bold inline-flex items-center gap-2 shadow-lg hover:shadow-emerald-500/30 transition-all group"
                           >
                             <span>EXPLORE COMMUNITY FORUM</span>
-                            <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                            <i class="fa-solid fa-arrow-right text-[11px] transition-transform group-hover:translate-x-1"></i>
                           </a>
                           <button 
                             type="button" 
@@ -1593,16 +1720,13 @@
                           </button>
                         </div>
                       </div>
-                      <div class="text-[10px] text-slate-400 font-mono">
-                        Privacy-First Architecture • Community Owned &amp; Governed
-                      </div>
                     </div>
 
                   </div>
 
                   <!-- Bottom Progress & Replay Controls -->
-                  <div class="pt-3 border-t border-slate-700/40 flex items-center justify-between text-xs text-slate-400">
-                    <span id="community-step-caption" class="font-medium text-slate-300">INTRO: Community members fragmented across scattered chat groups &amp; emails</span>
+                  <div class="pt-3 border-t border-slate-700/40 flex items-center justify-between text-xs text-slate-400 relative z-10">
+                    <span id="community-step-caption" class="font-medium text-slate-300">SCENE 1 - PEOPLE: Diverse members seeking meaningful connection</span>
                     <button type="button" class="story-replay-btn text-emerald-400 hover:text-emerald-300 flex items-center gap-1" data-story="community">
                       <i class="fa-solid fa-rotate text-[11px]"></i>
                       <span>Replay Story</span>
