@@ -1815,145 +1815,306 @@
 
               <!-- Right Column: Reusable Cinematic Visualization Stage -->
               <div class="lg:col-span-7">
-                <div class="product-background story-stage-canvas story-stage-grid p-5 sm:p-7 flex flex-col justify-between">
+                <div class="product-background story-stage-canvas story-stage-grid p-5 sm:p-7 flex flex-col justify-between relative overflow-hidden theme-ratehonk-stage">
                   
+                  <!-- Dedicated Professional SaaS Background Canvas -->
+                  <canvas id="ratehonk-saas-canvas" class="ratehonk-saas-bg-canvas" aria-hidden="true"></canvas>
+
                   <!-- Top Status & Movie Timeline Scene Navigation -->
-                  <div class="flex items-center justify-between flex-wrap gap-2 pb-4 border-b border-slate-700/40">
+                  <div class="flex items-center justify-between flex-wrap gap-2 pb-4 border-b border-slate-700/40 relative z-10">
                     <div class="flex items-center gap-2 text-[11px] font-mono text-blue-400">
                       <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-                      <span>CRM Sales Pipeline • Product Story</span>
+                      <span>RateHonk CRM • Product Story</span>
                     </div>
                     <div class="flex items-center gap-1.5 flex-wrap">
-                      <button type="button" class="story-step-pill pill-blue active" data-story="ratehonk" data-step="1">1. Intro</button>
-                      <button type="button" class="story-step-pill pill-blue" data-story="ratehonk" data-step="2">2. Problem / Input</button>
-                      <button type="button" class="story-step-pill pill-blue" data-story="ratehonk" data-step="3">3. Process</button>
-                      <button type="button" class="story-step-pill pill-blue" data-story="ratehonk" data-step="4">4. Result</button>
-                      <button type="button" class="story-step-pill pill-blue" data-story="ratehonk" data-step="5">5. Call to Action</button>
+                      <button type="button" class="story-step-pill pill-blue active" data-story="ratehonk" data-step="1">1. Lead</button>
+                      <button type="button" class="story-step-pill pill-blue" data-story="ratehonk" data-step="2">2. CRM</button>
+                      <button type="button" class="story-step-pill pill-blue" data-story="ratehonk" data-step="3">3. Pipeline Flow</button>
+                      <button type="button" class="story-step-pill pill-blue" data-story="ratehonk" data-step="4">4. Follow-up</button>
+                      <button type="button" class="story-step-pill pill-blue" data-story="ratehonk" data-step="5">5. Customer Info</button>
+                      <button type="button" class="story-step-pill pill-blue" data-story="ratehonk" data-step="6">6. Booking</button>
+                      <button type="button" class="story-step-pill pill-blue" data-story="ratehonk" data-step="7">7. Growth</button>
                     </div>
                   </div>
 
                   <!-- Visual Animation Stage Content -->
-                  <div class="product-visualization relative py-6 sm:py-8 flex flex-col items-center justify-center min-h-[260px]">
+                  <div class="product-visualization relative py-6 sm:py-8 flex flex-col items-center justify-center min-h-[300px] z-10">
                     
-                    <!-- Scene 1: INTRO (Disorganized Agency Operations) -->
+                    <!-- Scene 1: LEAD (A new lead appears) -->
                     <div id="ratehonk-stage-step1" class="product-story-scene story-step-pane w-full max-w-md mx-auto space-y-3 transition-all duration-500" data-scene="intro">
-                      <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-700 space-y-2 text-center">
-                        <div class="w-10 h-10 mx-auto rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-lg">
-                          <i class="fa-solid fa-table-list"></i>
+                      <div class="text-center">
+                        <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-bold uppercase tracking-wider font-mono">Scene 1 • Inbound Capture</span>
+                        <h4 class="text-sm sm:text-base font-bold text-white mt-1">A New Lead Appears</h4>
+                      </div>
+
+                      <!-- New Lead Card -->
+                      <div class="p-4 rounded-2xl bg-slate-900/90 border border-blue-500/40 shadow-2xl space-y-3 relative overflow-hidden">
+                        <div class="flex items-center justify-between">
+                          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-300 text-[11px] font-extrabold uppercase tracking-wider">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+                            <span>NEW LEAD</span>
+                          </span>
+                          <span class="text-[10px] text-slate-400 font-mono">Source: Web Inquiry</span>
                         </div>
-                        <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-bold uppercase tracking-wider font-mono">Movie Intro • Agency Bottleneck</span>
-                        <h4 class="text-xs sm:text-sm font-bold text-white">Manual Spreadsheets &amp; Lost Client Quotes</h4>
-                        <p class="text-[11px] text-slate-300 leading-relaxed max-w-xs mx-auto">
-                          Tour agencies lose high-ticket packages when client inquiries are buried across email threads and unorganized spreadsheets.
+
+                        <div class="flex items-center gap-3 pt-1">
+                          <div class="w-11 h-11 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 text-lg shrink-0">
+                            <i class="fa-solid fa-user-tie"></i>
+                          </div>
+                          <div class="text-left">
+                            <h5 class="text-base font-bold text-white">John Smith</h5>
+                            <p class="text-xs text-blue-300 font-medium">Travel Package • Bali &amp; Singapore Tour</p>
+                          </div>
+                        </div>
+
+                        <div class="flex items-center justify-between text-xs text-slate-300 pt-2 border-t border-slate-800">
+                          <span class="text-slate-400">Package Value:</span>
+                          <span class="text-emerald-400 text-base font-extrabold font-mono">₹85,000</span>
+                        </div>
+                      </div>
+
+                      <p class="text-[11px] text-slate-400 text-center">Demo simulation data ingested via automated webhook.</p>
+                    </div>
+
+                    <!-- Scene 2: CRM (The lead enters the CRM - Pipeline) -->
+                    <div id="ratehonk-stage-step2" class="product-story-scene story-step-pane hidden w-full max-w-lg mx-auto space-y-3 transition-all duration-500" data-scene="problem">
+                      <div class="text-center">
+                        <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-bold uppercase tracking-wider font-mono">Scene 2 • CRM Ingestion</span>
+                        <h4 class="text-sm sm:text-base font-bold text-white mt-1">The Lead Enters the CRM Pipeline</h4>
+                      </div>
+
+                      <!-- 5-Stage Pipeline Columns -->
+                      <div class="grid grid-cols-5 gap-1.5 text-center text-[10px] pt-1">
+                        <!-- Column 1: NEW LEAD -->
+                        <div class="p-2 rounded-xl bg-blue-950/60 border border-blue-500/50 shadow-md">
+                          <div class="font-extrabold text-blue-300 truncate">NEW LEAD</div>
+                          <div class="mt-1.5 p-1 rounded bg-blue-500/20 border border-blue-400/40 text-[9px] text-white font-medium truncate">
+                            John Smith
+                          </div>
+                        </div>
+
+                        <!-- Column 2: CONTACTED -->
+                        <div class="p-2 rounded-xl bg-slate-900/80 border border-slate-700/60">
+                          <div class="font-bold text-slate-400 truncate">CONTACTED</div>
+                          <div class="mt-1.5 text-[9px] text-slate-500 italic">Queue</div>
+                        </div>
+
+                        <!-- Column 3: FOLLOW-UP -->
+                        <div class="p-2 rounded-xl bg-slate-900/80 border border-slate-700/60">
+                          <div class="font-bold text-slate-400 truncate">FOLLOW-UP</div>
+                          <div class="mt-1.5 text-[9px] text-slate-500 italic">Queue</div>
+                        </div>
+
+                        <!-- Column 4: QUALIFIED -->
+                        <div class="p-2 rounded-xl bg-slate-900/80 border border-slate-700/60">
+                          <div class="font-bold text-slate-400 truncate">QUALIFIED</div>
+                          <div class="mt-1.5 text-[9px] text-slate-500 italic">Queue</div>
+                        </div>
+
+                        <!-- Column 5: CONVERTED -->
+                        <div class="p-2 rounded-xl bg-emerald-950/30 border border-emerald-500/30">
+                          <div class="font-bold text-emerald-400 truncate">CONVERTED</div>
+                          <div class="mt-1.5 text-[9px] text-emerald-500/70">Target</div>
+                        </div>
+                      </div>
+
+                      <p class="text-xs text-slate-300 text-center">Multi-stage pipeline organizes inquiries into structured sales phases.</p>
+                    </div>
+
+                    <!-- Scene 3: PIPELINE FLOW (Physically animate the lead card moving through pipeline) -->
+                    <div id="ratehonk-stage-step3" class="product-story-scene story-step-pane hidden w-full max-w-lg mx-auto space-y-3 transition-all duration-500" data-scene="process">
+                      <div class="text-center">
+                        <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-bold uppercase tracking-wider font-mono">Scene 3 • Pipeline Motion</span>
+                        <h4 class="text-sm sm:text-base font-bold text-white mt-1">Lead Moving Through the Pipeline</h4>
+                      </div>
+
+                      <!-- 5 Stage Tracker with Animated Flow Indicator -->
+                      <div class="grid grid-cols-5 gap-1.5 text-center text-[10px]" id="ratehonk-pipeline-tracker">
+                        <div class="p-1.5 rounded-lg bg-blue-900/40 border border-blue-500/40 text-blue-300 font-semibold truncate pipeline-step-col" data-col="1">NEW LEAD</div>
+                        <div class="p-1.5 rounded-lg bg-blue-900/40 border border-blue-500/40 text-blue-300 font-semibold truncate pipeline-step-col" data-col="2">CONTACTED</div>
+                        <div class="p-1.5 rounded-lg bg-blue-900/40 border border-blue-500/40 text-blue-300 font-semibold truncate pipeline-step-col" data-col="3">FOLLOW-UP</div>
+                        <div class="p-1.5 rounded-lg bg-blue-900/40 border border-blue-500/40 text-blue-300 font-semibold truncate pipeline-step-col" data-col="4">QUALIFIED</div>
+                        <div class="p-1.5 rounded-lg bg-emerald-900/40 border border-emerald-500/50 text-emerald-300 font-bold truncate pipeline-step-col" data-col="5">CONVERTED</div>
+                      </div>
+
+                      <!-- Animated Moving Lead Card -->
+                      <div class="p-3 rounded-xl bg-slate-900/90 border border-blue-500/50 shadow-xl flex items-center justify-between animate-pipeline-flow">
+                        <div class="flex items-center gap-2">
+                          <i class="fa-solid fa-person-walking-luggage text-blue-400 text-sm"></i>
+                          <div class="text-left">
+                            <span class="text-xs font-bold text-white block">John Smith</span>
+                            <span class="text-[10px] text-blue-300">₹85,000 Package</span>
+                          </div>
+                        </div>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-400/40" id="ratehonk-flow-status">Moving: Lead → Customer</span>
+                      </div>
+
+                      <!-- Visual Lead to Customer Transformation Highlight -->
+                      <div class="inline-flex items-center justify-center gap-3 px-4 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-semibold text-slate-200 mx-auto">
+                        <span class="text-blue-400 font-bold">Lead</span>
+                        <i class="fa-solid fa-arrow-right text-slate-400 text-xs"></i>
+                        <span class="text-emerald-400 font-bold">Customer</span>
+                      </div>
+                    </div>
+
+                    <!-- Scene 4: FOLLOW-UP (Follow-up due -> ✓ Completed) -->
+                    <div id="ratehonk-stage-step4" class="product-story-scene story-step-pane hidden w-full max-w-md mx-auto space-y-3.5 transition-all duration-500">
+                      <div class="text-center">
+                        <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-bold uppercase tracking-wider font-mono">Scene 4 • Automated Task</span>
+                        <h4 class="text-sm sm:text-base font-bold text-white mt-1">Smart Follow-up Automation</h4>
+                      </div>
+
+                      <!-- Task Alert Box transitioning from Due to Completed -->
+                      <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-700/60 shadow-xl space-y-2.5" id="ratehonk-followup-card">
+                        <div class="flex items-center justify-between">
+                          <span class="text-xs font-semibold text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-bell text-amber-400 text-xs"></i>
+                            <span>Scheduled Traveler Engagement</span>
+                          </span>
+                          <span class="text-[10px] font-mono text-slate-400">10:30 AM</span>
+                        </div>
+
+                        <!-- Status Badge (Dynamically transitions: Follow-up due -> ✓ Completed) -->
+                        <div class="p-3 rounded-xl border flex items-center justify-between transition-all duration-500" id="ratehonk-followup-badge-container">
+                          <span class="text-xs font-bold" id="ratehonk-followup-text">Follow-up due</span>
+                          <span class="text-xs font-bold" id="ratehonk-followup-status-icon"><i class="fa-solid fa-clock animate-pulse"></i></span>
+                        </div>
+
+                        <p class="text-[11px] text-slate-400 text-left">
+                          Customized flight itinerary &amp; Bali hotel voucher dispatched via automated WhatsApp channel.
                         </p>
                       </div>
                     </div>
 
-                    <!-- Scene 2: PROBLEM / INPUT (Inbound High-Value Lead) -->
-                    <div id="ratehonk-stage-step2" class="product-story-scene story-step-pane hidden w-full max-w-md mx-auto space-y-3 transition-all duration-500" data-scene="problem">
-                      <div class="p-4 rounded-xl bg-slate-900/90 border border-blue-500/40 shadow-xl space-y-2 animate-pipeline-glow">
-                        <div class="flex items-center justify-between">
-                          <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-[10px] font-bold uppercase">Problem / Input • New Inbound Lead</span>
-                          <span class="text-[10px] text-slate-400 font-mono">Source: Web Inquiry</span>
-                        </div>
-                        <h4 class="text-sm font-bold text-white flex items-center gap-2">
-                          <i class="fa-solid fa-user-tag text-blue-400"></i>
-                          <span>Michael Vance • Maldives Luxury Package</span>
-                        </h4>
-                        <div class="flex items-center justify-between text-xs text-slate-300 pt-1 border-t border-slate-800">
-                          <span>Quote Value: $5,400 USD</span>
-                          <span class="text-emerald-400 font-semibold">Priority: High (Action Required)</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Scene 3: PROCESS (Automated 5-Stage Sales Funnel) -->
-                    <div id="ratehonk-stage-step3" class="product-story-scene story-step-pane hidden w-full space-y-3 transition-all duration-500" data-scene="process">
+                    <!-- Scene 5: CUSTOMER INFO (Organized Customer Information) -->
+                    <div id="ratehonk-stage-step5" class="product-story-scene story-step-pane hidden w-full max-w-md mx-auto space-y-3 transition-all duration-500">
                       <div class="text-center">
-                        <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-bold uppercase tracking-wider font-mono">Process Stage • 5-Stage Pipeline</span>
-                        <h4 class="text-xs sm:text-sm font-bold text-white mt-1">Lead Progressing Through Sales Funnel:</h4>
+                        <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-bold uppercase tracking-wider font-mono">Scene 5 • Traveler Dossier</span>
+                        <h4 class="text-sm sm:text-base font-bold text-white mt-1">Organized Customer Information</h4>
                       </div>
-                      <div class="grid grid-cols-5 gap-1.5 text-center text-[10px]">
-                        <div class="p-2 rounded-lg bg-blue-500/10 border border-blue-500/40 text-blue-300 font-bold">
-                          1. NEW LEAD
-                          <div class="mt-1 text-slate-400">✓ Ingested</div>
-                        </div>
-                        <div class="p-2 rounded-lg bg-blue-500/10 border border-blue-500/40 text-blue-300 font-bold">
-                          2. CONTACTED
-                          <div class="mt-1 text-slate-400">✓ WhatsApp</div>
-                        </div>
-                        <div class="p-2 rounded-lg bg-blue-500/20 border border-blue-400 text-blue-200 font-bold shadow-md animate-pulse">
-                          3. FOLLOW-UP
-                          <div class="mt-1 text-cyan-400">PDF Opened</div>
-                        </div>
-                        <div class="p-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-400">
-                          4. QUALIFIED
-                          <div class="mt-1">Reviewing</div>
-                        </div>
-                        <div class="p-2 rounded-lg bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 font-bold">
-                          5. CONVERTED
-                          <div class="mt-1">Target</div>
-                        </div>
-                      </div>
-                      <div class="p-2.5 rounded-xl bg-amber-950/40 border border-amber-500/40 flex items-center gap-2.5 max-w-sm mx-auto shadow-md">
-                        <i class="fa-solid fa-bell text-amber-400 text-xs"></i>
-                        <span class="text-[11px] text-amber-200">Alert Triggered: Client opened Maldives Itinerary PDF 2m ago. Automated WhatsApp reminder queued!</span>
-                      </div>
-                    </div>
 
-                    <!-- Scene 4: RESULT (Confirmed Voucher & Revenue Dashboard) -->
-                    <div id="ratehonk-stage-step4" class="product-story-scene story-step-pane hidden w-full space-y-3 transition-all duration-500" data-scene="result">
-                      <div class="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/50 shadow-xl space-y-1.5 max-w-md mx-auto animate-voucher-stamp">
-                        <div class="flex items-center justify-between text-xs">
-                          <span class="px-2 py-0.5 rounded bg-emerald-500 text-slate-950 font-bold uppercase text-[10px]">Booking Confirmed</span>
-                          <span class="font-mono text-emerald-400">Voucher #RH-9842</span>
+                      <!-- Customer Dossier Specification Table -->
+                      <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-700/70 shadow-xl space-y-2 text-xs">
+                        <div class="flex items-center justify-between py-1 border-b border-slate-800">
+                          <span class="text-slate-400 flex items-center gap-1.5"><i class="fa-solid fa-user text-blue-400 text-[11px]"></i> Customer</span>
+                          <span class="font-bold text-white">John Smith</span>
                         </div>
-                        <div class="text-sm font-bold text-white">Emirates EK-512 + Soneva Jani Luxury Resort</div>
-                        <div class="text-xs text-slate-300 flex items-center justify-between pt-1 border-t border-emerald-500/20">
-                          <span>Paid: $5,400.00 USD</span>
-                          <span class="text-emerald-400 font-bold">Deal Won ✓</span>
+                        <div class="flex items-center justify-between py-1 border-b border-slate-800">
+                          <span class="text-slate-400 flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-emerald-400 text-[11px]"></i> Destination</span>
+                          <span class="font-semibold text-slate-200">Bali &amp; Singapore</span>
                         </div>
-                      </div>
-                      <div class="grid grid-cols-4 gap-2 max-w-md mx-auto text-center">
-                        <div class="p-2 rounded-xl bg-slate-900/80 border border-slate-700">
-                          <div class="text-[9px] text-slate-400 font-mono uppercase">Leads</div>
-                          <div class="text-sm font-bold text-blue-400">1,420</div>
+                        <div class="flex items-center justify-between py-1 border-b border-slate-800">
+                          <span class="text-slate-400 flex items-center gap-1.5"><i class="fa-solid fa-plane-departure text-purple-400 text-[11px]"></i> Trip</span>
+                          <span class="font-semibold text-slate-200">7 Days / 6 Nights Luxury</span>
                         </div>
-                        <div class="p-2 rounded-xl bg-slate-900/80 border border-slate-700">
-                          <div class="text-[9px] text-slate-400 font-mono uppercase">Deals Won</div>
-                          <div class="text-sm font-bold text-emerald-400">284</div>
+                        <div class="flex items-center justify-between py-1 border-b border-slate-800">
+                          <span class="text-slate-400 flex items-center gap-1.5"><i class="fa-solid fa-calendar-days text-amber-400 text-[11px]"></i> Booking Date</span>
+                          <span class="font-mono text-slate-200">14 Oct 2026</span>
                         </div>
-                        <div class="p-2 rounded-xl bg-slate-900/80 border border-slate-700">
-                          <div class="text-[9px] text-slate-400 font-mono uppercase">Conversion</div>
-                          <div class="text-sm font-bold text-purple-400">+34.8%</div>
-                        </div>
-                        <div class="p-2 rounded-xl bg-slate-900/80 border border-slate-700">
-                          <div class="text-[9px] text-slate-400 font-mono uppercase">Pipeline</div>
-                          <div class="text-sm font-bold text-amber-400">$128.4K</div>
+                        <div class="flex items-center justify-between py-1">
+                          <span class="text-slate-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-400 text-[11px]"></i> Status</span>
+                          <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-[10px]">Ready for Booking</span>
                         </div>
                       </div>
                     </div>
 
-                    <!-- Scene 5: CALL TO ACTION (Interactive Launch & Specs) -->
-                    <div id="ratehonk-stage-step5" class="product-story-scene story-step-pane hidden w-full text-center space-y-4 transition-all duration-500" data-scene="cta">
-                      <div class="p-4 rounded-2xl bg-blue-950/40 border border-blue-500/40 max-w-md mx-auto space-y-3 shadow-xl">
-                        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-[11px] font-bold uppercase tracking-wider">
+                    <!-- Scene 6: BOOKING (BOOKING CONFIRMED - ₹85,000) -->
+                    <div id="ratehonk-stage-step6" class="product-story-scene story-step-pane hidden w-full max-w-md mx-auto space-y-3 transition-all duration-500" data-scene="result">
+                      <div class="text-center">
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase tracking-wider font-mono">Scene 6 • Deal Won</span>
+                      </div>
+
+                      <!-- Confirmed Booking Card -->
+                      <div class="p-4 rounded-2xl bg-gradient-to-br from-emerald-950/60 to-slate-900/90 border-2 border-emerald-500/60 shadow-2xl space-y-3 animate-voucher-stamp">
+                        <div class="flex items-center justify-between">
+                          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500 text-slate-950 font-extrabold text-[11px] uppercase tracking-wider">
+                            <i class="fa-solid fa-check"></i>
+                            <span>BOOKING CONFIRMED</span>
+                          </span>
+                          <span class="font-mono text-xs text-emerald-400 font-bold">Voucher #RH-85000</span>
+                        </div>
+
+                        <div class="text-left space-y-1">
+                          <div class="text-sm font-bold text-white">Travel Package • John Smith</div>
+                          <div class="text-xs text-slate-300">Bali Resort + Flight EK-512 Confirmed</div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2 border-t border-emerald-500/30 text-xs">
+                          <span class="text-slate-400 font-medium">Payment Received:</span>
+                          <span class="text-emerald-400 text-xl font-extrabold font-mono">₹85,000</span>
+                        </div>
+                      </div>
+
+                      <div class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Commission Ledger Updated &amp; Invoiced</span>
+                      </div>
+                    </div>
+
+                    <!-- Scene 7: CRM DASHBOARD & FINAL CTA -->
+                    <div id="ratehonk-stage-step7" class="product-story-scene story-step-pane hidden w-full max-w-lg mx-auto space-y-3.5 transition-all duration-500" data-scene="cta">
+                      <div class="text-center">
+                        <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-bold uppercase tracking-wider font-mono">Scene 7 • Analytics Dashboard</span>
+                        <h4 class="text-sm sm:text-base font-bold text-white mt-1">Real-Time Business Growth Dashboard</h4>
+                      </div>
+
+                      <!-- 6 Smooth Animated Metrics -->
+                      <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 text-center">
+                        <!-- Leads -->
+                        <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-700/70">
+                          <span class="text-[9px] text-slate-400 uppercase font-mono block">Leads</span>
+                          <span class="text-sm font-bold text-blue-400 ratehonk-counter" data-target="1420" data-suffix="">0</span>
+                        </div>
+
+                        <!-- Customers -->
+                        <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-700/70">
+                          <span class="text-[9px] text-slate-400 uppercase font-mono block">Customers</span>
+                          <span class="text-sm font-bold text-emerald-400 ratehonk-counter" data-target="385" data-suffix="">0</span>
+                        </div>
+
+                        <!-- Follow-ups -->
+                        <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-700/70">
+                          <span class="text-[9px] text-slate-400 uppercase font-mono block">Follow-ups</span>
+                          <span class="text-sm font-bold text-amber-400 ratehonk-counter" data-target="98" data-suffix="%">0%</span>
+                        </div>
+
+                        <!-- Bookings -->
+                        <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-700/70">
+                          <span class="text-[9px] text-slate-400 uppercase font-mono block">Bookings</span>
+                          <span class="text-sm font-bold text-purple-400 ratehonk-counter" data-target="342" data-suffix="">0</span>
+                        </div>
+
+                        <!-- Revenue -->
+                        <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-700/70">
+                          <span class="text-[9px] text-slate-400 uppercase font-mono block">Revenue</span>
+                          <span class="text-sm font-bold text-cyan-400 font-mono">₹<span class="ratehonk-counter" data-target="85" data-suffix="L">0</span></span>
+                        </div>
+
+                        <!-- Conversion Rate -->
+                        <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-700/70">
+                          <span class="text-[9px] text-slate-400 uppercase font-mono block">Conversion</span>
+                          <span class="text-sm font-bold text-emerald-400 ratehonk-counter" data-target="34.8" data-suffix="%" data-decimals="1">0%</span>
+                        </div>
+                      </div>
+
+                      <!-- FINAL Section -->
+                      <div class="p-4 rounded-2xl bg-gradient-to-r from-blue-950/70 via-slate-900/90 to-emerald-950/70 border border-blue-500/50 shadow-xl text-center space-y-2">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 font-bold text-xs uppercase tracking-wider">
                           <i class="fa-solid fa-chart-line"></i>
-                          <span>Call to Action • Scale Your Travel Agency</span>
+                          <span>Turn Leads Into Organized Business Growth</span>
                         </div>
-                        <h4 class="text-base font-extrabold text-white">Scale Your Tour Operations</h4>
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                          Automate multi-city itineraries, supplier invoices, margin ledgers, and customer bookings in one integrated CRM platform.
+                        <p class="text-xs text-slate-300 max-w-sm mx-auto">
+                          Transform chaotic spreadsheets into high-converting sales pipelines, margin tracking, and automated bookings.
                         </p>
                         <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
                           <a 
                             href="https://crm.ratehonk.com/portfolio" 
                             target="_blank" 
                             rel="noopener noreferrer" 
-                            class="btn-primary px-5 py-2.5 rounded-xl text-white text-xs font-bold inline-flex items-center gap-2 shadow-lg"
+                            class="btn-primary px-6 py-2.5 rounded-xl text-white text-xs font-bold inline-flex items-center gap-2 shadow-lg hover:shadow-blue-500/30 transition-all group"
                           >
                             <span>EXPLORE RATEHONK CRM</span>
-                            <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                            <i class="fa-solid fa-arrow-right text-[11px] transition-transform group-hover:translate-x-1"></i>
                           </a>
                           <button 
                             type="button" 
@@ -1964,22 +2125,13 @@
                           </button>
                         </div>
                       </div>
-                      <div class="text-center pt-2">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/15 border border-blue-500/40 text-blue-300 font-bold text-xs uppercase tracking-wider shadow-lg">
-                          <i class="fa-solid fa-chart-line"></i>
-                          <span>Turn Leads Into Organized Business Growth</span>
-                        </div>
-                      </div>
-                      <div class="text-[10px] text-slate-400 font-mono">
-                        B2B Tour Operator Ready • Multi-Currency Ledger Support
-                      </div>
                     </div>
 
                   </div>
 
                   <!-- Bottom Progress & Replay Controls -->
-                  <div class="pt-3 border-t border-slate-700/40 flex items-center justify-between text-xs text-slate-400">
-                    <span id="ratehonk-step-caption" class="font-medium text-slate-300">INTRO: Travel agencies lose deals in messy spreadsheets and delayed quotes</span>
+                  <div class="pt-3 border-t border-slate-700/40 flex items-center justify-between text-xs text-slate-400 relative z-10">
+                    <span id="ratehonk-step-caption" class="font-medium text-slate-300">SCENE 1 - LEAD: Inbound inquiry received for John Smith (₹85,000)</span>
                     <button type="button" class="story-replay-btn text-blue-400 hover:text-blue-300 flex items-center gap-1" data-story="ratehonk">
                       <i class="fa-solid fa-rotate text-[11px]"></i>
                       <span>Replay Story</span>

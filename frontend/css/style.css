@@ -1235,7 +1235,46 @@ h1, h2, h3, h4, .font-heading {
   animation: featureDockIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* RateHonk Voucher & Pipeline Animations */
+/* RateHonk Travel CRM SaaS Animations & Background (Phase 8) */
+.ratehonk-saas-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.theme-ratehonk-stage {
+  background: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
+              #111827;
+}
+
+@keyframes pipelineLeadShift {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-4px) scale(1.02); }
+  50% { transform: translateY(0); }
+  75% { transform: translateY(-4px) scale(1.02); }
+  100% { transform: translateY(0); }
+}
+
+.animate-pipeline-flow {
+  animation: pipelineLeadShift 3.2s ease-in-out infinite;
+}
+
+.pipeline-step-col {
+  transition: all 0.3s ease;
+}
+
+.pipeline-step-col.active-col {
+  background: rgba(59, 130, 246, 0.35);
+  border-color: #3b82f6;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(59, 130, 246, 0.4);
+}
+
 @keyframes voucherStampPop {
   0% {
     transform: scale(0.92) rotate(-2deg);
@@ -1348,7 +1387,8 @@ h1, h2, h3, h4, .font-heading {
   .animate-community-pulse,
   .animate-verification-stamp,
   .animate-phone-enter,
-  .comm-phone-service {
+  .comm-phone-service,
+  .animate-pipeline-flow {
     animation: none !important;
   }
 

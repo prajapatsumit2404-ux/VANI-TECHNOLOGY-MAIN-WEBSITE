@@ -1083,23 +1083,68 @@ function initCinematicProductStories() {
       id: 'ratehonk',
       name: 'RateHonk Travel CRM',
       container: document.getElementById('story-ratehonk'),
-      totalSteps: 5,
+      totalSteps: 7,
       scenes: MOVIE_SCENES_STANDARD,
       currentStep: 1,
       timer: null,
       intervalMs: 3400,
       isInView: false,
       captions: [
-        'INTRO: Travel agencies lose deals in messy spreadsheets and delayed quotes',
-        'PROBLEM / INPUT: Inbound travel inquiries need instant quotation & pipeline tracking',
-        'PROCESS: Automated 5-stage sales funnel with instant client engagement alerts',
-        'RESULT: +34.8% conversion boost, automated booking vouchers & live revenue growth',
-        'CALL TO ACTION: Streamline your travel sales at crm.ratehonk.com'
+        'SCENE 1 - LEAD: Inbound inquiry received for John Smith (₹85,000)',
+        'SCENE 2 - CRM: Lead ingested into the 5-stage sales pipeline',
+        'SCENE 3 - PIPELINE FLOW: Lead card progressing from Lead to Customer',
+        'SCENE 4 - FOLLOW-UP: Automated task alert transitioning from Due to Completed',
+        'SCENE 5 - CUSTOMER INFO: Comprehensive traveler profile and itinerary specs',
+        'SCENE 6 - BOOKING: Booking Confirmed with payment received of ₹85,000',
+        'SCENE 7 - DASHBOARD: Executive CRM growth metrics and live pipeline revenue'
       ]
     }
   };
 
   const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Pipeline motion animation for RateHonk Scene 3
+  const runRateHonkPipelineFlow = () => {
+    const cols = document.querySelectorAll('.pipeline-step-col');
+    if (!cols || cols.length === 0) return;
+
+    cols.forEach(c => c.classList.remove('active-col'));
+    cols.forEach((col, idx) => {
+      setTimeout(() => {
+        cols.forEach(c => c.classList.remove('active-col'));
+        col.classList.add('active-col');
+      }, 280 * (idx + 1));
+    });
+  };
+
+  // Follow-up dynamic transition for RateHonk Scene 4 (Follow-up due -> ✓ Completed)
+  const runRateHonkFollowUp = () => {
+    const container = document.getElementById('ratehonk-followup-badge-container');
+    const text = document.getElementById('ratehonk-followup-text');
+    const icon = document.getElementById('ratehonk-followup-status-icon');
+    if (!container || !text || !icon) return;
+
+    container.className = 'p-3 rounded-xl border border-amber-500/50 bg-amber-950/40 text-amber-300 flex items-center justify-between transition-all duration-500';
+    text.textContent = 'Follow-up due';
+    icon.innerHTML = '<i class="fa-solid fa-clock animate-pulse"></i>';
+
+    setTimeout(() => {
+      container.className = 'p-3 rounded-xl border border-emerald-500/60 bg-emerald-950/60 text-emerald-300 flex items-center justify-between transition-all duration-500 shadow-lg';
+      text.textContent = '✓ Completed';
+      icon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400"></i>';
+    }, 750);
+  };
+
+  // Smooth animated counters for RateHonk Scene 7 (Dashboard)
+  const runRateHonkCounters = () => {
+    const counters = document.querySelectorAll('.ratehonk-counter');
+    counters.forEach((el) => {
+      const target = parseFloat(el.getAttribute('data-target') || '0');
+      const suffix = el.getAttribute('data-suffix') || '';
+      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      animateValue(el, 0, target, 1100, decimals, suffix);
+    });
+  };
 
   // Typing animation for AI Talksy Scene 1
   const runAITalksyTyping = () => {
@@ -1244,6 +1289,10 @@ function initCinematicProductStories() {
       if (stepNum === 1) runCommunityPeopleConnect();
       if (stepNum === 3) runCommunityVerification();
       if (stepNum === 4) runCommunityPhoneServices();
+    } else if (storyKey === 'ratehonk') {
+      if (stepNum === 3) runRateHonkPipelineFlow();
+      if (stepNum === 4) runRateHonkFollowUp();
+      if (stepNum === 7) runRateHonkCounters();
     }
 
     // 4. Update caption with subtle directional GSAP nudge
@@ -1560,6 +1609,123 @@ function initCinematicProductStories() {
   };
 
   initCommunityBackground();
+
+  // Dedicated Professional SaaS Background Canvas for RateHonk Travel CRM (Phase 8)
+  const initRateHonkBackground = () => {
+    const canvas = document.getElementById('ratehonk-saas-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = (canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : 600);
+    let height = (canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : 450);
+
+    const handleResize = () => {
+      if (!canvas.parentElement) return;
+      width = canvas.width = canvas.parentElement.offsetWidth;
+      height = canvas.height = canvas.parentElement.offsetHeight;
+    };
+    window.addEventListener('resize', handleResize);
+
+    // Data stream particles flowing horizontally along grid lines
+    const particleCount = 20;
+    const particles = [];
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.floor(Math.random() * 8) * (height / 8) + 20,
+        speed: Math.random() * 0.8 + 0.4,
+        length: Math.random() * 20 + 10,
+        alpha: Math.random() * 0.4 + 0.2
+      });
+    }
+
+    // Moving chart trend line data
+    let chartPhase = 0;
+
+    let animFrameId = null;
+
+    const render = () => {
+      if (!stories.ratehonk.isInView && !isReducedMotion) {
+        animFrameId = requestAnimationFrame(render);
+        return;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+
+      // 1. Subtle SaaS Coordinate Grid
+      ctx.strokeStyle = 'rgba(59, 130, 246, 0.05)';
+      ctx.lineWidth = 1;
+      const gridSize = 45;
+      for (let x = 0; x < width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // 2. Moving SaaS Chart Trend Line
+      chartPhase += 0.02;
+      ctx.beginPath();
+      const points = 8;
+      for (let i = 0; i <= points; i++) {
+        const px = (width / points) * i;
+        const baseProgress = (i / points);
+        const py = (height * 0.75) - (baseProgress * height * 0.4) + Math.sin(chartPhase + i * 0.8) * 12;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.strokeStyle = 'rgba(59, 130, 246, 0.22)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // 3. Subtle Glowing Data Points along Chart
+      for (let i = 1; i < points; i++) {
+        const px = (width / points) * i;
+        const baseProgress = (i / points);
+        const py = (height * 0.75) - (baseProgress * height * 0.4) + Math.sin(chartPhase + i * 0.8) * 12;
+        ctx.beginPath();
+        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(96, 165, 250, 0.6)';
+        ctx.fill();
+      }
+
+      // 4. Data Line Particles
+      for (let i = 0; i < particleCount; i++) {
+        const p = particles[i];
+        p.x += p.speed;
+        if (p.x > width + p.length) {
+          p.x = -p.length;
+          p.y = Math.floor(Math.random() * 8) * (height / 8) + 20;
+        }
+
+        const grad = ctx.createLinearGradient(p.x - p.length, p.y, p.x, p.y);
+        grad.addColorStop(0, 'rgba(59, 130, 246, 0)');
+        grad.addColorStop(1, `rgba(59, 130, 246, ${p.alpha})`);
+
+        ctx.beginPath();
+        ctx.moveTo(p.x - p.length, p.y);
+        ctx.lineTo(p.x, p.y);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      if (!isReducedMotion) {
+        animFrameId = requestAnimationFrame(render);
+      }
+    };
+
+    render();
+  };
+
+  initRateHonkBackground();
 
   // IntersectionObserver: Viewport detection ensures animations ONLY run when the product enters view
   // and does NOT run all product animations simultaneously.
