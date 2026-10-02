@@ -112,7 +112,7 @@ const Auth = {
       console.warn('Logout endpoint call failed, clearing local session anyway');
     }
     this.clearSession();
-    window.location.href = 'login.html?loggedOut=true';
+    window.location.href = 'index.html';
   },
 
   async forgotPassword(data) {
@@ -394,17 +394,17 @@ const Auth = {
       const user = this.getUser();
       const displayName = user ? user.fullName.split(' ')[0] : 'Profile';
       authBtn.href = 'profile.html';
+      authBtn.style.display = 'inline-flex';
       authBtn.innerHTML = `
         <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
         <i class="fa-solid fa-user-circle mr-1.5 text-sm"></i>
         <span>${displayName}</span>
       `;
     } else {
-      authBtn.href = 'login.html';
-      authBtn.innerHTML = `
-        <i class="fa-solid fa-arrow-right-to-bracket mr-1.5 text-xs"></i>
-        <span>Login</span>
-      `;
+      // Phase 10: Completely remove login prompt/button from public website
+      authBtn.style.display = 'none';
+      authBtn.innerHTML = '';
+      authBtn.removeAttribute('href');
     }
   },
 };
