@@ -1,0 +1,781 @@
+/**
+ * Phase 7 — Website-wide light / dark theme (eligible surfaces only).
+ * Theme tokens + scoped remaps (#home included in Light Mode when toggled).
+ */
+
+html[data-vani-theme='dark'] {
+  color-scheme: dark;
+  --vani-t-bg-deep: #161c28;
+  --vani-t-bg-main: #1c2332;
+  --vani-t-bg-surface: #252e40;
+  --vani-t-bg-elevated: #2e384d;
+  --vani-t-text: #f1f5f9;
+  --vani-t-text-muted: #94a3b8;
+  --vani-t-text-soft: #cbd5e1;
+  --vani-t-border: rgba(96, 105, 125, 0.28);
+  --vani-t-chrome-bg: rgba(22, 28, 40, 0.95);
+  --vani-t-chrome-border: rgba(96, 105, 125, 0.22);
+  --vani-t-input-bg: rgba(37, 46, 64, 0.85);
+  --vani-t-ambient-strength: 1;
+}
+
+html[data-vani-theme='light'] {
+  color-scheme: light;
+  --vani-t-bg-deep: #f1f5f9;
+  --vani-t-bg-main: #ffffff;
+  --vani-t-bg-surface: #f8fafc;
+  --vani-t-bg-elevated: #ffffff;
+  --vani-t-card-surface: rgba(255, 255, 255, 0.96);
+  --vani-t-card-surface-hover: #ffffff;
+  --vani-t-text: #0f172a;
+  --vani-t-text-muted: #475569;
+  --vani-t-text-soft: #64748b;
+  --vani-t-border: rgba(100, 116, 139, 0.28);
+  --vani-t-chrome-bg: rgba(255, 255, 255, 0.92);
+  --vani-t-chrome-border: rgba(148, 163, 184, 0.35);
+  --vani-t-input-bg: #ffffff;
+  --vani-t-ambient-strength: 0.55;
+}
+
+html.is-vani-theme-animate .vani-theme-chrome,
+html.is-vani-theme-animate .vani-theme-scope,
+html.is-vani-theme-animate .vani-theme-scope .glass-card,
+html.is-vani-theme-animate .vani-theme-scope .glass-panel,
+html.is-vani-theme-animate .navbar-initial {
+  transition:
+    background-color 0.32s ease,
+    color 0.32s ease,
+    border-color 0.32s ease,
+    box-shadow 0.32s ease;
+}
+
+/* ——— Shared chrome (navbar, footer, top bar) ——— */
+html[data-vani-theme='light'] .vani-theme-chrome.navbar-initial,
+html[data-vani-theme='light'] header.navbar-initial.vani-theme-chrome {
+  background: var(--vani-t-chrome-bg) !important;
+  border-bottom-color: var(--vani-t-chrome-border) !important;
+}
+
+/* Footer stays premium dark in Light Mode (see vani-footer.css when .vani-footer is present) */
+html[data-vani-theme='light'] .vani-theme-chrome#main-footer:not(.vani-footer),
+html[data-vani-theme='light'] #main-footer.vani-theme-chrome:not(.vani-footer) {
+  background-color: #161c28 !important;
+  border-top-color: rgba(96, 105, 125, 0.2) !important;
+  color: #94a3b8 !important;
+}
+
+html[data-vani-theme='light'] #main-footer.vani-theme-chrome a {
+  color: #cbd5e1 !important;
+}
+
+html[data-vani-theme='light'] #main-footer.vani-theme-chrome a:hover {
+  color: #f8fafc !important;
+}
+
+html[data-vani-theme='light'] #main-footer.vani-theme-chrome .text-slate-400,
+html[data-vani-theme='light'] #main-footer.vani-theme-chrome p {
+  color: #94a3b8 !important;
+}
+
+html[data-vani-theme='light'] #main-footer.vani-theme-chrome [class*='border-[#60697d]'] {
+  border-color: rgba(96, 105, 125, 0.2) !important;
+}
+
+html[data-vani-theme='light'] #main-footer.vani-theme-chrome .logo-shimmer-wrapper {
+  background: rgba(35, 42, 57, 0.8) !important;
+  border-color: rgba(96, 105, 125, 0.2) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-chrome:not(#main-footer) .text-slate-300,
+html[data-vani-theme='light'] .vani-theme-chrome:not(#main-footer) .text-slate-400 {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-chrome:not(#main-footer) .text-white {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-chrome:not(#main-footer) .hover\:text-white:hover,
+html[data-vani-theme='light'] .vani-theme-chrome:not(#main-footer) .hover\:text-\[\#fbd5c6\]:hover {
+  color: #c2410c !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-chrome .hover\:bg-white\/5:hover {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-chrome .logo-shimmer-wrapper {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-theme='light'] #mobile-menu.vani-theme-chrome,
+html[data-vani-theme='light'] #mobile-menu.menu-open {
+  background: var(--vani-t-chrome-bg) !important;
+  border-bottom-color: var(--vani-t-chrome-border) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-chrome[class*='bg-[#161c28]']:not(#main-footer) {
+  background-color: var(--vani-t-chrome-bg) !important;
+  border-color: var(--vani-t-chrome-border) !important;
+  color: var(--vani-t-text-muted) !important;
+}
+
+/* ——— Standalone pages ——— */
+html[data-vani-route='standalone'][data-vani-theme='light'] body {
+  background-color: var(--vani-t-bg-main) !important;
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope .text-white {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope .text-slate-100 {
+  color: #1e293b !important;
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope .text-slate-300 {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope .text-slate-400 {
+  color: var(--vani-t-text-soft) !important;
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope .text-slate-100,
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope .text-slate-200 {
+  color: #1e293b !important;
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope label,
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope .text-slate-500 {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope a:not(.btn-primary):not(.btn-secondary) {
+  color: #c2410c;
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope a:not(.btn-primary):not(.btn-secondary):hover {
+  color: #9a3412;
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope [class*='bg-[#161c28]'],
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope [class*='bg-[#1c2332]'],
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope [class*='bg-[#252e40]'] {
+  background-color: var(--vani-t-bg-surface) !important;
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope [class*='border-[#60697d]'] {
+  border-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope .glass-card,
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope .glass-panel {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: var(--vani-t-border) !important;
+  box-shadow: 0 12px 40px -18px rgba(15, 23, 42, 0.12);
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope input,
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope textarea,
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope select {
+  background-color: var(--vani-t-input-bg) !important;
+  color: var(--vani-t-text) !important;
+  border-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope input::placeholder,
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* ——— Index: eligible sections (not #home) ——— */
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) {
+  color: var(--vani-t-text);
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) .text-white {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) .text-slate-300 {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) .text-slate-400 {
+  color: var(--vani-t-text-soft) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) .text-slate-100,
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) .text-slate-200 {
+  color: #1e293b !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) h1,
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) h2,
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) h3,
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) h4 {
+  color: var(--vani-t-text);
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) .font-heading.text-white {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) .product-card .text-white,
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) .service-card .text-white {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) .service-card .text-slate-400,
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) .product-card .text-slate-400 {
+  color: var(--vani-t-text-soft) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .product-card .text-white {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .product-card .text-slate-300 {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .product-card .text-slate-400 {
+  color: var(--vani-t-text-soft) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope {
+  background: linear-gradient(180deg, var(--vani-t-bg-surface) 0%, var(--vani-t-bg-deep) 100%);
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope .text-white {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope .text-slate-300,
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope .text-slate-400 {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope input,
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope textarea,
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope select {
+  background-color: var(--vani-t-input-bg) !important;
+  color: var(--vani-t-text) !important;
+  border-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope input::placeholder,
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Contact privacy inset — wins over section-wide .text-white remaps */
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] .text-white,
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] h4 {
+  color: #f8fafc !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] .text-slate-300,
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] .text-slate-400,
+html[data-vani-route='home'][data-vani-theme='light'] #contact.vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] p {
+  color: #cbd5e1 !important;
+}
+
+/* Dark mode — keep muted copy readable on slate sections */
+html[data-vani-theme='dark'] .vani-theme-scope:not(#home) .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+html[data-vani-theme='dark'] .vani-theme-scope:not(#home) .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+/* Dark mode — #products / #product-showcase (light-SaaS HTML + style.css) follow site theme */
+html[data-vani-theme='dark'] #products.vani-theme-scope,
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope {
+  background-color: var(--vani-t-bg-main) !important;
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope[class*='border-slate'],
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope[class*='border-slate'] {
+  border-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .text-slate-900,
+html[data-vani-theme='dark'] #products.vani-theme-scope .text-slate-800,
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope .text-slate-900,
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope .text-slate-800 {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .text-slate-700,
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope .text-slate-700 {
+  color: var(--vani-t-text-soft) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .bg-white,
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope .bg-white {
+  background-color: var(--vani-t-bg-surface) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope [class*='border-slate-200'],
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope [class*='border-slate-200'] {
+  border-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope.vani-prod-stacked .vani-prod-panel {
+  background: rgba(37, 46, 64, 0.88) !important;
+  border-color: var(--vani-t-border) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope.vani-prod-stacked .vani-prod-stack-header {
+  border-bottom-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-grid-bg {
+  background-image: linear-gradient(rgba(241, 245, 249, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(241, 245, 249, 0.07) 1px, transparent 1px) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-tab {
+  background: var(--vani-t-bg-surface) !important;
+  border-color: var(--vani-t-border) !important;
+  color: var(--vani-t-text-muted) !important;
+  box-shadow: none !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-tab.is-active {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-tab.is-active[data-vani-prod-tab='aitalksy'] {
+  background: linear-gradient(180deg, var(--vani-t-bg-elevated), rgba(6, 182, 212, 0.14)) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-tab.is-active[data-vani-prod-tab='community'] {
+  background: linear-gradient(180deg, var(--vani-t-bg-elevated), rgba(16, 185, 129, 0.14)) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-tab.is-active[data-vani-prod-tab='traveljioo'] {
+  background: linear-gradient(180deg, var(--vani-t-bg-elevated), rgba(59, 130, 246, 0.14)) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-story-chip {
+  background: var(--vani-t-bg-surface) !important;
+  border-color: var(--vani-t-border) !important;
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-story-chip.is-active {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-story-rail-cyan .vani-prod-story-chip.is-active {
+  background: rgba(6, 182, 212, 0.16) !important;
+  color: #67e8f9 !important;
+  border-color: rgba(6, 182, 212, 0.45) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-story-rail-emerald .vani-prod-story-chip.is-active {
+  background: rgba(16, 185, 129, 0.16) !important;
+  color: #6ee7b7 !important;
+  border-color: rgba(16, 185, 129, 0.45) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-story-rail-blue .vani-prod-story-chip.is-active {
+  background: rgba(59, 130, 246, 0.16) !important;
+  color: #93c5fd !important;
+  border-color: rgba(59, 130, 246, 0.45) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-feature {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope [data-vani-prod-panel='aitalksy'] .vani-prod-aitalksy-feature-grid {
+  background: linear-gradient(180deg, var(--vani-t-bg-surface) 0%, var(--vani-t-bg-main) 100%) !important;
+  border-color: var(--vani-t-border) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope [data-vani-prod-panel='aitalksy'] .vani-prod-aitalksy-features-label {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope [data-vani-prod-panel='aitalksy'] .vani-prod-aitalksy-feature-card {
+  background: var(--vani-t-bg-elevated) !important;
+  border-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope [data-vani-prod-panel='aitalksy'] .vani-prod-aitalksy-feature-text strong {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope [data-vani-prod-panel='aitalksy'] .vani-prod-aitalksy-feature-text span {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope [data-vani-prod-panel='aitalksy'] .vani-prod-aitalksy-integrations {
+  background: linear-gradient(180deg, var(--vani-t-bg-surface) 0%, var(--vani-t-bg-main) 100%) !important;
+  border-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope [data-vani-prod-panel='aitalksy'] .vani-prod-aitalksy-integrations-label,
+html[data-vani-theme='dark'] #products.vani-theme-scope [data-vani-prod-panel='aitalksy'] .vani-prod-aitalksy-integrations-note {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-feature-story-kicker {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-feature-story-now {
+  background: var(--vani-t-bg-elevated) !important;
+  border-color: var(--vani-t-border) !important;
+  color: var(--vani-t-text-soft) !important;
+}
+
+html[data-vani-theme='dark'] #products.vani-theme-scope .vani-prod-feature-story-now strong {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope .showcase-tab {
+  background: var(--vani-t-bg-surface) !important;
+  border-color: var(--vani-t-border) !important;
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope .showcase-tab.is-active {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope[data-showcase-theme='cyan'] .showcase-tab.is-active {
+  background: linear-gradient(180deg, var(--vani-t-bg-elevated), rgba(6, 182, 212, 0.14)) !important;
+}
+
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope[data-showcase-theme='emerald'] .showcase-tab.is-active {
+  background: linear-gradient(180deg, var(--vani-t-bg-elevated), rgba(16, 185, 129, 0.14)) !important;
+}
+
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope[data-showcase-theme='blue'] .showcase-tab.is-active {
+  background: linear-gradient(180deg, var(--vani-t-bg-elevated), rgba(59, 130, 246, 0.14)) !important;
+}
+
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope .showcase-float {
+  background: linear-gradient(145deg, rgba(37, 46, 64, 0.94), rgba(28, 35, 50, 0.88)) !important;
+  border-color: var(--vani-t-border) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32) !important;
+}
+
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope .showcase-float-success {
+  background: linear-gradient(145deg, rgba(6, 78, 59, 0.55), rgba(37, 46, 64, 0.9)) !important;
+  border-color: rgba(16, 185, 129, 0.45) !important;
+}
+
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope .showcase-float-label {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope .showcase-float-text {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-theme='dark'] #product-showcase.vani-theme-scope .showcase-grid-bg {
+  opacity: 0.28;
+}
+
+/* Light mode — restore light-SaaS product bands when toggled back from dark */
+html[data-vani-theme='light'] #products.vani-theme-scope,
+html[data-vani-theme='light'] #product-showcase.vani-theme-scope {
+  background-color: var(--vani-t-bg-surface) !important;
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-theme='light'] #products.vani-theme-scope .text-slate-900,
+html[data-vani-theme='light'] #products.vani-theme-scope .text-slate-800,
+html[data-vani-theme='light'] #product-showcase.vani-theme-scope .text-slate-900,
+html[data-vani-theme='light'] #product-showcase.vani-theme-scope .text-slate-800 {
+  color: #0f172a !important;
+}
+
+html[data-vani-theme='light'] #products.vani-theme-scope .text-slate-600,
+html[data-vani-theme='light'] #product-showcase.vani-theme-scope .text-slate-600 {
+  color: #475569 !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] body {
+  background-color: var(--vani-t-bg-deep) !important;
+  color: var(--vani-t-text);
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home)[class*='bg-[#161c28]'],
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home)[class*='bg-[#1c2332]'] {
+  background-color: var(--vani-t-bg-surface) !important;
+}
+
+/* Nested slate panels (About cards, Mission/Vision, etc.) — must match light text remaps */
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) [class*='bg-[#161c28]'],
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) [class*='bg-[#1c2332]'],
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) [class*='bg-[#252e40]'] {
+  background-color: var(--vani-t-card-surface) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .glass-card,
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .glass-panel,
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .service-card,
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .value-card,
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .product-card,
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .gradient-border-inner {
+  background: var(--vani-t-card-surface) !important;
+  border-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .glass-card:hover,
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .value-card:hover,
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .service-card:hover,
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .product-card:hover {
+  background: var(--vani-t-card-surface-hover) !important;
+  box-shadow: 0 16px 36px -12px rgba(15, 23, 42, 0.1), 0 0 24px -6px rgba(232, 88, 39, 0.12);
+}
+
+/* Delivery / portfolio product cards — secondary actions & filters */
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .product-card .btn-primary {
+  color: #ffffff !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .product-card button[class*='bg-white/5'] {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+  color: #1e293b !important;
+  border-color: rgba(100, 116, 139, 0.4) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .product-card button[class*='bg-white/5']:hover {
+  background-color: rgba(15, 23, 42, 0.1) !important;
+  color: #0f172a !important;
+  border-color: rgba(232, 88, 39, 0.35) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .filter-btn:not(.active) {
+  background: var(--vani-t-card-surface) !important;
+  color: var(--vani-t-text-muted) !important;
+  border-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) .filter-btn:not(.active):hover {
+  background: var(--vani-t-bg-elevated) !important;
+  color: var(--vani-t-text) !important;
+  border-color: rgba(232, 88, 39, 0.35) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) input[class*='bg-[#252e40]'],
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) input.text-white {
+  background-color: var(--vani-t-input-bg) !important;
+  color: var(--vani-t-text) !important;
+  border-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) input.text-white::placeholder,
+html[data-vani-theme='light'] .vani-theme-scope:not(#home) input.placeholder-slate-400::placeholder {
+  color: #94a3b8 !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] .vani-theme-scope:not(#home) [class*='border-[#60697d]'] {
+  border-color: var(--vani-t-border) !important;
+}
+
+/* Overview component — light tokens */
+html[data-vani-theme='light'] #overview.vani-overview {
+  --ov-ink: #0f172a;
+  --ov-muted: #64748b;
+  --ov-soft: #475569;
+  --ov-line: rgba(100, 116, 139, 0.24);
+  --ov-deep: #f1f5f9;
+  --ov-panel: #ffffff;
+  --ov-panel-2: #f8fafc;
+  background:
+    radial-gradient(ellipse 55% 40% at 8% 12%, rgba(52, 211, 153, 0.08), transparent 60%),
+    radial-gradient(ellipse 45% 35% at 92% 18%, rgba(232, 88, 39, 0.06), transparent 55%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2f7 42%, #f8fafc 100%);
+}
+
+html[data-vani-theme='light'] #overview.vani-overview .vani-overview__close {
+  background:
+    linear-gradient(135deg, rgba(52, 211, 153, 0.12), transparent 45%),
+    linear-gradient(180deg, var(--ov-panel), var(--ov-panel-2));
+}
+
+/* Product motion showcase — light tokens */
+html[data-vani-theme='light'] #vani-product-motion.vani-pm {
+  --pm-ink: #0f172a;
+  --pm-soft: #475569;
+  --pm-muted: #64748b;
+  --pm-line: rgba(100, 116, 139, 0.22);
+  --pm-line-strong: rgba(100, 116, 139, 0.32);
+  --pm-bg: #f1f5f9;
+  --pm-surface: #ffffff;
+  --pm-surface-elevated: #f8fafc;
+  --pm-ui-bg: #e2e8f0;
+  --pm-ui-panel: #f8fafc;
+  background-color: var(--pm-bg);
+  background-image: linear-gradient(180deg, #f8fafc 0%, var(--pm-bg) 48%, #eef2f7 100%);
+}
+
+/* Admin dashboard chrome */
+html[data-vani-theme='light'] .vani-theme-chrome.admin-header-bar {
+  background: var(--vani-t-chrome-bg) !important;
+  border-bottom-color: var(--vani-t-chrome-border) !important;
+}
+
+html[data-vani-theme='light'] .admin-scrollbar::-webkit-scrollbar-track {
+  background: #e2e8f0;
+}
+
+html[data-vani-theme='light'] .admin-scrollbar::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+}
+
+/* Dark inset panels (privacy guarantee, etc.) — keep dark surface + light copy in Light Mode */
+html[data-vani-theme='light'] .vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'],
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] {
+  background-image: linear-gradient(to bottom right, #161c28, #1c2332) !important;
+  background-color: #161c28 !important;
+  border-color: rgba(96, 105, 125, 0.35) !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] .text-white,
+html[data-vani-theme='light'] .vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] h4,
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] .text-white {
+  color: #f8fafc !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] .text-slate-300,
+html[data-vani-theme='light'] .vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] .text-slate-400,
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] .text-slate-400 {
+  color: #cbd5e1 !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] strong,
+html[data-vani-route='standalone'][data-vani-theme='light'] .vani-theme-scope [class*='from-[#161c28]'][class*='to-[#1c2332]'] strong {
+  color: #f8fafc !important;
+}
+
+/* Home — Light Mode (hero content readable; 3D canvas unchanged) */
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope {
+  color: var(--vani-t-text);
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .bg-layer-1-gradient {
+  background: radial-gradient(circle at 75% 35%, #f8fafc 0%, #eef2f7 48%, #e2e8f0 100%);
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .bg-layer-2-glow-orange,
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .bg-layer-2-glow-blue {
+  opacity: 0.35;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .text-white {
+  color: var(--vani-t-text) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .text-slate-300 {
+  color: var(--vani-t-text-muted) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .text-slate-400 {
+  color: var(--vani-t-text-soft) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .text-slate-200 {
+  color: #334155 !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .btn-primary {
+  color: #ffffff !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .btn-secondary {
+  color: #e2e8f0 !important;
+  border-color: rgba(100, 116, 139, 0.35) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .btn-secondary.text-slate-200,
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .btn-secondary:hover {
+  color: #f8fafc !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .glass-card {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: var(--vani-t-border) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope [class*='border-[#60697d]'] {
+  border-color: var(--vani-t-border) !important;
+}
+
+/* Theme toggle control */
+.vani-theme-toggle {
+  position: relative;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  border: 1px solid var(--vani-t-chrome-border, rgba(96, 105, 125, 0.28));
+  background: rgba(37, 46, 64, 0.45);
+  color: var(--vani-t-text-soft, #cbd5e1);
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease;
+}
+
+html[data-vani-theme='light'] .vani-theme-toggle {
+  background: rgba(255, 255, 255, 0.85);
+  color: #475569;
+}
+
+.vani-theme-toggle:hover {
+  border-color: rgba(232, 88, 39, 0.45);
+  color: #fbd5c6;
+}
+
+html[data-vani-theme='light'] .vani-theme-toggle:hover {
+  color: #c2410c;
+}
+
+.vani-theme-toggle:focus-visible {
+  outline: 2px solid #e85827 !important;
+  outline-offset: 2px !important;
+}
+
+.vani-theme-toggle__icon {
+  font-size: 1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+html[data-vani-theme='dark'] .vani-theme-toggle__icon--dark,
+html[data-vani-theme='light'] .vani-theme-toggle__icon--light {
+  display: none;
+}
+
+html[data-vani-theme='dark'] .vani-theme-toggle__icon--light,
+html[data-vani-theme='light'] .vani-theme-toggle__icon--dark {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.is-vani-theme-animate .vani-theme-chrome,
+  html.is-vani-theme-animate .vani-theme-scope {
+    transition: none !important;
+  }
+}

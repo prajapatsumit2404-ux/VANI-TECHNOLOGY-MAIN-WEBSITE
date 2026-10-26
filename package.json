@@ -7,6 +7,7 @@
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
     "test": "node backend/tests/test_phase10.js",
+    "test:motion": "node backend/tests/test_phase10_motion_theme_stack.js",
     "test:all": "node backend/tests/test_phase6.js && node backend/tests/test_phase7.js && node backend/tests/test_phase8.js && node backend/tests/test_phase10.js"
   },
   "keywords": [

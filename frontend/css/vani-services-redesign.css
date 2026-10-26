@@ -1,0 +1,234 @@
+/**
+ * Services dashboard (#services.vani-services-redesign only).
+ */
+
+#services.vani-services-redesign {
+  isolation: isolate;
+}
+
+#services.vani-services-redesign .vani-svc-dash__mesh {
+  background:
+    radial-gradient(ellipse 80% 55% at 12% 18%, rgba(232, 88, 39, 0.09), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 88% 72%, rgba(59, 130, 246, 0.07), transparent 52%),
+    linear-gradient(180deg, rgba(255, 252, 247, 0.03) 0%, transparent 42%);
+  opacity: 0.95;
+}
+
+#services.vani-services-redesign .vani-svc-dash__header {
+  max-width: 44rem;
+}
+
+#services.vani-services-redesign .vani-svc-dash__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(251, 213, 198, 0.92);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+#services.vani-services-redesign .service-card {
+  background: rgba(255, 252, 247, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.125rem;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 12px 40px -24px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+#services.vani-services-redesign .service-card::before {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 252, 247, 0.35), rgba(232, 88, 39, 0.55), transparent);
+}
+
+#services.vani-services-redesign .service-card:not(.vani-svc-dash-tilt-card):hover {
+  transform: translateY(-4px);
+  border-color: rgba(232, 88, 39, 0.45);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 22px 48px -20px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(232, 88, 39, 0.12);
+}
+
+#services.vani-services-redesign .service-card.vani-svc-dash-tilt-card:hover {
+  border-color: rgba(232, 88, 39, 0.45);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 22px 48px -20px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(232, 88, 39, 0.12);
+}
+
+#services.vani-services-redesign .service-card.vani-svc-dash-tilt-card {
+  transform: perspective(1000px) rotateX(var(--vani-svc-rx, 0deg)) rotateY(var(--vani-svc-ry, 0deg))
+    translateY(var(--vani-svc-lift, 0px));
+  transform-style: preserve-3d;
+  transition:
+    transform 0.22s ease-out,
+    border-color 0.32s ease,
+    box-shadow 0.32s ease;
+  will-change: transform;
+}
+
+#services.vani-services-redesign .service-card.vani-svc-dash-tilt-card:hover {
+  --vani-svc-lift: -4px;
+}
+
+#services.vani-services-redesign .service-card.vani-svc-dash-tilt-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  background: radial-gradient(
+    18rem circle at var(--vani-svc-shine-x, 50%) var(--vani-svc-shine-y, 50%),
+    rgba(255, 252, 247, 0.12) 0%,
+    rgba(232, 88, 39, 0.08) 28%,
+    transparent 58%
+  );
+}
+
+#services.vani-services-redesign .service-card.vani-svc-dash-tilt-card:hover::after {
+  opacity: 1;
+}
+
+#services.vani-services-redesign .vani-svc-dash__featured-card {
+  padding: 1.75rem 1.5rem;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 252, 247, 0.1) 0%,
+    rgba(255, 252, 247, 0.04) 38%,
+    rgba(37, 46, 64, 0.35) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+@media (min-width: 640px) {
+  #services.vani-services-redesign .vani-svc-dash__featured-card {
+    padding: 2rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #services.vani-services-redesign .vani-svc-dash__featured-card {
+    padding-right: calc(min(30%, 17.5rem) + 2.5rem);
+    min-height: 13.5rem;
+  }
+
+  #services.vani-services-redesign .vani-svc-dash__featured-card .vani-svc-dash__featured-panel {
+    position: absolute;
+    right: 1.75rem;
+    top: 1.75rem;
+    bottom: 1.75rem;
+    width: min(30%, 17.5rem);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background:
+      radial-gradient(circle at 30% 25%, rgba(232, 88, 39, 0.22), transparent 55%),
+      radial-gradient(circle at 70% 75%, rgba(59, 130, 246, 0.18), transparent 50%),
+      linear-gradient(160deg, rgba(255, 252, 247, 0.08), rgba(22, 28, 40, 0.45));
+    box-shadow: 0 8px 32px -12px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+  }
+
+  #services.vani-services-redesign .vani-svc-dash__featured-card .vani-svc-dash__featured-panel::before {
+    content: '';
+    position: absolute;
+    inset: 12%;
+    border-radius: 0.75rem;
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+    opacity: 0.7;
+  }
+}
+
+#services.vani-services-redesign .vani-svc-dash__featured-card .service-icon-box {
+  width: 3.75rem;
+  height: 3.75rem;
+  font-size: 1.55rem;
+}
+
+#services.vani-services-redesign .vani-svc-dash__featured-card h3 {
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+@media (min-width: 1024px) {
+  #services.vani-services-redesign .vani-svc-dash__featured-card h3 {
+    font-size: 1.5rem;
+  }
+}
+
+#services.vani-services-redesign .service-icon-box {
+  background: linear-gradient(145deg, rgba(255, 252, 247, 0.08) 0%, rgba(37, 46, 64, 0.85) 100%);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+#services.vani-services-redesign .service-card:hover .service-icon-box {
+  transform: scale(1.06) rotate(-3deg);
+}
+
+#services.vani-services-redesign .vani-svc-dash__grid .service-card {
+  min-height: 100%;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #services.vani-services-redesign {
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 48%, #eef2f7 100%) !important;
+  border-top-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #services.vani-services-redesign .vani-svc-dash__mesh {
+  background:
+    radial-gradient(ellipse 75% 50% at 10% 20%, rgba(232, 88, 39, 0.08), transparent 55%),
+    radial-gradient(ellipse 65% 45% at 90% 70%, rgba(59, 130, 246, 0.06), transparent 52%);
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #services.vani-services-redesign .vani-svc-dash__chip {
+  color: #9a3412;
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(232, 88, 39, 0.18);
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #services.vani-services-redesign .service-card {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 16px 40px -28px rgba(15, 23, 42, 0.18);
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #services.vani-services-redesign .vani-svc-dash__featured-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 252, 247, 0.88) 55%, rgba(241, 245, 249, 0.95) 100%);
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #services.vani-services-redesign .service-icon-box {
+  background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #services.vani-services-redesign .service-card,
+  #services.vani-services-redesign .service-card.vani-svc-dash-tilt-card,
+  #services.vani-services-redesign .service-icon-box {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+  }
+
+  #services.vani-services-redesign .service-card.vani-svc-dash-tilt-card {
+    transform: none !important;
+  }
+
+  #services.vani-services-redesign .service-card:hover .service-icon-box {
+    transform: none !important;
+  }
+
+}

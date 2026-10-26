@@ -26,7 +26,7 @@ const defaultProducts = [
     sortOrder: 2,
   },
   {
-    name: 'RateHonk Travel CRM',
+    name: 'TravelJioo',
     category: 'CRM',
     description: 'Enterprise Travel Management CRM engineered for tour operators, booking itineraries, agent commissions, and multi-currency billing.',
     features: ['Lead & Booking Pipelines', 'Dynamic Quotation Engine', 'Supplier Inventory Sync', 'Multi-Currency Accounting'],

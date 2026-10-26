@@ -1,0 +1,9 @@
+/**
+ * Ambient canvas/particle/grid layers removed — stylesheet retained for page wiring.
+ */
+
+.vani-ambient-layer,
+.vani-ambient-page,
+.vani-ambient-host > .vani-ambient-layer {
+  display: none !important;
+}

@@ -1,0 +1,131 @@
+/**
+ * Phase 8 — Responsive motion tiers & accessibility helpers.
+ */
+
+/* ——— Motion tier: minimal (mobile / reduced motion) ——— */
+html[data-vani-motion-tier='minimal'] .vani-ambient__gradient,
+html[data-vani-motion-tier='minimal'] .vani-ambient__orb,
+html[data-vani-motion-tier='minimal'] .vani-ambient__grid {
+  animation: none !important;
+  will-change: auto;
+}
+
+html[data-vani-motion-tier='minimal'] .vani-ambient__mesh {
+  display: none !important;
+}
+
+html[data-vani-motion-tier='minimal'] .vani-scroll-host.is-vm-active .vani-scroll-item:not(.is-vm-revealed) {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+html[data-vani-motion-tier='minimal'] .vani-scroll-host.is-vm-inview .vani-ambient__gradient {
+  transform: none !important;
+}
+
+html[data-vani-motion-tier='minimal'] .vani-scroll-host.is-vm-active .vani-scroll-item.is-vm-revealed {
+  transition: none !important;
+}
+
+/* ——— Motion tier: reduced (tablet) ——— */
+html[data-vani-motion-tier='reduced'] .vani-ambient__gradient {
+  animation-duration: 72s !important;
+}
+
+html[data-vani-motion-tier='reduced'] .vani-ambient__orb--a {
+  animation-duration: 54s !important;
+}
+
+html[data-vani-motion-tier='reduced'] .vani-ambient__orb--b {
+  animation-duration: 62s !important;
+}
+
+html[data-vani-motion-tier='reduced'] .vani-scroll-host.is-vm-active .vani-scroll-item.is-vm-revealed {
+  transition-duration: 0.38s;
+}
+
+html[data-vani-motion-tier='reduced'] .vani-scroll-host.is-vm-active:not(.is-vm-reduced) .vani-scroll-item:not(.is-vm-revealed) {
+  transform: translate3d(0, 10px, 0);
+}
+
+/* ——— Pointer tier: off (mobile / no fine pointer) ——— */
+html[data-vani-pointer-tier='off'] .vani-cursor-glow {
+  display: none !important;
+}
+
+html[data-vani-pointer-tier='off'] .vani-ambient-layer.vani-parallax-enabled {
+  transform: none !important;
+}
+
+html[data-vani-pointer-tier='off'] .vani-pointer-card::after {
+  opacity: 0 !important;
+}
+
+/* ——— Pointer tier: lite (tablet) ——— */
+html[data-vani-pointer-tier='lite'] .vani-cursor-glow {
+  opacity: 0.65;
+}
+
+html[data-vani-pointer-tier='lite'] {
+  --vani-parallax-shift-x: 5px;
+  --vani-parallax-shift-y: 4px;
+}
+
+html[data-vani-pointer-tier='full'] {
+  --vani-parallax-shift-x: 10px;
+  --vani-parallax-shift-y: 8px;
+}
+
+.vani-ambient-layer.vani-parallax-enabled {
+  transform: translate3d(
+    calc(var(--vani-parallax-x, 0) * var(--vani-parallax-shift-x, 10px)),
+    calc(var(--vani-parallax-y, 0) * var(--vani-parallax-shift-y, 8px)),
+    0
+  );
+  will-change: transform;
+}
+
+/* Theme toggle — touch target on small screens */
+@media (max-width: 767px) {
+  .vani-theme-toggle {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}
+
+/* Coarse pointer: suppress hover-only card polish; keep keyboard focus */
+@media (hover: none), (pointer: coarse) {
+  .vani-pointer-card:hover {
+    box-shadow: none;
+    border-color: inherit !important;
+  }
+
+  .vani-pointer-card:hover::after {
+    opacity: 0;
+  }
+}
+
+.vani-pointer-card:focus-visible {
+  outline: 2px solid var(--flame-orange, #e85827) !important;
+  outline-offset: 2px !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope .text-slate-300,
+html[data-vani-theme='light'] .vani-theme-chrome .text-slate-300 {
+  color: #475569 !important;
+}
+
+html[data-vani-theme='light'] .vani-theme-scope .text-slate-400,
+html[data-vani-theme='light'] .vani-theme-chrome .text-slate-400 {
+  color: #64748b !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-vani-motion-tier] .vani-ambient__gradient,
+  html[data-vani-motion-tier] .vani-ambient__orb,
+  html[data-vani-motion-tier] .vani-ambient__grid {
+    animation: none !important;
+  }
+}

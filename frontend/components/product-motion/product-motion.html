@@ -1,0 +1,242 @@
+<!--
+  Product Motion Showcase — Phase 4 Polished Markup
+  Inserted in index.html between #overview and #about.
+  Styles: product-motion.css | Script: product-motion.js (scoped to #vani-product-motion).
+-->
+<section id="vani-product-motion" class="vani-pm" aria-labelledby="vani-pm-heading">
+  <div class="vani-pm__inner">
+    <header class="vani-pm__header">
+      <div data-pm-anim="header">
+        <p class="vani-pm__eyebrow">Product architecture &amp; workflows</p>
+        <h2 id="vani-pm-heading" class="vani-pm__title">
+          Software experiences built for <em>real workflows</em>
+        </h2>
+      </div>
+      <div class="vani-pm__header-aside" data-pm-anim="header">
+        <p class="vani-pm__lead">
+          Explore Vani Technologies’ verified software platforms and client delivery systems—conversational AI,
+          community infrastructure, and travel CRM—structured around the interfaces operators use every day.
+        </p>
+        <p class="vani-pm__demo-note">
+          <span class="vani-pm__demo-dot" aria-hidden="true"></span>
+          <span>Interactive workspace preview · Illustrative interface states for this website.</span>
+        </p>
+      </div>
+    </header>
+
+    <!-- Featured product workspace -->
+    <div class="vani-pm__workspace">
+      <div class="vani-pm__rail" role="group" aria-label="Select a product workspace preview">
+        <button type="button" class="vani-pm__product is-featured" data-pm-select="aitalksy" aria-pressed="true">
+          <img class="vani-pm__product-logo" src="assets/images/portfolio/aitalksy-logo.png" alt="" width="40" height="40" loading="lazy" decoding="async">
+          <div>
+            <div class="vani-pm__product-head">
+              <strong>AI Talksy</strong>
+              <span class="vani-pm__product-kicker">Conversational AI</span>
+            </div>
+            <span class="vani-pm__product-desc">Autonomous customer support, intent routing, and multi-channel voice &amp; text workflows.</span>
+          </div>
+        </button>
+
+        <button type="button" class="vani-pm__product" data-pm-select="community" aria-pressed="false">
+          <img class="vani-pm__product-logo" src="assets/images/portfolio/community-forum-logo.png" alt="" width="40" height="40" loading="lazy" decoding="async">
+          <div>
+            <div class="vani-pm__product-head">
+              <strong>Community Forum</strong>
+              <span class="vani-pm__product-kicker">Member Platform</span>
+            </div>
+            <span class="vani-pm__product-desc">Verified member directories, moderated discussion threads, and collaborative community hubs.</span>
+          </div>
+        </button>
+
+        <button type="button" class="vani-pm__product" data-pm-select="traveljioo" aria-pressed="false">
+          <img class="vani-pm__product-logo" src="assets/images/portfolio/ratehonk-logo.png" alt="" width="40" height="40" loading="lazy" decoding="async">
+          <div>
+            <div class="vani-pm__product-head">
+              <strong>TravelJioo</strong>
+              <span class="vani-pm__product-kicker">Travel CRM</span>
+            </div>
+            <span class="vani-pm__product-desc">B2B tour operator CRM for deal pipelines, multi-city itineraries, and commission tracking.</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="vani-pm__stage" data-vani-pm-stage="aitalksy" aria-live="polite">
+        <div class="vani-pm__stage-bar">
+          <p class="vani-pm__stage-bar-title" data-pm-stage-title>
+            <img src="assets/images/portfolio/aitalksy-logo.png" alt="" width="22" height="22" loading="lazy" decoding="async" data-pm-stage-logo>
+            <span data-pm-stage-label>AI Talksy · Conversational AI Workspace</span>
+          </p>
+          <span class="vani-pm__pill" data-pm-stage-pill>Simulated workflow</span>
+        </div>
+
+        <div class="vani-pm__stage-body">
+          <div class="vani-pm__ui" aria-label="Simulated product workflow and interface">
+            <!-- Sequence flow nodes -->
+            <div class="vani-pm__flow" aria-label="Workflow sequence">
+              <span class="vani-pm__node is-on" data-pm-node="0">
+                <span class="vani-pm__node-dot" aria-hidden="true"></span>
+                <span data-pm-node-text="0">Inbound Chat</span>
+              </span>
+              <span class="vani-pm__connector is-drawn" data-pm-connector aria-hidden="true"></span>
+              <span class="vani-pm__node is-on" data-pm-node="1">
+                <span class="vani-pm__node-dot" aria-hidden="true"></span>
+                <span data-pm-node-text="1">Intent Engine</span>
+              </span>
+              <span class="vani-pm__connector is-drawn" data-pm-connector aria-hidden="true"></span>
+              <span class="vani-pm__node is-on" data-pm-node="2">
+                <span class="vani-pm__node-dot" aria-hidden="true"></span>
+                <span data-pm-node-text="2">CRM Sync</span>
+              </span>
+            </div>
+
+            <!-- Simulated application window -->
+            <div class="vani-pm__ui-window">
+              <div class="vani-pm__ui-chrome" aria-hidden="true">
+                <div class="vani-pm__ui-dots">
+                  <i class="vani-pm__dot"></i><i class="vani-pm__dot"></i><i class="vani-pm__dot"></i>
+                </div>
+                <span class="vani-pm__ui-chrome-title" data-pm-window-title>Inbox · Omnichannel Router</span>
+              </div>
+              <div class="vani-pm__ui-content">
+                <div class="vani-pm__msg vani-pm__msg--in" data-pm-msg-in>
+                  <span data-pm-msg-in-text>Hello, I need help checking my order status and invoice.</span>
+                  <small data-pm-msg-in-meta>Visitor · Web chat</small>
+                </div>
+                <div class="vani-pm__msg vani-pm__msg--ai" data-pm-msg-out>
+                  <span data-pm-msg-out-text>Intent matched: Order Lookup. Dispatched status &amp; PDF invoice synced to thread.</span>
+                  <small data-pm-msg-out-meta>AI Talksy · Automated response</small>
+                </div>
+
+                <div class="vani-pm__telemetry">
+                  <div class="vani-pm__channels" aria-label="Active modules">
+                    <span class="vani-pm__channel is-on" data-pm-chip="0">Web</span>
+                    <span class="vani-pm__channel" data-pm-chip="1">WhatsApp</span>
+                    <span class="vani-pm__channel" data-pm-chip="2">Slack</span>
+                  </div>
+                  <div class="vani-pm__bars" aria-hidden="true">
+                    <span class="vani-pm__bar is-grown" data-pm-bar style="--bar-h: 55%"></span>
+                    <span class="vani-pm__bar is-grown" data-pm-bar style="--bar-h: 82%"></span>
+                    <span class="vani-pm__bar is-grown" data-pm-bar style="--bar-h: 68%"></span>
+                    <span class="vani-pm__bar is-grown" data-pm-bar style="--bar-h: 94%"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vani-pm__visual">
+            <div class="vani-pm__visual-frame">
+              <img
+                src="assets/images/portfolio/Tablet-Screens-presentation-Mock-up.png"
+                alt="Multi-device product interface mockup from Vani Technologies portfolio"
+                width="1200"
+                height="750"
+                loading="lazy"
+                decoding="async"
+                data-pm-visual-img
+              >
+            </div>
+            <div class="vani-pm__visual-caption">
+              <div class="vani-pm__visual-tags">
+                <span class="vani-pm__tag" data-pm-tag-primary>Multi-device UI</span>
+                <span class="vani-pm__tag" data-pm-tag-secondary>Verified asset</span>
+              </div>
+              <span class="vani-pm__status" data-pm-status>Workflow ready · Demo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second visual story: workflow -->
+    <div class="vani-pm__workflow">
+      <figure class="vani-pm__workflow-media">
+        <div class="vani-pm__workflow-Screen">
+          <img
+            src="assets/images/portfolio/responsive_web.png"
+            alt="MSB educational portal shown across desktop, laptop, and tablet screens"
+            width="960"
+            height="600"
+            loading="lazy"
+            decoding="async"
+          >
+        </div>
+        <figcaption class="vani-pm__workflow-bar">
+          <span class="vani-pm__workflow-BarTitle">MSB School Management · Multi-screen layout</span>
+          <span>16:10 device presentation</span>
+        </figcaption>
+      </figure>
+
+      <div class="vani-pm__workflow-copy">
+        <p class="vani-pm__label" data-pm-anim="workflow-copy">Delivery architecture</p>
+        <h3 data-pm-anim="workflow-copy">From interface craft to dependable delivery</h3>
+        <p data-pm-anim="workflow-copy">
+          Alongside flagship platforms, Vani engineers custom portals and commerce systems—keeping
+          data models, responsive layouts, and QA verification aligned across desktop and mobile.
+        </p>
+        <ol class="vani-pm__steps">
+          <li>
+            <span class="vani-pm__step-num" aria-hidden="true">01</span>
+            <div>
+              <strong>Scope &amp; system design</strong>
+              <span>Define user journeys, API contracts, and screen architecture before build.</span>
+            </div>
+          </li>
+          <li>
+            <span class="vani-pm__step-num" aria-hidden="true">02</span>
+            <div>
+              <strong>Responsive interface engineering</strong>
+              <span>Build cohesive web and mobile views with consistent component hierarchy.</span>
+            </div>
+          </li>
+          <li>
+            <span class="vani-pm__step-num" aria-hidden="true">03</span>
+            <div>
+              <strong>Regression QA &amp; launch support</strong>
+              <span>Validate workflows, benchmark performance, and support post-release operations.</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Editorial specification ledger for additional verified portfolio products -->
+    <div class="vani-pm__support" aria-label="Additional verified portfolio systems">
+      <article class="vani-pm__support-item">
+        <p class="vani-pm__label">01 / Healthcare</p>
+        <h4>TeleMedicine Platform</h4>
+        <p>Telehealth consultation workflows, appointment scheduling, and digital prescription views in the product catalog.</p>
+      </article>
+      <article class="vani-pm__support-item">
+        <p class="vani-pm__label">02 / Commerce</p>
+        <h4>Homem Do Pão</h4>
+        <p>Subscription and retail bakery e-commerce experience showcased across desktop and mobile mockups.</p>
+      </article>
+      <article class="vani-pm__support-item">
+        <p class="vani-pm__label">03 / Wellness</p>
+        <h4>Meditation with Willy Cherish</h4>
+        <p>Guided mindfulness and audio soundscape mobile application presented in our portfolio mockups.</p>
+      </article>
+    </div>
+
+    <!-- Closing CTA -->
+    <div class="vani-pm__close">
+      <div>
+        <p class="vani-pm__close-kicker">Explore further</p>
+        <h3>Inspect every flagship platform in detail</h3>
+        <p>Jump to the interactive product stack below or continue to About Vani Technologies.</p>
+      </div>
+      <div class="vani-pm__close-actions">
+        <a href="#products" class="btn-primary px-6 py-3.5 rounded-xl text-sm font-semibold text-white inline-flex items-center justify-center gap-2 shadow-lg shadow-[#e85827]/25">
+          <span>Explore Products</span>
+          <i class="fa-solid fa-cubes text-xs" aria-hidden="true"></i>
+        </a>
+        <a href="#about" class="vani-pm__ghost">
+          <span>Continue to About</span>
+          <i class="fa-solid fa-arrow-down text-xs" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

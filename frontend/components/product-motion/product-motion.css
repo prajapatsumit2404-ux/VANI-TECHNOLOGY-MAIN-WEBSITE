@@ -1,0 +1,912 @@
+/**
+ * Vani Product Motion Showcase — Phase 4 Polished & Scoped Styles
+ * All selectors strictly scoped under #vani-product-motion
+ */
+
+#vani-product-motion.vani-pm {
+  --pm-ink: #f8fafc;
+  --pm-soft: #cbd5e1;
+  --pm-muted: #94a3b8;
+  --pm-line: rgba(148, 163, 184, 0.2);
+  --pm-line-strong: rgba(148, 163, 184, 0.32);
+  --pm-bg: #121824;
+  --pm-surface: #171f2e;
+  --pm-surface-elevated: #1d2739;
+  --pm-ui-bg: #0c121d;
+  --pm-ui-panel: #131c2b;
+  --pm-flame: #e85827;
+  --pm-amber: #ed8a0a;
+  --pm-emerald: #10b981;
+  --pm-emerald-bright: #34d399;
+  --pm-emerald-tint: rgba(16, 185, 129, 0.1);
+  --pm-emerald-border: rgba(52, 211, 153, 0.38);
+  --pm-display: 'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --pm-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+  border-top: 1px solid var(--pm-line);
+  background-color: var(--pm-bg);
+  background-image: linear-gradient(180deg, #101622 0%, var(--pm-bg) 48%, #151c2a 100%);
+  color: var(--pm-ink);
+  font-family: var(--pm-body);
+  z-index: 10;
+}
+
+#vani-product-motion.vani-pm *,
+#vani-product-motion.vani-pm *::before,
+#vani-product-motion.vani-pm *::after {
+  box-sizing: border-box;
+}
+
+#vani-product-motion .vani-pm__inner {
+  width: min(100% - 2rem, 76rem);
+  margin: 0 auto;
+  padding: clamp(3.75rem, 7vw, 6.25rem) 0;
+}
+
+@media (min-width: 640px) {
+  #vani-product-motion .vani-pm__inner {
+    width: min(100% - 3rem, 76rem);
+  }
+}
+
+/* ——— Section Header & Hierarchy ——— */
+#vani-product-motion .vani-pm__header {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  padding-bottom: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: clamp(2.25rem, 4.5vw, 3.25rem);
+  border-bottom: 1px solid var(--pm-line);
+}
+
+@media (min-width: 1024px) {
+  #vani-product-motion .vani-pm__header {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: end;
+    gap: 2.5rem;
+  }
+}
+
+#vani-product-motion .vani-pm__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pm-emerald-bright);
+}
+
+#vani-product-motion .vani-pm__eyebrow::before {
+  content: '';
+  width: 1.5rem;
+  height: 2px;
+  background: var(--pm-emerald-bright);
+}
+
+#vani-product-motion .vani-pm__title {
+  margin: 0;
+  font-family: var(--pm-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--pm-ink);
+}
+
+#vani-product-motion .vani-pm__title em {
+  font-style: normal;
+  color: var(--pm-emerald-bright);
+}
+
+#vani-product-motion .vani-pm__header-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#vani-product-motion .vani-pm__lead {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.4vw, 1.0625rem);
+  line-height: 1.68;
+  color: var(--pm-soft);
+}
+
+#vani-product-motion .vani-pm__demo-note {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--pm-muted);
+}
+
+#vani-product-motion .vani-pm__demo-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--pm-emerald-bright);
+  flex-shrink: 0;
+}
+
+/* ——— Featured Product Workspace ——— */
+#vani-product-motion .vani-pm__workspace {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: clamp(3rem, 6vw, 4.5rem);
+}
+
+@media (min-width: 1024px) {
+  #vani-product-motion .vani-pm__workspace {
+    grid-template-columns: minmax(17.5rem, 0.36fr) minmax(0, 0.64fr);
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+}
+
+#vani-product-motion .vani-pm__rail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  min-width: 0;
+  align-content: start;
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  #vani-product-motion .vani-pm__rail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+#vani-product-motion .vani-pm__product {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: start;
+  width: 100%;
+  min-height: 3.5rem;
+  text-align: left;
+  padding: 1rem 1.05rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--pm-line);
+  background: var(--pm-surface);
+  color: var(--pm-ink);
+  cursor: pointer;
+  font: inherit;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  touch-action: manipulation;
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  #vani-product-motion .vani-pm__product {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    padding: 0.9rem;
+  }
+}
+
+#vani-product-motion .vani-pm__product:hover {
+  border-color: var(--pm-line-strong);
+  background: var(--pm-surface-elevated);
+}
+
+#vani-product-motion .vani-pm__product:focus-visible {
+  outline: 2px solid var(--pm-emerald-bright);
+  outline-offset: 2px;
+}
+
+#vani-product-motion .vani-pm__product.is-featured {
+  border-color: var(--pm-emerald-border);
+  background: var(--pm-surface-elevated);
+  box-shadow: inset 3px 0 0 var(--pm-emerald-bright);
+}
+
+#vani-product-motion .vani-pm__product-logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.5rem;
+  object-fit: contain;
+  padding: 0.25rem;
+  background: var(--pm-ui-bg);
+  border: 1px solid var(--pm-line);
+  flex-shrink: 0;
+}
+
+#vani-product-motion .vani-pm__product-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+#vani-product-motion .vani-pm__product strong {
+  font-family: var(--pm-display);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--pm-ink);
+  line-height: 1.25;
+}
+
+#vani-product-motion .vani-pm__product-kicker {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pm-emerald-bright);
+}
+
+#vani-product-motion .vani-pm__product span.vani-pm__product-desc {
+  display: block;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--pm-soft);
+}
+
+/* ——— Stage Container ——— */
+#vani-product-motion .vani-pm__stage {
+  position: relative;
+  min-width: 0;
+  border-radius: 0.875rem;
+  border: 1px solid var(--pm-line-strong);
+  background: var(--pm-ui-bg);
+  overflow: hidden;
+  box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+}
+
+#vani-product-motion .vani-pm__stage-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  padding: 0.8rem 1.1rem;
+  border-bottom: 1px solid var(--pm-line);
+  background: var(--pm-surface);
+}
+
+#vani-product-motion .vani-pm__stage-bar-title {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--pm-display);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--pm-ink);
+}
+
+#vani-product-motion .vani-pm__stage-bar-title img {
+  width: 1.4rem;
+  height: 1.4rem;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: 0.3rem;
+}
+
+#vani-product-motion .vani-pm__pill {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pm-emerald-bright);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--pm-emerald-border);
+  background: var(--pm-emerald-tint);
+}
+
+#vani-product-motion .vani-pm__stage-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  flex: 1;
+  min-height: 0;
+}
+
+@media (min-width: 768px) {
+  #vani-product-motion .vani-pm__stage-body {
+    grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
+  }
+}
+
+/* ——— Left Stage Column: Simulated UI & Flow Nodes ——— */
+#vani-product-motion .vani-pm__ui {
+  padding: 1.1rem;
+  border-bottom: 1px solid var(--pm-line);
+  background: var(--pm-ui-bg);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  #vani-product-motion .vani-pm__ui {
+    border-right: 1px solid var(--pm-line);
+    border-bottom: none;
+    min-height: 22.5rem;
+  }
+}
+
+/* Flow builder node strip */
+#vani-product-motion .vani-pm__flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--pm-line);
+  background: var(--pm-ui-panel);
+}
+
+#vani-product-motion .vani-pm__node {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.55rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--pm-line);
+  background: var(--pm-surface);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--pm-soft);
+  white-space: nowrap;
+}
+
+#vani-product-motion .vani-pm__node.is-on {
+  border-color: var(--pm-emerald-border);
+  color: var(--pm-ink);
+}
+
+#vani-product-motion .vani-pm__node-dot {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: var(--pm-emerald-bright);
+  flex-shrink: 0;
+}
+
+#vani-product-motion .vani-pm__connector {
+  flex: 1;
+  min-width: 0.65rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--pm-emerald-bright), rgba(52, 211, 153, 0.35));
+  transform-origin: left center;
+}
+
+#vani-product-motion .vani-pm__ui-window {
+  border-radius: 0.65rem;
+  border: 1px solid var(--pm-line);
+  background: var(--pm-ui-panel);
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#vani-product-motion .vani-pm__ui-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  background: var(--pm-surface);
+  border-bottom: 1px solid var(--pm-line);
+}
+
+#vani-product-motion .vani-pm__ui-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+#vani-product-motion .vani-pm__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+}
+
+#vani-product-motion .vani-pm__dot:nth-child(1) { background: #f87171; }
+#vani-product-motion .vani-pm__dot:nth-child(2) { background: #fbbf24; }
+#vani-product-motion .vani-pm__dot:nth-child(3) { background: #34d399; }
+
+#vani-product-motion .vani-pm__ui-chrome-title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--pm-soft);
+  letter-spacing: 0.03em;
+}
+
+#vani-product-motion .vani-pm__ui-content {
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+#vani-product-motion .vani-pm__msg {
+  max-width: 94%;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.6rem;
+  font-size: 0.8125rem;
+  line-height: 1.48;
+}
+
+#vani-product-motion .vani-pm__msg--in {
+  align-self: flex-start;
+  background: var(--pm-surface);
+  color: var(--pm-ink);
+  border: 1px solid var(--pm-line);
+}
+
+#vani-product-motion .vani-pm__msg--ai {
+  align-self: flex-end;
+  background: rgba(16, 185, 129, 0.12);
+  color: #ecfdf5;
+  border: 1px solid var(--pm-emerald-border);
+}
+
+#vani-product-motion .vani-pm__msg small {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.6875rem;
+  color: var(--pm-muted);
+  letter-spacing: 0.03em;
+}
+
+/* Dashboard Telemetry Footer inside UI Panel */
+#vani-product-motion .vani-pm__telemetry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.45rem;
+  margin-top: auto;
+  border-top: 1px solid var(--pm-line);
+}
+
+#vani-product-motion .vani-pm__channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+#vani-product-motion .vani-pm__channel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.22rem 0.5rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--pm-line);
+  color: var(--pm-muted);
+  background: var(--pm-ui-bg);
+}
+
+#vani-product-motion .vani-pm__channel.is-on {
+  color: #d1fae5;
+  border-color: var(--pm-emerald-border);
+  background: var(--pm-emerald-tint);
+}
+
+#vani-product-motion .vani-pm__bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.22rem;
+  height: 1.4rem;
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.35rem;
+  background: var(--pm-ui-bg);
+  border: 1px solid var(--pm-line);
+}
+
+#vani-product-motion .vani-pm__bar {
+  width: 0.25rem;
+  height: var(--bar-h, 70%);
+  border-radius: 2px;
+  background: var(--pm-emerald-bright);
+  transform-origin: bottom center;
+}
+
+/* ——— Right Stage Column: Sharp Product Mockup Frame ——— */
+#vani-product-motion .vani-pm__visual {
+  position: relative;
+  min-width: 0;
+  background: #080d16;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+#vani-product-motion .vani-pm__visual-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  border: 1px solid var(--pm-line);
+  background: #05080f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#vani-product-motion .vani-pm__visual-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 0.35rem;
+}
+
+#vani-product-motion .vani-pm__visual-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+}
+
+#vani-product-motion .vani-pm__visual-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+#vani-product-motion .vani-pm__tag {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.55rem;
+  border-radius: 0.35rem;
+  color: var(--pm-soft);
+  background: var(--pm-surface);
+  border: 1px solid var(--pm-line);
+}
+
+#vani-product-motion .vani-pm__status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--pm-emerald-bright);
+}
+
+/* ——— Second Visual Story: Delivery Workflow ——— */
+#vani-product-motion .vani-pm__workflow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 3.5vw, 2.5rem);
+  align-items: center;
+  margin-bottom: clamp(3rem, 6vw, 4.25rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--pm-line);
+}
+
+@media (min-width: 1024px) {
+  #vani-product-motion .vani-pm__workflow {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  }
+}
+
+#vani-product-motion .vani-pm__workflow-media {
+  margin: 0;
+  position: relative;
+  border-radius: 0.875rem;
+  overflow: hidden;
+  border: 1px solid var(--pm-line-strong);
+  background: #070b12;
+  padding: 0.85rem;
+  box-shadow: 0 20px 44px -28px rgba(0, 0, 0, 0.75);
+}
+
+#vani-product-motion .vani-pm__workflow-Screen {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #05080f;
+  border: 1px solid var(--pm-line);
+}
+
+#vani-product-motion .vani-pm__workflow-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  object-position: center;
+}
+
+#vani-product-motion .vani-pm__workflow-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--pm-muted);
+}
+
+#vani-product-motion .vani-pm__workflow-BarTitle {
+  font-weight: 600;
+  color: var(--pm-soft);
+}
+
+#vani-product-motion .vani-pm__workflow-copy .vani-pm__label {
+  display: block;
+  margin: 0 0 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pm-emerald-bright);
+}
+
+#vani-product-motion .vani-pm__workflow-copy h3 {
+  margin: 0 0 0.75rem;
+  font-family: var(--pm-display);
+  font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
+  color: var(--pm-ink);
+}
+
+#vani-product-motion .vani-pm__workflow-copy p {
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--pm-soft);
+}
+
+#vani-product-motion .vani-pm__steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+
+#vani-product-motion .vani-pm__steps li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: start;
+  padding: 0.85rem 1rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--pm-line);
+  background: var(--pm-surface);
+}
+
+#vani-product-motion .vani-pm__step-num {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--pm-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #042f2e;
+  background: var(--pm-emerald-bright);
+  flex-shrink: 0;
+}
+
+#vani-product-motion .vani-pm__steps strong {
+  display: block;
+  font-family: var(--pm-display);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--pm-ink);
+  margin-bottom: 0.2rem;
+}
+
+#vani-product-motion .vani-pm__steps span {
+  display: block;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--pm-soft);
+}
+
+/* ——— Editorial Specification Ledger (replaces generic card grids) ——— */
+#vani-product-motion .vani-pm__support {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--pm-line);
+  border-bottom: 1px solid var(--pm-line);
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+@media (min-width: 768px) {
+  #vani-product-motion .vani-pm__support {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+#vani-product-motion .vani-pm__support-item {
+  padding: 1.35rem 0;
+  min-width: 0;
+  border-bottom: 1px solid var(--pm-line);
+}
+
+#vani-product-motion .vani-pm__support-item:last-child {
+  border-bottom: none;
+}
+
+@media (min-width: 768px) {
+  #vani-product-motion .vani-pm__support-item {
+    padding: 1.5rem 1.35rem;
+    border-bottom: none;
+    border-right: 1px solid var(--pm-line);
+  }
+
+  #vani-product-motion .vani-pm__support-item:first-child {
+    padding-left: 0;
+  }
+
+  #vani-product-motion .vani-pm__support-item:last-child {
+    padding-right: 0;
+    border-right: none;
+  }
+}
+
+#vani-product-motion .vani-pm__support-item .vani-pm__label {
+  display: block;
+  margin: 0 0 0.45rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pm-emerald-bright);
+}
+
+#vani-product-motion .vani-pm__support-item h4 {
+  margin: 0 0 0.4rem;
+  font-family: var(--pm-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--pm-ink);
+}
+
+#vani-product-motion .vani-pm__support-item p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--pm-soft);
+}
+
+/* ——— Closing CTA Band ——— */
+#vani-product-motion .vani-pm__close {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: center;
+  padding: clamp(1.5rem, 3.5vw, 2.25rem);
+  border-radius: 0.875rem;
+  border: 1px solid var(--pm-line-strong);
+  background: var(--pm-surface);
+}
+
+@media (min-width: 768px) {
+  #vani-product-motion .vani-pm__close {
+    grid-template-columns: 1.35fr auto;
+  }
+}
+
+#vani-product-motion .vani-pm__close-kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pm-emerald-bright);
+}
+
+#vani-product-motion .vani-pm__close h3 {
+  margin: 0 0 0.4rem;
+  font-family: var(--pm-display);
+  font-size: clamp(1.3rem, 2.3vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--pm-ink);
+}
+
+#vani-product-motion .vani-pm__close p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--pm-soft);
+  max-width: 36rem;
+}
+
+#vani-product-motion .vani-pm__close-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+#vani-product-motion .vani-pm__close-actions .btn-primary {
+  text-decoration: none;
+}
+
+#vani-product-motion .vani-pm__ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.75rem 1.15rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--pm-line-strong);
+  color: var(--pm-ink);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+#vani-product-motion .vani-pm__ghost:hover {
+  border-color: var(--pm-emerald-border);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+#vani-product-motion .vani-pm__ghost:focus-visible {
+  outline: 2px solid var(--pm-emerald-bright);
+  outline-offset: 3px;
+}
+
+/* ——— Mobile Refinements (390px and below) ——— */
+@media (max-width: 639px) {
+  #vani-product-motion .vani-pm__flow {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  #vani-product-motion .vani-pm__connector {
+    display: none;
+  }
+
+  #vani-product-motion .vani-pm__node {
+    font-size: 0.6875rem;
+    padding: 0.28rem 0.5rem;
+  }
+
+  #vani-product-motion .vani-pm__close-actions {
+    width: 100%;
+  }
+
+  #vani-product-motion .vani-pm__close-actions a {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+/* ——— Reduced Motion Accessibility ——— */
+@media (prefers-reduced-motion: reduce) {
+  #vani-product-motion .vani-pm__product,
+  #vani-product-motion .vani-pm__ghost {
+    transition: none !important;
+  }
+
+  #vani-product-motion [data-pm-anim],
+  #vani-product-motion [data-pm-node],
+  #vani-product-motion [data-pm-connector],
+  #vani-product-motion [data-pm-bar] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

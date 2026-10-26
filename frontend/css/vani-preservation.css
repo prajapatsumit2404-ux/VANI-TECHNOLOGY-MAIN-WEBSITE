@@ -1,0 +1,23 @@
+/**
+ * Phase 2 — hard guards for future motion/theme layers (reversible, scoped).
+ * Does not restyle existing pages; only suppresses opt-in enhancement hooks on Home.
+ */
+
+html[data-vani-home-preserve="true"] .vani-motion-layer,
+html[data-vani-home-preserve="true"] .vani-pointer-glow,
+html[data-vani-home-preserve="true"] .vani-parallax-layer,
+html[data-vani-home-preserve="true"] .vani-ambient-particles,
+html[data-vani-home-preserve="true"] .vani-cursor-fx,
+html[data-vani-home-preserve="true"] .vani-scroll-reveal--enhanced {
+  display: none !important;
+  pointer-events: none !important;
+  animation: none !important;
+}
+
+html[data-vani-home-preserve="true"] #home {
+  color-scheme: dark;
+}
+
+html[data-vani-home-preserve="true"][data-vani-theme='light'] #home {
+  color-scheme: light;
+}

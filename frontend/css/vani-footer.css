@@ -1,0 +1,371 @@
+/**
+ * Vani Technologies — Premium footer (scoped to #main-footer only).
+ */
+
+#main-footer.vani-footer {
+  position: relative;
+  overflow: hidden;
+  background-color: #040506 !important;
+  color: #94a3b8;
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 0;
+  z-index: 10;
+}
+
+#main-footer.vani-footer .vani-footer__accent {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+#main-footer.vani-footer .vani-footer__accent-shape {
+  position: absolute;
+  border: 1px solid rgba(20, 184, 166, 0.12);
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.06) 0%, transparent 55%);
+}
+
+#main-footer.vani-footer .vani-footer__accent-shape--1 {
+  width: min(42vw, 420px);
+  height: min(42vw, 420px);
+  top: -12%;
+  right: -8%;
+  transform: rotate(12deg);
+  clip-path: polygon(0 0, 100% 0, 100% 72%, 0 100%);
+}
+
+#main-footer.vani-footer .vani-footer__accent-shape--2 {
+  width: min(36vw, 320px);
+  height: min(36vw, 320px);
+  bottom: 8%;
+  left: -10%;
+  transform: rotate(-18deg);
+  clip-path: polygon(0 28%, 100% 0, 100% 100%, 0 100%);
+  opacity: 0.7;
+}
+
+#main-footer.vani-footer .vani-footer__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem) clamp(2rem, 4vw, 2.5rem);
+}
+
+#main-footer.vani-footer .vani-footer__cta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+@media (min-width: 768px) {
+  #main-footer.vani-footer .vani-footer__cta {
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+#main-footer.vani-footer .vani-footer__cta-title {
+  margin: 0;
+  font-family: inherit;
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #f8fafc;
+  max-width: 18ch;
+}
+
+#main-footer.vani-footer .vani-footer__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+  padding: 0.85rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff !important;
+  background: linear-gradient(135deg, #e85827 0%, #c2410c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 28px rgba(232, 88, 39, 0.28);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+  text-decoration: none;
+}
+
+#main-footer.vani-footer .vani-footer__cta-btn i {
+  font-size: 0.75rem;
+  transition: transform 0.25s ease;
+}
+
+#main-footer.vani-footer .vani-footer__cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(232, 88, 39, 0.38);
+  color: #fff !important;
+}
+
+#main-footer.vani-footer .vani-footer__cta-btn:hover i {
+  transform: translate(3px, -1px);
+}
+
+#main-footer.vani-footer .vani-footer__rule {
+  border: none;
+  height: 1px;
+  margin: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.1) 80%,
+    transparent 100%
+  );
+}
+
+#main-footer.vani-footer .vani-footer__brand-block {
+  padding: clamp(2rem, 5vw, 3.25rem) 0 clamp(1.75rem, 4vw, 2.5rem);
+}
+
+#main-footer.vani-footer .vani-footer__wordmark {
+  margin: 0;
+  font-family: inherit;
+  font-size: clamp(2.75rem, 11vw, 7.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  color: #f8fafc;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+#main-footer.vani-footer .vani-footer__wordmark-accent {
+  display: block;
+  font-size: 0.22em;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(20, 184, 166, 0.85);
+  margin-top: 0.35em;
+}
+
+#main-footer.vani-footer .vani-footer__logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  text-decoration: none;
+}
+
+#main-footer.vani-footer .vani-footer__logo-link img {
+  height: 2.75rem;
+  width: auto;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+#main-footer.vani-footer .vani-footer__info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  padding: clamp(1.75rem, 4vw, 2.5rem) 0;
+}
+
+@media (min-width: 768px) {
+  #main-footer.vani-footer .vani-footer__info {
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+#main-footer.vani-footer .vani-footer__info-title {
+  margin: 0 0 0.65rem;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(20, 184, 166, 0.9);
+}
+
+#main-footer.vani-footer .vani-footer__desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: #cbd5e1;
+  max-width: 36rem;
+}
+
+#main-footer.vani-footer .vani-footer__contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#main-footer.vani-footer .vani-footer__contact-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: #e2e8f0 !important;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+#main-footer.vani-footer .vani-footer__contact-list a:hover {
+  color: #f8fafc !important;
+}
+
+#main-footer.vani-footer .vani-footer__contact-list i {
+  width: 1.1rem;
+  text-align: center;
+  color: #e85827;
+}
+
+#main-footer.vani-footer .vani-footer__contact-list i.fa-globe {
+  color: #60a5fa;
+}
+
+#main-footer.vani-footer .vani-footer__connect-text {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #94a3b8;
+}
+
+#main-footer.vani-footer .vani-footer__connect-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: 0.65rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #f8fafc !important;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease;
+}
+
+#main-footer.vani-footer .vani-footer__connect-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(20, 184, 166, 0.35);
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+
+#main-footer.vani-footer .vani-footer__nav-wrap {
+  padding: clamp(1.25rem, 3vw, 1.75rem) 0;
+}
+
+#main-footer.vani-footer .vani-footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#main-footer.vani-footer .vani-footer__nav li {
+  display: inline-flex;
+  align-items: center;
+}
+
+#main-footer.vani-footer .vani-footer__nav a {
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #94a3b8 !important;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+#main-footer.vani-footer .vani-footer__nav a:hover {
+  color: #f8fafc !important;
+}
+
+#main-footer.vani-footer .vani-footer__nav-sep {
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 0.65rem;
+  user-select: none;
+  padding: 0 0.15rem;
+}
+
+#main-footer.vani-footer .vani-footer__legal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: clamp(1.25rem, 3vw, 1.75rem);
+  text-align: center;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+@media (min-width: 640px) {
+  #main-footer.vani-footer .vani-footer__legal {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+#main-footer.vani-footer .vani-footer__legal p {
+  margin: 0;
+}
+
+#main-footer.vani-footer .vani-footer__tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.5rem;
+}
+
+#main-footer.vani-footer .vani-footer__tags span {
+  color: #64748b;
+}
+
+#main-footer.vani-footer .vani-footer__tags .vani-footer__dot {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* Light site theme: footer stays premium dark */
+html[data-vani-theme='light'] #main-footer.vani-footer.vani-theme-chrome {
+  background-color: #040506 !important;
+  color: #94a3b8 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #main-footer.vani-footer .vani-footer__cta-btn,
+  #main-footer.vani-footer .vani-footer__cta-btn i,
+  #main-footer.vani-footer .vani-footer__connect-btn,
+  #main-footer.vani-footer .vani-footer__nav a,
+  #main-footer.vani-footer .vani-footer__contact-list a {
+    transition: none !important;
+  }
+
+  #main-footer.vani-footer .vani-footer__cta-btn:hover,
+  #main-footer.vani-footer .vani-footer__connect-btn:hover {
+    transform: none;
+  }
+}

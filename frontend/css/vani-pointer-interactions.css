@@ -1,0 +1,256 @@
+/**
+ * Pointer interactions — scoped classes only (never #home).
+ */
+
+/* Ambient page glow (non-Home regions; hidden over #home via JS) */
+.vani-cursor-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background:
+    radial-gradient(
+      26rem circle at var(--vani-gx, -100px) var(--vani-gy, -100px),
+      rgba(232, 88, 39, 0.11),
+      transparent 62%
+    ),
+    radial-gradient(
+      18rem circle at calc(var(--vani-gx, -100px) + 4rem) calc(var(--vani-gy, -100px) + 3rem),
+      rgba(59, 130, 246, 0.07),
+      transparent 68%
+    );
+}
+
+.vani-cursor-glow.is-active {
+  opacity: 1;
+}
+
+html[data-vani-theme='light'] .vani-cursor-glow {
+  background:
+    radial-gradient(
+      24rem circle at var(--vani-gx, -100px) var(--vani-gy, -100px),
+      rgba(232, 88, 39, 0.07),
+      transparent 62%
+    ),
+    radial-gradient(
+      16rem circle at calc(var(--vani-gx, -100px) + 3rem) calc(var(--vani-gy, -100px) + 2rem),
+      rgba(59, 130, 246, 0.06),
+      transparent 68%
+    );
+}
+
+/* Custom cursor — dot + ring (fine pointer, tier full) */
+.vani-cursor-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  margin: -9px 0 0 -9px;
+  transition: opacity 0.2s ease;
+}
+
+.vani-cursor-root.is-hidden {
+  opacity: 0;
+}
+
+.vani-cursor__dot {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(232, 88, 39, 0.95);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.vani-cursor__ring {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 88, 39, 0.55);
+  transition: transform 0.22s ease, border-color 0.22s ease;
+}
+
+.vani-cursor-root.is-hover .vani-cursor__ring {
+  transform: scale(1.45);
+  border-color: rgba(59, 130, 246, 0.65);
+}
+
+.vani-cursor__label {
+  position: absolute;
+  left: 22px;
+  top: -2px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(232, 88, 39, 0.9);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.vani-cursor-root.is-hover .vani-cursor__label {
+  opacity: 1;
+}
+
+.vani-cursor-root.is-hover[data-label='View'] .vani-cursor__label::after {
+  content: 'View';
+}
+
+.vani-cursor-root.is-hover[data-label='Explore'] .vani-cursor__label::after {
+  content: 'Explore';
+}
+
+html[data-vani-custom-cursor='on'] .vani-cursor-target {
+  cursor: none;
+}
+
+#home,
+#home * {
+  cursor: auto;
+}
+
+/* Card spotlight + subtle tilt (not .tilt-card — owned by main.js) */
+.vani-pointer-card {
+  position: relative;
+  transform: perspective(900px) rotateX(var(--vani-tilt-x, 0deg)) rotateY(var(--vani-tilt-y, 0deg));
+  transition:
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    transform 0.2s ease;
+}
+
+.vani-pointer-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  background: radial-gradient(
+    12rem circle at var(--vani-card-x, 50%) var(--vani-card-y, 50%),
+    rgba(232, 88, 39, 0.14),
+    transparent 65%
+  );
+}
+
+.vani-pointer-card:hover,
+.vani-pointer-card:focus-within {
+  border-color: rgba(232, 88, 39, 0.38) !important;
+  box-shadow:
+    0 14px 34px -22px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(232, 88, 39, 0.12);
+}
+
+.vani-pointer-card:hover::after,
+.vani-pointer-card:focus-within::after {
+  opacity: 0.55;
+}
+
+html[data-vani-theme='light'] .vani-pointer-card:hover,
+html[data-vani-theme='light'] .vani-pointer-card:focus-within {
+  border-color: rgba(232, 88, 39, 0.28) !important;
+  box-shadow:
+    0 12px 28px -20px rgba(15, 23, 42, 0.18),
+    0 0 0 1px rgba(232, 88, 39, 0.1);
+}
+
+/* Click ripple */
+.vani-click-ripple--fixed {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  background: rgba(232, 88, 39, 0.22);
+  transform: scale(0);
+  animation: vani-ripple-out 0.55s ease-out forwards;
+  z-index: 9998;
+}
+
+@keyframes vani-ripple-out {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Nav link underline (chrome only; geometry unchanged) */
+html[data-vani-pointer-tier='full'] #main-navbar a {
+  position: relative;
+}
+
+html[data-vani-pointer-tier='full'] #main-navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: rgba(232, 88, 39, 0.85);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.28s ease;
+  pointer-events: none;
+}
+
+html[data-vani-pointer-tier='full'] #main-navbar a:hover::after,
+html[data-vani-pointer-tier='full'] #main-navbar a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vani-cursor-glow,
+  .vani-cursor-root {
+    display: none !important;
+  }
+
+  .vani-ambient-layer.vani-parallax-enabled {
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .vani-pointer-card,
+  .vani-pointer-card::after {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .vani-click-ripple {
+    animation: none !important;
+    display: none !important;
+  }
+
+  html[data-vani-pointer-tier='full'] #main-navbar a::after {
+    display: none;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .vani-cursor-root {
+    display: none !important;
+  }
+
+  html[data-vani-custom-cursor='on'] .vani-cursor-target {
+    cursor: auto;
+  }
+
+  .vani-pointer-card:hover {
+    box-shadow: none;
+    border-color: inherit !important;
+  }
+
+  .vani-pointer-card:hover::after {
+    opacity: 0;
+  }
+}
+
+.vani-pointer-card:focus-visible {
+  outline: 2px solid var(--flame-orange, #e85827) !important;
+  outline-offset: 2px !important;
+}

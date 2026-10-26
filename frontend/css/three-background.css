@@ -249,6 +249,17 @@
   animation: orangeShimmerMove 6.5s ease-in-out infinite;
 }
 
+/* After .orange-shimmer-accent — keep hero line reveal + shimmer on “Forward” */
+.hero-line-fade-up.orange-shimmer-accent {
+  animation:
+    heroLineReveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    orangeShimmerMove 6.5s ease-in-out infinite;
+}
+
+.hero-line-delay-4.orange-shimmer-accent {
+  animation-delay: 0.64s, 1.35s;
+}
+
 @keyframes orangeShimmerMove {
   0%, 100% {
     background-position: 0% 50%;
@@ -305,4 +316,62 @@
     transform: none !important;
     animation: none !important;
   }
+}
+
+/* Light Mode hero — secondary CTA stays readable on dark glass (loads after Tailwind) */
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope a.btn-secondary.text-slate-200 {
+  color: #e2e8f0 !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope a.btn-secondary.text-slate-200:hover {
+  color: #f8fafc !important;
+}
+
+/* Light Mode hero — floating badges & labels (keep glass surfaces; fix foreground only) */
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .floating-tech-chip {
+  color: #e2e8f0 !important;
+  background: rgba(22, 28, 40, 0.82) !important;
+  border-color: rgba(100, 116, 139, 0.38) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .floating-glass-card {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(100, 116, 139, 0.32) !important;
+  color: #0f172a !important;
+  box-shadow:
+    0 16px 36px -10px rgba(15, 23, 42, 0.14),
+    0 0 20px -5px rgba(232, 88, 39, 0.12) !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .floating-glass-card .text-white {
+  color: #0f172a !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .floating-glass-card .text-slate-400 {
+  color: #64748b !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .floating-glass-card [class*='text-[#fbd5c6]'] {
+  color: #c2410c !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .rounded-full[class*='text-[#fbd5c6]'] {
+  color: #7c2d12 !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope .rounded-full[class*='bg-[#e85827]/10'] {
+  background-color: rgba(255, 251, 247, 0.96) !important;
+  border-color: rgba(232, 88, 39, 0.48) !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope [class*='bg-[#161c28]/70'][class*='font-mono'] {
+  background-color: rgba(22, 28, 40, 0.88) !important;
+  border-color: rgba(100, 116, 139, 0.35) !important;
+  color: #e2e8f0 !important;
+}
+
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope [class*='bg-[#161c28]/70'][class*='font-mono'] .text-slate-300,
+html[data-vani-route='home'][data-vani-theme='light'] #home.vani-theme-scope [class*='bg-[#161c28]/70'][class*='font-mono'] span {
+  color: #e2e8f0 !important;
 }

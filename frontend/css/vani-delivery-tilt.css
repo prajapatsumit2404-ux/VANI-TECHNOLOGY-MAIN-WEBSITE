@@ -1,0 +1,103 @@
+/**
+ * PROJECT DELIVERED (#delivery-projects) — Unlumen-style tilt cards only.
+ */
+
+#delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(1100px) rotateX(var(--vani-delivery-rx, 0deg)) rotateY(var(--vani-delivery-ry, 0deg))
+    translateY(0);
+  transition:
+    transform 0.2s ease-out,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+#delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  background: radial-gradient(
+    22rem circle at var(--vani-delivery-shine-x, 50%) var(--vani-delivery-shine-y, 50%),
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(232, 88, 39, 0.1) 22%,
+    transparent 58%
+  );
+}
+
+#delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    transparent 42%,
+    transparent 58%,
+    rgba(232, 88, 39, 0.06) 100%
+  );
+}
+
+#delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card:is(:hover, :focus-within) {
+  border-color: rgba(232, 88, 39, 0.48) !important;
+  box-shadow:
+    0 22px 40px -14px rgba(0, 0, 0, 0.65),
+    0 0 28px -6px rgba(232, 88, 39, 0.22);
+  transform: perspective(1100px) rotateX(var(--vani-delivery-rx, 0deg)) rotateY(var(--vani-delivery-ry, 0deg))
+    translateY(-5px);
+}
+
+#delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card:is(:hover, :focus-within)::before,
+#delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card:is(:hover, :focus-within)::after {
+  opacity: 1;
+}
+
+#delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card:active {
+  transform: perspective(1100px) rotateX(var(--vani-delivery-rx, 0deg)) rotateY(var(--vani-delivery-ry, 0deg))
+    translateY(-2px) scale(0.995);
+}
+
+html[data-vani-theme='light']
+  #delivery-projects.vani-delivery-tilt-section
+  #delivery-grid
+  .product-card.vani-delivery-tilt-card:is(:hover, :focus-within) {
+  box-shadow:
+    0 18px 36px -16px rgba(15, 23, 42, 0.2),
+    0 0 24px -8px rgba(232, 88, 39, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card,
+  #delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card:hover {
+    transform: none !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card::before,
+  #delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card::after {
+    display: none;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  #delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card {
+    transform: none !important;
+  }
+
+  #delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card::before,
+  #delivery-projects.vani-delivery-tilt-section #delivery-grid .product-card.vani-delivery-tilt-card::after {
+    display: none;
+  }
+}

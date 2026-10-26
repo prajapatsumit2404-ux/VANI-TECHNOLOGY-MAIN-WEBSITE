@@ -1,0 +1,66 @@
+/**
+ * Scroll motion — scoped to .vani-scroll-host only (never #home).
+ * Without JS: no .vani-scroll-item classes → content stays fully visible.
+ */
+
+#home .vani-scroll-item,
+#home .vani-scroll-host {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+}
+
+.vani-scroll-host.is-vm-active:not(.is-vm-reduced):not(.is-vm-gsap) .vani-scroll-item:not(.is-vm-revealed) {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+}
+
+.vani-scroll-host.is-vm-gsap.is-vm-active:not(.is-vm-reduced) .vani-scroll-item {
+  pointer-events: auto;
+}
+
+.vani-scroll-host.is-vm-gsap .vani-scroll-item.is-vm-revealed {
+  transition: none;
+}
+
+.vani-scroll-item[data-vani-scroll-effect='image-reveal'] img {
+  display: block;
+  max-width: 100%;
+}
+
+.vani-scroll-host.is-vm-active .vani-scroll-item.is-vm-revealed {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--vm-delay, 0ms);
+}
+
+.vani-scroll-host.is-vm-reduced .vani-scroll-item {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+}
+
+.vani-scroll-host.is-vm-reduced-intensity.is-vm-active:not(.is-vm-reduced):not(.is-vm-gsap)
+  .vani-scroll-item:not(.is-vm-revealed) {
+  transform: translate3d(0, 8px, 0);
+}
+
+.vani-scroll-host.is-vm-inview .vani-ambient__gradient {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vani-scroll-host.is-vm-active .vani-scroll-item:not(.is-vm-revealed) {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+
+  .vani-scroll-host.is-vm-inview .vani-ambient__gradient {
+    transform: none !important;
+    will-change: auto;
+  }
+}
